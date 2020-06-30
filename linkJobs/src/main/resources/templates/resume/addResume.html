@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>addResume</title>
+<!-- Custom fonts for this template-->
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+</head>
+<body id="page-top">
+<div class="container">
+	<h1>addResume</h1>  
+	<form method="post" th:action="@{/addResume}">
+		<div>
+			이력서 제목 :
+			<input type="text" name="resumeTitle" id="resumeTitle">
+		</div>
+		<div>
+			경력사항:
+			<select name="resumeCareer" id="resumeCareer">
+				<option>선택</option>
+				<option>신입</option>
+				<option>경력</option>
+			</select>
+		</div>
+		<div>
+			근무형태 :
+			<select name="resumeWorkingForm" id="resumeWorkingForm">
+				<option>선택</option>
+				<option>계약직</option>
+				<option>교육생</option>
+				<option>별정직</option>
+				<option>병역특례</option>
+				<option>아르바이트</option>
+				<option>위촉직</option>
+				<option>인턴직</option>
+				<option>전임</option>
+				<option>정규직</option>
+				<option>파견직</option>
+				<option>파트</option>
+				<option>프리랜서</option>
+			</select>
+		</div>
+		<div>
+			희망연봉 :
+			<select name="resumeSalary" id="resumeSalary">
+				<option>선택</option>
+				<option>회사내규에 따름</option>
+				<option>1400 만원 이하</option>
+				<option>1400~1600만원</option>
+				<option>1600~1800만원</option>
+				<option>1800~2000만원</option>
+				<option>2000~2200만원</option>
+				<option>2200~2400만원</option>
+				<option>2400~2600만원</option>
+				<option>2600~2800만원</option>
+				<option>2800~3000만원</option>
+				<option>3000~3200만원</option>
+				<option>3200~3400만원</option>
+				<option>3400~3600만원</option>
+				<option>3600~3800만원</option>
+				<option>3800~4000만원</option>
+				<option>4000~5000만원</option>
+				<option>5000~6000만원</option>
+				<option>6000~7000만원</option>
+				<option>7000~8000만원</option>
+				<option>8000~9000만원</option>
+				<option>9000~1억원</option>
+				<option>1억원 이상</option>
+				<option>면접 후 결정</option>
+			</select>
+		</div>
+		<div>
+			희망 근무 지역 : 검색할때 애매
+			<input type="text" name="resumeWishArea" id="resumeWishArea">
+		</div>d
+		<div>
+			희망 근무 직종 : 검색할때 애매
+			<input type="text" name="resumeWishJob" id="resumeWishJob">
+		</div>
+		<div>
+			희망 근무 업종 : 검색할때 애매
+			<input type="text" name="resumeWishIndustry" id="resumeWishIndustry">
+		</div>
+		<div>
+			공개여부:
+			<label><input type="checkbox" name="resumeAvaliability" id="resumeAvaliability" value="공개">공개</label>
+			<label><input type="checkbox" name="resumeAvaliability" id="resumeAvaliability" value="비공개">비공개</label>
+		</div>
+		<button type="submit">이력서 등록</button>
+	</form>
+</div>
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{js/sb-admin-2.min.js}"></script>
+
+<!-- Page level plugins -->
+<script th:src="@{vendor/chart.js/Chart.min.js}"></script>
+
+<!-- Page level custom scripts -->
+<script th:src="@{js/demo/chart-area-demo.js}"></script>
+<script th:src="@{js/demo/chart-pie-demo.js}"></script>
+</body>
+</html>
