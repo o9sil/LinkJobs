@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>addMember</title>
+<!-- Custom fonts for this template-->
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+
+	let helpInit = function() {
+		$("#idHelper").text("");
+	}
+
+	$(document).ready(function() {
+		$('#idFormBtn').click(function() {
+			
+		});
+		
+		$('#myFormBtn').click(function() {
+			
+		});
+		
+	});
+</script>
+</head>
+<body id="page-top">
+<div>
+	<h1>회원가입</h1>
+	
+    <!-- 아이디 중복확인 -->
+	<form id="idForm" method="post" th:action="@{/checkMemberId}">
+		<div>
+          <div align="left">
+             <label>아이디 중복 확인</label>&nbsp;&nbsp;&nbsp;<button type="button" id="idFormBtn">중복체크</button>
+             <span th:text="${msg}"></span>
+             
+          </div> 
+          <div>
+             <input type="text" id="memberIdCheck" name="memberIdCheck">
+             <span id="idCheckHelper"></span>
+          </div>
+          
+       </div>
+	</form>
+	
+	<!-- 회원가입 폼 -->
+	<form th:action="@{/addMember}" method="post" id="myForm">
+		<div>
+			아이디 : 
+			<input type="text" id="memberId" name="memberId" > 
+			<span id="idHelper"></span>
+		</div>
+		<div>
+			비밀번호 :
+			<input type="password" name="memberPw" id="memberPw">	
+			<span id="pwHelper"></span>
+		</div>
+		<div>
+			비밀번호 확인 :
+			<input type="password" name="memberPw2" id="memberPw2">	
+			<span id="pw2Helper"></span>
+		</div>
+		<div>
+			이름 : 
+			<input type="text" name="memberName" id="memberName">
+			<span id="nameHelper"></span>
+		</div>
+		<div>
+			주소 :
+			<select id="area2Code">
+				<option value="">주소</option>
+				
+			</select>
+		</div>
+		<div>
+			상세주소 :
+			<input type="text" name="memberDetailAddress" id="memberDetailAddress">
+			<span id="detailAddrHelper"></span>
+		</div>
+		<div>
+			전화번호 :
+			<input type="text" name="memberPhone" id="memberPhone">
+			<span id="phoneHelper"></span>
+		</div>
+		<div>
+			이메일 :
+			<input type="text" name="memberEmail" id="memberEmail">
+			<span id="emailHelper"></span>
+			
+		</div>
+		<div>
+			생년월일 :
+			<input type="text" name="memberBirthdate" id="memberBirthdate">
+			<span id="birthHelper"></span>
+		</div>
+		<div>
+			성별 :
+			<input type="radio" value="남" id="memberGender" name="memberGender">남
+			<input type="radio" value="여" id="memberGender" name="memberGender">여
+			<span id="genderHelper"></span>
+		</div>
+		
+		<button id="myFormBtn" type="button">회원가입</button>
+	</form>	
+	
+</div>
+	
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
+</body>
+
+</html>

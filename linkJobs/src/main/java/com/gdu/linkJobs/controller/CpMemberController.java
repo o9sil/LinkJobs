@@ -28,7 +28,7 @@ public class CpMemberController {
 			return "redirect:/";
 		}
 		// 로그인이 아닐시
-		return "/Login/login";
+		return "/login/login";
 	}
 	
 	// 기업회원 로그인 액션

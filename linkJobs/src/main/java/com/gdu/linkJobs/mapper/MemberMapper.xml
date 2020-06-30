@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.linkJobs.mapper.MemberMapper">
+	<!-- 회원가입 -->
+	<insert id="insertMember" parameterType="com.gdu.linkJobs.vo.Member">
+		INSERT INTO linkjobs_member(
+			member_id, 
+			member_pw, 
+			member_name, 
+			area2_code, 
+			member_detailed_address, 
+			member_phone, 
+			member_email,
+			member_birthdate,
+			member_gender, 
+			member_social_login
+		) 
+		VALUES(?,?,?,?,?,?,?,?,?,?)
+	</insert>
+
+	<!-- 중복 체크 쿼리 -->
+	<select id="memberIdCheck" parameterType="String" resultType="String">
+		SELECT member_id
+		FROM (SELECT member_id FROM linkjobs_member 
+				UNION 
+			  SELECT member_id FROM linkjobs_member_withdrawal) t
+		WHERE member_id=#{memberId}
+	</select>
+</mapper>
