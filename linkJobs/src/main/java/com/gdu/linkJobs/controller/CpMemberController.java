@@ -22,13 +22,16 @@ public class CpMemberController {
 	
 	// 로그인 폼
 	@GetMapping("/loginCpMember")
-	public String login(HttpSession session) {
+	public String login(Model model, HttpSession session) {
 		// 로그인 중
 		if(session.getAttribute("loginCpMember") != null) {
 			return "redirect:/";
 		}
 		// 로그인이 아닐시
-		return "/login/login";
+		
+		model.addAttribute("cp", true);
+		
+		return "login/login";
 	}
 	
 	// 기업회원 로그인 액션

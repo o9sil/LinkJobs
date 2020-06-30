@@ -91,6 +91,17 @@
 	});
 </script>
 
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+	if([[${cp}]] == true){
+		$('#loginCpMemberBtn').attr('class', 'btn btn-secondary btn-icon-split');
+		$('#loginMemberBtn').attr('class', 'btn btn-light btn-icon-split');
+		$('#cpMemberDiv').css('display', '');	
+	}
+/*]]>*/
+</script>
+
 </body>
 
 </html>
