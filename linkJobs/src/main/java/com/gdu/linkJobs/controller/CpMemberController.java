@@ -3,15 +3,48 @@ package com.gdu.linkJobs.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.gdu.linkJobs.common.KakaoLogin;
+import com.gdu.linkJobs.service.CpMemberService;
+import com.gdu.linkJobs.vo.LoginCpMember;
 
 @Controller
 public class CpMemberController {
 	KakaoLogin login = null;
+	
+	
+	
+	// 로그인 폼
+	@GetMapping("/loginCpMember")
+	public String login(HttpSession session) {
+		// 로그인 중
+		if(session.getAttribute("loginCpMember") != null) {
+			return "redirect:/";
+		}
+		// 로그인이 아닐시
+		return "/Login/login";
+	}
+	
+	// 기업회원 로그인 액션
+	@PostMapping("/login")
+	public String login(Model model, HttpSession session, LoginCpMember loginCpmember) {
+		// 로그인 중
+		if(session.getAttribute("loginCpMember") != null) {
+			return "redirect:/";
+		}
+		System.out.println(loginCpmember);
+		LoginCpMember returnLoginCpmember = CpMemberService.login(loginCpmember);
+		System.out.println(returnLoginCpmember +"<--returnLoginCpMember");
+		
+		return "redirect:/";
+	}
+	
 	
 	// 카카오 로그인 및 유저 정보	
     @RequestMapping(value="/cpKakaoLogin")
