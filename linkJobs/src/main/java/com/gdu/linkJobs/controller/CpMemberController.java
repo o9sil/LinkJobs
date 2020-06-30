@@ -2,6 +2,7 @@ package com.gdu.linkJobs.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,30 @@ import com.gdu.linkJobs.vo.LoginCpMember;
 public class CpMemberController {
 	KakaoLogin login = null;
 	
+	@Autowired
+	private CpMemberService cpMemberService;
 	
+	// 회원가입 폼
+	@GetMapping("/signUpCpMember")
+	public String signUpCpMember(HttpSession session) {
+		// 로그인 중
+		if(session.getAttribute("loginCpMember") != null) {
+			return "redirect:/";
+		}
+		return "cpMember/signUpCpMember";
+		
+	}
+   
+	// 회원가입 액션
+	@PostMapping("/signUpCpMember")
+	public String signUp(Model model, HttpSession session) {
+		// 로그인 중
+		if(session.getAttribute("loginCpMember") != null) {
+			return "redirect:/";
+		}
+		return "redirect:/loginCpMember";
+	}
+	   
 	
 	// 로그인 폼
 	@GetMapping("/loginCpMember")
@@ -42,7 +66,7 @@ public class CpMemberController {
 			return "redirect:/";
 		}
 		System.out.println(loginCpmember);
-		LoginCpMember returnLoginCpmember = CpMemberService.login(loginCpmember);
+		LoginCpMember returnLoginCpmember = cpMemberService.login(loginCpmember);
 		System.out.println(returnLoginCpmember +"<--returnLoginCpMember");
 		
 		return "redirect:/";

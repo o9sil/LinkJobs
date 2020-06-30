@@ -2,12 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.CpMemberMapper">
 	<!-- 로그인 쿼리 -->
-	<select id="loginCpMember" parameterType="com.gdu.linkJobs.vo.loginCpMember">
+	<select id="selectLoginCpMember" parameterType="com.gdu.linkJobs.vo.LoginCpMember">
 		SELECT
 			cpmember_id AS cpmemberId,
 			cpmember_pw AS cpmemberPw
 		FROM linkjobs_cpmember
 		WHERE cpmember_id = #{cpmemberId}
 		AND cpmember_pw = PASSWORD(#{cpmemberPw})
+	</select>
+	
+	<!-- 히원가입 쿼리 -->
+	<insert id="insertCpMember" parameterType="com.gdu.linkJobs.vo.CpMember">
+		INSERT INTO linkjobs_cpmember(
+			cpmember_id,
+			cpmember_pw,
+			cpmember_license_no,
+			cpmember_manager,
+			cpmember_company,
+			cpmember_ceo,
+			cpmember_phonenum,
+			cpmember_date
+		) VALUES (
+			#{cpmemberId},
+			PASSWORD(#{cpmemberPw}),
+			#{cpmemberLicneseNo},
+			#{cpmemberManager},
+			#{cpmemberCompany},
+			#{cpmemberCeo},
+			#{cpmemberPhonenum},
+			#{cpmemberDate}
+		)
+	</insert>
+	
+	<!-- 아이디 중복검사 쿼리 -->
+	<select id="selectCpMemberIdCnt" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM (SELECT cpmember_id AS id FROM linkJobs_cpmember
+      		  UNION
+      		  SELECT cpmember_id AS id FROM linkJobs_cpmember_withdrawal) t
+		WHERE t.id = #{cpmemberId}
 	</select>
 </mapper>
