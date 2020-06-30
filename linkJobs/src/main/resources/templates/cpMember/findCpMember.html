@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>findCpMember</title>
+<!-- Custom fonts for this template-->
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+</head>
+<body class="bg-gradient-primary">
+
+	<div class="container">
+    	<!-- Outer Row -->
+    	<div class="row justify-content-center">
+
+	    	<div class="col-md-9">
+        		<div class="card o-hidden border-0 shadow-lg my-5">
+          			<div class="card-body p-0">
+            			<!-- Nested Row within Card Body -->
+            			<div class="row">             				
+              				<div class="col-lg-12">
+	               				<div class="p-5">
+	               					<div class="text-center">
+	               						<button id="idSearchBtn" class="btn btn-secondary btn-icon-split" style="width: 49%;">
+	               							<span class="text">기업회원 ID 찾기</span>
+	               						</button>
+	               						<button id="pwSearchBtn" class="btn btn-light btn-icon-split" style="width: 49%;">
+	               							<span class="text">기업회원 PW 찾기</span>
+	               						</button>                    					
+	               					</div>
+	               					<hr> 
+	               					
+	               					<!-- ID 찾기 -->
+	               					<div id="cpIdDiv">
+	                					<form class="user" id="searchIdForm" method="post" th:action="@{/findCpMemberId}">
+		                  					<div class="form-group">
+		                    					<input type="text" class="form-control form-control-user" name="cpMemberManager" id="cpMemberManagerID" placeholder="담당자 이름을 입력하세요.">
+		                    					<span id="cpMemberManagerIDSpan" style="color: red; margin: auto;"></span>
+		                  					</div>
+		                  					<div class="form-group">
+		                    					<input type="text" class="form-control form-control-user" name="cpMemberLicenseNo" id="cpMemberLicenseNoID" placeholder="사업자 번호를 입력하세요.">
+		                    					<span id="cpMemberLicenseNoIDSpan" style="color: red; margin: auto;"></span>
+		                  					</div>	
+		                  					<div class="form-group">
+		                    					<input type="text" class="form-control form-control-user" name="cpMemberEmail" id="cpMemberEmailID" placeholder="이메일을 입력하세요.">
+		                    					<span id="cpMemberEmailIDSpan" style="color: red; margin: auto;"></span>
+		                  					</div>                
+		                  					  		
+		                  					<a id="searchIdBtn" class="btn btn-primary btn-user btn-block" style="color: white;">아이디 찾기</a>		
+		                  					   					
+	                					</form>
+	                					<hr>
+	                					<div class="text-center">
+	                  						<a class="small" th:href="@{/loginCpMember}">로그인</a>
+	                  						<a class="small" th:href="@{/signUpCpMember}">회원가입</a>	                  						
+	                					</div>	                					
+	               					</div>
+	               					
+	               					
+	               					<!-- PW 찾기 -->
+	               					<div id="cpPwDiv" style="display: none;">
+	                					<form class="user" id="searchPwForm" method="post" th:action="@{/findCpMemberPw}">
+		                  					<div class="form-group">
+		                    					<input type="text" class="form-control form-control-user" name="cpMemberId" id="cpMemberIdPW" placeholder="ID를 입력하세요.">
+		                    					<span id="cpMemberIdPWSpan" style="color: red; margin: auto;"></span>
+		                  					</div>
+		                  					<div class="form-group">
+		                    					<input type="text" class="form-control form-control-user" name="cpMemberManager" id="cpMemberManagerPW" placeholder="담당자 이름을 입력하세요.">
+		                    					<span id="cpMemberManagerPWSpan" style="color: red; margin: auto;"></span>
+		                  					</div>
+		                  					<div class="form-group">
+		                    					<input type="password" class="form-control form-control-user" name="cpMemberLicenseNo" id="cpMemberLicenseNoPW" placeholder="사업자 번호를 입력하세요.">
+		                    					<span id="cpMemberLicenseNoPWSpan" style="color: red; margin: auto;"></span>
+		                  					</div>	
+		                  					<div class="form-group">
+		                    					<input type="password" class="form-control form-control-user" name="cpMemberEmail" id="cpMemberEmailPW" placeholder="이메일을 입력하세요.">
+		                    					<span id="cpMemberEmailPWSpan" style="color: red; margin: auto;"></span>
+		                  					</div>    
+		                  					<a id="searchPwBtn" class="btn btn-primary btn-user btn-block" style="color: white;">비밀번호 찾기</a>              					
+		                  					              					
+	                					</form>
+	                					<hr>
+	                					<div class="text-center">
+	                  						<a class="small" th:href="@{/loginCpMember}">로그인</a>
+	                  						<a class="small" th:href="@{/signUpCpMember}">회원가입</a>	                  						
+	                					</div>	                					
+	               					</div>
+	               				</div>  
+               				</div>            				
+            			</div>
+          			</div>
+        		</div>	
+    		</div>
+    	</div>
+  	</div>
+	
+
+	<!-- Bootstrap core JavaScript-->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+	<!-- Core plugin JavaScript-->
+	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+	
+	<!-- Custom scripts for all pages-->
+	<!-- <script src="js/sb-admin-2.min.js"></script> -->
+
+<script>
+	$('#pwSearchBtn').click(function(){
+		$('#idSearchBtn').attr('class', 'btn btn-light btn-icon-split');
+		$('#pwSearchBtn').attr('class', 'btn btn-secondary btn-icon-split');		
+		$('#cpPwDiv').css('display', '');		
+		$('#cpIdDiv').css('display', 'none');		
+		
+		$('#cpMemberIdPWSpan').text("");
+		$('#cpMemberManagerPWSpan').text("");
+		$('#cpMemberLicenseNoPWSpan').text("");
+		$('#cpMemberEmailPWSpan').text("");
+		
+	});
+	
+	$('#idSearchBtn').click(function(){
+		$('#idSearchBtn').attr('class', 'btn btn-secondary btn-icon-split');
+		$('#pwSearchBtn').attr('class', 'btn btn-light btn-icon-split');
+		$('#cpPwDiv').css('display', 'none');
+		$('#cpIdDiv').css('display', '');
+		
+		$('#cpMemberManagerIDSpan').text("");
+		$('#cpMemberLicenseNoIDSpan').text("");
+		$('#cpMemberEmailIDSpan').text("");
+	});
+	
+	
+	$("#searchIdBtn").click(function(){
+		$('#cpMemberManagerIDSpan').text("");
+		$('#cpMemberLicenseNoIDSpan').text("");
+		$('#cpMemberEmailIDSpan').text("");
+		
+		if($('#cpMemberManagerID').val().length === 0){
+			$('#cpMemberManagerIDSpan').text("담당자 이름을 입력하세요.");
+			return;
+		}
+		if($('#cpMemberLicenseNoID').val().length === 0){
+			$('#cpMemberLicenseNoIDSpan').text("사업자 등록번호를 입력하세요.");
+			return;
+		}
+		if($('#cpMemberEmailID').val().length === 0){
+			$('#cpMemberEmailIDSpan').text("이메일을 입력하세요.");
+			return;
+		}
+		
+		$('#searchIdForm').submit();		
+		
+	});
+	
+	
+	$("#searchPwBtn").click(function(){
+		$('#cpMemberIdPWSpan').text("");
+		$('#cpMemberManagerPWSpan').text("");
+		$('#cpMemberLicenseNoPWSpan').text("");
+		$('#cpMemberEmailPWSpan').text("");
+		
+		if($('#cpMemberIdPW').val().length === 0){
+			$('#cpMemberIdPWSpan').text("아이디를 입력하세요.");
+			return;
+		}
+		if($('#cpMemberManagerPW').val().length === 0){
+			$('#cpMemberManagerPWSpan').text("담당자 이름을 입력하세요.");
+			return;
+		}
+		if($('#cpMemberLicenseNoPW').val().length === 0){
+			$('#cpMemberLicenseNoPWSpan').text("사업자 등록번호를 입력하세요.");
+			return;
+		}
+		if($('#cpMemberEmailPW').val().length === 0){
+			$('#cpMemberEmailPWSpan').text("이메일을 입력하세요.");
+			return;
+		}
+		
+		$('#searchPwForm').submit();		
+		
+	});
+</script>
+
+</body>
+
+</html>

@@ -1,116 +1,124 @@
 package com.gdu.linkJobs.vo;
 
 public class CpMember {
-	private String cpmemberId;
-	private String cpmemberPw;
-	private String cpmemberLicenseNo;
-	private String cpmemberManager;
-	private String cpmemberCompany;
-	private String cpmemberCeo;
-	private int cpmemberIndustryNo;
-	private int cpmemberArea2No;
-	private String cpmemberDetatiledAddress;
-	private String cpmemberPhonenum;
-	private int cpmemberNumberOfEmployees;
-	private String cpmemberEstablishDate;
-	private String cpmemberDate;
-	private String cpmemberAdminAdmission;
-	
+	private String cpMemberId;
+	private String cpMemberPw;
+	private String cpMemberLicenseNo;
+	private String cpMemberManager;
+	private String cpMemberCompany;
+	private String cpMemberCeo;
+	private String cpMemberEmail;
+	private int cpMemberIndustryNo;
+	private int cpMemberArea2No;
+	private String cpMemberDetatiledAddress;
+	private String cpMemberPhoneNum;
+	private int cpMemberNumberOfEmployees;
+	private String cpMemberEstablishDate;
+	private String cpMemberDate;
+	private String cpMemberAdminAdmission;
+	public String getCpMemberId() {
+		return cpMemberId;
+	}
+	public void setCpMemberId(String cpMemberId) {
+		this.cpMemberId = cpMemberId;
+	}
+	public String getCpMemberPw() {
+		return cpMemberPw;
+	}
+	public void setCpMemberPw(String cpMemberPw) {
+		this.cpMemberPw = cpMemberPw;
+	}
+	public String getCpMemberLicenseNo() {
+		return cpMemberLicenseNo;
+	}
+	public void setCpMemberLicenseNo(String cpMemberLicenseNo) {
+		this.cpMemberLicenseNo = cpMemberLicenseNo;
+	}
+	public String getCpMemberManager() {
+		return cpMemberManager;
+	}
+	public void setCpMemberManager(String cpMemberManager) {
+		this.cpMemberManager = cpMemberManager;
+	}
+	public String getCpMemberCompany() {
+		return cpMemberCompany;
+	}
+	public void setCpMemberCompany(String cpMemberCompany) {
+		this.cpMemberCompany = cpMemberCompany;
+	}
+	public String getCpMemberCeo() {
+		return cpMemberCeo;
+	}
+	public void setCpMemberCeo(String cpMemberCeo) {
+		this.cpMemberCeo = cpMemberCeo;
+	}
+	public String getCpMemberEmail() {
+		return cpMemberEmail;
+	}
+	public void setCpMemberEmail(String cpMemberEmail) {
+		this.cpMemberEmail = cpMemberEmail;
+	}
+	public int getCpMemberIndustryNo() {
+		return cpMemberIndustryNo;
+	}
+	public void setCpMemberIndustryNo(int cpMemberIndustryNo) {
+		this.cpMemberIndustryNo = cpMemberIndustryNo;
+	}
+	public int getCpMemberArea2No() {
+		return cpMemberArea2No;
+	}
+	public void setCpMemberArea2No(int cpMemberArea2No) {
+		this.cpMemberArea2No = cpMemberArea2No;
+	}
+	public String getCpMemberDetatiledAddress() {
+		return cpMemberDetatiledAddress;
+	}
+	public void setCpMemberDetatiledAddress(String cpMemberDetatiledAddress) {
+		this.cpMemberDetatiledAddress = cpMemberDetatiledAddress;
+	}
+	public String getCpMemberPhoneNum() {
+		return cpMemberPhoneNum;
+	}
+	public void setCpMemberPhoneNum(String cpMemberPhoneNum) {
+		this.cpMemberPhoneNum = cpMemberPhoneNum;
+	}
+	public int getCpMemberNumberOfEmployees() {
+		return cpMemberNumberOfEmployees;
+	}
+	public void setCpMemberNumberOfEmployees(int cpMemberNumberOfEmployees) {
+		this.cpMemberNumberOfEmployees = cpMemberNumberOfEmployees;
+	}
+	public String getCpMemberEstablishDate() {
+		return cpMemberEstablishDate;
+	}
+	public void setCpMemberEstablishDate(String cpMemberEstablishDate) {
+		this.cpMemberEstablishDate = cpMemberEstablishDate;
+	}
+	public String getCpMemberDate() {
+		return cpMemberDate;
+	}
+	public void setCpMemberDate(String cpMemberDate) {
+		this.cpMemberDate = cpMemberDate;
+	}
+	public String getCpMemberAdminAdmission() {
+		return cpMemberAdminAdmission;
+	}
+	public void setCpMemberAdminAdmission(String cpMemberAdminAdmission) {
+		this.cpMemberAdminAdmission = cpMemberAdminAdmission;
+	}
 	@Override
 	public String toString() {
-		return "LinkjobsCpmember [cpmemberId=" + cpmemberId + ", cpmemberPw=" + cpmemberPw + ", cpmemberLicenseNo="
-				+ cpmemberLicenseNo + ", cpmemberManager=" + cpmemberManager + ", cpmemberCompany=" + cpmemberCompany
-				+ ", cpmemberCeo=" + cpmemberCeo + ", cpmemberIndustryNo=" + cpmemberIndustryNo + ", cpmemberArea2No="
-				+ cpmemberArea2No + ", cpmemberDetatiledAddress=" + cpmemberDetatiledAddress + ", cpmemberPhonenum="
-				+ cpmemberPhonenum + ", cpmemberNumberOfEmployees=" + cpmemberNumberOfEmployees
-				+ ", cpmemberEstablishDate=" + cpmemberEstablishDate + ", cpmemberDate=" + cpmemberDate
-				+ ", cpmemberAdminAdmission=" + cpmemberAdminAdmission + "]";
+		return "CpMember [cpMemberId=" + cpMemberId + ", cpMemberPw=" + cpMemberPw + ", cpMemberLicenseNo="
+				+ cpMemberLicenseNo + ", cpMemberManager=" + cpMemberManager + ", cpMemberCompany=" + cpMemberCompany
+				+ ", cpMemberCeo=" + cpMemberCeo + ", cpMemberEmail=" + cpMemberEmail + ", cpMemberIndustryNo="
+				+ cpMemberIndustryNo + ", cpMemberArea2No=" + cpMemberArea2No + ", cpMemberDetatiledAddress="
+				+ cpMemberDetatiledAddress + ", cpMemberPhoneNum=" + cpMemberPhoneNum + ", cpMemberNumberOfEmployees="
+				+ cpMemberNumberOfEmployees + ", cpMemberEstablishDate=" + cpMemberEstablishDate + ", cpMemberDate="
+				+ cpMemberDate + ", cpMemberAdminAdmission=" + cpMemberAdminAdmission + "]";
 	}
 	
 	
-	public String getCpmemberId() {
-		return cpmemberId;
-	}
-	public void setCpmemberId(String cpmemberId) {
-		this.cpmemberId = cpmemberId;
-	}
-	public String getCpmemberPw() {
-		return cpmemberPw;
-	}
-	public void setCpmemberPw(String cpmemberPw) {
-		this.cpmemberPw = cpmemberPw;
-	}
-	public String getCpmemberLicenseNo() {
-		return cpmemberLicenseNo;
-	}
-	public void setCpmemberLicenseNo(String cpmemberLicenseNo) {
-		this.cpmemberLicenseNo = cpmemberLicenseNo;
-	}
-	public String getCpmemberManager() {
-		return cpmemberManager;
-	}
-	public void setCpmemberManager(String cpmemberManager) {
-		this.cpmemberManager = cpmemberManager;
-	}
-	public String getCpmemberCompany() {
-		return cpmemberCompany;
-	}
-	public void setCpmemberCompany(String cpmemberCompany) {
-		this.cpmemberCompany = cpmemberCompany;
-	}
-	public String getCpmemberCeo() {
-		return cpmemberCeo;
-	}
-	public void setCpmemberCeo(String cpmemberCeo) {
-		this.cpmemberCeo = cpmemberCeo;
-	}
-	public int getCpmemberIndustryNo() {
-		return cpmemberIndustryNo;
-	}
-	public void setCpmemberIndustryNo(int cpmemberIndustryNo) {
-		this.cpmemberIndustryNo = cpmemberIndustryNo;
-	}
-	public int getCpmemberArea2No() {
-		return cpmemberArea2No;
-	}
-	public void setCpmemberArea2No(int cpmemberArea2No) {
-		this.cpmemberArea2No = cpmemberArea2No;
-	}
-	public String getCpmemberDetatiledAddress() {
-		return cpmemberDetatiledAddress;
-	}
-	public void setCpmemberDetatiledAddress(String cpmemberDetatiledAddress) {
-		this.cpmemberDetatiledAddress = cpmemberDetatiledAddress;
-	}
-	public String getCpmemberPhonenum() {
-		return cpmemberPhonenum;
-	}
-	public void setCpmemberPhonenum(String cpmemberPhonenum) {
-		this.cpmemberPhonenum = cpmemberPhonenum;
-	}
-	public int getCpmemberNumberOfEmployees() {
-		return cpmemberNumberOfEmployees;
-	}
-	public void setCpmemberNumberOfEmployees(int cpmemberNumberOfEmployees) {
-		this.cpmemberNumberOfEmployees = cpmemberNumberOfEmployees;
-	}
-	public String getCpmemberEstablishDate() {
-		return cpmemberEstablishDate;
-	}
-	public void setCpmemberEstablishDate(String cpmemberEstablishDate) {
-		this.cpmemberEstablishDate = cpmemberEstablishDate;
-	}
-	public String getCpmemberDate() {
-		return cpmemberDate;
-	}
-	public void setCpmemberDate(String cpmemberDate) {
-		this.cpmemberDate = cpmemberDate;
-	}
-	public String getCpmemberAdminAdmission() {
-		return cpmemberAdminAdmission;
-	}
-	public void setCpmemberAdminAdmission(String cpmemberAdminAdmission) {
-		this.cpmemberAdminAdmission = cpmemberAdminAdmission;
-	}
+	
+	
 	
 }

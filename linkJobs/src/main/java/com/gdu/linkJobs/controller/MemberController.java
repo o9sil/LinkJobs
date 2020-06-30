@@ -28,7 +28,7 @@ public class MemberController {
     	List<AreaAndArea2> areaList= areaAndArea2Service.getAreaAndArea2();
     	model.addAttribute("areaList", areaList);
     	
-    	return "/member/addMember";
+    	return "member/addMember";
     }
     
     @PostMapping("/addMember")
@@ -53,7 +53,7 @@ public class MemberController {
 			System.out.println("아이디를 사용할 수 있습니다 ");
 			model.addAttribute("confirmMemberId", memberId);
 		}
-		return "/member/addMember";
+		return "member/addMember";
 	}
     
 }

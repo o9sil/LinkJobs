@@ -31,6 +31,7 @@
 										th:action="@{/signUpCpMember}" method="post">
 										<div class="form-group">
 											<input type="text" class="form-control form-control-user"
+												name="cpMemberId"
 												id="cpMemberId" placeholder="아이디를 입력하세요."> <span
 												id="cpMemberIdSpan" style="color: red; margin: auto;"></span>
 										</div>
@@ -38,6 +39,7 @@
 											<div class="col-sm-6 mb-3 mb-sm-0">
 												<input type="password"
 													class="form-control form-control-user" id="cpMemberPw"
+													name="cpMemberPw"
 													placeholder="비밀번호를 입력하세요.">
 											</div>
 											<div class="col-sm-6">
@@ -49,27 +51,32 @@
 										</div>
 										<div class="form-group">
 											<input type="text" class="form-control form-control-user"
+												name="cpMemberCompany"
 												id="cpMemberCompany" placeholder="회사명을 입력하세요."> <span
 												id="cpMemberCompanySpan" style="color: red; margin: auto;"></span>
 										</div>
 										<div class="form-group">
 											<input type="text" class="form-control form-control-user"
+												name="cpMemberCeo"
 												id="cpMemberCeo" placeholder="대표자 성함을 입력하세요."> <span
 												id="cpMemberCeoSpan" style="color: red; margin: auto;"></span>
 										</div>
 										<div class="form-group">
 											<input type="text" class="form-control form-control-user"
+												name="cpMemberLicenseNo"
 												id="cpMemberLicenseNo" placeholder="사업자 등록번호를 입력하세요.">
 											<span id="cpMemberLicenseNoSpan"
 												style="color: red; margin: auto;"></span>
 										</div>
 										<div class="form-group">
 											<input type="text" class="form-control form-control-user"
+												name="cpMemberManager"
 												id="cpMemberManager" placeholder="담당자 성함을 입력하세요."> <span
 												id="cpMemberManagerSpan" style="color: red; margin: auto;"></span>
 										</div>
 										<div class="form-group">
 											<input type="text" class="form-control form-control-user"
+												name="cpMemberPhoneNum"
 												id="cpMemberPhoneNum" placeholder="담당자 전화번호를 입력하세요.">
 											<span id="cpMemberPhoneNumSpan"
 												style="color: red; margin: auto;"></span>
@@ -148,20 +155,22 @@ $('#signUpBtn').click(function(){
       return;
    }
    
-   /*<![CDATA[*/
-	      
+   /*<![CDATA[*/	      
     $.ajax({    	
     	url: /*[[@{/checkCpMemberId}]]*/
         ,type:'POST'
         ,data:{'checkCpMemberId':cpMemberId}
         ,success : function(data) {
-           console.log(data);
+           if(data === 0){
+        	   //기존 회원 없음(회원가입 가능)
+        	   $('#signUpForm').submit();
+           }else{
+        	   $('#cpMemberIdSpan').text("중복된 ID가 존재합니다.");
+           }
         }
     });
    
     /*]]>*/
-   
-   //$('#signUpForm').submit();
    
 });
 </script>

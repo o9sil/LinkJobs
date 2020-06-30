@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.CpMemberMapper">
+
+
+	<!-- 기업회원 PW 찾기(DB는 수정) -->
+	<update id="updateCpMemberPw" parameterType="com.gdu.linkJobs.vo.CpMember">
+	
+	</update>
+
+	<!-- 기업회원 ID 찾기 -->
+	<select id="selectCpMemberId" parameterType="com.gdu.linkJobs.vo.CpMember" resultType="com.gdu.linkJobs.vo.CpMember">
+		SELECT cpmember_id AS cpMemberId, cpmember_email AS cpMemberEmail 
+		FROM linkjobs_cpmember 
+		WHERE cpmember_license_no = #{cpMemberLicenseNo}
+			AND cpmember_manager = #{cpMemberManager} 
+			AND cpmember_email = #{cpMemberEmail}
+	</select>
+
 	<!-- 로그인 쿼리 -->
-	<select id="selectLoginCpMember" parameterType="com.gdu.linkJobs.vo.LoginCpMember">
+	<select id="selectLoginCpMember" parameterType="com.gdu.linkJobs.vo.LoginCpMember" resultType="String">
 		SELECT
-			cpmember_id AS cpmemberId,
-			cpmember_pw AS cpmemberPw
+			cpmember_id			
 		FROM linkjobs_cpmember
-		WHERE cpmember_id = #{cpmemberId}
-		AND cpmember_pw = PASSWORD(#{cpmemberPw})
+		WHERE cpmember_id = #{cpMemberId}
+		AND cpmember_pw = PASSWORD(#{cpMemberPw})
 	</select>
 	
 	<!-- 히원가입 쿼리 -->
@@ -21,16 +36,18 @@
 			cpmember_company,
 			cpmember_ceo,
 			cpmember_phonenum,
-			cpmember_date
+			cpmember_date,
+			cpmember_admin_admission
 		) VALUES (
-			#{cpmemberId},
-			PASSWORD(#{cpmemberPw}),
-			#{cpmemberLicneseNo},
-			#{cpmemberManager},
-			#{cpmemberCompany},
-			#{cpmemberCeo},
-			#{cpmemberPhonenum},
-			#{cpmemberDate}
+			#{cpMemberId},
+			PASSWORD(#{cpMemberPw}),
+			#{cpMemberLicenseNo},
+			#{cpMemberManager},
+			#{cpMemberCompany},
+			#{cpMemberCeo},
+			#{cpMemberPhoneNum},
+			NOW(),
+			'N'
 		)
 	</insert>
 	

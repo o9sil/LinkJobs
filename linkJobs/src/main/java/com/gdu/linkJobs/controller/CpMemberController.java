@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.gdu.linkJobs.common.KakaoLogin;
 import com.gdu.linkJobs.service.CpMemberService;
+import com.gdu.linkJobs.vo.CpMember;
 import com.gdu.linkJobs.vo.LoginCpMember;
 
 @Controller
@@ -20,7 +21,39 @@ public class CpMemberController {
 	KakaoLogin login = null;
 	
 	@Autowired
-	private CpMemberService cpMemberService;
+	private CpMemberService cpMemberService;	
+	
+	//ID 찾기 액션
+	@PostMapping("/findCpMemberId")
+	public String findCpMemberId(CpMember cpMember) {
+		
+		System.out.println(cpMemberService.getCpMemberId(cpMember));
+		
+		
+		return "redirect:/loginCpMember";
+	}
+	
+	//PW 찾기 액션
+	@PostMapping("/findCpMemberPw")
+	public String findCpMemberPw(CpMember cpMember) {
+		
+		System.out.println("findCpMemberPw Post");
+		System.out.println(cpMember);
+		
+		return "redirect:/loginCpMember";
+	}
+	
+	
+	// ID, PW 찾기 폼
+	@GetMapping("/findCpMember")
+	public String findCpMember(HttpSession session) {
+		// 로그인 중
+		if(session.getAttribute("loginCpMember") != null) {
+			return "redirect:/";
+		}
+		
+		return "cpMember/findCpMember";
+	}
 	
 	// 회원가입 폼
 	@GetMapping("/signUpCpMember")
@@ -35,11 +68,14 @@ public class CpMemberController {
    
 	// 회원가입 액션
 	@PostMapping("/signUpCpMember")
-	public String signUp(Model model, HttpSession session) {
+	public String signUp(HttpSession session, CpMember cpMember) {
 		// 로그인 중
 		if(session.getAttribute("loginCpMember") != null) {
 			return "redirect:/";
 		}
+		
+		//System.out.println("회원가입 성공 여부 = " + cpMemberService.addMember(cpMember));
+		
 		return "redirect:/loginCpMember";
 	}
 	   
@@ -59,15 +95,15 @@ public class CpMemberController {
 	}
 	
 	// 기업회원 로그인 액션
-	@PostMapping("/login")
+	@PostMapping("/loginCpMember")
 	public String login(Model model, HttpSession session, LoginCpMember loginCpmember) {
 		// 로그인 중
 		if(session.getAttribute("loginCpMember") != null) {
 			return "redirect:/";
 		}
 		System.out.println(loginCpmember);
-		LoginCpMember returnLoginCpmember = cpMemberService.login(loginCpmember);
-		System.out.println(returnLoginCpmember +"<--returnLoginCpMember");
+		String loginId = cpMemberService.login(loginCpmember);
+		System.out.println(loginId +"<--returnLoginCpMember ID");
 		
 		return "redirect:/";
 	}

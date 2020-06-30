@@ -14,6 +14,8 @@ import com.gdu.linkJobs.service.CpMemberService;
 public class CpMemberRestController {
 	@Autowired
 	private CpMemberService cpMemberService;
+	
+	
 	// 아이디 중복검사
 	@PostMapping("/checkCpMemberId")
 	public int checkCpMemberId(Model model, HttpSession session, @RequestParam(value="checkCpMemberId") String checkCpMemberId) {
