@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.linkJobs.mapper.AreaAndArea2Mapper">
+
+	<!-- AreaAndArea2 List -->
+	<select id="selectAreaAndArea2" resultType="com.gdu.linkJobs.vo.AreaAndArea2">
+		SELECT 
+			a.area_no areaNo,
+			a.area_sido areaSido,
+			a2.area2_no area2No,
+			a2.area2_gungu area2Gungu
+		FROM linkjobs_area a 
+		INNER JOIN linkjobs_area2 a2 
+		ON a.area_no=a2.area_no
+	</select>
+
+</mapper>

@@ -1,5 +1,7 @@
 package com.gdu.linkJobs.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,18 +9,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gdu.linkJobs.service.AreaAndArea2Service;
 import com.gdu.linkJobs.service.MemberService;
+import com.gdu.linkJobs.vo.AreaAndArea2;
 import com.gdu.linkJobs.vo.Member;
 
 @Controller
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private AreaAndArea2Service areaAndArea2Service;
     
     //일반회원 회원가입
     @GetMapping("/addMember")
-    public String addMember() {
+    public String addMember(Model model) {
     	System.out.println("member insert sucess");
+    	List<AreaAndArea2> areaList= areaAndArea2Service.getAreaAndArea2();
+    	model.addAttribute("areaList", areaList);
+    	
     	return "/member/addMember";
     }
     
