@@ -6,17 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gdu.linkJobs.mapper.AreaAndArea2Mapper;
+import com.gdu.linkJobs.mapper.AreaMapper;
+import com.gdu.linkJobs.vo.Area;
 import com.gdu.linkJobs.vo.AreaAndArea2;
 
 @Service
 @Transactional
-public class AreaAndArea2Service {
+public class AreaService {
 	@Autowired
-	private AreaAndArea2Mapper areaAndArea2Mapper;
+	private AreaMapper areaMapper;
 	
-	//areaAndArea2 List
-	public List<AreaAndArea2> getAreaAndArea2(){
-		return areaAndArea2Mapper.selectAreaAndArea2();
+	//sido
+	public List<Area> getArea(){
+		return areaMapper.selectArea();
 	}
+	
+	//gungu
+	public List<AreaAndArea2> getArea2(int areaNo){
+		return areaMapper.selectArea2(areaNo);
+	}
+	
+	
 }
