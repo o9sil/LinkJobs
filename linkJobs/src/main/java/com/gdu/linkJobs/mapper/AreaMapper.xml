@@ -12,9 +12,6 @@
 	<!-- Gungu -->
 	<select id="selectArea2" parameterType="int" resultType="com.gdu.linkJobs.vo.AreaAndArea2">
 		SELECT 
-			a.area_no areaNo,
-			a.area_sido areaSido,
-			a2.area2_no area2No,
 			a2.area2_gungu area2Gungu
 		FROM linkjobs_area a 
 		INNER JOIN linkjobs_area2 a2 

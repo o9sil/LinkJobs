@@ -61,10 +61,16 @@
     	  		url	:/*[[@{/selectArea2}]]*/, 
     	  	  	type: "POST",
     	  	    data:{'areaNo':areaNo},
-	             sucess: function (data) {
-					$.each(function (index,item) {
+	             success: function (data) {
+	            	 console.log(data);	            	 
+					$.each(data, function (index,item) {
 						
-						$('#area2Code').append("<option >"+item.area2Gungu+"</option>");
+						console.log(item);
+						
+						var addContent = $("<option th:value='"+item.area2Gungu+"' th:text='"+item.area2Gungu+"'>"+item.area2Gungu+"</option>");
+				        $("#area2Code").append(addContent);
+
+						
 					});
 				}
              });
