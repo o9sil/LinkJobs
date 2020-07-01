@@ -12,9 +12,23 @@ import com.gdu.linkJobs.vo.Resume;
 @Service
 public class ResumeService {
 	@Autowired private ResumeMapper resumeMapper;
+	
+	
+	//이력서 상세보기
+	public List<Resume> getDetailResume(Resume resume){
+		List<Resume> list = resumeMapper.selectDetailResume(resume);
+		return list;
+	}
+	
+	
 	// 이력서 추가
 	public int addResume(Resume resume) {
 		return resumeMapper.insertResume(resume);
+	}
+	
+	// 이력서 현황 카운트
+	public int getResumeCount(String memberId) {
+		return resumeMapper.selectResumeCount(memberId);
 	}
 	
 	// 이력서 삭제

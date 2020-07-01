@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.ResumeMapper">
+	
+	<!-- 이력서 상세보기 -->
+	<select id="selectDetailResume" parameterType="com.gdu.linkJobs.vo.Resume"  resultType="com.gdu.linkJobs.vo.Resume">
+		SELECT 
+			resume_career resumeCareer,
+			resume_title resumeTitle,
+			member_id memberId,
+			resume_working_form resumeWorkingForm,
+			resume_salary resumeSalary,
+			resume_wish_area resumeWishArea,
+			resume_wish_job resumeWishJob,
+			resume_wish_industry resumeWishIndustry,
+			resume_avaliability resumeAvaliability,
+			resume_self_introduction_title resumeSelfIntroductionTitle
+			resume_self_introduction_contents resumeSelfIntroductionContents 
+			resume_date resumeDate
+		FROM linkjobs_resume
+	</select>
+	
+	
+	<!-- 이력서 현황 카운트 -->
+	<select id="selectResumeCount" parameterType="String" resultType="int">
+		SELECT count(*)
+		FROM linkjobs_resume
+		WHERE member_id = #{memberId}
+	</select>
 	<!-- 이력서 삭제 -->
 	<delete id="deleteResume" parameterType="com.gdu.linkJobs.vo.Resume">
 		DELETE FROM linkjobs_resume
