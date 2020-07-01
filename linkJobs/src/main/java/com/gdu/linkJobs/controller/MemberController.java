@@ -53,6 +53,9 @@ public class MemberController {
           System.out.println("아이디를 사용할 수 있습니다 ");
           model.addAttribute("confirmMemberId", memberIdCheck);
        }
+       
+       List<Area> areaList=areaService.getArea();
+       model.addAttribute("areaList", areaList);
        return "member/addMember";
     }
 	

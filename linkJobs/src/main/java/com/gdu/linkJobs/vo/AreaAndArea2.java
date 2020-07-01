@@ -5,6 +5,8 @@ public class AreaAndArea2 {
 	private String areaSido;
 	private int area2No;
 	private String area2Gungu;
+	
+	
 	public int getAreaNo() {
 		return areaNo;
 	}
