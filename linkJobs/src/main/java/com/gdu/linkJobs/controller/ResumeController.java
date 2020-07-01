@@ -38,9 +38,9 @@ public class ResumeController {
 	@GetMapping("/addResume")
 	public String addResume(Model model) {
 		List<Area> areaList = areaService.getArea();
-		List<AreaAndArea2> area2List = areaService.getResumeArea2();
+		//List<AreaAndArea2> area2List = areaService.getResumeArea2();
 		model.addAttribute("areaList", areaList);
-		model.addAttribute("area2List", area2List);
+		//model.addAttribute("area2List", area2List);
 		return "resume/addResume";
 	}
 	

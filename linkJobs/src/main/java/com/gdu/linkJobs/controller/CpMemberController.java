@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.gdu.linkJobs.common.KakaoLogin;
 import com.gdu.linkJobs.service.CpMemberService;
+import com.gdu.linkJobs.service.IndustryService;
 import com.gdu.linkJobs.vo.AlterCpMemberPw;
 import com.gdu.linkJobs.vo.CpMember;
 import com.gdu.linkJobs.vo.LoginCpMember;
@@ -24,6 +25,22 @@ public class CpMemberController {
 	@Autowired
 	private CpMemberService cpMemberService;	
 	
+	@Autowired
+	private IndustryService industryService;
+	
+	//기업회원 정부 수정 액션
+	@PostMapping("/alterCpMemberDetail")
+	public String alterCpMemberDetailAction(HttpSession session, CpMember cpMember, @RequestParam(value="address") String address) {
+		if(session.getAttribute("loginCpMember") == null) {
+			return "redirect:/";
+		}
+		
+		System.out.println("cpMember = " + cpMember);
+		System.out.println("address = " + address);
+		
+		return "redirect:/alterCpMemberDetail";
+	}
+	
 	//기업회원 정보 수정 폼
 	@GetMapping("/alterCpMemberDetail")
 	public String alterCpMemberDetail(HttpSession session, Model model) {
@@ -33,6 +50,7 @@ public class CpMemberController {
 		
 		String loginCpMemberID = (String) session.getAttribute("loginCpMember");
 		model.addAttribute("cpMember", cpMemberService.getCpMemberDetail(loginCpMemberID));
+		model.addAttribute("industryList", industryService.getIndustryList());		
 		
 		return "cpMember/alterCpMemberDetail";
 	}
