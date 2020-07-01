@@ -10,12 +10,26 @@ public class CpMember {
 	private String cpMemberEmail;
 	private int cpMemberIndustryNo;
 	private int cpMemberArea2No;
-	private String cpMemberDetatiledAddress;
-	private String cpMemberPhoneNum;
+	private String cpMemberDetailedAddress;
+	private String cpMemberPhonenum;
 	private int cpMemberNumberOfEmployees;
 	private String cpMemberEstablishDate;
 	private String cpMemberDate;
 	private String cpMemberAdminAdmission;
+	
+	
+	
+	@Override
+	public String toString() {
+		return "CpMember [cpMemberId=" + cpMemberId + ", cpMemberPw=" + cpMemberPw + ", cpMemberLicenseNo="
+				+ cpMemberLicenseNo + ", cpMemberManager=" + cpMemberManager + ", cpMemberCompany=" + cpMemberCompany
+				+ ", cpMemberCeo=" + cpMemberCeo + ", cpMemberEmail=" + cpMemberEmail + ", cpMemberIndustryNo="
+				+ cpMemberIndustryNo + ", cpMemberArea2No=" + cpMemberArea2No + ", cpMemberDetailedAddress="
+				+ cpMemberDetailedAddress + ", cpMemberPhonenum=" + cpMemberPhonenum + ", cpMemberNumberOfEmployees="
+				+ cpMemberNumberOfEmployees + ", cpMemberEstablishDate=" + cpMemberEstablishDate + ", cpMemberDate="
+				+ cpMemberDate + ", cpMemberAdminAdmission=" + cpMemberAdminAdmission + "]";
+	}
+	
 	public String getCpMemberId() {
 		return cpMemberId;
 	}
@@ -70,17 +84,17 @@ public class CpMember {
 	public void setCpMemberArea2No(int cpMemberArea2No) {
 		this.cpMemberArea2No = cpMemberArea2No;
 	}
-	public String getCpMemberDetatiledAddress() {
-		return cpMemberDetatiledAddress;
+	public String getCpMemberDetailedAddress() {
+		return cpMemberDetailedAddress;
 	}
-	public void setCpMemberDetatiledAddress(String cpMemberDetatiledAddress) {
-		this.cpMemberDetatiledAddress = cpMemberDetatiledAddress;
+	public void setCpMemberDetailedAddress(String cpMemberDetailedAddress) {
+		this.cpMemberDetailedAddress = cpMemberDetailedAddress;
 	}
-	public String getCpMemberPhoneNum() {
-		return cpMemberPhoneNum;
+	public String getCpMemberPhonenum() {
+		return cpMemberPhonenum;
 	}
-	public void setCpMemberPhoneNum(String cpMemberPhoneNum) {
-		this.cpMemberPhoneNum = cpMemberPhoneNum;
+	public void setCpMemberPhonenum(String cpMemberPhonenum) {
+		this.cpMemberPhonenum = cpMemberPhonenum;
 	}
 	public int getCpMemberNumberOfEmployees() {
 		return cpMemberNumberOfEmployees;
@@ -106,19 +120,5 @@ public class CpMember {
 	public void setCpMemberAdminAdmission(String cpMemberAdminAdmission) {
 		this.cpMemberAdminAdmission = cpMemberAdminAdmission;
 	}
-	@Override
-	public String toString() {
-		return "CpMember [cpMemberId=" + cpMemberId + ", cpMemberPw=" + cpMemberPw + ", cpMemberLicenseNo="
-				+ cpMemberLicenseNo + ", cpMemberManager=" + cpMemberManager + ", cpMemberCompany=" + cpMemberCompany
-				+ ", cpMemberCeo=" + cpMemberCeo + ", cpMemberEmail=" + cpMemberEmail + ", cpMemberIndustryNo="
-				+ cpMemberIndustryNo + ", cpMemberArea2No=" + cpMemberArea2No + ", cpMemberDetatiledAddress="
-				+ cpMemberDetatiledAddress + ", cpMemberPhoneNum=" + cpMemberPhoneNum + ", cpMemberNumberOfEmployees="
-				+ cpMemberNumberOfEmployees + ", cpMemberEstablishDate=" + cpMemberEstablishDate + ", cpMemberDate="
-				+ cpMemberDate + ", cpMemberAdminAdmission=" + cpMemberAdminAdmission + "]";
-	}
-	
-	
-	
-	
-	
+
 }

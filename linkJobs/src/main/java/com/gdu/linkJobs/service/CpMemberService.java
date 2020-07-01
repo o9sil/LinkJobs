@@ -2,6 +2,7 @@ package com.gdu.linkJobs.service;
 
 import javax.servlet.http.HttpServlet;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -21,11 +22,41 @@ public class CpMemberService extends HttpServlet {
 	@Autowired private JavaMailSender javaMailSender;
 	
 	
+	//기업회원 상세정보 수정
+	public int modifyCpMemberDetail(CpMember cpMember) {
+		return cpMemberMapper.updateCpMemberDetail(cpMember);
+	}
+	
+	//기업회원 상세정보 가져오기
+	public CpMember getCpMemberDetail(String cpMemberId) {
+		return cpMemberMapper.selectCpMemberDetail(cpMemberId);
+	}
+	
 	//기업회원 PW 수정
 	public int modifyCpMemberPw(AlterCpMemberPw alterCpMemberPw) {
 		return cpMemberMapper.updateCpMemberPw(alterCpMemberPw);
 	}
 	
+	//기업회원 PW 찾기
+	public int findCpMemberPw(CpMember cpMember) {
+		
+		String pw = RandomStringUtils.randomNumeric(10);
+
+		cpMember.setCpMemberPw(pw);
+		
+		int row = cpMemberMapper.updateCpMemberPwRandom(cpMember);
+		
+		if(row==1) {
+			SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+			simpleMailMessage.setTo(cpMember.getCpMemberEmail());
+			simpleMailMessage.setFrom("LinkJobs");
+			simpleMailMessage.setSubject("LinkJobs PW 찾기");	
+			simpleMailMessage.setText("기업회원 PW " + pw + " 입니다.");
+			
+			javaMailSender.send(simpleMailMessage);
+		}
+		return row;
+	}
 	
 	//기업회원 ID 찾기
 	public int getCpMemberId(CpMember cpMember) {

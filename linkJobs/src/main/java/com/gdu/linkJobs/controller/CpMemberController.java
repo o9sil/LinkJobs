@@ -24,6 +24,19 @@ public class CpMemberController {
 	@Autowired
 	private CpMemberService cpMemberService;	
 	
+	//기업회원 정보 수정 폼
+	@GetMapping("/alterCpMemberDetail")
+	public String alterCpMemberDetail(HttpSession session, Model model) {
+		if(session.getAttribute("loginCpMember") == null) {
+			return "redirect:/";
+		}
+		
+		String loginCpMemberID = (String) session.getAttribute("loginCpMember");
+		model.addAttribute("cpMember", cpMemberService.getCpMemberDetail(loginCpMemberID));
+		
+		return "cpMember/alterCpMemberDetail";
+	}
+	
 	//비밀번호 수정 액션
 	@PostMapping("/alterCpMemberPw")
 	public String alterCpMemberPwAction(HttpSession session, AlterCpMemberPw alterCpMemberPw) {
@@ -74,7 +87,11 @@ public class CpMemberController {
 		System.out.println("findCpMemberPw Post");
 		System.out.println(cpMember);
 		
-		return "redirect:/loginCpMember";
+		if(cpMemberService.findCpMemberPw(cpMember) == 1) {
+			return "redirect:/loginCpMember";
+		} else {
+			return "redirect:/findCpMember";
+		}
 	}
 	
 	

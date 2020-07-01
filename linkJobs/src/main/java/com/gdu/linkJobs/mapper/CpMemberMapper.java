@@ -9,6 +9,14 @@ import com.gdu.linkJobs.vo.LoginCpMember;
 @Mapper
 public interface CpMemberMapper {
 	
+	//기업회원 상세정보 가져오기
+	public CpMember selectCpMemberDetail(String cpMemberId);
+	
+	//기업회원 정보수정
+	public int updateCpMemberDetail(CpMember cpMember);
+	
+	//기업회원 PW 찾기
+	public int updateCpMemberPwRandom(CpMember cpMember);
 	
 	//기업회원 PW 수정
 	public int updateCpMemberPw(AlterCpMemberPw alterCpMemberPw);

@@ -2,17 +2,59 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.CpMemberMapper">
 
+	<!-- 기업회원 상세정보 가져오기 -->
+	<select id="selectCpMemberDetail" parameterType="String" resultType="com.gdu.linkJobs.vo.CpMember">
+		SELECT 
+			cpmember_id AS cpMemberId,
+			cpmember_license_no AS cpMemberLicenseNo,
+			cpmember_manager AS cpMemberManager,
+			cpmember_company AS cpMemberCompany,
+			cpmember_ceo AS cpMemberCeo,
+			cpmember_email AS cpMemberEmail,
+			industry_no AS cpMemberIndustryNo,
+			area2_no AS cpMemberArea2No,
+			cpmember_detailed_address AS cpMemberDetailedAddress,
+			cpmember_phonenum AS cpMemberPhonenum,
+			cpmember_number_of_employees AS cpMemberNumberOfEmployees,
+			cpmember_establish_date AS cpMemberEstablishDate
+		FROM linkjobs_cpmember
+		WHERE cpmember_id = #{cpmemberId}	
+	</select>
+
+	<!-- 기업회원 정보수정 -->
+	<update id="updateCpMemberDetail" parameterType="com.gdu.linkJobs.vo.CpMember">
+		UPDATE linkjobs_cpmember
+		SET cpmember_license_no = #{cpMemberLicenseNo},
+			cpmember_manager = #{cpMemberManager},
+			cpmember_company = #{cpMemberCompany},
+			cpmember_ceo = #{cpMemberCeo},
+			cpmember_email = #{cpMemberEmail},
+			cpmember_industry_no = #{cpMemberIndustryNo},
+			cpmember_area2_no = #{cpMemberArea2No},
+			cpmember_detailed_address = #{cpMemberDetailedAddress},
+			cpmember_phonenum = #{cpMemberPhonenum},
+			cpmember_number_of_employees = #{cpMemberNumberOfEmployees},
+			cpmember_establish_date = #{cpMemberEstablishDate},
+		WHERE cpmember_id = #{cpMemberId}
+	</update>
+	
 	<!-- 기업회원 PW 수정 -->
 	<update id="updateCpMemberPw" parameterType="com.gdu.linkJobs.vo.AlterCpMemberPw">
-		UPDATE linkjobs_cpmember 
+		UPDATE linkjobs_cpmember
 		SET cpmember_pw = PASSWORD(#{cpMemberPwAfter}) 
 		WHERE cpmember_id = #{cpMemberId} 
-			AND cpmember_pw = PASSWORD(#{cpMemberPwBefore})
+		AND cpmember_pw = PASSWORD(#{cpMemberPwBefore})
 	</update>
 
 	<!-- 기업회원 PW 찾기(DB는 수정) -->
 	<update id="updateCpMemberPwRandom" parameterType="com.gdu.linkJobs.vo.CpMember">
-	
+		UPDATE linkjobs_cpmember
+		SET cpmember_pw = PASSWORD(#{cpMemberPw})
+		WHERE 	cpmember_id = #{cpMemberId}
+		AND	cpmember_license_no = #{cpMemberLicenseNo}
+		AND cpmember_manager = #{cpMemberManager} 
+		AND cpmember_email = #{cpMemberEmail}
+		
 	</update>
 
 	<!-- 기업회원 ID 찾기 -->
@@ -20,8 +62,8 @@
 		SELECT cpmember_id AS cpMemberId, cpmember_email AS cpMemberEmail 
 		FROM linkjobs_cpmember 
 		WHERE cpmember_license_no = #{cpMemberLicenseNo}
-			AND cpmember_manager = #{cpMemberManager} 
-			AND cpmember_email = #{cpMemberEmail}
+		AND cpmember_manager = #{cpMemberManager} 
+		AND cpmember_email = #{cpMemberEmail}
 	</select>
 
 	<!-- 로그인 쿼리 -->
@@ -44,6 +86,7 @@
 			cpmember_company,
 			cpmember_ceo,
 			cpmember_phonenum,
+			cpmember_email,
 			cpmember_date,
 			cpmember_admin_admission
 		) VALUES (
@@ -53,7 +96,8 @@
 			#{cpMemberManager},
 			#{cpMemberCompany},
 			#{cpMemberCeo},
-			#{cpMemberPhoneNum},
+			#{cpMemberPhonenum},
+			#{cpMemberEmail},
 			NOW(),
 			'N'
 		)
