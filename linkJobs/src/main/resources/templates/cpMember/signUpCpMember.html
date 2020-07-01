@@ -157,7 +157,7 @@ $('#signUpBtn').click(function(){
    
    /*<![CDATA[*/	      
     $.ajax({    	
-    	url: /*[[@{/checkCpMemberId}]]*/
+    	url: [[@{/checkCpMemberId}]]
         ,type:'POST'
         ,data:{'checkCpMemberId':cpMemberId}
         ,success : function(data) {

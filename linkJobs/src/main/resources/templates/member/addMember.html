@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>cpMemberLogin</title>
+<title>MemberLogin</title>
 <!-- Custom fonts for this template-->
 <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -31,22 +31,27 @@
 		
 	}
 	*/
-	let memberId="";
+	
+	
 	
 	
 	$(document).ready(function () {
 		
-		/*
+		
+		
+		
 		$('#idFormBtn').click(function() {
 			if ($('#memberIdCheck').val().length < 4) {
 				$('#idCheckHelper').text("id를 4자이상");
 			} else {
-				memberId=$('#memberIdCheck').val();
-				console.log(memberId);
-				
+				$('#idForm').submit();
 			}
 		});
-		*/
+		
+		
+		
+		
+		/*
 		$('#areaCode').click(function(){
 	        console.log('#areaCode click');
 	        $.ajax({
@@ -66,7 +71,7 @@
 	               }
 	        });
 	    });
-		
+		*/
 		$('#myFormBtn').click(function() {
 			
 			
@@ -136,12 +141,12 @@
 												</div>
 												<div class="col-sm-6">
 													<input type="text" id="memberIdCheck" name="memberIdCheck" class="form-control">
+													<span id="idCheckHelper"></span>
+													<span th:text="${msg}" class="text text-danger"></span>
 												</div>
 												<div class="col-sm-3">
 													<button type="button" id="idFormBtn" class="form-control">확인</button>
 												</div>
-												<span id="idCheckHelper"></span>
-												<span th:text="${msg}" class="text text-danger"></span>
 											</div>
 										</form>
 										<br>
@@ -150,7 +155,7 @@
 											<div class="row">
 												<div class="col-sm-3">아이디 :</div>
 												<div class="col-sm-9">
-													<input type="text" id="memberId" name="memberId" class="form-control" >
+													<input type="text" id="memberId" name="memberId" class="form-control" th:value="${confirmMemberId}" readonly="readonly">
 												</div>
 												<span id="idHelper" ></span>
 											</div>
@@ -184,13 +189,13 @@
 												<div class="col-sm-4">
 													<select id="areaCode" class="form-control" name="areaCode">
 														<option value="ddd">주소</option>
-														<option th:each="@{areaList.areaSido}"></option>
+														<option ></option>
 													</select>
 												</div>	
 												<div class="col-sm-5">	
 													<select id="area2Code" class="form-control" name="area2Code">
 														<option value="ddd">주소</option>
-														<option th:each="@{areaList.areaSido}"></option>
+														<option ></option>
 													</select>
 												</div>
 											</div>
