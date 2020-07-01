@@ -24,7 +24,6 @@ public class MemberController {
     //일반회원 회원가입
     @GetMapping("/addMember")
     public String addMember(Model model) {
-    	System.out.println("member insert sucess");
     	List<AreaAndArea2> areaList= areaAndArea2Service.getAreaAndArea2();
     	model.addAttribute("areaList", areaList);
     	
@@ -51,7 +50,7 @@ public class MemberController {
 		} else { // 멤버아이디에 반환되는 값이 없으면 아이디 사용가능
 			// 아이디를 사용할 수 있습니다
 			System.out.println("아이디를 사용할 수 있습니다 ");
-			model.addAttribute("confirmMemberId", memberId);
+			model.addAttribute("confirmMemberId", memberIdCheck);
 		}
 		return "member/addMember";
 	}
