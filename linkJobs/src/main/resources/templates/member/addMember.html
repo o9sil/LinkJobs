@@ -17,103 +17,119 @@
 <!-- <script src="js/sb-admin-2.min.js"></script> -->
 <!-- Custom styles for this template-->
 <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
-<script>
+<script th:inline="javascript">
+   
    
    let helperInit = function() {
-      $('#idHelper').text("");
-      $('#pwHelper').text("");
-      $('#nameHelper').text("");
-      $('#detailAddrHelper').text("");
-      $('#phoneHelper').text("");
-      $('#emailHelper').text("");
-      $('#birthHelper').text("");
-      $('#genderHelper').text("");
-      
-   }
+         $('#idHelper').text("");
+         $('#pwHelper').text("");
+         $('#nameHelper').text("");
+         $('#detailAddrHelper').text("");
+         $('#phoneHelper').text("");
+         $('#emailHelper').text("");
+         $('#birthHelper').text("");
+         $('#genderHelper').text("");
+         $('#areaCodeHelper').text("");
+         $('#areaCode2Helper').text("");
+      }
+   
+   
+   
+   
    
    $(document).ready(function () {
+      
+      
+      
+      
       $('#idFormBtn').click(function() {
-         if($('#memberIdCheck').val().length < 4) {
+         if ($('#memberIdCheck').val().length < 4) {
             $('#idCheckHelper').text("id를 4자이상");
          } else {
             $('#idForm').submit();
          }
       });
 
+     
       //지역
-      /*
-      $('#areaCode').click(function(){
-    	  var index = $("#areaCode option").index($("#areaCode option:selected"));
-           console.log('#areaCode selected');
-           $.ajax({
-               url:'/addMember'
-               ,type:'GET'
-               ,success:function(data){ // data -> json member list
-               $(data).each(function(index,item){
-                          $('#list').append('<tr>');
-                          $('#list').append('<td><input type="checkbox" class="ck" value="'+item.id+'"></td>');
-                          $('#list').append('<td>'+item.id+'</td>');
-                          $('#list').append('<td>'+item.pw+'</td>');
-                          $('#list').append('<td>'+item.name+'</td>');
-                          $('#list').append('<td>'+item.age+'</td>');
-                          $('#list').append('<td>'+item.gender+'</td>');
-                          $('#list').append('</tr>');
-                      });
-                  }
-           });
-       });
-      */
+      
+      /*<![CDATA[*/
+      $('#areaCode').change(function () {
+            let areaNo=$(this).val();
+            console.log("areaNo : "+areaNo);
+             $.ajax({
+               url   :/*[[@{/selectArea2}]]*/, 
+                 type: "POST",
+                data:{'areaNo':areaNo},
+                success: function (data) {
+                   console.log(data);                   
+               $.each(data, function (index,item) {
+                  
+                  console.log(item);
+                  
+                  var addContent = $("<option th:value='"+item.area2Gungu+"' th:text='"+item.area2Gungu+"'>"+item.area2Gungu+"</option>");
+                    $("#area2Code").append(addContent);
+
+                  
+               });
+            }
+             });
+     });   
+      /*]]>*/
+      
       
       //회원가입 폼
       $('#myFormBtn').click(function() {
-         if($('#memberPw').val().length < 4){
-            helperInit(); //값이 다시 초기화 됨
+         
+         
+       if($('#memberId').val().length == ""){
+             helperInit(); //값이 다시 초기화 됨
+              $('#idHelper').text("ID를 중복체크 해주세요");
+              $('#memberId').focus();
+         }else if($('#memberPw').val().length < 4){
+           helperInit(); //값이 다시 초기화 됨
             $('#pwHelper').text("PW는 4자 이상");
             $('#memberPw').focus();
-            return;
-         }
-         if($('#memberPw').val() != $('#memberPw2').val()) {
+         } else if($('#memberPw').val() != $('#memberPw2').val()) {
             helperInit();
             $('#pwHelper').text("PW를 확인 하세요");
             $('#memberPw').focus();
-            return;
-         }if($('#memberName').val() == "") {
+         } else if($('#memberName').val() == "") {
             helperInit();
             $('#nameHelper').text("이름을 입력 하세요");
             $('#memberName').focus();
-            return;
-         }
-         if($('#memberDetailAddress').val() == "") {
+         } else if($('#areaCode').val() == "") {
+             helperInit();
+             $('#areaCodeHelper').text("시/도를 선택하세요"); 
+             $('#areaCode').focus();
+          } else if($('#area2Code').val() == "") {
+              helperInit();
+              $('#area2CodeHelper').text("군/구를 선택 하세요"); 
+              $('#area2Code').focus();
+           } else if($('#memberDetailAddress').val() == "") {
             helperInit();
             $('#addrHelper').text("상세 주소를 입력 하세요");
             $('#memberDetailAddress').focus();
-            return;
-         }
-         if($('#memberPhone').val() == "") {
+         } else if($('#memberPhone').val() == "") {
             helperInit();
-            $('#phoneHelper').text("전화번호를 입력 하세요");
+            $('#phoneHelper').text("전화번호를 입력 하세요"); 
             $('#memberPhone').focus();
-            return;
-         }
-         if($('#memberEmail').val() == "") {
+         } else if($('#memberEmail').val() == "") {
             helperInit();
             $('#emailHelper').text("이메일을 입력 하세요");
             $('#memberEmail').focus();
-            return;
-         }
-         if($('#memberBirthdate').val() == "") {
+         } else if($('#memberBirthdate').val() == "") {
             helperInit();
             $('#birthHelper').text("생년월일을 입력 하세요");
             $('#memberBirthdate').focus();
-            return;
-         }
-         if($('#memberGender').val() == "") {
+         } else if($('#memberGender').val() == "") {
             helperInit();
             $('#genderHelper').text("성별을 선택하세요");
             $('#memberGender').focus();
-            return;
-         }
+         } else{
             $('#myForm').submit();            
+         }
+         
       });
    });
    
@@ -158,8 +174,8 @@
                                  <div class="row">
                                     <div class="col-sm-3">아이디 :</div>
                                     <div class="col-sm-9">
-                                       	<input type="text" id="memberId" name="memberId" class="form-control" th:value="${confirmMemberId}" readonly="readonly">
-	                                    <span id="idHelper" ></span>
+                                          <input type="text" id="memberId" name="memberId" class="form-control" th:value="${confirmMemberId}" readonly="readonly">
+                                       <span id="idHelper" ></span>
                                     </div>
                                  </div>
                                  <br>
@@ -184,8 +200,8 @@
                                  <div class="row">
                                     <div class="col-sm-3">이름 :</div>
                                     <div class="col-sm-9">
-                                       	<input type="text" name="memberName" id="memberName" class="form-control">
-	                                    <span id="nameHelper"></span>
+                                          <input type="text" name="memberName" id="memberName" class="form-control">
+                                       <span id="nameHelper"></span>
                                     </div>
                                  </div>
                                  <br>
@@ -196,36 +212,38 @@
                                           <option value="">시 / 도</option>
                                           <option th:each="areaList : ${areaList}" th:value="${areaList.areaNo}" th:text="${areaList.areaSido}"></option>
                                        </select>
+                                       <span id="areaCodeHelper"></span>
                                     </div>   
                                     <div class="col-sm-5">   
                                        <select id="area2Code" class="form-control" name="area2Gungu" >
                                           <option value="">군 / 구</option>
-                                        
+                                          
                                        </select>
+                                       <span id="area2CodeHelper"></span>
                                     </div>
                                  </div>
                                  <br>
                                  <div class="row">
                                     <div class="col-sm-3">상세주소 :</div>
                                     <div class="col-sm-9">
-                                    	<input type="text" name="memberDetailAddress" id="memberDetailAddress" class="form-control">
-	                                    <span id="detailAddrHelper"></span>
+                                       <input type="text" name="memberDetailAddress" id="memberDetailAddress" class="form-control">
+                                       <span id="detailAddrHelper"></span>
                                     </div>
                                  </div>
                                  <br>
                                  <div class="row">
                                     <div class="col-sm-3">전화번호 :</div>
                                     <div class="col-sm-9">
-                                       	<input type="text" name="memberPhone" id="memberPhone" class="form-control">
-	                                    <span id="phoneHelper"></span>
+                                          <input type="text" name="memberPhone" id="memberPhone" class="form-control">
+                                       <span id="phoneHelper"></span>
                                     </div>
                                  </div>
                                  <br>
                                  <div class="row">
                                     <div class="col-sm-3">이메일 :</div>
                                     <div class="col-sm-9">
-                                       	<input type="text" name="memberEmail" id="memberEmail" class="form-control">
-	                                    <span id="emailHelper"></span>
+                                          <input type="text" name="memberEmail" id="memberEmail" class="form-control">
+                                       <span id="emailHelper"></span>
                                     </div>
 
                                  </div>
@@ -233,8 +251,8 @@
                                  <div class="row">
                                     <div class="col-sm-3">생년월일 :</div>
                                     <div class="col-sm-9">
-                                       	<input type="text" name="memberBirthdate" id="memberBirthdate" class="form-control">
-	                                    <span id="birthHelper"></span>
+                                          <input type="text" name="memberBirthdate" id="memberBirthdate" class="form-control">
+                                       <span id="birthHelper"></span>
                                     </div>
                                  </div>
                                  <br>
@@ -243,7 +261,7 @@
                                     <div class="col-sm-9">
                                        <input type="radio" value="남" id="memberGender"name="memberGender">&nbsp;&nbsp;&nbsp;&nbsp;남 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                        <input type="radio" value="여" id="memberGender" name="memberGender">&nbsp;&nbsp;&nbsp;&nbsp;여
-                                    	<span id="genderHelper"></span>
+                                       <span id="genderHelper"></span>
                                     </div>
                                  </div>
                                  <div>
