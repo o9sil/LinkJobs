@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.gdu.linkJobs.common.KakaoLogin;
 import com.gdu.linkJobs.service.CpMemberService;
+import com.gdu.linkJobs.vo.AlterCpMemberPw;
 import com.gdu.linkJobs.vo.CpMember;
 import com.gdu.linkJobs.vo.LoginCpMember;
 
@@ -22,6 +23,39 @@ public class CpMemberController {
 	
 	@Autowired
 	private CpMemberService cpMemberService;	
+	
+	//비밀번호 수정 액션
+	@PostMapping("/alterCpMemberPw")
+	public String alterCpMemberPwAction(HttpSession session, AlterCpMemberPw alterCpMemberPw) {
+
+		if(session.getAttribute("loginCpMember") == null) {
+			return "redirect:/";
+		}
+		
+		//System.out.println("session = " + session.getAttribute("loginCpMember"));
+		//System.out.println("AlterCpMemberPw = " + alterCpMemberPw);
+		
+		//비밀번호 수정 성공
+		if(cpMemberService.modifyCpMemberPw(alterCpMemberPw) == 1) {
+			//System.out.println("비밀번호 수정 성공");
+			return "redirect:/";
+		}else {
+			//System.out.println("비밀번호 수정 실패");
+			return "redirect:/alterCpMemberPw";
+		}
+	}
+	
+	//비밀번호 수정 폼
+	@GetMapping("/alterCpMemberPw")
+	public String alterCpMemberPw(HttpSession session) {
+
+		if(session.getAttribute("loginCpMember") == null) {
+			return "redirect:/";
+		}
+		
+		return "cpMember/alterCpMemberPw";
+	}
+	
 	
 	//ID 찾기 액션
 	@PostMapping("/findCpMemberId")
@@ -74,9 +108,18 @@ public class CpMemberController {
 			return "redirect:/";
 		}
 		
-		//System.out.println("회원가입 성공 여부 = " + cpMemberService.addMember(cpMember));
+		//System.out.println("회원가입 성공 여부 = ");
+		cpMemberService.addMember(cpMember);
 		
 		return "redirect:/loginCpMember";
+	}
+	
+	// 기업회원 로그아웃
+	@GetMapping("/logoutCpMember")
+	public String logoutCpMember(HttpSession session) {
+		session.removeAttribute("loginCpMember");
+		
+		return "redirect:/";
 	}
 	   
 	
@@ -105,7 +148,13 @@ public class CpMemberController {
 		String loginId = cpMemberService.login(loginCpmember);
 		System.out.println(loginId +"<--returnLoginCpMember ID");
 		
-		return "redirect:/";
+		//회원가입 실패(회원이 아님)
+		if(loginId == null) {
+			return "redirect:/loginCpMember";
+		}else {
+			session.setAttribute("loginCpMember", loginId);
+			return "redirect:/";
+		}
 	}
 	
 	

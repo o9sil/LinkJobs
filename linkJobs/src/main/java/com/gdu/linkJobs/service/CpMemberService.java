@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.gdu.linkJobs.mapper.CpMemberMapper;
+import com.gdu.linkJobs.vo.AlterCpMemberPw;
 import com.gdu.linkJobs.vo.CpMember;
 import com.gdu.linkJobs.vo.LoginCpMember;
 
@@ -19,11 +20,18 @@ public class CpMemberService extends HttpServlet {
 	
 	@Autowired private JavaMailSender javaMailSender;
 	
+	
+	//기업회원 PW 수정
+	public int modifyCpMemberPw(AlterCpMemberPw alterCpMemberPw) {
+		return cpMemberMapper.updateCpMemberPw(alterCpMemberPw);
+	}
+	
+	
 	//기업회원 ID 찾기
 	public int getCpMemberId(CpMember cpMember) {
 		
 		CpMember returnCpMember = cpMemberMapper.selectCpMemberId(cpMember); 
-		System.out.println("cpMemberService getCpMemberId = " + returnCpMember);
+		//System.out.println("cpMemberService getCpMemberId = " + returnCpMember);
 		
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 		simpleMailMessage.setTo(returnCpMember.getCpMemberEmail());

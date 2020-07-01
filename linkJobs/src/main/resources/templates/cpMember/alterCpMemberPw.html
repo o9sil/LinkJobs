@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>alterCpMemberPw</title>
+<!-- Custom fonts for this template-->
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+</head>
+<body class="bg-gradient-primary">
+
+	<div class="container">
+    	<!-- Outer Row -->
+    	<div class="row justify-content-center">
+
+	    	<div class="col-md-9">
+        		<div class="card o-hidden border-0 shadow-lg my-5">
+          			<div class="card-body p-0">
+            			<!-- Nested Row within Card Body -->
+            			<div class="row">             				
+              				<div class="col-lg-12">
+	               				<div class="p-5">	               					
+	               					
+	               					<!-- 기존 비밀번호 확인 -->
+	               					<div id="cpIdDiv">
+	                					<form class="user" id="alterPwForm" method="post" th:action="@{/alterCpMemberPw}">
+		                  					<div class="form-group">
+		                    					<input type="text" class="form-control form-control-user" name="cpMemberId" id="cpMemberId" readonly="readonly" th:value="${session['loginCpMember']}">		                    					
+		                  					</div>
+		                  					<div class="form-group">
+		                    					<input type="password" class="form-control form-control-user" name="cpMemberPwBefore" id="cpMemberPwBefore" placeholder="기존 비밀번호를 입력하세요.">
+		                    					<span id="cpMemberPwBeforeSpan" style="color: red; margin: auto;"></span>
+		                  					</div> 
+		                  					<div class="form-group">
+		                    					<input type="password" class="form-control form-control-user" name="cpMemberPwAfter" id="cpMemberPwAfter" placeholder="수정할 비밀번호를 입력하세요.">
+		                    					<span id="cpMemberPwAfterSpan" style="color: red; margin: auto;"></span>
+		                  					</div>    
+		                  					  		
+		                  					<a id="updatePwBtn" class="btn btn-primary btn-user btn-block" style="color: white;">비밀번호 수정</a>		
+		                  					   					
+	                					</form>
+	                					<hr>	                					
+	               					</div>
+	               						               					
+	               				</div>  
+               				</div>            				
+            			</div>
+          			</div>
+        		</div>	
+    		</div>
+    	</div>
+  	</div>
+	
+
+	<!-- Bootstrap core JavaScript-->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+	<!-- Core plugin JavaScript-->
+	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+	
+	<!-- Custom scripts for all pages-->
+	<script src="js/sb-admin-2.min.js"></script>
+
+<script>
+	$('#updatePwBtn').click(function(){
+		$('#cpMemberPwBeforeSpan').text("");
+		$('#cpMemberPwAfterSpan').text("");
+		if($('#cpMemberPwBefore').val().length === 0){
+			$('#cpMemberPwBeforeSpan').text("기존 비밀번호를 입력하세요.");
+			return;
+		}
+		if($('#cpMemberPwAfter').val().length === 0){
+			$('#cpMemberPwAfterSpan').text("수정할 비밀번호를 입력하세요.");
+			return;
+		}
+		
+		$('#alterPwForm').submit();
+	});
+</script>
+
+</body>
+
+</html>
