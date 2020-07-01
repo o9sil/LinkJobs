@@ -4,7 +4,8 @@ public class Member {
 	private String memberId;
 	private String memberPw;
 	private String memberName;
-	private int area2Code;
+	private String areaSido;
+	private String area2Gungu;
 	private String memberDetailAddress;
 	private String memberPhone;
 	private String memberEmail;
@@ -29,11 +30,17 @@ public class Member {
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
-	public int getArea2Code() {
-		return area2Code;
+	public String getAreaSido() {
+		return areaSido;
 	}
-	public void setArea2Code(int area2Code) {
-		this.area2Code = area2Code;
+	public void setAreaSido(String areaSido) {
+		this.areaSido = areaSido;
+	}
+	public String getArea2Gungu() {
+		return area2Gungu;
+	}
+	public void setArea2Gungu(String area2Gungu) {
+		this.area2Gungu = area2Gungu;
 	}
 	public String getMemberDetailAddress() {
 		return memberDetailAddress;
@@ -71,4 +78,5 @@ public class Member {
 	public void setMemberSocialLogin(String memberSocialLogin) {
 		this.memberSocialLogin = memberSocialLogin;
 	}
+	
 }

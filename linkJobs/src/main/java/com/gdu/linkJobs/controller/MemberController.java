@@ -2,6 +2,8 @@ package com.gdu.linkJobs.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gdu.linkJobs.service.AreaService;
 import com.gdu.linkJobs.service.MemberService;
 import com.gdu.linkJobs.vo.Area;
-import com.gdu.linkJobs.vo.AreaAndArea2;
+import com.gdu.linkJobs.vo.LoginMember;
 import com.gdu.linkJobs.vo.Member;
 
 @Controller
@@ -38,6 +40,8 @@ public class MemberController {
     	System.out.println(member);
     	return "redirect:/index";
     }
+    
+   
     // 중복 체크
     @PostMapping("/checkMemberId")
     public String checkMemberId(@RequestParam("memberIdCheck") String memberIdCheck, Model model ) {
@@ -59,5 +63,40 @@ public class MemberController {
        return "member/addMember";
     }
 	
+    //login form
+    @GetMapping("/loginMember")
+    public String loginMember() {
+    	
+    	return "login/login";
+    }
     
+    //login action
+    @PostMapping("/loginMember")
+    public String loginMember(Model model, HttpSession session, LoginMember loginMember) {
+    	// 로그인 중
+		if(session.getAttribute("loginMember") != null) {
+			return "redirect:/";
+		}
+		
+		String loginMemberId = memberService.loginMember(loginMember);
+		
+		//회원가입 실패(회원이 아님)
+		if(loginMemberId == null) {
+			System.out.println(loginMemberId + "<--loginId");
+			return "redirect:/loginMember";
+		}else {
+			System.out.println(loginMemberId + "<--loginId");
+			session.setAttribute("loginMember", loginMemberId);
+			return "redirect:/";
+		}
+    	
+    }
+    
+    //logout
+ 	@GetMapping("/logoutMember")
+ 	public String logoutMember(HttpSession session) {
+ 		session.removeAttribute("loginMember");
+ 		
+ 		return "redirect:/";
+ 	}
 }

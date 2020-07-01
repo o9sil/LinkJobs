@@ -2,6 +2,7 @@ package com.gdu.linkJobs.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.gdu.linkJobs.vo.LoginMember;
 import com.gdu.linkJobs.vo.Member;
 
 @Mapper
@@ -11,5 +12,7 @@ public interface MemberMapper {
 	public int insertMember(Member member);
 	//중복체크
 	public String memberIdCheck(String memberId);
+	//login member
+	public String loginMember(LoginMember loginMember);
 	
 }

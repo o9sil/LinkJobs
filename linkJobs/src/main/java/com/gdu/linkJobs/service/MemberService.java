@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gdu.linkJobs.mapper.MemberMapper;
+import com.gdu.linkJobs.vo.LoginMember;
 import com.gdu.linkJobs.vo.Member;
 
 @Service
@@ -21,5 +22,10 @@ public class MemberService {
 	//중복확인 (아이디)
 	public String memberIdCheck(String memberId) {
 		return memberMapper.memberIdCheck(memberId);
+	}
+	
+	//loginMember
+	public String loginMember(LoginMember loginMember) {
+		return memberMapper.loginMember(loginMember);
 	}
 }

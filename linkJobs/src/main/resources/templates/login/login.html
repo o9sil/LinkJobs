@@ -11,10 +11,54 @@
 <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
 </head>
 <body class="bg-gradient-primary">
+	<!-- Topbar -->
+	<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
+		<!-- Topbar Search -->
+        <form class="navbar-search">
+        	<a class="m-0 font-weight-bold text-primary" style="padding-left: 5%">지역별</a>
+        	
+        	<a class="m-0 font-weight-bold text-primary" style="padding-left: 5%">직업별</a>
+        	
+        	<a class="m-0 font-weight-bold text-primary" style="padding-left: 5%">산업별</a>        	      	
+        </form>
 	
-	<div th:include ="/include/menuTop::navTop">
+		<!-- Topbar Navbar -->
+	  	<ul class="navbar-nav ml-auto">
 	
-	</div>
+		    <!-- Nav Item - User Information -->
+		    <li class="nav-item dropdown no-arrow">
+		    	<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		        	<span class="mr-2 d-lg-inline text-gray-600 small">로그인하세요</span>	        	
+		      	</a>
+		  	<!-- Dropdown - User Information -->
+		    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+		    	<a class="dropdown-item" th:href="@{/loginMember}">
+		        	<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+	          		일반회원 로그인
+		        </a>
+		    	<a class="dropdown-item" th:href="@{/loginCpMember}">
+		        	<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+	          		기업회원 로그인
+		        </a>	    	
+		        <!-- <a class="dropdown-item" href="#">
+		        	<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>	          	
+		        </a> -->
+		        <!-- <a class="dropdown-item" href="#">
+		        	<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+		          	Activity Log
+		        </a> -->
+		        <div class="dropdown-divider"></div>
+		        <!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+		        	<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+		          	Logout
+		        </a> -->
+		      </div>
+		    </li>
+		
+		  </ul>
+	
+	</nav>
+	<!-- End of Topbar -->
 	
 	
 	<div class="container">
@@ -40,7 +84,7 @@
 	               					</div>
 	               					<hr> 
 	               					
-	               					
+	               					<!-- cpMember -->
 	               					<div id="cpMemberDiv" style="display: none;">
 	                					<form class="user" id="cpMemberForm" method="post" th:action="@{/loginCpMember}">
 		                  					<div class="form-group">
@@ -51,14 +95,34 @@
 	                    						<input type="password" class="form-control form-control-user" id="cpMemberPw" name="cpMemberPw" placeholder="PW를 입력하세요.">
 	                    						<span id="cpMemberPWSpan" style="color: red; margin: auto;"></span>
 		                  					</div>	
-		                  					<a id="cpMemberLoginBtn" class="btn btn-primary btn-user btn-block" style="color: white;">Login</a>
-		                  					
+		                  						<a id="cpMemberLoginBtn" class="btn btn-primary btn-user btn-block" style="color: white;">기업회원 로그인</a>
 		                  					<hr>		                  					                  					
 	                					</form>
 	                					<hr>
 	                					<div class="text-center">
 	                  						<a class="small" th:href="@{/findCpMember}">ID/PW 찾기</a>	                  						
 	                  						<a class="small" th:href="@{/signUpCpMember}">회원가입</a>
+	                					</div>	                					
+	               					</div>
+	               					
+	               					<!-- member -->
+	               					<div id="memberDiv">
+	                					<form class="user" id="memberForm" method="post" th:action="@{/loginMember}">
+		                  					<div class="form-group">
+	                    						<input type="text" class="form-control form-control-user" id="memberId" name="memberId" placeholder="ID를 입력하세요.">
+	                    						<span id="memberIDSpan" style="color: red; margin: auto;"></span>
+		                  					</div>
+		                  					<div class="form-group">
+	                    						<input type="password" class="form-control form-control-user" id="memberPw" name="memberPw" placeholder="PW를 입력하세요.">
+	                    						<span id="memberPWSpan" style="color: red; margin: auto;"></span>
+		                  					</div>	
+		                  						<a id="memberLoginBtn" class="btn btn-primary btn-user btn-block" style="color: white;">일반회원 로그인</a>
+		                  					<hr>		                  					                  					
+	                					</form>
+	                					<hr>
+	                					<div class="text-center">
+	                  						<a class="small" th:href="@{/findMember}">ID/PW 찾기</a>	                  						
+	                  						<a class="small" th:href="@{/addMember}">회원가입</a>
 	                					</div>	                					
 	               					</div>
 	               				</div>  
@@ -82,16 +146,19 @@
 	<script src="js/sb-admin-2.min.js"></script>
 
 <script>
+	//cpMember
 	$('#loginCpMemberBtn').click(function(){
 		$('#loginCpMemberBtn').attr('class', 'btn btn-secondary btn-icon-split');
 		$('#loginMemberBtn').attr('class', 'btn btn-light btn-icon-split');
-		$('#cpMemberDiv').css('display', '');		
+		$('#cpMemberDiv').css('display', '');
+		$('#memberDiv').css('display', 'none');
 	});
 	
 	$('#loginMemberBtn').click(function(){
 		$('#loginCpMemberBtn').attr('class', 'btn btn-light btn-icon-split');
 		$('#loginMemberBtn').attr('class', 'btn btn-secondary btn-icon-split');
 		$('#cpMemberDiv').css('display', 'none');
+		$('#memberDiv').css('display', '');
 	});
 	
 	$('#cpMemberLoginBtn').click(function(){
@@ -107,6 +174,23 @@
 		}
 		
 		$('#cpMemberForm').submit();
+		
+	})
+	
+	
+	$('#memberLoginBtn').click(function(){
+		$('#memberIDSpan').text("");
+		$('#memberPWSpan').text("");
+		if($('#memberId').val().length === 0){
+			$('#memberIDSpan').text("ID를 입력하세요.");
+			return;
+		}
+		if($('#memberPw').val().length === 0){
+			$('#memberPWSpan').text("PW를 입력하세요.");
+			return;
+		}
+		
+		$('#memberForm').submit();
 		
 	})
 </script>

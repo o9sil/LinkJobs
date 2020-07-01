@@ -7,7 +7,8 @@
 			member_id, 
 			member_pw, 
 			member_name, 
-			area2_code, 
+			area_sido,
+			arae2_gungu, 
 			member_detailed_address, 
 			member_phone, 
 			member_email,
@@ -15,7 +16,7 @@
 			member_gender, 
 			member_social_login
 		) 
-		VALUES(?,?,?,?,?,?,?,?,?,?)
+		VALUES(?,?,?,?,?,?,?,?,?,?,?)
 	</insert>
 
 	<!-- 중복 체크 쿼리 -->
@@ -25,5 +26,14 @@
 				UNION 
 			  SELECT member_id FROM linkjobs_member_withdrawal) t
 		WHERE member_id=#{memberId}
+	</select>
+	
+	<!-- login -->
+	<select id="loginMember" parameterType="com.gdu.linkJobs.vo.LoginMember" resultType="String">
+		SELECT
+			member_id 
+		FROM linkjobs_member
+		WHERE member_id = #{memberId} 
+			AND member_pw = PASSWORD(#{memberPw})
 	</select>
 </mapper>
