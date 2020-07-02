@@ -14,5 +14,6 @@ public interface MemberMapper {
 	public String memberIdCheck(String memberId);
 	//login member
 	public String loginMember(LoginMember loginMember);
-	
+	//이력서 회원정보 출력
+	public Member selectMemberOne(String memberId);
 }

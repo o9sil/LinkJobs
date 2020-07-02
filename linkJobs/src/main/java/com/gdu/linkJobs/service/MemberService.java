@@ -13,7 +13,10 @@ import com.gdu.linkJobs.vo.Member;
 public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
-	
+	// 이력서 회원정보 출력 
+		public Member getMemberOne(String memberId) {
+			return memberMapper.selectMemberOne(memberId);
+		}
 	//일반회원 회원가입
 	public int addMember(Member member) {
 		return memberMapper.insertMember(member);

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.linkJobs.mapper.MemberCareerMapper">
+	<select id="selectmemberCareerOne" parameterType="com.gdu.linkJobs.vo.MemberCareer" resultType="com.gdu.linkJobs.vo.MemberCareer">
+		SELECT
+			career_no careerNo,
+			member_id memberId,
+			career_company_name careerCompanyName,
+			career_start_date careerStartDate,
+			career_end_date careerEndDate,
+			career_leaving careerLeaving,
+			career_reason_for_leaving careerReasonForLeaving,
+			career_jobgrade_jobposition careerJobgradeJobposition,
+			career_jobgrade_jobposition_year careerJobgradeJobpositionYear,
+			job2_no job2No,
+			area_no areaNo,
+			career_department careerDepartment,
+			career_salary careerSalary,
+			career_responsibilities careerResponsibilities,
+			carrer_project_contents carrerProjectContents
+		FROM linkjobs_member_career
+		WHERE member_id = #{memberId}
+	</select>
+</mapper>

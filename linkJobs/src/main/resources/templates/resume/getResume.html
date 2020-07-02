@@ -31,9 +31,16 @@
 			<div th:text="${list.resumeAvaliability}"></div>
 			<div th:text="${list.resumeCareer}"></div>
 			<div th:text="${list.resumeSalary}"></div>
+			<div>
+				<label>
+					<input type="radio" name="resumeAvaliability" id="openRadio">공개
+				</label>
+				<label>
+					<input type="radio" name="resumeAvaliability" id="closeRadio">비공개
+				</label>
+			</div>
 			<div><a th:href="@{/removeResume(resumeNo=${list.resumeNo},memberId=${list.memberId})}">삭제</a></div>
-			
-			
+
 			<div>
 				<button id="openBtn" type="submit" name="resumeAvaliability" value="공개">공개</button>
 				<button id="closeBtn" type="submit" name="resumeAvaliability" value="비공개">비공개</button>

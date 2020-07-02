@@ -30,7 +30,22 @@
          'N'
       )
    </insert>
-
+   
+	<!-- 이력서 회원정보 출력 -->
+	<select id="selectMemberOne" parameterType="String" resultType="com.gdu.linkJobs.vo.Member">
+		SELECT 
+			member_name memberName,
+			member_birthdate memberBirthdate,
+			member_gender memberGender,
+			member_email memberEmail,
+			member_phone memberPhone,
+			area_sido areaSido,
+			area2_gungu area2Gungu,
+			member_detailed_address memberDetailedAddress
+		FROM linkjobs_member
+		WHERE member_id = #{memberId}
+	</select>
+	
    <!-- 중복 체크 쿼리 -->
    <select id="memberIdCheck" parameterType="String" resultType="String">
       SELECT member_id
