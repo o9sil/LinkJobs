@@ -8,6 +8,7 @@ import com.gdu.linkJobs.vo.HireAnnouncement;
 public interface HireAnnouncementMapper {
 	
 	
+	
 	//채용공고 상세보기
 	public HireAnnouncement selectHireAnnouncementDetail(int hireAnnouncementNo);
 	

@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.HireAnnouncementMapper">
 	
+	<!-- 채용공고 리스트 출력 -->
+	<select id="selectHireAnnouncementList" parameterType="com.gdu.linkJobs.vo.HireAnnouncement" resultType="com.gdu.linkJobs.vo.HireAnnouncement">
+		SELECT
+			hire_announcement_no AS hireAnnouncementNo,
+			
+		FROM linkjobs_hire_announcement
+		
+	</select>
+	
 	<!-- 채용공고 상세보기 -->
 	<select id="selectHireAnnouncementDetail" parameterType="String" resultType="com.gdu.linkJobs.vo.HireAnnouncement">
 		SELECT
@@ -27,7 +36,6 @@
 	<!-- 채용공고 등록쿼리 -->
 	<insert id="insertHireAnnouncement" parameterType="com.gdu.linkJobs.vo.HireAnnouncement">
 		INSERT INTO linkjobs_hire_announcement(
-			hire_announcement_no,
 			cpmember_id,
 			hire_announcement_title,
 			hire_announcement_recruitment_field,
@@ -43,7 +51,6 @@
 			hire_announcement_start_date,
 			hire_announcement_end_date
 		) VALUES (
-			#{hireAnnouncementNo},
 			#{cpmemberId},
 			#{hireAnnouncementTitle},
 			#{hireAnnouncementRecuitmentField},

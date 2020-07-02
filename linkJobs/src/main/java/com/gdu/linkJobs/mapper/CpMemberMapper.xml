@@ -32,25 +32,27 @@
 			cpmember_email = #{cpMember.cpMemberEmail},
 			
 			<choose>
-				<when test="cpMember.cpMemberIndustryNo != 0">
-					industry_no = #{cpMember.cpMemberIndustryNo},		
-				</when>
-				
-				
-				
-				<when test="cpMember.cpMemberEstablishDate != ''">
-					cpmember_establish_date = #{cpMember.cpMemberEstablishDate},
-				</when>
+            	<when test="cpMember.cpMemberIndustryNo != 0">
+               		industry_no = #{cpMember.cpMemberIndustryNo},      
+            	</when>
+         	</choose>
+         
+			<choose>
+			   <when test="cpMember.cpMemberEstablishDate != ''">
+			      cpmember_establish_date = #{cpMember.cpMemberEstablishDate},
+			   </when>
 			</choose>
 			
-			
-				
-			area2_no = (SELECT area2_no 
-						FROM linkjobs_area2 
-						WHERE area2_gungu = #{areaGungu} 
-							AND area_no = (SELECT area_no 
-											FROM linkjobs_area 
-											WHERE area_sido = #{areaSido})),
+			<choose>
+			   <when test="areaGungu != ''">
+			      area2_no = (SELECT area2_no 
+			         FROM linkjobs_area2 
+			         WHERE area2_gungu = #{areaGungu} 
+			            AND area_no = (SELECT area_no 
+			                        FROM linkjobs_area 
+			                        WHERE area_sido = #{areaSido})),   
+			   </when>
+			</choose>
 			
 							
 				

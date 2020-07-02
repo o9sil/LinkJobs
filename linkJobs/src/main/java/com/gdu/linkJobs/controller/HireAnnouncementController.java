@@ -18,24 +18,27 @@ public class HireAnnouncementController {
 	private HireAnnouncementService hireAnnouncementService;
 	
 	// 채용공고 상세보기
-	/*
-	 * @GetMapping("/aboutAnnouncementOne") public String aboutAnnouncementOne(Model
-	 * model, HttpSession session, @RequestParam) { // 로그인중이 아닐때
-	 * if(session.getAttribute("loginCpMember") == null) { return "redirect:/"; }
-	 * int hireAnnouncement =
-	 * ((HireAnnouncement)session.getAttribute("hireAnnouncement")).
-	 * getHireAnnouncementNo(); System.out.println(
-	 * hireAnnouncement+"<--HireAnnouncementController : aboutAnnouncementOne-hireAnnouncementNo "
-	 * );
-	 * 
-	 * return ""; }
-	 */
+	
+	@GetMapping("/aboutAnnouncementOne")
+	public String aboutAnnouncementOne(Model model, HttpSession session) {
+		// 로그인중이 아닐때
+		if(session.getAttribute("loginCpMember") != null) {
+			return "redirect:/";
+		}
+	  
+		int hireAnnouncement = ((HireAnnouncement)session.getAttribute("hireAnnouncement")).getHireAnnouncementNo();
+		
+		System.out.println(hireAnnouncement+"<--HireAnnouncementController : aboutAnnouncementOne-hireAnnouncementNo ");
+		
+		return ""; 
+	  }
+	 
 	
 	// 채용공고 등록 폼
 	@GetMapping("/recordAnnouncement")
 	public String recordAnnouncement(HttpSession session) {
 		// 로그인 중
-		if(session.getAttribute("loginCpMember") != null) {
+		if(session.getAttribute("loginCpMember") == null) {
 			return "redirect:/";
 		}
 		return "hireAnnouncement/recordAnnouncement";
@@ -45,7 +48,7 @@ public class HireAnnouncementController {
 	@PostMapping("/recordAnnouncement")
 	public String recordAnnouncement(HttpSession session, HireAnnouncement hireAnnouncement) {
 		// 로그인 중
-		if(session.getAttribute("loginCpMember") != null) {
+		if(session.getAttribute("loginCpMember") == null) {
 			return "redirect:/";
 		}
 		

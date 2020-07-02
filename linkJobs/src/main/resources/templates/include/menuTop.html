@@ -18,7 +18,7 @@
 		<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
 			<!-- Topbar Search -->
 	        <form class="navbar-search">
-	        	<img th:src="@{/img/LinkJobsLogo.png}" style="height: 4rem;"/>
+	        	<!-- <img th:src="@{/img/LinkJobsLogo.png}" style="height: 4rem;"/> -->
 	        	
 	        	<a class="m-0 font-weight-bold text-primary" style="padding-left: 5%">지역별</a>
 	        	
@@ -27,40 +27,58 @@
 	        	<a class="m-0 font-weight-bold text-primary" style="padding-left: 5%">산업별</a>        	      	
 	        </form>
 		
-			<!-- Topbar Navbar -->
-		  	<ul class="navbar-nav ml-auto">
-		
-			    <!-- Nav Item - User Information -->
-			    <li class="nav-item dropdown no-arrow">
-			    	<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			        	<span class="mr-2 d-lg-inline text-gray-600 small">로그인하세요</span>	        	
-			      	</a>
-			  	<!-- Dropdown - User Information -->
-			    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-			    	<a class="dropdown-item" th:href="@{/loginCpMember}">
-			        	<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-		          		일반회원 로그인
-			        </a>
-			    	<a class="dropdown-item" th:href="@{/loginCpMember}">
-			        	<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-		          		기업회원 로그인
-			        </a>	    	
-			        <!-- <a class="dropdown-item" href="#">
-			        	<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>	          	
-			        </a> -->
-			        <!-- <a class="dropdown-item" href="#">
-			        	<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-			          	Activity Log
-			        </a> -->
-			        <div class="dropdown-divider"></div>
-			        <!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-			        	<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-			          	Logout
-			        </a> -->
-			      </div>
-			    </li>
 			
-			  </ul>
+			<!-- Topbar Navbar -->
+         	<ul class="navbar-nav ml-auto">
+    
+	           	<!-- Nav Item - User Information -->
+	           	<li class="nav-item dropdown no-arrow">
+	              
+	              	<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                    
+	                  	<th:block th:if="${session['loginCpMember'] != null}">
+	                     	<span class="mr-3 d-lg-inline text-gray-600" th:text="${session['loginCpMember']}"></span>
+	                  	</th:block>
+	                  	<th:block th:if="${session['loginCpMember'] == null}">
+	                     	<span class="mr-3 d-lg-inline text-gray-600">로그인하세요</span>
+	                  	</th:block>
+	                	</a>
+	                
+			           	<th:block th:if="${session['loginCpMember'] != null}">
+			              <!-- Dropdown - User Information -->
+			              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+			                 <a class="dropdown-item" th:href="@{/alterCpMemberDetail}">
+			                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+								기업회원 정보 수정
+			                 </a>
+			                 <a class="dropdown-item" th:href="@{/alterCpMemberPw}">
+			                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+								기업회원 비밀번호 수정
+			                 </a>
+			                 <a class="dropdown-item" th:href="@{/logoutCpMember}">
+			                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+								로그아웃
+			                 </a>
+			               </div>             
+			            </th:block>     
+			                 
+			            <th:block th:if="${session['loginCpMember'] == null}">
+						<!-- Dropdown - User Information -->
+			               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+			                  <a class="dropdown-item" th:href="@{/loginCpMember}">
+			                      <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+								일반회원 로그인
+			                  </a>
+			                  <a class="dropdown-item" th:href="@{/loginCpMember}">
+			                      <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+								기업회원 로그인
+			                  </a>
+			                </div>
+			            </th:block>
+				</li>
+			</ul>
+			
+			
+			
 		
 		</nav>
 		<!-- End of Topbar -->

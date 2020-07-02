@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Custom fonts for this template -->
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+<!-- Custom styles for this page -->
+<link href="vendor/datatables/dataTables.bootstrap4.min.css"
+	rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<!-- Sidebar -->
+		<ul
+			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+
+			<!-- Sidebar - Brand -->
+			<li>
+			   <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/}">
+			        <span class="sidebar-brand-icon rotate-n-15">                   
+			             <i class="fas fa-link"></i>
+			        </span>              
+			         
+			        <span class="sidebar-brand-text mx-3">
+			         <img th:src="@{/img/LinkJobsLogo.png}" style="height: 3.5rem;"/>
+			         </span>
+			      </a>
+			</li>
+
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseTwo"
+				aria-expanded="true" aria-controls="collapseTwo"> <i
+					class="fas fa-fw fa-tachometer-alt"></i> <span>채용공고</span>
+			</a>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/recordAnnouncement}">채용공고등록</a>
+						<a class="collapse-item" th:href="@{/}">등록한 채용공고 조회</a>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<!-- End of Sidebar -->
+		
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div th:include="/include/menuTop::navTop"></div>
+			<!-- Main Content -->
+			<div id="content">
+				
+				<!-- 페이지 내용 -->
+				<div class="container-fluid">
+		
+					<!-- Page 헤드 -->
+					<div>
+						<h1 class="h3 mb-2 text-gray-800">채용공고 등록</h1>
+					</div>
+					<br><br>
+					<!-- 담당자 정보 -->
+					<div class="row">
+						<div class="col-xl-8 col-lg-7">
+			             	<div class="card shadow mb-4">
+				               <!-- 담당자 정보 헤드-->
+				                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				                 <h6 class="m-0 font-weight-bold text-primary">담당자 정보</h6>
+				                </div>
+			                	
+			                	<!-- 담당자 정보 바디 -->
+			                	<div class="card-body">
+								<form class="user" id="alterCpMemberDetailForm" method="post" th:action="@{/alterCpMemberDetail}">	                					
+										<div class="form-group">	
+	                  						<span>담당자 성함 :</span>			                  				
+											<input type="text" class="form-control form-control-user" name="cpMemberId" id="cpMemberId" readonly="readonly">
+	                  					</div>
+	                  					<div class="form-group">
+	                  						<span>휴대폰 : </span>
+	                    					<input type="text" class="form-control form-control-user" name="cpMemberLicenseNo" id="cpMemberLicenseNo" readonly="readonly">
+	                    					<span id="cpMemberLicenseNoSpan" style="color: red; margin: auto;"></span>
+	                  					</div>
+	                  					<div class="form-group">
+	                  						<span>이메일 :</span>
+	                    					<input type="text" class="form-control form-control-user" name="cpMemberCompany" id="cpMemberCompany" readonly="readonly">
+	                    					<span id="cpMemberCompanySpan" style="color: red; margin: auto;"></span>
+	                  					</div>
+	                  					<div class="form-group">
+	                  						<span>업종 :</span>
+	                    					<input type="text" class="form-control form-control-user" name="cpMemberCompany" id="cpMemberCompany" readonly="readonly">
+	                    					<span id="cpMemberCompanySpan" style="color: red; margin: auto;"></span>
+	                  					</div>
+	                  					<div class="form-group">
+	                  						<span>주소 :</span>
+	                    					<input type="text" class="form-control form-control-user" name="cpMemberCompany" id="cpMemberCompany" readonly="readonly">
+	                    					<span id="cpMemberCompanySpan" style="color: red; margin: auto;"></span>
+	                  					</div>
+	                  				</form>
+			                	</div>
+							</div>
+							<br><br>
+			                
+			                <!-- 모집분야 -->
+			                <div class="card shadow mb-4">
+				               <!-- 모집분야 헤드r-->
+				                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				                 <h6 class="m-0 font-weight-bold text-primary">모집 분야</h6>
+				                </div>
+			                	
+			                	<!-- 모집분야 바디 -->
+			                	<div class="card-body">
+								<form class="user" id="alterCpMemberDetailForm" method="post" th:action="@{/alterCpMemberDetail}">	                					
+										<div class="form-group">	
+	                  						<span>모집 분야명 :</span>			                  				
+											<input type="text" class="form-control form-control-user" name="cpMemberId" id="cpMemberId">
+	                  					</div>
+	                  					<div class="form-group">
+	                  						<span>경력여부 : </span>
+	                    					<input type="text" class="form-control form-control-user" name="cpMemberLicenseNo" id="cpMemberLicenseNo">
+	                    					<span id="cpMemberLicenseNoSpan" style="color: red; margin: auto;"></span>
+	                  					</div>
+	                  					<div class="form-group">
+	                  						<span>근무부서 :</span>
+	                    					<input type="text" class="form-control form-control-user" name="cpMemberCompany" id="cpMemberCompany">
+	                    					<span id="cpMemberCompanySpan" style="color: red; margin: auto;"></span>
+	                  					</div>
+	                  					<div class="form-group">
+	                  						<span>직급/직책 :</span>
+	                    					<input type="text" class="form-control form-control-user" name="cpMemberCompany" id="cpMemberCompany">
+	                    					<span id="cpMemberCompanySpan" style="color: red; margin: auto;"></span>
+	                  					</div>
+	                  					<div class="form-group">
+	                  						<span>우대조건 :</span>
+	                    					<input type="text" class="form-control form-control-user" name="cpMemberCompany" id="cpMemberCompany">
+	                    					<span id="cpMemberCompanySpan" style="color: red; margin: auto;"></span>
+	                  					</div>
+	                  				</form>
+			                	</div>
+							</div>
+							<br><br>
+			                
+			                <!-- 지원자격 -->
+			                <div class="card shadow mb-4">
+				                <!-- 지원자격 헤드-->
+				                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				                 <h6 class="m-0 font-weight-bold text-primary">지원 자격</h6>
+				                </div>
+			                	
+			                	<!-- 지원자격 바디 -->
+			                	<div class="card-body">
+								<form class="user" id="alterCpMemberDetailForm" method="post" th:action="@{/alterCpMemberDetail}">	                					
+										<div class="form-group">	
+	                  						<span>지원자 학력 :</span>			                  				
+											<input type="text" class="form-control form-control-user" name="cpMemberId" id="cpMemberId">
+	                  					</div>
+	                  					<div class="form-group">
+	                  						<span>연봉/급여 : </span>
+	                    					<input type="text" class="form-control form-control-user" name="cpMemberLicenseNo" id="cpMemberLicenseNo">
+	                    					<span id="cpMemberLicenseNoSpan" style="color: red; margin: auto;"></span>
+	                  					</div>
+	                  					<div class="form-group">
+	                  						<span>근무형태 :</span>
+	                    					<input type="text" class="form-control form-control-user" name="cpMemberCompany" id="cpMemberCompany">
+	                    					<span id="cpMemberCompanySpan" style="color: red; margin: auto;"></span>
+	                  					</div>
+	                  				</form>
+			                	</div>
+							 </div>
+							 <br><br>
+			                
+			                 <!-- 채용절차 -->
+			                 <div class="card shadow mb-4">
+				                <!-- 채용절차 헤드-->
+				                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				                 	<h6 class="m-0 font-weight-bold text-primary">채용 절차</h6>
+				                </div>
+			                	
+			                	<!-- 채용절차 바디 -->
+			                	<div class="card-body">
+										
+                					<form class="user" id="alterCpMemberDetailForm" method="post" th:action="@{/alterCpMemberDetail}">	                					
+                					
+	                  					<div class="form-group">	
+	                  						<span>공고 대표직무 :</span>			                  				
+											<input type="text" class="form-control form-control-user" name="cpMemberId" id="cpMemberId">
+	                  					</div>
+	                  					<div class="form-group">
+	                  						<span>지원 접수기간 : </span>
+	                    					<input type="text" class="form-control form-control-user" name="cpMemberLicenseNo" id="cpMemberLicenseNo">
+	                    					<span id="cpMemberLicenseNoSpan" style="color: red; margin: auto;"></span>
+	                  					</div>
+	                  				</form>
+			                	</div>
+							 </div>
+			                <br><br>
+			                
+			                <!-- 공고 내용 -->
+			                <div class="card shadow mb-4">
+				                <!-- 공고 내용 헤드-->
+				                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				                 <h6 class="m-0 font-weight-bold text-primary">공고 내용</h6>
+				                </div>
+			                	
+			                	<!-- 공고 내용 바디 -->
+			                	<div class="card-body">
+									<form class="user" id="alterCpMemberDetailForm" method="post" th:action="@{/alterCpMemberDetail}">	                					
+									
+									</form>
+			                	</div>
+			                	
+			                </div>
+			            </div>
+			         </div>
+				</div>
+
+
+
+			</div>
+			<!-- End of Content Wrapper -->
+
+		</div>
+		<!-- End of Page Wrapper -->
+
+		<!-- Scroll to Top Button-->
+		<a class="scroll-to-top rounded" href="#page-top"> <i
+			class="fas fa-angle-up"></i>
+		</a>
+
+		<!-- Logout Modal-->
+		<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+						<a class="btn btn-primary" href="login.html">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Bootstrap core JavaScript-->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+	<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+	<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="js/demo/datatables-demo.js"></script>
+
+</body>
+
+</html>
