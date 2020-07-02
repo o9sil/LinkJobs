@@ -13,18 +13,18 @@ import com.gdu.linkJobs.vo.AreaAndArea2;
 @Service
 @Transactional
 public class AreaService {
-	@Autowired
-	private AreaMapper areaMapper;
-	
-	//sido
-	public List<Area> getArea(){
-		return areaMapper.selectArea();
-	}
-	
-	//gungu
-	public List<AreaAndArea2> getArea2(int areaNo){
-		return areaMapper.selectArea2(areaNo);
-	}
-	
-	
+   @Autowired
+   private AreaMapper areaMapper;
+   
+   //sido
+   public List<Area> getArea(){
+      return areaMapper.selectArea();
+   }
+   
+   //gungu
+   public List<AreaAndArea2> getArea2(String areaSido){
+      return areaMapper.selectArea2(areaSido);
+   }
+   
+   
 }

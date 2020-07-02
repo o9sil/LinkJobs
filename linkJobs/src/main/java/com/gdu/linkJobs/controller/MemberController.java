@@ -19,33 +19,34 @@ import com.gdu.linkJobs.vo.Member;
 
 @Controller
 public class MemberController {
-	@Autowired
-	private MemberService memberService;
-	@Autowired
-	private AreaService areaService;
+   @Autowired
+   private MemberService memberService;
+   @Autowired
+   private AreaService areaService;
     
     //일반회원 회원가입 폼
     @GetMapping("/addMember")
     public String addMember(Model model) {
-    	System.out.println("member insert sucess");
-    	List<Area> areaList=areaService.getArea();
-    	model.addAttribute("areaList", areaList);
-    	return "member/addMember";
+       System.out.println("member insert sucess");
+       List<Area> areaList=areaService.getArea();
+       model.addAttribute("areaList", areaList);
+       return "member/addMember";
     }
     
     //일반회원 회원가입 액션
     @PostMapping("/addMember")
     public String addMember(Member member) {
-    	memberService.addMember(member);
-    	System.out.println(member);
-    	return "redirect:/index";
+       System.out.println(member);
+       memberService.addMember(member);
+       System.out.println(member);
+       return "redirect:/index";
     }
     
    
     // 중복 체크
     @PostMapping("/checkMemberId")
-    public String checkMemberId(@RequestParam("memberIdCheck") String memberIdCheck, Model model ) {
-       
+    public String checkMemberId(@RequestParam("memberIdCheck") String memberIdCheck, Model model,Member member ) {
+       System.out.println(member);
        String memberId=memberService.memberIdCheck(memberIdCheck);
        System.out.println(memberId);
        if (memberId != null) { // 멤버아이디가 있으면 아이디를 사용 불가
@@ -62,41 +63,44 @@ public class MemberController {
        model.addAttribute("areaList", areaList);
        return "member/addMember";
     }
-	
+   
     //login form
     @GetMapping("/loginMember")
-    public String loginMember() {
-    	
-    	return "login/login";
+    public String loginMember(HttpSession session) {
+    	if(session.getAttribute("loginMember") != null) {
+			return "redirect:/";
+		}
+       
+       return "login/login";
     }
     
     //login action
     @PostMapping("/loginMember")
     public String loginMember(Model model, HttpSession session, LoginMember loginMember) {
-    	// 로그인 중
-		if(session.getAttribute("loginMember") != null) {
-			return "redirect:/";
-		}
-		
-		String loginMemberId = memberService.loginMember(loginMember);
-		
-		//회원가입 실패(회원이 아님)
-		if(loginMemberId == null) {
-			System.out.println(loginMemberId + "<--loginId");
-			return "redirect:/loginMember";
-		}else {
-			System.out.println(loginMemberId + "<--loginId");
-			session.setAttribute("loginMember", loginMemberId);
-			return "redirect:/";
-		}
-    	
+       // 로그인 중
+      if(session.getAttribute("loginMember") != null) {
+         return "redirect:/";
+      }
+      
+      String loginMemberId = memberService.loginMember(loginMember);
+      
+      //회원가입 실패(회원이 아님)
+      if(loginMemberId == null) {
+         System.out.println(loginMemberId + "<--loginId");
+         return "redirect:/loginMember";
+      }else {
+         System.out.println(loginMemberId + "<--loginId");
+         session.setAttribute("loginMember", loginMemberId);
+         return "redirect:/";
+      }
+       
     }
     
     //logout
- 	@GetMapping("/logoutMember")
- 	public String logoutMember(HttpSession session) {
- 		session.removeAttribute("loginMember");
- 		
- 		return "redirect:/";
- 	}
+    @GetMapping("/logoutMember")
+    public String logoutMember(HttpSession session) {
+       session.removeAttribute("loginMember");
+       
+       return "redirect:/";
+    }
 }

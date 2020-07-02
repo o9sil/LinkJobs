@@ -55,12 +55,13 @@
       
       /*<![CDATA[*/
       $('#areaCode').change(function () {
-            let areaNo=$(this).val();
-            console.log("areaNo : "+areaNo);
+            let areaSido=$(this).val();
+            console.log("areaSido : "+areaSido);
+            $('#area2Code').empty();
              $.ajax({
                url   :/*[[@{/selectArea2}]]*/, 
                  type: "POST",
-                data:{'areaNo':areaNo},
+                data:{'areaSido':areaSido},
                 success: function (data) {
                    console.log(data);                   
                $.each(data, function (index,item) {
@@ -106,10 +107,10 @@
               helperInit();
               $('#area2CodeHelper').text("군/구를 선택 하세요"); 
               $('#area2Code').focus();
-           } else if($('#memberDetailAddress').val() == "") {
+           } else if($('#memberDetailedAddress').val() == "") {
             helperInit();
             $('#addrHelper').text("상세 주소를 입력 하세요");
-            $('#memberDetailAddress').focus();
+            $('#memberDetailedAddress').focus();
          } else if($('#memberPhone').val() == "") {
             helperInit();
             $('#phoneHelper').text("전화번호를 입력 하세요"); 
@@ -208,9 +209,9 @@
                                  <div class="row">
                                     <div class="col-sm-3">주소 :</div>
                                     <div class="col-sm-4">
-                                       <select id="areaCode" class="form-control" name="areaSido" th:field="*{areaList}">
+                                       <select name="areaSido" id="areaCode" class="form-control">
                                           <option value="">시 / 도</option>
-                                          <option th:each="areaList : ${areaList}" th:value="${areaList.areaNo}" th:text="${areaList.areaSido}"></option>
+                                          <option th:each="areaList : ${areaList}" th:value="${areaList.areaSido}" th:text="${areaList.areaSido}"></option>
                                        </select>
                                        <span id="areaCodeHelper"></span>
                                     </div>   
@@ -226,7 +227,7 @@
                                  <div class="row">
                                     <div class="col-sm-3">상세주소 :</div>
                                     <div class="col-sm-9">
-                                       <input type="text" name="memberDetailAddress" id="memberDetailAddress" class="form-control">
+                                       <input type="text" name="memberDetailedAddress" id="memberDetailedAddress" class="form-control">
                                        <span id="detailAddrHelper"></span>
                                     </div>
                                  </div>
@@ -251,7 +252,7 @@
                                  <div class="row">
                                     <div class="col-sm-3">생년월일 :</div>
                                     <div class="col-sm-9">
-                                          <input type="text" name="memberBirthdate" id="memberBirthdate" class="form-control">
+                                          <input type="date" name="memberBirthdate" id="memberBirthdate" class="form-control">
                                        <span id="birthHelper"></span>
                                     </div>
                                  </div>
@@ -263,9 +264,6 @@
                                        <input type="radio" value="여" id="memberGender" name="memberGender">&nbsp;&nbsp;&nbsp;&nbsp;여
                                        <span id="genderHelper"></span>
                                     </div>
-                                 </div>
-                                 <div>
-                                    <input type="hidden" name="memberSocialLiogin" value="N">
                                  </div>
                                  <br>
                                  <button id="myFormBtn" type="button" class="btn btn-primary btn-user btn-block">회원가입</button>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.linkJobs.mapper.SelfIntroductionMapper">
+
+	<!-- 로그인 되어 있는 회원의 자기소개서 리스트 출력 -->
+	<select id="selectSelfIntroductionList" parameterType="String" resultType="com.gdu.linkJobs.vo.SelfIntroduction">
+		SELECT 
+			self_introduction_no selfIntroductionNo,
+			member_id, memberId,
+			self_introduction_title selfIntroductionTitle,
+			self_introduction_contents selfIntroductionContents,
+			self_introduction_date selfIntroductionDate
+		FROM linkjobs_self_introduction
+		WHERE 
+			member_id = #{memberId}
+	</select>
+	
+	<!-- 자기소개서 하나만 가지고 오기 -->
+	<select id="selectSelfIntroductionOne" parameterType="int" resultType="com.gdu.linkJobs.vo.SelfIntroduction">
+		SELECT 
+			self_introduction_no selfIntroductionNo,
+			member_id, memberId,
+			self_introduction_title selfIntroductionTitle,
+			self_introduction_contents selfIntroductionContents,
+			self_introduction_date selfIntroductionDate
+		FROM linkjobs_self_introduction
+		WHERE 
+			self_introduction_no = #{selfIntroductionNo}
+	</select>
+	
+	<!-- 자기소개서 수정 -->
+	<update id="updateSelfIntroduction" parameterType="com.gdu.linkJobs.vo.SelfIntroduction">
+		UPDATE linkjobs_self_introduction
+		SET self_introduction_title = #{selfIntroductionTitle} ,
+			self_introduction_contents = #{selfIntroductionContents},
+			self_introduction_date = NOW()
+		WHERE 
+			self_introduction_no = #{selfIntroductionNo}
+	</update>
+	
+	<!-- 자기소개서 삭제 -->
+	<delete id="deleteSelfIntroduction" parameterType="int">
+		DELETE FROM linkjobs_self_introduction
+		WHERE self_introduction_no = #{selfIntroductionNo}
+	</delete>
+	
+	<!-- 자기소개서 추가 -->
+	<insert id="insertSelfIntroduction" parameterType="com.gdu.linkJobs.vo.SelfIntroduction">
+		INSERT INTO (
+			member_id,
+			self_introduction_title,
+			self_introduction_contents,
+			self_introduction_date
+		)
+		FROM linkjobs_self_introduction
+		VALUES(
+			#{memberId},
+			#{selfIntroductionTitle},
+			#{selfIntroductionContents},
+			NOW()
+		)
+	</insert>
+	
+</mapper>
