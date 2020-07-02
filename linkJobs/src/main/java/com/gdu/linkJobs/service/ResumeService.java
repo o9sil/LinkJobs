@@ -14,6 +14,13 @@ public class ResumeService {
 	@Autowired private ResumeMapper resumeMapper;
 	
 	
+	//이력서 공개/비공개
+	public int resumeAvaliability(Resume resume) {
+		System.out.println(resume+"<--resumeService");
+		return resumeMapper.resumeAvaliability(resume);
+	}
+	
+	
 	//이력서 상세보기
 	public List<Resume> getDetailResume(Resume resume){
 		List<Resume> list = resumeMapper.selectDetailResume(resume);

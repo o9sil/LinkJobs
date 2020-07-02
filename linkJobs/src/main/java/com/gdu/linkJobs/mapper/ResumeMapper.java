@@ -8,7 +8,8 @@ import com.gdu.linkJobs.vo.Resume;
 
 @Mapper
 public interface ResumeMapper {
-	
+	// 이력서 공개/비공개
+	public int resumeAvaliability(Resume resume);
 	//이력서 상세보기
 	public List<Resume> selectDetailResume(Resume resume);
 	// 이력서 추가

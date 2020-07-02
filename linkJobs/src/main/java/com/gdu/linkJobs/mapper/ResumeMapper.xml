@@ -2,6 +2,21 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.ResumeMapper">
 	
+	
+	
+	<!-- 이력서 공개/비공개 설정 -->
+	<update id="resumeAvaliability" parameterType="com.gdu.linkJobs.vo.Resume">
+		UPDATE linkjobs_resume
+		SET	
+			resume_avaliability = #{resumeAvaliability}
+		WHERE resume_no = #{resumeNo} 
+		AND member_id = #{memberId};
+	</update>
+	
+	
+	
+	
+	
 	<!-- 이력서 상세보기 -->
 	<select id="selectDetailResume" parameterType="com.gdu.linkJobs.vo.Resume"  resultType="com.gdu.linkJobs.vo.Resume">
 		SELECT 

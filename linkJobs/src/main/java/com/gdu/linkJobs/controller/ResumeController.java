@@ -24,6 +24,27 @@ public class ResumeController {
 	@Autowired private AreaService areaService;
 	
 	
+	
+	
+	
+	// 이력서 공개/비공개
+	@PostMapping("/resumeAvaliability")
+	public String updateResumeAvaliability(Resume resume) {
+		System.out.println(resume+"<--resumecontroller");
+		
+		resume.getMemberId();
+		resume.getResumeNo();
+		System.out.println(resume.getResumeNo()+"<--resumeNo");
+		System.out.println(resume.getMemberId()+"<--memberId");
+		resumeService.resumeAvaliability(resume);
+		
+		return "redirect:/getResume";
+	}
+	
+	
+	
+	
+	
 	//이력서 상세보기
 	@GetMapping("getDetailResume")
 	public String getDetailResume(Resume resume, Model model) {
@@ -38,9 +59,7 @@ public class ResumeController {
 	@GetMapping("/addResume")
 	public String addResume(Model model) {
 		List<Area> areaList = areaService.getArea();
-		//List<AreaAndArea2> area2List = areaService.getResumeArea2();
 		model.addAttribute("areaList", areaList);
-		//model.addAttribute("area2List", area2List);
 		return "resume/addResume";
 	}
 	
@@ -85,6 +104,7 @@ public class ResumeController {
 		int count = resumeService.getResumeCount(memberId);
 		System.out.println(count+"<--count");
 		model.addAttribute("list", list);
+		model.addAttribute("memberId", memberId);
 		model.addAttribute("count", count);
 		return "resume/getResume";
 	}
