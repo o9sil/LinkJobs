@@ -1,5 +1,8 @@
 package com.gdu.linkJobs.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +33,18 @@ public class CpMemberController {
 	
 	//기업회원 정부 수정 액션
 	@PostMapping("/alterCpMemberDetail")
-	public String alterCpMemberDetailAction(HttpSession session, CpMember cpMember, @RequestParam(value="address") String address) {
+	public String alterCpMemberDetailAction(HttpSession session, CpMember cpMember, @RequestParam(value="address") String address, 
+			@RequestParam(value="areaSido") String areaSido, @RequestParam(value="areaGungu") String areaGungu) {
 		if(session.getAttribute("loginCpMember") == null) {
 			return "redirect:/";
 		}
 		
-		System.out.println("cpMember = " + cpMember);
-		System.out.println("address = " + address);
+//		System.out.println("cpMember = " + cpMember);
+//		System.out.println("address = " + address);
+//		System.out.println("areaSido = " + areaSido);
+//		System.out.println("areaGungu = " + areaGungu);
+		
+		cpMemberService.modifyCpMemberDetail(cpMember, areaSido, areaGungu);
 		
 		return "redirect:/alterCpMemberDetail";
 	}
@@ -49,7 +57,18 @@ public class CpMemberController {
 		}
 		
 		String loginCpMemberID = (String) session.getAttribute("loginCpMember");
-		model.addAttribute("cpMember", cpMemberService.getCpMemberDetail(loginCpMemberID));
+		
+		
+		
+		@SuppressWarnings("unchecked")
+		Map<String, Object> map = cpMemberService.getCpMemberDetail(loginCpMemberID);		
+		
+		model.addAttribute("cpMember", map.get("cpMember"));
+		model.addAttribute("areaAndArea2", map.get("areaAndArea2"));
+		
+		System.out.println(("areaAndArea2 = " + map.get("areaAndArea2")));
+		
+		
 		model.addAttribute("industryList", industryService.getIndustryList());		
 		
 		return "cpMember/alterCpMemberDetail";

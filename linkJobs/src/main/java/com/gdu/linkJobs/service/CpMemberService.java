@@ -1,5 +1,8 @@
 package com.gdu.linkJobs.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServlet;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -8,8 +11,10 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.gdu.linkJobs.mapper.AreaMapper;
 import com.gdu.linkJobs.mapper.CpMemberMapper;
 import com.gdu.linkJobs.vo.AlterCpMemberPw;
+import com.gdu.linkJobs.vo.AreaAndArea2;
 import com.gdu.linkJobs.vo.CpMember;
 import com.gdu.linkJobs.vo.LoginCpMember;
 
@@ -19,17 +24,43 @@ public class CpMemberService extends HttpServlet {
 	@Autowired
 	private CpMemberMapper cpMemberMapper;	
 	
+	@Autowired
+	private AreaMapper areaMapper;
+	
 	@Autowired private JavaMailSender javaMailSender;
 	
 	
 	//기업회원 상세정보 수정
-	public int modifyCpMemberDetail(CpMember cpMember) {
-		return cpMemberMapper.updateCpMemberDetail(cpMember);
+	public int modifyCpMemberDetail(CpMember cpMember, String areaSido, String areaGungu) {
+		System.out.println("modifyCpMemberDetail = " + cpMember);
+		System.out.println("modifyCpMemberDetail = " + areaSido);
+		System.out.println("modifyCpMemberDetail = " + areaGungu);
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cpMember", cpMember);
+		map.put("areaSido", areaSido);
+		map.put("areaGungu", areaGungu);
+		
+		cpMemberMapper.updateCpMemberDetail(map);
+		
+		return 0;
+		//return cpMemberMapper.updateCpMemberDetail(cpMember);
 	}
 	
 	//기업회원 상세정보 가져오기
-	public CpMember getCpMemberDetail(String cpMemberId) {
-		return cpMemberMapper.selectCpMemberDetail(cpMemberId);
+	public Map getCpMemberDetail(String cpMemberId) {
+		
+		CpMember cpMember = cpMemberMapper.selectCpMemberDetail(cpMemberId);
+		
+		System.out.println("getCpMemberDetail area2No = " + cpMember.getCpMemberArea2No());
+		AreaAndArea2 areaAndArea2 = areaMapper.selectAreaSidoGungu(cpMember.getCpMemberArea2No());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cpMember", cpMember);
+		map.put("areaAndArea2", areaAndArea2);
+		
+		return map;
 	}
 	
 	//기업회원 PW 수정

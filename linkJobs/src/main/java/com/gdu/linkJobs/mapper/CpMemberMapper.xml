@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.CpMemberMapper">
+	
 
 	<!-- 기업회원 상세정보 가져오기 -->
 	<select id="selectCpMemberDetail" parameterType="String" resultType="com.gdu.linkJobs.vo.CpMember">
@@ -22,20 +23,46 @@
 	</select>
 
 	<!-- 기업회원 정보수정 -->
-	<update id="updateCpMemberDetail" parameterType="com.gdu.linkJobs.vo.CpMember">
+	<update id="updateCpMemberDetail" parameterType="hashmap">
 		UPDATE linkjobs_cpmember
-		SET cpmember_license_no = #{cpMemberLicenseNo},
-			cpmember_manager = #{cpMemberManager},
-			cpmember_company = #{cpMemberCompany},
-			cpmember_ceo = #{cpMemberCeo},
-			cpmember_email = #{cpMemberEmail},
-			cpmember_industry_no = #{cpMemberIndustryNo},
-			cpmember_area2_no = #{cpMemberArea2No},
-			cpmember_detailed_address = #{cpMemberDetailedAddress},
-			cpmember_phonenum = #{cpMemberPhonenum},
-			cpmember_number_of_employees = #{cpMemberNumberOfEmployees},
-			cpmember_establish_date = #{cpMemberEstablishDate},
-		WHERE cpmember_id = #{cpMemberId}
+		SET cpmember_license_no = #{cpMember.cpMemberLicenseNo},
+			cpmember_manager = #{cpMember.cpMemberManager},
+			cpmember_company = #{cpMember.cpMemberCompany},
+			cpmember_ceo = #{cpMember.cpMemberCeo},
+			cpmember_email = #{cpMember.cpMemberEmail},
+			
+			<choose>
+				<when test="cpMember.cpMemberIndustryNo != 0">
+					industry_no = #{cpMember.cpMemberIndustryNo},		
+				</when>
+				
+				
+				
+				<when test="cpMember.cpMemberEstablishDate != ''">
+					cpmember_establish_date = #{cpMember.cpMemberEstablishDate},
+				</when>
+			</choose>
+			
+			
+				
+			area2_no = (SELECT area2_no 
+						FROM linkjobs_area2 
+						WHERE area2_gungu = #{areaGungu} 
+							AND area_no = (SELECT area_no 
+											FROM linkjobs_area 
+											WHERE area_sido = #{areaSido})),
+			
+							
+				
+			
+			
+			cpmember_detailed_address = #{cpMember.cpMemberDetailedAddress},
+			cpmember_phonenum = #{cpMember.cpMemberPhonenum},
+			cpmember_number_of_employees = #{cpMember.cpMemberNumberOfEmployees}
+			
+			
+			
+		WHERE cpmember_id = #{cpMember.cpMemberId}
 	</update>
 	
 	<!-- 기업회원 PW 수정 -->

@@ -66,18 +66,34 @@
 		                    					<span id="cpMemberEmailSpan" style="color: red; margin: auto;"></span>
 		                  					</div>
 		                  					<div class="form-group">
-		                  						<span>산업 선택 : </span>
-		                    					<select name="cpMemberIndustryNo" class="custom-select">
-		                    						<option value="0">- 산업이름 -</option>
+		                  						<span>산업 선택 : </span>		                  						
+		                    					<select name="cpMemberIndustryNo" class="custom-select" style="font-size: .8rem; border-radius: 10rem;">
+		                    						<option value="0">- 산업이름 -</option>		                    							                    								                    						
 		                    						<th:block th:each="industry : ${industryList}">
-		                    							<option th:value="${industry.industryNo}" th:text="${industry.industryCategory}"></option>
+		                    							<th:block th:if="${industry.industryNo == cpMember.cpMemberIndustryNo}">
+		                    								<option th:value="${industry.industryNo}" th:text="${industry.industryCategory}" selected="selected"></option>
+		                    							</th:block>
+		                    							<th:block th:if="${industry.industryNo != cpMember.cpMemberIndustryNo}">
+		                    								<option th:value="${industry.industryNo}" th:text="${industry.industryCategory}"></option>
+		                    							</th:block>
+		                    							
 		                    						</th:block>
 		                    					</select>
 		                    					<!-- <span id="cpMemberIndustryNoSpan" style="color: red; margin: auto;"></span> -->
 		                  					</div>
 		                  					<div class="form-group">
-		                  						<span>지역 선택 : </span>
-		                  						<input name="address" id="address" type="text" class="form-control form-control-user" onclick="getAddress();" value="주소 검색" readonly="readonly">		                    					
+		                  						<span>지역 선택 : </span>		             
+		                  						<th:block th:if="${areaAndArea2 != null}">
+		                  							<input name="address" id="address" type="text" class="form-control form-control-user" onclick="getAddress();" th:value="|${areaAndArea2.areaSido} ${areaAndArea2.area2Gungu}|" readonly="readonly">
+			                  						<input type="hidden" id="areaSido" name="areaSido" th:value="${areaAndArea2.areaSido}">
+			                  						<input type="hidden" id="areaGungu" name="areaGungu" th:value="${areaAndArea2.area2Gungu}">
+		                  						</th:block>
+		                  						<th:block th:if="${areaAndArea2 == null}">
+		                  							<input name="address" id="address" type="text" class="form-control form-control-user" onclick="getAddress();" readonly="readonly">
+			                  						<input type="hidden" id="areaSido" name="areaSido">
+			                  						<input type="hidden" id="areaGungu" name="areaGungu">
+		                  						</th:block>     						
+		                  								                    					
 		                    					<!-- <span id="cpMemberArea2NoSpan" style="color: red; margin: auto;"></span> -->
 		                  					</div>
 		                  					<div class="form-group">
@@ -164,6 +180,8 @@
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 
                 document.getElementById('address').value = data.sido + " " + data.sigungu;
+                document.getElementById('areaSido').value = data.sido;
+                document.getElementById('areaGungu').value = data.sigungu;
                 document.getElementById('cpMemberDetatiledAddress').value = data.bname + " ";
                 
                 

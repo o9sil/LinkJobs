@@ -1,5 +1,7 @@
 package com.gdu.linkJobs.mapper;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gdu.linkJobs.vo.AlterCpMemberPw;
@@ -13,7 +15,7 @@ public interface CpMemberMapper {
 	public CpMember selectCpMemberDetail(String cpMemberId);
 	
 	//기업회원 정보수정
-	public int updateCpMemberDetail(CpMember cpMember);
+	public int updateCpMemberDetail(Map<String, Object> map);
 	
 	//기업회원 PW 찾기
 	public int updateCpMemberPwRandom(CpMember cpMember);
