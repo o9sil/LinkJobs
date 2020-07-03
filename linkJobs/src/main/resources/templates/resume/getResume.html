@@ -3,51 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <title>getResume</title>
-<Custom fonts for this template>
+<!-- Custom fonts for this template-->
 <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
- -->
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<!-- <script src="js/sb-admin-2.min.js"></script> -->
 <!-- Custom styles for this template-->
 <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
-	<!--<script>
-	 $('#openBtn').click(function(){
-		$ajax.({
-			url:/resumeAvaliability
-			type:post
-			
-		})
-	})
-</script> -->
+<script th:inline="javascript">
+   
+$(document).ready(function(){
+	 /*<![CDATA[*/	
+	// 공개 비공개
+	
+    $('#openRadio').click(function () {
+          let resumeNo= $('#resumeNo').val();
+		  let resumeAvaliability = $(this).val();
+          console.log("resumeNo : "+resumeNo);
+          console.log("resumeAvaliability : "+resumeAvaliability);
+           $.ajax({
+              url :/*[[@{/modifyResumeAvaliability}]]*/, 
+              type: "POST",
+              data:{'resumeNo':resumeNo, 'resumeAvaliability':resumeAvaliability},
+              success: function (data) {
+              console.log(data);                   
+          	},
+          	 error: function (data) {
+                 console.log('Error:', data);
+             }
+           });
+          
+   });   
+    $('#closeRadio').click(function () {
+        let resumeNo= $('#resumeNo').val();
+		  let resumeAvaliability = $(this).val();
+        console.log("resumeNo : "+resumeNo);
+        console.log("resumeAvaliability : "+resumeAvaliability);
+         $.ajax({
+            url :/*[[@{/modifyResumeAvaliability}]]*/, 
+            type: "POST",
+            data:{'resumeNo':resumeNo, 'resumeAvaliability':resumeAvaliability},
+            success: function (data) {
+            console.log(data);                   
+        	},
+        	 error: function (data) {
+               console.log('Error:', data);
+           }
+         });
+        
+ });
+    /* 수정중
+    if($('#openRadio').val() === "공개") {
+    	$('#openRadio').prop('checked', true);
+    	$('#closeRadio').prop('disabled', false);
+    } else {
+    	$('#openRadio').prop('disabled', false);
+    	$('#closeRadio').prop('checked', true);
+    }
+    */
+    /*]]>*/
+   
+});
+   
+</script>
+
 </head>
 <body id="page-top">
 <div class="container">
 	<h1>이력서 현황</h1>  
 	
 	<div th:text="${count}"></div>
-	<form method="post" th:action="@{/resumeAvaliability(resumeNo=${resumeNo},memberId=${memberId})}">
+	
 		<fieldset th:each="list : ${list}">
 			<div>수정 <span  th:text="${list.resumeDate}"></span></div><br>
 			<div><a href="#" th:text="${list.resumeTitle}"></a></div>
 			<div th:text="${list.resumeAvaliability}"></div>
 			<div th:text="${list.resumeCareer}"></div>
 			<div th:text="${list.resumeSalary}"></div>
+			<input type="hidden" name="resumeNo" id="resumeNo" th:value="${list.resumeNo}">
 			<div>
 				<label>
-					<input type="radio" name="resumeAvaliability" id="openRadio">공개
+					<input type="radio" name="resumeAvaliability" id="openRadio" value="공개">공개
 				</label>
 				<label>
-					<input type="radio" name="resumeAvaliability" id="closeRadio">비공개
+					<input type="radio" name="resumeAvaliability" id="closeRadio" value="비공개">비공개
 				</label>
 			</div>
 			<div><a th:href="@{/removeResume(resumeNo=${list.resumeNo},memberId=${list.memberId})}">삭제</a></div>
-
-			<div>
-				<button id="openBtn" type="submit" name="resumeAvaliability" value="공개">공개</button>
-				<button id="closeBtn" type="submit" name="resumeAvaliability" value="비공개">비공개</button>
-			</div> 
-		
 		</fieldset>
-	</form>
+
 		
 
 	

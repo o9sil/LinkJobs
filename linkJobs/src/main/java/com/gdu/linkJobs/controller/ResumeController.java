@@ -44,7 +44,7 @@ public class ResumeController {
 		resume.getResumeNo();
 		System.out.println(resume.getResumeNo()+"<--resumeNo");
 		System.out.println(resume.getMemberId()+"<--memberId");
-		resumeService.resumeAvaliability(resume);
+		resumeService.modifyResumeAvaliability(resume);
 		
 		return "redirect:/getResume";
 	}
@@ -69,7 +69,7 @@ public class ResumeController {
 		
 		memberId = "user";
 		Member member = memberService.getMemberOne(memberId);
-		MemberCareer memberCareer = memberCareerService.getmemberCareerOne(memberId);
+		MemberCareer memberCareer = memberCareerService.getMemberCareerOne(memberId);
 		List<Area> areaList = areaService.getArea();
 		MemberAcademic memberAcademic = memberAcademicService.getMemberAcademic(memberId);
 	    System.out.println(memberAcademic+"<--이력서 회원학력");

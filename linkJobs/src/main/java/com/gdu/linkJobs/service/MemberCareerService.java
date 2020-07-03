@@ -10,7 +10,7 @@ import com.gdu.linkJobs.vo.MemberCareer;
 public class MemberCareerService {
 	@Autowired  private MemberCareerMapper memberCareerMapper;
 	// 이력서 학력 추가
-	public MemberCareer getmemberCareerOne(String memberId) {
-		return memberCareerMapper.selectmemberCareerOne(memberId);
+	public MemberCareer getMemberCareerOne(String memberId) {
+		return memberCareerMapper.selectMemberCareerOne(memberId);
 	}
 }

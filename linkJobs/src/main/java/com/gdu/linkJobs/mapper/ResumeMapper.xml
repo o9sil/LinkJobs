@@ -5,7 +5,7 @@
 	
 	
 	<!-- 이력서 공개/비공개 설정 -->
-	<update id="resumeAvaliability" parameterType="com.gdu.linkJobs.vo.Resume">
+	<update id="updateResumeAvaliability" parameterType="com.gdu.linkJobs.vo.Resume">
 		UPDATE linkjobs_resume
 		SET	
 			resume_avaliability = #{resumeAvaliability}

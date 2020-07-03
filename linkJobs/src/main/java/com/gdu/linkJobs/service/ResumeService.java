@@ -15,9 +15,9 @@ public class ResumeService {
 	
 	
 	//이력서 공개/비공개
-	public int resumeAvaliability(Resume resume) {
+	public int modifyResumeAvaliability(Resume resume) {
 		System.out.println(resume+"<--resumeService");
-		return resumeMapper.resumeAvaliability(resume);
+		return resumeMapper.updateResumeAvaliability(resume);
 	}
 	
 	

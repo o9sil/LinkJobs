@@ -100,9 +100,9 @@ $(document).ready(function(){
    </div>
    <div>
       재학기간
-      <input type="text" th:value="${memberAcademic.academicFromDate}"  id="academicFromDate">
+      <input type="date" th:value="${memberAcademic.academicFromDate}"  id="academicFromDate">
       ~
-      <input type="text" th:value="${memberAcademic.academicToDate}"  id="academicToDate">
+      <input type="date" th:value="${memberAcademic.academicToDate}"  id="academicToDate">
    </div>
    <div>
       학점
@@ -128,9 +128,9 @@ $(document).ready(function(){
       </div>
       <div>
       	재직기간
-      	<input type="text" th:value="${memberCareer.careerStartDate}" placeholder="YYYY-MM-DD" readonly="readonly">
+      	<input type="date" th:value="${memberCareer.careerStartDate}" placeholder="YYYY-MM-DD" readonly="readonly">
       	~
-      	<input type="text" th:value="${memberCareer.careerEndDate}" placeholder="YYYY-MM-DD" readonly="readonly">
+      	<input type="date" th:value="${memberCareer.careerEndDate}" placeholder="YYYY-MM-DD" readonly="readonly">
       	<input type="text" th:value="${memberCareer.careerLeaving}" readonly="readonly">
       </div>
       <div>
