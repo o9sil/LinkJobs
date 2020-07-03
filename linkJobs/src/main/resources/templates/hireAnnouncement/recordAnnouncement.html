@@ -12,6 +12,16 @@
 
 <!-- Custom styles for this page -->
 <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+<style type="text/css">
+.job3Ul{
+	margin-left: 2.5em; margin-top: 1em;
+}
+
+.job3Ul .job3Li{
+	width: 50%;
+}
+
+</style>
 
 </head>
 
@@ -39,42 +49,70 @@
 						<h1 class="h3 mb-2 text-gray-800">채용공고 등록</h1>
 					</div>
 					<br><br>
+					
+					
+					
 					<!-- 담당자 정보 -->
 					<div class="row">
 						<div class="col-xl-8 col-lg-7">
+						
+						<form class="user" id="alterCpMemberDetailForm" method="post" th:action="@{/alterCpMemberDetail}">
 			             	<div class="card shadow mb-4">
 				               
 				                <!-- 공고 제목 -->
 				                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-				                 	<input type="text" class="form-control form-control-user" placeholder="공고 제목을 입력하세요.">	
+				                	<h2 class="m-0 font-weight-bold text-info">공고 제목</h2>				                 		
 				                </div>
-				                <br>
+				                <div class="card-body">
+				                	<input type="text" class="form-control form-control-user" id="hireAnnouncementTitle" name="hireAnnouncementTitle" placeholder="공고 제목을 입력하세요.">
+                               		<span id="hireAnnouncementTitleSpan" style="color: red; margin: auto;"></span>
+				                </div>
 				                
+				          	</div>  
+				               <br>
+				              
+				            <div class="card shadow mb-4">    
 				                <!-- 담당자 정보 헤드-->
 				                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-				                 	<h6 class="m-0 font-weight-bold text-info">담당자 정보</h6>
+				                 	<h2 class="m-0 font-weight-bold text-info">담당자 정보</h2>
 				                </div>
 			               	
 			                	<!-- 담당자 정보 바디 -->
 			                	<div class="card-body">
-								<form class="user" id="alterCpMemberDetailForm" method="post" th:action="@{/alterCpMemberDetail}">	                					
-										<div class="form-group">	
-	                  						<span>담당자 성함 :</span>			                  				
-											<input type="text" class="form-control form-control-user" name="cpMemberManager" id="cpMemberManager" placeholder="담당자 이름을 입력하세요." th:value="${cpMember.cpMemberManager}">
+										                					
+										<div class="form-group row">
+											<div class="col-xl-2">	
+												<h5 class="m-0 font-weight-bold">담당자 성함</h5>	                  							
+	                  						</div>
+	                  						<div class="col-xl-10">			                  				
+												<input type="text" class="form-control" name="cpMemberManager" id="cpMemberManager" placeholder="담당자 이름을 입력하세요." th:value="${cpMember.cpMemberManager}">
+												<span id="cpMemberManagerSpan" style="color: red; margin: auto;"></span>
+											</div>
 	                  					</div>
-	                  					<div class="form-group">
-	                  						<span>휴대폰 : </span>
-	                    					<input type="text" class="form-control form-control-user" name="cpMemberPhonenum" id="cpMemberPhonenum" placeholder="담당자 전화번호를 입력하세요." th:value="${cpMember.cpMemberPhonenum}">
-	                    					<span id="cpMemberPhonenumSpan" style="color: red; margin: auto;"></span>
+	                  					<div class="form-group row">
+	                  						<div class="col-xl-2">	
+												<h5 class="m-0 font-weight-bold">휴대폰</h5>	                  							
+	                  						</div>
+	                  						<div class="col-xl-10">			                  				
+												<input type="text" class="form-control" name="cpMemberPhonenum" id="cpMemberPhonenum" placeholder="담당자 전화번호를 입력하세요." th:value="${cpMember.cpMemberPhonenum}">
+	                    						<span id="cpMemberPhonenumSpan" style="color: red; margin: auto;"></span>
+											</div>
 	                  					</div>
-	                  					<div class="form-group">
-	                  						<span>이메일 :</span>
-	                    					<input type="text" class="form-control form-control-user" name="cpMemberEmail" id="cpMemberEmail" placeholder="이메일을 입력하세요." th:value="${cpMember.cpMemberEmail}">
-	                    					<span id="cpMemberEmailSpan" style="color: red; margin: auto;"></span>
+	                  					<div class="form-group row">
+	                  						<div class="col-xl-2">	
+												<h5 class="m-0 font-weight-bold">이메일</h5>	                  							
+	                  						</div>
+	                  						<div class="col-xl-10">			                  				
+												<input type="text" class="form-control" name="cpMemberEmail" id="cpMemberEmail" placeholder="이메일을 입력하세요." th:value="${cpMember.cpMemberEmail}">
+	                    						<span id="cpMemberEmailSpan" style="color: red; margin: auto;"></span>
+											</div>
 	                  					</div>
-	                  					<div class="form-group">
-		                  						<span>업종 : </span>		                  						
-		                    					<select name="cpMemberIndustryNo" class="custom-select" style="font-size: .8rem; border-radius: 10rem;">
+	                  					<div class="form-group row">
+	                  						<div class="col-xl-2">	
+												<h5 class="m-0 font-weight-bold">업종</h5>	                  							
+	                  						</div>
+	                  						<div class="col-xl-10">			                  				
+												<select name="cpMemberIndustryNo" class="custom-select">
 		                    						<option value="0">- 산업이름 -</option>		                    							                    								                    						
 		                    						<th:block th:each="industry : ${industryList}">
 		                    							<th:block th:if="${industry.industryNo == cpMember.cpMemberIndustryNo}">
@@ -86,70 +124,108 @@
 		                    							
 		                    						</th:block>
 		                    					</select>
+											</div>
 		                  				</div>
-	                  					<div class="form-group">
-		                  						<span>근무 지역  : </span>		             
-		                  						<th:block th:if="${areaAndArea2 != null}">
-		                  							<input name="address" id="address" type="text" class="form-control form-control-user" onclick="getAddress();" th:value="|${areaAndArea2.areaSido} ${areaAndArea2.area2Gungu}|" readonly="readonly">
+	                  					<div class="form-group row">
+	                  						<div class="col-xl-2">	
+												<h5 class="m-0 font-weight-bold">근무 지역</h5>	                  							
+	                  						</div>
+	                  						<div class="col-xl-10">			                  				
+												<th:block th:if="${areaAndArea2 != null}">
+		                  							<input name="address" id="address" type="text" class="form-control" th:value="|${areaAndArea2.areaSido} ${areaAndArea2.area2Gungu}|" readonly="readonly">
 			                  						<input type="hidden" id="areaSido" name="areaSido" th:value="${areaAndArea2.areaSido}">
 			                  						<input type="hidden" id="areaGungu" name="areaGungu" th:value="${areaAndArea2.area2Gungu}">
 		                  						</th:block>
 		                  						<th:block th:if="${areaAndArea2 == null}">
-		                  							<input name="address" id="address" type="text" class="form-control form-control-user" onclick="getAddress();" readonly="readonly">
+		                  							<input name="address" id="address" type="text" class="form-control" readonly="readonly">
 			                  						<input type="hidden" id="areaSido" name="areaSido">
 			                  						<input type="hidden" id="areaGungu" name="areaGungu">
-		                  						</th:block>     						
-		                  								                    					
-		                    					<!-- <span id="cpMemberArea2NoSpan" style="color: red; margin: auto;"></span> -->
+		                  						</th:block>    
+											</div>
 		                  				</div>
-	                  					<div class="form-group">
-	                  						<span>상세주소 : </span>
-	                    					<input type="text" class="form-control form-control-user" name="cpMemberDetailedAddress" id="cpMemberDetatiledAddress" readonly="readonly" th:value="${cpMember.cpMemberDetailedAddress}">
-	                    					<!-- <span id="cpMemberDetatiledAddressSpan" style="color: red; margin: auto;"></span> -->
+	                  					<div class="form-group row">
+	                  						<div class="col-xl-2">	
+												<h5 class="m-0 font-weight-bold">상세주소</h5>	                  							
+	                  						</div>
+	                  						<div class="col-xl-10">			                  				
+												<input type="text" class="form-control" name="cpMemberDetailedAddress" id="cpMemberDetatiledAddress" readonly="readonly" th:value="${cpMember.cpMemberDetailedAddress}">
+											</div>
 	                  					</div>
 		                  					
-	                  				</form>
+	                  				
 			                	</div>
 							</div>
+							
+							
+							
 							<br><br>
 			                
 			                <!-- 모집분야 -->
 			                <div class="card shadow mb-4">
 				               <!-- 모집분야 헤드-->
 				                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-				                 <h6 class="m-0 font-weight-bold text-info">모집 분야</h6>
+				                 	<h2 class="m-0 font-weight-bold text-info">모집 분야</h2>
 				                </div>
 			                	
 			                	<!-- 모집분야 바디 -->
 			                	<div class="card-body">
-								<form class="user" id="alterCpMemberDetailForm" method="post" th:action="@{/alterCpMemberDetail}">	                					
-										<div class="form-group">	
-	                  						<span>모집 분야명 :</span>			                  				
-											<input type="text" class="form-control form-control-user" name="hireAnnouncementRecuitmentField" id="hireAnnouncementRecuitmentField" placeholder="예) R&D, 경영지원">
+									                					
+										<div class="form-group row">
+											<div class="col-xl-2">	
+												<h5 class="m-0 font-weight-bold">모집 분야명</h5>	                  							
+	                  						</div>
+	                  						<div class="col-xl-10">			                  				
+												<input type="text" class="form-control" name="hireAnnouncementRecuitmentField" id="hireAnnouncementRecuitmentField" placeholder="예) R&D, 경영지원">
+											</div>
 	                  					</div>
-	                  					<div class="form-group">
-	                  						<span>경력여부 : </span>
-	                    					<input type="checkbox" name="checkNewcomer" value="신입">신입
-											<input type="checkbox" name="checkCareer" value="경력">경력
-											<input type="checkbox" name="checkIrrelevant" value="경력무관">경력무관
-	                    					<span id="hireAnnouncementCareerSpan" style="color: red; margin: auto;"></span>
+	                  					<div class="form-group row">
+	                  						<div class="col-xl-2">	
+												<h5 class="m-0 font-weight-bold">경력여부</h5>	                  							
+	                  						</div>
+	                  						<div class="col-xl-10">
+		                  						<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="hireAnnouncementCareerRadio1" name="hireAnnouncementCareer" value="신입">
+												    <label class="custom-control-label" for="hireAnnouncementCareerRadio1">신입</label>
+												</div>
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="hireAnnouncementCareerRadio2" name="hireAnnouncementCareer" value="경력">
+												    <label class="custom-control-label" for="hireAnnouncementCareerRadio2">경력</label>
+												</div>
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="hireAnnouncementCareerRadio3" name="hireAnnouncementCareer" value="경력무관">
+												    <label class="custom-control-label" for="hireAnnouncementCareerRadio3">경력무관</label>
+												</div>
+		                    					<span id="hireAnnouncementCareerSpan" style="color: red; margin: auto;"></span>
+											</div>
 	                  					</div>
-	                  					<div class="form-group">
-	                  						<span>근무부서 :</span>
-	                    					<input type="text" class="form-control form-control-user" name="hireAnnouncementJobPosition" id="hireAnnouncementJobPosition" placeholder="근무하게 될 부서 또는 근무지를 입력해주세요.">
-	                    					<span id="hireAnnouncementJobPositionSpan" style="color: red; margin: auto;"></span>
+	                  					<div class="form-group row">
+	                  						<div class="col-xl-2">	
+												<h5 class="m-0 font-weight-bold">근무부서</h5>	                  							
+	                  						</div>
+	                  						<div class="col-xl-10">			                  				
+												<input type="text" class="form-control" name="hireAnnouncementJobPosition" id="hireAnnouncementJobPosition" placeholder="근무하게 될 부서 또는 근무지를 입력해주세요.">
+	                    						<span id="hireAnnouncementJobPositionSpan" style="color: red; margin: auto;"></span>
+											</div>
 	                  					</div>
-	                  					<div class="form-group">
-	                  						<span>직급/직책 :</span>
-	                    					<input type="text" class="form-control form-control-user" name="cpMemberCompany" id="cpMemberCompany">
-	                    					<span id="cpMemberCompanySpan" style="color: red; margin: auto;"></span>
+	                  					<div class="form-group row">
+	                  						<div class="col-xl-2">	
+												<h5 class="m-0 font-weight-bold">직급/직책</h5>	                  							
+	                  						</div>
+	                  						<div class="col-xl-10">			                  				
+												<input type="text" class="form-control" name="hireAnnouncementJobGradeJobPosition" id="hireAnnouncementJobGradeJobPosition">
+	                    						<span id="hireAnnouncementJobGradeJobPositionSpan" style="color: red; margin: auto;"></span>
+											</div>
 	                  					</div>
-	                  					<div class="form-group">
-	                  						<span>우대조건 :</span>
-	                    					<input type="text" class="form-control form-control-user" name="hireAnnouncementPreferentialConditions" id="hireAnnouncementPreferentialConditions" placeholder="보유역량, 자격증, 외국어. 전공학과등 우대사항을 입력해보세요!">
-	                    					<span id="hireAnnouncementPreferentialConditionsSpan" style="color: red; margin: auto;"></span>
+	                  					<div class="form-group row">
+	                  						<div class="col-xl-2">	
+												<h5 class="m-0 font-weight-bold">우대조건</h5>	                  							
+	                  						</div>
+	                  						<div class="col-xl-10">			                  				
+												<input type="text" class="form-control" name="hireAnnouncementPreferentialConditions" id="hireAnnouncementPreferentialConditions" placeholder="보유역량, 자격증, 외국어. 전공학과등 우대사항을 입력해보세요!">
+	                    						<span id="hireAnnouncementPreferentialConditionsSpan" style="color: red; margin: auto;"></span>
+											</div>
 	                  					</div>
-	                  				</form>
+	                  				
 			                	</div>
 							</div>
 							<br><br>
@@ -163,7 +239,7 @@
                             
                             <!-- 지원자격 바디 -->
                            	<div class="card-body">
-                        	<form class="user" id="alterCpMemberDetailForm" method="post" th:action="@{/alterCpMemberDetail}">                                  
+                        	                                  
                               <div class="form-group row">
                                  <div class="col-xl-2">
                                           <h5 class="m-0 font-weight-bold">지원자 학력</h5>
@@ -232,7 +308,7 @@
                                          </select>
                                        </div>
                                     </div>
-                                 </form>
+                                 
 							  </div>
                       		</div>
                       		<br><br>
@@ -247,16 +323,69 @@
 	                        <!-- 채용절차 바디 -->
 	                        <div class="card-body">
 	                          
-	                           <form class="user" id="alterCpMemberDetailForm" method="post" th:action="@{/alterCpMemberDetail}">                                  
+	                                                             
 	                           
 	                                <div class="form-group row">
 	                                   <div class="col-xl-2">
 	                                      <h5 class="m-0 font-weight-bold">공고 대표직무</h5>
 	                                   </div>
 	                                   <div class="col-xl-10">   
-	                                      <input type="text" class="form-control" name="hireAnnouncementMainJob" id="hireAnnouncementMainJob">
-	                                      <span id="hireAnnouncementMainJobSpan" style="color: red; margin: auto;"></span>
-	                                   </div>
+										<input type="text" class="form-control" name="hireAnnouncementMainJob" id="hireAnnouncementMainJob" readonly="readonly">
+	                                      
+	                                    
+	                                    
+	                                    
+											<div id="job1DivId" class="dropdown-list" style="float: left; height: 245px; overflow: scroll; width: 20%;">
+												<th:block th:each="job : ${job}">
+													<div th:id="|job1Id_${job.jobNo}|" th:text="${job.jobCategory}" th:name="job1Div" class="dropdown-item d-flex align-items-center font-weight-bold text-truncate" style="cursor: pointer;">
+															                                      		       		
+		                                      		</div>
+		                                      		
+												
+												</th:block>
+												
+	                                      		<!-- <div class="dropdown-item d-flex align-items-center font-weight-bold text-truncate" style="cursor: pointer;">
+		                                      		ASDF                                     		
+	                                      		</div> -->
+	                                      		
+		                                    </div>
+		                                      
+		                                      <div id="job2DivId" class="dropdown-list" style="float: left; height: 245px; overflow: scroll; width: 25%;" >
+		                                      	<th:block th:each="job2 : ${job2}">
+													<div th:name="|job2_job1Id_${job2.jobNo}|" th:id="|job2Id_${job2.job2No}|" th:text="${job2.job2Category}" class="job2Div" style="cursor: pointer; display: none;">
+															                                      		       		
+		                                      		</div>
+												
+												</th:block>
+		                                      </div>
+		                                      
+		                                      
+		                                      <div class="dropdown-list" style="float: left; height: 245px; overflow: scroll; width: 55%;">
+		                                      	<ul class="nav job3Ul">
+		                                      		<th:block th:each="job3 : ${job3}">
+		                                      			<li th:name="|job3_job2Id_${job3.job2No}|" class="nav-item job3Li" style="display: none;">
+			                                      			<div class="form-check-inline">		
+			                                      				<label class="form-check-label">
+			                                      					<input type="checkbox" class="form-check-input" name="job3Click" th:id="|job3Id_${job3.job3No}|" th:value="${job3.job3Category}" th:text="${job3.job3Category}">
+			                                      				</label>															
+			                                      			</div>
+		                                      			</li>		                                      	
+		                                      		</th:block>
+		                                      	</ul>
+		                                      </div>
+		                                      
+		                                      
+		                                      
+		                                      <span id="hireAnnouncementMainJobSpan" style="color: red; margin: auto;"></span>
+		                                   </div>
+	                                   
+	                                   
+	                                   
+	                                 
+	                                   
+	                                   
+	                                   
+	                                   
 	                                <!--  -->
 	                                </div>
 	                                    <div class="form-group row">
@@ -277,7 +406,7 @@
 	                                                                                   
 	                                       </div>
 	                                    </div>
-	                                 </form>
+	                                 
 	                            </div>
                       	 </div>
                          <br><br>
@@ -291,7 +420,7 @@
                             
                             <!-- 공고 내용 바디 -->
                             <div class="card-body">
-                            <form class="user" id="alterCpMemberDetailForm" method="post" th:action="@{/alterCpMemberDetail}">    
+                                
                                     <div class="form-group row">
                                        <div class="col-xl-2">
                                           <h5 class="m-0 font-weight-bold">공고 내용</h5>
@@ -301,11 +430,13 @@
                                          <span id="hireAnnouncementContentsSpan" style="color: red; margin: auto;"></span>
                                        </div>
                                     </div>
-                            </form>
+                            
                             </div>
                             
                          </div>
+                         </form>
 					</div>
+					
 				</div>
 			</div>
 
@@ -358,6 +489,95 @@
 
 	<!-- Page level custom scripts -->
 	<script src="js/demo/datatables-demo.js"></script>
+	
+	
+	<script>
+	   
+	      $('#insertHireAnnouncementBtn').click(function() {
+	         $('#hireAnnouncementTitleSpan').text("");
+	         $('#cpMemberManagerSpan').text("");
+	         $('#cpMemberPhonenumSpan').text("");
+	         $('#cpMemberEmailSpan').text("");
+	         $('#hireAnnouncementRecuitmentFieldSpan').text("");
+	         $('#hireAnnouncementJobGradeJobPositionSpan').text("");
+	         $('#hireAnnouncementPreferentialConditionsSpan').text("");
+	         $('#hireAnnouncementMainJobSpan').text("");
+	         
+	         if($('#hireAnnouncementTitle').val().length === 0){
+	            $('#hireAnnouncementTitleSpan').text("공고제목을 입력하세요.");
+	            return;
+	         }
+	         if($('#cpMemberManager').val().length === 0){
+	            $('#cpMemberManagerSpan').text("담당자 이름을 입력하세요.");
+	            return;
+	         }
+	         if($('#cpMemberPhonenum').val().length === 0){
+	            $('#cpMemberPhonenumSpan').text("담당자 전화번호를 입력하세요.");
+	            return;
+	         }
+	         if($('#cpMemberEmail').val().length === 0){
+	            $('#cpMemberEmailSpan').text("이메일을 입력하세요.");
+	            return;
+	         }
+	         if($('#hireAnnouncementRecuitmentField').val().length === 0){
+	            $('#hireAnnouncementRecuitmentFieldSpan').text("모집분야를 입력하세요.");
+	            return;
+	         }
+	         if($('#hireAnnouncementJobGradeJobPosition').val().length === 0){
+	            $('#hireAnnouncementJobGradeJobPositionSpan').text("근무부서를 입력하세요.");
+	            return;
+	         }
+	         if($('#hireAnnouncementPreferentialConditions').val().length === 0){
+	            $('#hireAnnouncementPreferentialConditionsSpan').text("우대사항을 입력하세요.");
+	            return;
+	         }
+	         if($('#hireAnnouncementMainJob').val().length === 0){
+	            $('#hireAnnouncementMainJobSpan').text("대표직무를 선택하세요.");
+	            return;
+	         }
+	         
+	         $('#cpMemberAnnouncementForm').submit();
+	      });
+	   
+		$('#hireAnnouncementCareerRadio2').click(function(){
+			//console.log("checkCareerFunction Click");
+		});
+		
+		$('#hireAnnouncementMainJob').click(function(){
+			$('#jobListSelect').css('display', '');
+		});
+		
+		$('[name=job1Div]').click(function(){
+			$('#job2DivId').children().attr('class', '');
+			$('#job2DivId').children().css('display', 'none');
+			//console.log(this.id);
+			let job2Name = 'job2_' + this.id;
+			$('[name='+job2Name+']').attr('class', 'dropdown-item d-flex align-items-center font-weight-bold text-truncate');
+			$('[name='+job2Name+']').css('display','');
+		});
+		
+		$('[class=job2Div]').click(function(){
+			//console.log(this.id);
+			
+			$('.job3Li').css('display', 'none');			
+			let job3Name = 'job3_' + this.id;
+			$('[name=' + job3Name + ']').css('display', '');
+			
+		});
+		
+		
+		$('[name=job3Click]').click(function(){
+			console.log(this);
+			var str = "";
+			$('[name=job3Click]').each(function(){
+				if($(this).is(":checked")){
+					str += $(this).val() + " ";
+				}				
+			});
+			
+			$('#hireAnnouncementMainJob').val(str);
+		})
+	</script>
 
 </body>
 

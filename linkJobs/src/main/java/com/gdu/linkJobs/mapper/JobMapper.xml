@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.linkJobs.mapper.JobMapper">
+
+   <!-- Job 리스트 가져오기 -->
+   <select id="selectJobListAll" resultType="com.gdu.linkJobs.vo.Job">
+      SELECT job_no AS jobNo, job_category AS jobCategory FROM linkjobs_job
+   </select>
+   
+   <!-- Job2 리스트 가져오기 -->
+   <select id="selectJob2ListAll" resultType="com.gdu.linkJobs.vo.Job2">
+      SELECT job2_no AS job2No, job2_category AS job2Category, job_no AS jobNo FROM linkjobs_job2 ORDER BY jobNo, job2No
+   </select>
+   
+   <!-- Job3 리스트 가져오기 -->
+   <select id="selectJob3ListAll" resultType="com.gdu.linkJobs.vo.Job3">
+      SELECT job3_no AS job3No, job3_category AS job3Category, job2_no AS job2No FROM linkjobs_job3 ORDER BY job2No, job3No
+   </select>
+
+
+
+</mapper>

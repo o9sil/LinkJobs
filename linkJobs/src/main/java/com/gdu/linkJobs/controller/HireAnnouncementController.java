@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gdu.linkJobs.service.CpMemberService;
 import com.gdu.linkJobs.service.HireAnnouncementService;
 import com.gdu.linkJobs.service.IndustryService;
+import com.gdu.linkJobs.service.JobService;
 import com.gdu.linkJobs.vo.CpMember;
 import com.gdu.linkJobs.vo.HireAnnouncement;
 
@@ -27,6 +28,9 @@ public class HireAnnouncementController {
 	
 	@Autowired
 	private IndustryService industryService;
+	
+	@Autowired
+	private JobService jobService;
 	
 	// 채용공고 상세보기
 	
@@ -64,6 +68,10 @@ public class HireAnnouncementController {
 		
 		System.out.println(("areaAndArea2 = " + map.get("areaAndArea2")));
 		
+		Map<String, Object> jobMap = jobService.getJobListAll();
+		model.addAttribute("job", jobMap.get("job"));
+		model.addAttribute("job2", jobMap.get("job2"));
+		model.addAttribute("job3", jobMap.get("job3"));
 		
 		model.addAttribute("industryList", industryService.getIndustryList());
 		return "hireAnnouncement/recordAnnouncement";
