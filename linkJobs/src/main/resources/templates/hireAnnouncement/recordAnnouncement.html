@@ -26,7 +26,7 @@
 
 		<!-- Sidebar -->
 		<ul
-			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+			class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
 			id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
@@ -37,8 +37,9 @@
 			        </span>              
 			         
 			        <span class="sidebar-brand-text mx-3">
-			         <img th:src="@{/img/LinkJobsLogo.png}" style="height: 3.5rem;"/>
-			         </span>
+			        	<!-- <img th:src="@{/img/LinkJobsLogo.png}" style="height: 3.5rem;"/> -->
+			        	Link Jobs
+			        </span>
 			      </a>
 			</li>
 
@@ -55,6 +56,12 @@
 					</div>
 				</div>
 			</li>
+			
+			<li class="nav-item">
+				<div class="text-center">
+					<button class="rounded-circle border-0" id="sidebarToggle"></button>
+				</div>
+			</li>			
 		</ul>
 		<!-- End of Sidebar -->
 		
@@ -79,7 +86,7 @@
 			             	<div class="card shadow mb-4">
 				               <!-- 담당자 정보 헤드-->
 				                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-				                 <h6 class="m-0 font-weight-bold text-primary">담당자 정보</h6>
+				                 <h6 class="m-0 font-weight-bold text-info">담당자 정보</h6>
 				                </div>
 			                	
 			                	<!-- 담당자 정보 바디 -->
@@ -118,7 +125,7 @@
 			                <div class="card shadow mb-4">
 				               <!-- 모집분야 헤드r-->
 				                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-				                 <h6 class="m-0 font-weight-bold text-primary">모집 분야</h6>
+				                 <h6 class="m-0 font-weight-bold text-info">모집 분야</h6>
 				                </div>
 			                	
 			                	<!-- 모집분야 바디 -->
@@ -157,7 +164,7 @@
 			                <div class="card shadow mb-4">
 				                <!-- 지원자격 헤드-->
 				                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-				                 <h6 class="m-0 font-weight-bold text-primary">지원 자격</h6>
+				                 <h6 class="m-0 font-weight-bold text-info">지원 자격</h6>
 				                </div>
 			                	
 			                	<!-- 지원자격 바디 -->
@@ -186,7 +193,7 @@
 			                 <div class="card shadow mb-4">
 				                <!-- 채용절차 헤드-->
 				                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-				                 	<h6 class="m-0 font-weight-bold text-primary">채용 절차</h6>
+				                 	<h6 class="m-0 font-weight-bold text-info">채용 절차</h6>
 				                </div>
 			                	
 			                	<!-- 채용절차 바디 -->
@@ -212,7 +219,7 @@
 			                <div class="card shadow mb-4">
 				                <!-- 공고 내용 헤드-->
 				                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-				                 <h6 class="m-0 font-weight-bold text-primary">공고 내용</h6>
+				                 <h6 class="m-0 font-weight-bold text-info">공고 내용</h6>
 				                </div>
 			                	
 			                	<!-- 공고 내용 바디 -->
