@@ -33,6 +33,8 @@
 		WHERE hire_announcement_no = #{hireAnnouncementNo}
 	</select>
 	
+	
+	
 	<!-- 채용공고 등록쿼리 -->
 	<insert id="insertHireAnnouncement" parameterType="com.gdu.linkJobs.vo.HireAnnouncement">
 		INSERT INTO linkjobs_hire_announcement(

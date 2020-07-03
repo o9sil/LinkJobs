@@ -19,6 +19,244 @@
 	</div>
 
 	<div class="container">
+		<!-- 담당자 정보 -->
+    <section id="frmManager" class="step_recruit">
+        <div id="manager">
+            <div class="frm_header">
+                <h2 class="tit_step">담당자 정보</h2>
+                <p class="subhead">먼저 인사담당자님과 기업 정보가 맞는지 확인해주세요</p>
+            </div>
+            <div class="frm_body frm_manager">
+                <div class="items">
+                    <div class="area_tit">
+                        <strong class="tit">담당자 성함</strong>
+                        <em class="required">필수</em>
+                    </div>
+                    <div class="area_data">
+                        <span class="manager_name">
+                            <input type="text" id="manager_nm" name="manager_nm" class="inpTypo sizeL " title="담당자명 입력" placeholder="담당자명 입력" maxlength="30">
+                            <em class="msgInvalid _invalid_msg_manager" style="display:none;">담당자명을 입력해주세요.</em>
+                        </span>
+                        <span class="manager_part">
+                            <input type="text" id="manager_dept" name="manager_dept" class="inpTypo sizeL" title="(선택) 담당자 부서명 입력" placeholder="(선택) 담당자 부서명" maxlength="30">
+                        </span>
+                    </div>
+                </div>
+                <div class="items">
+                    <div class="area_tit">
+                        <strong class="tit">전화번호</strong>
+                        <em class="required">필수</em>
+                    </div>
+                    <div class="area_data">
+                        <span class="manager_phone">
+                            <input type="text" id="tel1" name="tel1" class="inpTypo sizeL _filter" title="전화번호 첫번째 자리 입력" maxlength="3" data-filter="numeric">
+                        </span>
+                        <span class="manager_phone">
+                            <input type="text" id="tel2" name="tel2" class="inpTypo sizeL _filter" title="전화번호 두번째 자리 입력" maxlength="4" data-filter="numeric">
+                        </span>
+                        <span class="manager_phone">
+                            <input type="text" id="tel3" name="tel3" class="inpTypo sizeL _filter" title="전화번호 세번째 자리 입력" maxlength="4" data-filter="numeric">
+                        </span>
+                        <em class="msgInvalid _invalid_msg_tel" style="display:none;"></em>
+                    </div>
+                </div>
+
+                <div class="items">
+                    <div class="area_tit">
+                        <strong class="tit">휴대폰 번호</strong>
+                    </div>
+                    <div class="area_data">
+                        <span class="manager_phone">
+                            <input type="text" id="cell1" name="cell1" class="inpTypo sizeL _filter" title="휴대폰 번호 첫번째 자리 입력" maxlength="3" data-filter="numeric">
+                        </span>
+                        <span class="manager_phone">
+                            <input type="text" id="cell2" name="cell2" class="inpTypo sizeL _filter" title="휴대폰 번호 두번째 자리 입력" maxlength="4" data-filter="numeric">
+                        </span>
+                        <span class="manager_phone">
+                            <input type="text" id="cell3" name="cell3" class="inpTypo sizeL _filter" title="휴대폰 번호 세번째 자리 입력" maxlength="4" data-filter="numeric">
+                        </span>
+                        <em class="msgInvalid _invalid_msg_cell" style="display:none;">휴대폰번호 형식이 올바르지 않습니다.</em>
+                    </div>
+                </div>
+                <div class="items">
+                    <div class="area_tit">
+                        <strong class="tit">이메일 주소</strong>
+                        <em class="required">필수</em>
+                    </div>
+                    <div class="area_data">
+                        <div class="manager_email">
+                            <input type="text" id="email" name="email" class="inpTypo sizeL " title="이메일 주소 입력" placeholder="이메일 주소를 입력해주세요." autocomplete="off">
+                            <div class="wrap_layer">
+                                <div class="layer_auto_email">
+                                    <ul class="list_email" id="list_email_auto_complete"></ul>
+                                </div>
+                            </div>
+                            <em class="msgInvalid msgarea_manager _invalid_msg_email" style="display:none;"></em>
+                        </div>
+                    </div>
+                </div>
+
+        <div class="items">
+            <div class="area_tit">
+                <strong class="tit">업종</strong>
+                <em class="required">필수</em>
+            </div>
+            <div class="area_data" id="industry">
+                <div class="selected_item selected" id="industry_summary">
+                    <p class="txt_placeholder">업종은 최대 1개 선택할 수 있습니다.</p>
+                    <ul class="list_selected_item frm_box_list" data-help_target="industry">
+                        <li>보안시스템영업<button type="button" class="btn_del">삭제</button></li>
+                    </ul>
+                    <button type="button" class="btn_add btn_more_ly" id="industry_setting_btn" data-layer_type="industry">수정·추가하기</button>
+                </div>
+                <div class="wrap_layer">
+                    <div class="layer_frm layer_add_industry" id ="industry_all_list">
+                        <div class="area_keyword">
+                            <div class="wrap_search" id="industry_auto_complete_wrap">
+                                <input type="text" id="industry_search_input" class="inpTypo sizeL inp_keyword" title="업종명" placeholder="업종명을 입력하세요">
+                                <button type="button" class="btn_del_keyword btnDeleteSearch" data-target-input="#industry_search_input">키워드 삭제</button>
+                                <div class="layer_suggestion">
+                                    <div class="area_scroll auto_complete_area">
+                                        <p class="txt_noti no_auto_complete" style="display: none;">일치하는 업종이 없습니다. 다시 검색해주세요.</p>
+                                        <ul class="list_check auto_complete_list"></ul>
+                                    </div>
+                                    <div class="util_search">
+                                        <button type="button" class="btn_close">닫기</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="area_category_select ">
+                            <div class="depth1">
+                                <div class="area_scroll category_step">
+                                    <ul class="list_category"></ul>
+                                </div>
+                            </div>
+                            <div class="depth2" >
+                                <div class="area_scroll category_step">
+                                    <ul class="list_category"></ul>
+                                </div>
+                            </div>
+                            <div class="depth_check" >
+                                <div class="area_scroll category_step">
+                                    <p class="txt_noti no_industry_bcode" style="display: none;">← 업종을 선택해주세요</p>
+                                    <ul class="list_check industry_bcode"></ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="area_btn">
+                            <button type="button" class="btnSizeL colorWhite close_layer">취소</button>
+                            <button type="button" class="btnSizeL colorBlue confirm_layer">확인</button>
+                        </div>
+                    </div>
+                </div>
+                <em class="msgInvalid _invalid_msg" style="display: none;">업종을 입력해주세요.</em>
+            </div>
+        </div>
+        <div class="items" >
+            <div class="area_tit">
+                <strong class="tit">대표 근무지역</strong>
+                <em class="required">필수</em>
+            </div>
+            <div class="area_data" id="address">
+                <div class="manager_location">
+                    <span class="inpChk"><input type="checkbox" id="overseas" name="overseas" value="overseas"><label class="lbl" for="overseas">해외지역</label></span>
+                    <span class="inpChk"><input type="checkbox" id="chk_typ3_01" name="work-site-cd" value="site050" data-help_target="company_address"><label class="lbl" for="chk_typ3_01" >재택근무 가능</label></span>
+                </div>
+                <div class="input_address internal">
+                    <span class="manager_address"><input type="text" class="inpTypo sizeL address01 _inputWrapper" id="address_depth1" name="address"  readonly data-help_target="company_address"  title="주소 입력" placeholder="클릭하면 주소검색창이 열립니다."></span>
+                    <span class="manager_address2"><input type="text" class="inpTypo sizeL address02 _inputWrapper" id="address_depth2" name="address_detail"  data-help_target="company_address" title="상세주소 입력" placeholder="상세주소 : 예) 187-10 코오롱싸이언스밸리"></span>
+                    <button type="button" class="btnSizeL colorBlack btn_map" id="showAreaMapBtn"><span class="ico_map">지도위치확인</span></button>
+                    <em class="msgInvalid _invalid_msg" id="address_empty_msg" style="display: none;">근무지역을 입력해주세요.</em>
+
+                    <div class="wrap_map" id="mapBox" style="display:block">
+                        <strong class="tit_map">위치/지도 확인 <span class="txt" id="locationName"></span></strong>
+                        <div class="map_area" id="mapArea"></div>
+                        <span class="inpChk sizeM"><input type="checkbox" id="showMap"><label class="lbl" for="showMap">채용공고에 지도표시</label></span>
+                        <button type="button" class="btn_close"><span class="blind">닫기</span></button>
+                    </div>
+                    <em class="msgInvalid _invalid_msg" id="address_lating_msg" style="display: none;">입력하신 주소로 지도를 불러올 수가 없습니다. 주소 확인바랍니다.</em>
+                </div>
+                <div class="data_oversea oversea" style="display: none;">
+                    <div class="inpSel sizeL address01">
+                        <select id="overseasPost" title="국가 선택">
+                            <option value="">국가 선택</option>
+                        </select>
+                    </div>
+                    <input type="text" id="overseaDetails" class="inpTypo sizeL address02" title="상세주소 입력" placeholder="해외 근무지역의 상세주소를 입력해 주세요. 영문/중문/일문 가능">
+                </div>
+                <div class="add_location subway_txt">
+                    <p class="desc" id="subway_txt"></p>
+                    <button type="button" class="btn_location _show_location" data-help_target="near_address">인근지역 추가</button>
+                </div>
+            </div>
+        </div>
+        <div class="items" id="location" style="display:none;">
+            <div class="area_tit">
+                <strong class="tit">인근지역</strong>
+            </div>
+            <div class="area_data add_list">
+                <div class="data_location _location_group" data-seq="1">
+                    <div class="inpSel sizeL" >
+                        <select class="_sel_one_depth" title="지역" >
+                            <option value="">선택</option>
+                                                            <option value="101000">서울</option>
+                                                            <option value="102000">경기</option>
+                                                            <option value="103000">광주</option>
+                                                            <option value="104000">대구</option>
+                                                            <option value="105000">대전</option>
+                                                            <option value="106000">부산</option>
+                                                            <option value="107000">울산</option>
+                                                            <option value="108000">인천</option>
+                                                            <option value="109000">강원</option>
+                                                            <option value="110000">경남</option>
+                                                            <option value="111000">경북</option>
+                                                            <option value="112000">전남</option>
+                                                            <option value="113000">전북</option>
+                                                            <option value="114000">충북</option>
+                                                            <option value="115000">충남</option>
+                                                            <option value="116000">제주</option>
+                                                            <option value="118000">세종</option>
+                                                            <option value="117000">전국</option>
+                                                            <option value="210000">아시아·중동</option>
+                                                            <option value="211200">일본</option>
+                                                            <option value="211300">중국.홍콩</option>
+                                                            <option value="220000">북·중미</option>
+                                                            <option value="220200">미국</option>
+                                                            <option value="230000">남미</option>
+                                                            <option value="240000">유럽</option>
+                                                            <option value="250000">오세아니아</option>
+                                                            <option value="260000">아프리카</option>
+                                                            <option value="270000">남극대륙</option>
+                                                            <option value="280000">기타해외</option>
+                                                    </select>
+                    </div>
+                    <div class="selected_item _inputWrapper selected">
+                        <p class="txt_placeholder">인근지역</p>
+                        <ul class="list_selected_item _location_summary">
+                            <!-- 인근 지역 선택값 리스트 -->
+                        </ul>
+                        <button type="button" class="btn_add" data-target="layer_add_location"><span class="blind">인근지역 레이어 펼침</span></button>
+                    </div>
+                    <div class="wrap_layer" >
+                        <div class="layer_frm layer_add_location layer_add_location2">
+                            <div class="location_scroll">
+                                <ul class="list_location select_list " style="display:none;"></ul>
+                            </div>
+                            <div class="noti_location"><span class="noti_location_detail"></span>(이)가 속한 시/도 내에서 인근지역을 선택해주세요 (최대 5개)</div>
+                        </div>
+                    </div>
+                    <button type="button" class="btnSizeM colorBlack btn_list_add "><span class="blind">인근지역 리스트 추가</span></button>
+                </div>
+                <p class="msgarea _invalid_msg" style="display:none;"><span class="msg_err">공고 노출 지역을 선택해주세요.</span></p>
+                <p class="msgarea" id="locResetMsg" style="display:none;"><span class="msg_err">근무지역 반영을 위하여 공고 노출 지역을 초기화하였습니다.</span></p>
+            </div>
+        </div>
+            </div>
+</div>
+</section>
+		
 		<!-- Outer Row -->
 		<div class="row justify-content-center">
 			<div class="card o-hidden border-0 shadow-lg my-5">

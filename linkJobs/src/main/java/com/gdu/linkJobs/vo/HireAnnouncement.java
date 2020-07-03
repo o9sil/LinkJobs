@@ -1,38 +1,23 @@
 package com.gdu.linkJobs.vo;
 
 public class HireAnnouncement {
-	private int hireAnnouncementNo;
-	private String cpmemberId;
-	private String hireAnnouncementTitle;
-	private String hireAnnouncementRecuitmentField;
-	private String hireAnnouncementCareer;
-	private String hireAnnouncementManager;
-	private String hireAnnouncementContents;
-	private String hireAnnouncementEducation;
-	private String hireAnnouncementJobgrade;
-	private String hireAnnouncementJobPosition;
-	private String hireAnnouncementPreferentialConditions;
-	private String hireAnnouncementSalary;
-	private String hireAnnouncementWorkingFormName;
-	private String hireAnnouncementStartDate;
-	private String hireAnnouncementEndDate;
-	
-	@Override
-	public String toString() {
-		return "HireAnnouncement [hireAnnouncementNo=" + hireAnnouncementNo + ", cpmemberId=" + cpmemberId
-				+ ", hireAnnouncementTitle=" + hireAnnouncementTitle + ", hireAnnouncementRecuitmentField="
-				+ hireAnnouncementRecuitmentField + ", hireAnnouncementCareer=" + hireAnnouncementCareer
-				+ ", hireAnnouncementManager=" + hireAnnouncementManager + ", hireAnnouncementContents="
-				+ hireAnnouncementContents + ", hireAnnouncementEducation=" + hireAnnouncementEducation
-				+ ", hireAnnouncementJobgrade=" + hireAnnouncementJobgrade + ", hireAnnouncementJobPosition="
-				+ hireAnnouncementJobPosition + ", hireAnnouncementPreferentialConditions="
-				+ hireAnnouncementPreferentialConditions + ", hireAnnouncementSalary=" + hireAnnouncementSalary
-				+ ", hireAnnouncementWorkingFormName=" + hireAnnouncementWorkingFormName
-				+ ", hireAnnouncementStartDate=" + hireAnnouncementStartDate + ", hireAnnouncementEndDate="
-				+ hireAnnouncementEndDate + "]";
-	}
-	
-	
+	   private int hireAnnouncementNo;
+	   private String cpmemberId;
+	   private String hireAnnouncementTitle;
+	   private String hireAnnouncementManager;
+	   private String hireAnnouncementRecuitmentField;
+	   private String hireAnnouncementCareer;
+	   private String hireAnnouncementDepartment;
+	   private String hireAnnouncementJobgrade;
+	   private String hireAnnouncementJobPosition;
+	   private String hireAnnouncementPreferentialConditions;
+	   private String hireAnnouncementEducation;
+	   private String hireAnnouncementSalary;
+	   private String hireAnnouncementWorkingFormName;
+	   private String hireAnnouncementMainJob;
+	   private String hireAnnouncementStartDate;
+	   private String hireAnnouncementEndDate;   
+	   private String hireAnnouncementContents;
 	public int getHireAnnouncementNo() {
 		return hireAnnouncementNo;
 	}
@@ -51,6 +36,12 @@ public class HireAnnouncement {
 	public void setHireAnnouncementTitle(String hireAnnouncementTitle) {
 		this.hireAnnouncementTitle = hireAnnouncementTitle;
 	}
+	public String getHireAnnouncementManager() {
+		return hireAnnouncementManager;
+	}
+	public void setHireAnnouncementManager(String hireAnnouncementManager) {
+		this.hireAnnouncementManager = hireAnnouncementManager;
+	}
 	public String getHireAnnouncementRecuitmentField() {
 		return hireAnnouncementRecuitmentField;
 	}
@@ -63,23 +54,11 @@ public class HireAnnouncement {
 	public void setHireAnnouncementCareer(String hireAnnouncementCareer) {
 		this.hireAnnouncementCareer = hireAnnouncementCareer;
 	}
-	public String getHireAnnouncementManager() {
-		return hireAnnouncementManager;
+	public String getHireAnnouncementDepartment() {
+		return hireAnnouncementDepartment;
 	}
-	public void setHireAnnouncementManager(String hireAnnouncementManager) {
-		this.hireAnnouncementManager = hireAnnouncementManager;
-	}
-	public String getHireAnnouncementContents() {
-		return hireAnnouncementContents;
-	}
-	public void setHireAnnouncementContents(String hireAnnouncementContents) {
-		this.hireAnnouncementContents = hireAnnouncementContents;
-	}
-	public String getHireAnnouncementEducation() {
-		return hireAnnouncementEducation;
-	}
-	public void setHireAnnouncementEducation(String hireAnnouncementEducation) {
-		this.hireAnnouncementEducation = hireAnnouncementEducation;
+	public void setHireAnnouncementDepartment(String hireAnnouncementDepartment) {
+		this.hireAnnouncementDepartment = hireAnnouncementDepartment;
 	}
 	public String getHireAnnouncementJobgrade() {
 		return hireAnnouncementJobgrade;
@@ -99,6 +78,12 @@ public class HireAnnouncement {
 	public void setHireAnnouncementPreferentialConditions(String hireAnnouncementPreferentialConditions) {
 		this.hireAnnouncementPreferentialConditions = hireAnnouncementPreferentialConditions;
 	}
+	public String getHireAnnouncementEducation() {
+		return hireAnnouncementEducation;
+	}
+	public void setHireAnnouncementEducation(String hireAnnouncementEducation) {
+		this.hireAnnouncementEducation = hireAnnouncementEducation;
+	}
 	public String getHireAnnouncementSalary() {
 		return hireAnnouncementSalary;
 	}
@@ -110,6 +95,12 @@ public class HireAnnouncement {
 	}
 	public void setHireAnnouncementWorkingFormName(String hireAnnouncementWorkingFormName) {
 		this.hireAnnouncementWorkingFormName = hireAnnouncementWorkingFormName;
+	}
+	public String getHireAnnouncementMainJob() {
+		return hireAnnouncementMainJob;
+	}
+	public void setHireAnnouncementMainJob(String hireAnnouncementMainJob) {
+		this.hireAnnouncementMainJob = hireAnnouncementMainJob;
 	}
 	public String getHireAnnouncementStartDate() {
 		return hireAnnouncementStartDate;
@@ -123,6 +114,27 @@ public class HireAnnouncement {
 	public void setHireAnnouncementEndDate(String hireAnnouncementEndDate) {
 		this.hireAnnouncementEndDate = hireAnnouncementEndDate;
 	}
+	public String getHireAnnouncementContents() {
+		return hireAnnouncementContents;
+	}
+	public void setHireAnnouncementContents(String hireAnnouncementContents) {
+		this.hireAnnouncementContents = hireAnnouncementContents;
+	}
 	
-	
+	@Override
+	public String toString() {
+		return "HireAnnouncement [hireAnnouncementNo=" + hireAnnouncementNo + ", cpmemberId=" + cpmemberId
+				+ ", hireAnnouncementTitle=" + hireAnnouncementTitle + ", hireAnnouncementManager="
+				+ hireAnnouncementManager + ", hireAnnouncementRecuitmentField=" + hireAnnouncementRecuitmentField
+				+ ", hireAnnouncementCareer=" + hireAnnouncementCareer + ", hireAnnouncementDepartment="
+				+ hireAnnouncementDepartment + ", hireAnnouncementJobgrade=" + hireAnnouncementJobgrade
+				+ ", hireAnnouncementJobPosition=" + hireAnnouncementJobPosition
+				+ ", hireAnnouncementPreferentialConditions=" + hireAnnouncementPreferentialConditions
+				+ ", hireAnnouncementEducation=" + hireAnnouncementEducation + ", hireAnnouncementSalary="
+				+ hireAnnouncementSalary + ", hireAnnouncementWorkingFormName=" + hireAnnouncementWorkingFormName
+				+ ", hireAnnouncementMainJob=" + hireAnnouncementMainJob + ", hireAnnouncementStartDate="
+				+ hireAnnouncementStartDate + ", hireAnnouncementEndDate=" + hireAnnouncementEndDate
+				+ ", hireAnnouncementContents=" + hireAnnouncementContents + "]";
+	}
+	   
 }
