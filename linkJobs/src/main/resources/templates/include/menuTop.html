@@ -38,7 +38,10 @@
 	                  	<th:block th:if="${session['loginCpMember'] != null}">
 	                     	<span class="mr-3 d-lg-inline text-gray-600" th:text="${session['loginCpMember']}"></span>
 	                  	</th:block>
-	                  	<th:block th:if="${session['loginCpMember'] == null}">
+	                  	<th:block th:if="${session['loginMember'] != null}">
+	                     	<span class="mr-3 d-lg-inline text-gray-600" th:text="${session['loginMember']}"></span>
+	                  	</th:block>
+	                  	<th:block th:if="${session['loginCpMember'] == null && session['loginMember'] == null }">
 	                     	<span class="mr-3 d-lg-inline text-gray-600">로그인하세요</span>
 	                  	</th:block>
 	                	</a>
@@ -64,7 +67,7 @@
 			            <th:block th:if="${session['loginCpMember'] == null}">
 						<!-- Dropdown - User Information -->
 			               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-			                  <a class="dropdown-item" th:href="@{/loginCpMember}">
+			                  <a class="dropdown-item" th:href="@{/loginMember}">
 			                      <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 								일반회원 로그인
 			                  </a>

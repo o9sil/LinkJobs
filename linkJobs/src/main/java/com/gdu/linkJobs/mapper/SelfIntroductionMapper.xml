@@ -46,13 +46,12 @@
 	
 	<!-- 자기소개서 추가 -->
 	<insert id="insertSelfIntroduction" parameterType="com.gdu.linkJobs.vo.SelfIntroduction">
-		INSERT INTO (
+		INSERT INTO linkjobs_self_introduction(
 			member_id,
 			self_introduction_title,
 			self_introduction_contents,
 			self_introduction_date
 		)
-		FROM linkjobs_self_introduction
 		VALUES(
 			#{memberId},
 			#{selfIntroductionTitle},

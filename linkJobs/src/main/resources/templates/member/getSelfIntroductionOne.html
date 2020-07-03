@@ -27,12 +27,25 @@
 <!-- Custom styles for this template-->
 <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
 </head>
-<body>
-   <div class="container">
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+	<!-- SideBar -->
+<ul th:include="/include/menuSide::navSide" class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
+</ul>
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+	<div th:include="/include/menuTop::navTop"></div>
+	<!-- Main Content -->
+<div id="content">		
+	<!-- 페이지 내용 -->
+	<div class="container-fluid">
       <h1>자기소개서 상세페이지</h1>
       <br>
-      <a th:href="@{/modifySelfIntroduction(selfIntroductionNo=${selfIntroductionNo})}"   class="btn btn-primary">수정</a> 
-      <a th:href="@{/removeSelfIntroduction(selfIntroductionNo=${selfIntroductionNo})}"   class="btn btn-primary">삭제</a>
+      <a th:href="@{/modifySelfIntroduction(selfIntroductionNo=${selfIntroductionNo})}"  class="btn btn-info">수정</a> 
+      <a th:href="@{/removeSelfIntroduction(selfIntroductionNo=${selfIntroductionNo})}"  class="btn btn-info">삭제</a>
       <br>
       <br>
       
@@ -55,5 +68,8 @@
          </tr>
       </table>
    </div>
+  </div>
+ </div>
+</div>
 </body>
 </html>

@@ -54,8 +54,20 @@
    });
 </script>
 </head>
-<body>
-   <div class="container">   
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+	<!-- SideBar -->
+<ul th:include="/include/menuSide::navSide" class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
+</ul>
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+	<div th:include="/include/menuTop::navTop"></div>
+	<!-- Main Content -->
+<div id="content">				
+	<!-- 페이지 내용 -->
+	<div class="container-fluid">
       <h1>자격증 추가</h1>
       <form th:action="@{/addMemberCertificate}" id="certiFome" method="post">
          <div>
@@ -73,7 +85,10 @@
          </div>
       </form>
       <br>
-      <button type="button" id="certiBtn" class="btn btn-primary">추가하기</button>
+      <button type="button" id="certiBtn" class="btn btn-info">추가하기</button>
    </div>
+  </div>
+ </div>
+</div>
 </body>
 </html>
