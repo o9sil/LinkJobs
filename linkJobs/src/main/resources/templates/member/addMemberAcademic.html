@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:td="http://www.tdymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>addMemberAcademic</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Custom fonts for tdis template-->
+<link td:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Custom scripts for all pages-->
+<!-- <script src="js/sb-admin-2.min.js"></script> -->
+<!-- Custom styles for tdis template-->
+<link td:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+<script>
+   let helperInit = function(){
+       $('#gradeHelper').text("");
+       $('#nameHelper').text("");
+       $('#majorHelper').text("");
+       $('#majorDetailHelper').text("");
+       $('#fromDateHelper').text("");
+       $('#toDateHelper').text("");
+       $('#scoreHelper').text("");
+   };
+   
+   $(document).ready(function(){
+         $('#addFormBtn').click(function(){
+            console.log("btn");
+            if($('#academicGrade').val() ==""){
+               helperInit();
+               $('#gradeHelper').text("최종학력을 입력하지 않았습니다.");
+               $('#academicGrade').focus();
+               return;
+            }
+            if($('#academicName').val() ==""){
+                  helperInit();
+                  $('#nameHelper').text("학교명을 입력하지 않았습니다.");
+                  $('#academicName').focus();
+                  return;
+               }
+            if($('#academicMajor').val() ==""){
+                  helperInit();
+                  $('#majorHelper').text("전공을 입력하지 않았습니다.");
+                  $('#academicMajor').focus();
+                  return;
+               }
+            if($('#academicMajorDetail').val() ==""){
+                  helperInit();
+                  $('#majorDetailHelper').text("전공명을 입력하지 않았습니다.");
+                  $('#academicMajorDetail').focus();
+                  return;
+               }
+            if($('#academicFromDate').val() ==""){
+                  helperInit();
+                  $('#fromDateHelper').text("재학기간을 입력하지 않았습니다.");
+                  $('#academicFromDate').focus();
+                  return;
+               }
+            if($('#academicToDate').val() ==""){
+                  helperInit();
+                  $('#toDateHelper').text("재학기간을 입력하지 않았습니다.");
+                  $('#academicToDate').focus();
+                  return;
+               }
+            if($('#academicScore').val() ==""){
+                  helperInit();
+                  $('#scoreHelper').text("학점을 입력하지 않았습니다.");
+                  $('#academicScore').focus();
+                  return;
+               }
+            
+            
+            $('#addForm').submit();
+         });
+      });
+</script>
+</head>
+
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+   <!-- SideBar -->
+   <ul td:include="/include/menuSide::navSide" class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
+   </ul>
+
+   <!-- Content Wrapper -->
+   <div id="content-wrapper" class="d-flex flex-column">
+      <div td:include="/include/menuTop::navTop"></div>
+      <!-- Main Content -->
+      <div id="content">
+         
+         <!-- 페이지 내용 -->
+         <div class="container-fluid">
+         
+            <h1>학력 추가</h1>
+            
+            <form method="post" id="addForm" th:action="@{/addMemberAcademic}">
+               <table class="table" border="1">
+                  <tbody>
+                     <!-- <td>회원정보</td> -->
+                     <tr>               
+                        <td>최종학력</td>
+                        <td>
+                           <input type="text" id="academicGrade" name="academicGrade">
+                           <span id="gradeHelper" class="text text-danger"></span>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>학교명</td>
+                        <td>
+                           <input type="text" id="academicName" name="academicName">
+                           <span id="nameHelper" class="text text-danger"></span>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>전공계열</td>
+                        <td>
+                           <input type="text" id="academicMajor" name="academicMajor">
+                           <span id="majorHelper" class="text text-danger"></span>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>전공명</td>
+                        <td>
+                           <input type="text" id="academicMajorDetail" name="academicMajorDetail">
+                           <span id="majorDetailHelper" class="text text-danger"></span>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>재학기간(입학)</td>
+                        <td>
+                           <input type="date" id="academicFromDate" name="academicFromDate">
+                           <span id="fromDateHelper" class="text text-danger"></span>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>재학기간(졸업)</td>
+                        <td>
+                           <input type="date" id="academiToDate" name="academiToDate">
+                           <span id="toDateHelper" class="text text-danger"></span>
+                        </td>   
+                     </tr>
+                     <tr>
+                        <td>학점</td>
+                        <td>
+                           <input type="text" id="academicScore" name="academicScore">
+                           <span id="scoreHelper" class="text text-danger"></span>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </form>
+            
+            <div>
+               <button type="button" id="addFormBtn" class="btn btn-info">추가하기</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+</body>
+</html>

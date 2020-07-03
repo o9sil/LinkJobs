@@ -4,7 +4,9 @@
 
    <!-- 특정 지역 가져오기 -->
    <select id="selectAreaSidoGungu" resultType="com.gdu.linkJobs.vo.AreaAndArea2" parameterType="int">
-      SELECT a1.area_sido AS areaSido, a2.area2_gungu AS area2Gungu
+      SELECT 
+	      a1.area_sido AS areaSido, 
+	      a2.area2_gungu AS area2Gungu
       FROM linkjobs_area2 a2 INNER JOIN linkjobs_area a1 
       WHERE a2.AREA2_no = #{area2_no}
          AND a2.area_no = a1.area_no
@@ -28,5 +30,7 @@
       ON a.area_no=a2.area_no
       WHERE a.area_sido=#{areaSido}
    </select>
+   
+   
 
 </mapper>

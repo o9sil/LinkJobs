@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.linkJobs.service.MemberCertificateService;
+import com.gdu.linkJobs.vo.LoginMember;
 import com.gdu.linkJobs.vo.MemberCertificate;
 
 @Controller
@@ -33,6 +34,8 @@ public class MemberCertificateController {
 		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
+		String memberId=((LoginMember)(session.getAttribute("loginMember"))).getMemberId();
+		memberCertificate.setMemberId(memberId);
 		memberCertificateService.addMemberCertificate(memberCertificate);
 		
 		return "rediect:/member/getMemberCertificateList";

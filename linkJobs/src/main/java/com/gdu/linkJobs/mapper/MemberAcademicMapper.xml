@@ -1,17 +1,95 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.MemberAcademicMapper">
-   <!-- 학력정보 -->
-   <select id="selectMemberAcademic" parameterType="com.gdu.linkJobs.vo.MemberAcademic" resultType="com.gdu.linkJobs.vo.MemberAcademic">
-      SELECT
-         academic_name academicName, 
-         academic_major academicMajor,
-         academic_major_detail academicMajorDetail,
-         academic_grade academicGrade,
-         academic_from_date academicFromDate,
-         academic_to_date academicToDate,
-         academic_score academicScore
-       FROM linkjobs_member_academic
-       WHERE member_id = #{memberId}
-   </select>
- </mapper>
+	<!-- 학력정보(이력서용) -->
+	<select id="selectMemberAcademic"
+		parameterType="com.gdu.linkJobs.vo.MemberAcademic"
+		resultType="com.gdu.linkJobs.vo.MemberAcademic">
+		SELECT
+			academic_name academicName,
+			academic_major academicMajor,
+			academic_major_detail academicMajorDetail,
+			academic_grade academicGrade,
+			academic_from_date academicFromDate,
+			academic_to_date academicToDate,
+			academic_score academicScore
+		FROM linkjobs_member_academic
+		WHERE member_id = #{memberId}
+	</select>
+	
+	<!-- 멤버용 학력정보 -->
+	<select id="selectMemberAcademicList"
+		parameterType="String"
+		resultType="com.gdu.linkJobs.vo.MemberAcademic">
+		SELECT
+			academic_name academicName,
+			academic_major academicMajor,
+			academic_major_detail academicMajorDetail,
+			academic_grade academicGrade,
+			academic_from_date academicFromDate,
+			academic_to_date academicToDate,
+			academic_score academicScore
+		FROM linkjobs_member_academic
+		WHERE member_id = #{memberId}
+	</select>
+	
+	<!-- 학력정보 하나만 -->
+	<select id="selectMemberAcademicOne"
+		parameterType="int"
+		resultType="com.gdu.linkJobs.vo.MemberAcademic">
+		SELECT
+			academic_name academicName,
+			academic_major academicMajor,
+			academic_major_detail academicMajorDetail,
+			academic_grade academicGrade,
+			academic_from_date academicFromDate,
+			academic_to_date academicToDate,
+			academic_score academicScore
+		FROM linkjobs_member_academic
+		WHERE academic_no=#{academicNo}
+	</select>
+
+	<!-- 학력사항 추가 -->
+	<insert id="insertMemberAcademic" parameterType="com.gdu.linkJobs.vo.MemberAcademic">
+		INSERT INTO linkjobs_member_academic(
+				member_id,
+				academic_grade,
+				academic_name,
+				academic_major,
+				academic_major_detail,
+				academic_from_date,
+				academic_to_date,
+				academic_score
+			)
+			VALUES(
+				#{memberId},
+				#{academicGrade},
+				#{academicName},
+				#{academicMajor},
+				#{academicMajorDetail},
+				#{academicFromDate},
+				#{academicToDate},
+				#{academicScore}
+			)
+	</insert>
+	
+	<!-- 학력 수정 -->
+	<update id="updateMemberAcademic" parameterType="com.gdu.linkJobs.vo.MemberAcademic">
+	UPDATE linkjobs_member_academic 
+	SET academic_grade=#{academicGrade},
+		academic_name=#{academicName},
+		academic_major=#{academicMajor},
+		academic_major_detail=#{academicMajorDetail},
+		academic_from_date=#{academicFromDate},
+		academic_to_date=#{academicToDate},
+		academic_score=#{academicScore}
+	FROM academic_no=#{academicNo}
+	</update>
+	
+	<!-- 학력 삭제 -->
+	<delete id="deleteMemberAcademic" parameterType="int">
+		DELETE FROM  linkjobs_member_academic 
+		WHERE academic_no=#{academicNo}
+	</delete>
+	
+</mapper>

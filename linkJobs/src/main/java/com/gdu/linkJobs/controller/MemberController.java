@@ -86,7 +86,7 @@ public class MemberController {
       
       //회원가입 실패(회원이 아님)
       if(loginMemberId == null) {
-         System.out.println(loginMemberId + "<--loginId");
+         System.out.println(loginMember + "<--loginId");
          return "redirect:/loginMember";
       }else {
          System.out.println(loginMemberId + "<--loginId");
