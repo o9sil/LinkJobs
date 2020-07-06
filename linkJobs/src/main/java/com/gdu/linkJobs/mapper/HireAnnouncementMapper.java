@@ -1,12 +1,18 @@
 package com.gdu.linkJobs.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gdu.linkJobs.vo.CpMember;
 import com.gdu.linkJobs.vo.HireAnnouncement;
+import com.gdu.linkJobs.vo.HireAnnouncementAndCpMember;
 
 @Mapper
 public interface HireAnnouncementMapper {
+	
+	//채용공고 리스트 (일반회원)
+	public List<HireAnnouncementAndCpMember> selectHireAnnouncementList(HireAnnouncementAndCpMember hireAnnouncementAndCpMember);
 	
 	//채용공고 수정
 	public int updateHireAnnouncementOne(HireAnnouncement hireAnnouncement);

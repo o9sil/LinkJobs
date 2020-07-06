@@ -20,6 +20,7 @@ import com.gdu.linkJobs.service.JobService;
 import com.gdu.linkJobs.vo.AnnouncementList;
 import com.gdu.linkJobs.vo.CpMember;
 import com.gdu.linkJobs.vo.HireAnnouncement;
+import com.gdu.linkJobs.vo.HireAnnouncementAndCpMember;
 
 @Controller
 public class HireAnnouncementController {
@@ -37,6 +38,18 @@ public class HireAnnouncementController {
 	
 	@Autowired
 	private AnnouncementService announcementService;
+	
+	
+	// 채용공고 리스트(일반회원)
+	@GetMapping("/getAnnouncementList")
+	public String getHireAnnouncementList(Model model, HireAnnouncementAndCpMember hireAnnouncementAndCpMember) {
+	   List<HireAnnouncementAndCpMember> list = hireAnnouncementService.selectHireAnnouncementList(hireAnnouncementAndCpMember);
+	   model.addAttribute("list", list);
+	   return "hireAnnouncement/getAnnouncementList";
+	}
+		    
+	
+	
 	
 	//채용공고 리스트 보기
 	@GetMapping("/getAnnouncementListByCpMember")

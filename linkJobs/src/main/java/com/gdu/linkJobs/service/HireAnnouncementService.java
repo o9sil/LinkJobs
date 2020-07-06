@@ -1,6 +1,7 @@
 package com.gdu.linkJobs.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,7 @@ import com.gdu.linkJobs.mapper.HireAnnouncementMapper;
 import com.gdu.linkJobs.vo.AreaAndArea2;
 import com.gdu.linkJobs.vo.CpMember;
 import com.gdu.linkJobs.vo.HireAnnouncement;
+import com.gdu.linkJobs.vo.HireAnnouncementAndCpMember;
 
 @Service
 public class HireAnnouncementService extends HttpServlet {
@@ -26,6 +28,14 @@ public class HireAnnouncementService extends HttpServlet {
 	public int modifyHireAnnouncementOne(HireAnnouncement hireAnnouncement) {
 		return hireAnnouncementMapper.updateHireAnnouncementOne(hireAnnouncement);
 	}
+	
+	
+	//채용공고 리스트 출력
+	public List<HireAnnouncementAndCpMember> selectHireAnnouncementList(HireAnnouncementAndCpMember hireAnnouncementAndCpMember){
+		List<HireAnnouncementAndCpMember> list = hireAnnouncementMapper.selectHireAnnouncementList(hireAnnouncementAndCpMember);
+		return list;
+	}
+	
 	
 	//기업회원 상세정보 가져오기
 	public Map getCpMemberDetail(String cpMemberId) {

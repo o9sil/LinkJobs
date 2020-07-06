@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>getResume</title>
+<!-- Custom fonts for this template-->
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<!-- <script src="js/sb-admin-2.min.js"></script> -->
+<!-- Custom styles for this template-->
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+<script th:inline="javascript">
+$(document).ready(function(){
+	/*<![CDATA[*/
+
+	$('#scrap').click(function(){
+		if($('#scrap').val()==""){
+
+			let hireAnnouncementNo = $('#hireAnnouncementNo').val();
+			let scrapBoolean = $('#scrap').val();
+			$.ajax({
+				url:/*[[@{/insertScrap}]]*/,
+				type: "POST",
+				data:{'hireAnnouncementNo':hireAnnouncementNo, 'scrapBoolean':scrapBoolean},
+				success: function(data){
+					console.log(data);
+				},
+				error: function(data){
+					console.log('Error:',data);
+				}
+			})
+		} else {
+			let hireAnnouncementNo = $('#hireAnnouncementNo').val();
+			let scrapBoolean = $('#scrap').val();
+			
+			$.ajax({
+				url:/*[[@{/modifyScrap}]]*/,
+				type: "POST",
+				data:{'hireAnnouncementNo':hireAnnouncementNo, 'scrapBoolean':scrapBoolean},
+				success: function(data){
+					console.log(data);
+				},
+				error: function(data){
+					console.log('Error:',data);
+				}
+			})
+		}
+		
+		
+		})
+	}
+	
+		
+	
+	/*]]>*/
+	
+
+</script>
+</head>
+<body>
+   <table border="1">
+      <tr>
+      <td>관심기업</td>
+         <td>기업명</td>
+         <td>공고 제목</td>
+         <td>스크랩</td>
+         <td>마감날짜</td>
+		 <td>비고</td>
+      </tr>
+      <tr th:each="list : ${list}">
+    	 <td><input type="checkbox"></td>
+      	 <td th:text=${list.cpMemberCompany}></td>
+         <td th:text=${list.hireAnnouncementTitle}></td>
+         <td><input type="checkbox" name="scrap" id="scrap" value="N"></td>
+         <td th:text=${list.hireAnnouncementEndDate}></td>
+         <td>
+         	<input type="hidden" th:value="${list.hireAnnouncementNo}" name="hireAnnouncementNo" id="hireAnnouncementNo">
+         	<input type="hidden" th:value="${list.hireAnnouncementNo}" name="hireAnnouncementNo" id="hireAnnouncementNo">
+         </td>
+         <td>
+      </tr>
+   </table>
+</body>
+</html>

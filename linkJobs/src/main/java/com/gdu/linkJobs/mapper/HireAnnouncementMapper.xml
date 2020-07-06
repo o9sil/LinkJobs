@@ -2,54 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.HireAnnouncementMapper">
 	
-	<!-- 채용공고 리스트 출력 -->
-	<select id="selectHireAnnouncementList" parameterType="com.gdu.linkJobs.vo.HireAnnouncement" resultType="com.gdu.linkJobs.vo.HireAnnouncement">
-		SELECT
-			hire_announcement_no AS hireAnnouncementNo,
-			
-		FROM linkjobs_hire_announcement
-		
-	</select>
-	
-	<!-- 채용공고 수정 -->
-	<update id="updateHireAnnouncementOne" parameterType="com.gdu.linkJobs.vo.HireAnnouncement">
-		UPDATE linkjobs_hire_announcement
-		SET
-			hire_announcement_title = #{hireAnnouncementTitle},
-			hire_announcement_recruitment_field = #{hireAnnouncementRecruitmentField},
-			hire_announcement_career = #{hireAnnouncementCareer},
-			hire_announcement_department = #{hireAnnouncementDepartment},
-			hire_announcement_jobgrade_jobposition = #{hireAnnouncementJobgradeJobposition},
-			hire_announcement_preferential_conditions = #{hireAnnouncementPreferentialConditions},
-			hire_announcement_education = #{hireAnnouncementEducation},
-			hire_announcement_salary = #{hireAnnouncementSalary},
-			hire_announcement_working_form_name = #{hireAnnouncementWorkingFormName},
-			hire_announcement_main_job = #{hireAnnouncementMainJob},
-			hire_announcement_end_date = #{hireAnnouncementEndDate},
-			hire_announcement_contents = #{hireAnnouncementContents}
-		WHERE hire_announcement_no = #{hireAnnouncementNo} 
-		AND cpmember_id = #{cpmemberId}
-	</update>
+<!-- 채용공고 리스트 출력 -->
+<select id="selectHireAnnouncementList" parameterType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMember" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMember">
+	SELECT
+   		ha.hire_announcement_no AS hireAnnouncementNo,
+      	ha.hire_announcement_title AS hireAnnouncementTitle,
+      	ha.cpmember_id AS cpmemberId,
+      	ha.hire_announcement_end_date AS hireAnnouncementEndDate,
+		cp.cpmember_company AS cpMemberCompany  
+	FROM linkjobs_hire_announcement AS ha INNER JOIN linkjobs_cpmember AS cp
+   	ON ha.cpmember_id = cp.cpmember_id
+ 
+</select>
 	
 	<!-- 채용공고 상세보기 -->
-	<select id="selectHireAnnouncementDetail" parameterType="int" resultType="com.gdu.linkJobs.vo.HireAnnouncement">
-		SELECT 
-			hire_announcement_no AS hireAnnouncementNo,
-			cpmember_id AS cpmemberId,
-			hire_announcement_title AS hireAnnouncementTitle,
-			hire_announcement_manager AS hireAnnouncementManager,
-			hire_announcement_recruitment_field AS hireAnnouncementRecruitmentField,
-			hire_announcement_career AS hireAnnouncementCareer,
-			hire_announcement_department AS hireAnnouncementDepartment,
-			hire_announcement_jobgrade_jobposition AS hireAnnouncementJobgradeJobposition,
-			hire_announcement_preferential_conditions AS hireAnnouncementPreferentialConditions,
-			hire_announcement_education AS hireAnnouncementEducation,
-			hire_announcement_salary AS hireAnnouncementSalary,
-			hire_announcement_working_form_name AS hireAnnouncementWorkingFormName,
-			hire_announcement_main_job AS hireAnnouncementMainJob,
-			hire_announcement_start_date AS hireAnnouncementStartDate,
-			hire_announcement_end_date AS hireAnnouncementEndDate,
+	<select id="selectHireAnnouncementDetail" parameterType="String" resultType="com.gdu.linkJobs.vo.HireAnnouncement">
+		SELECT
+			hire_announcement_no AS hireAnnouncementNo
+			cpmember_id AS cpmemberId
+			hire_announcement_title AS hireAnnouncementTitle
+			hire_announcement_recruitment_field AS hireAnnouncementRecuitmentField
+			hire_announcement_career AS hireAnnouncementCareer
+			hire_announcement_manager AS hireAnnouncementManager
 			hire_announcement_contents AS hireAnnouncementContents
+			hire_announcement_education AS hireAnnouncementEducation
+			hire_announcement_jobgrade AS hireAnnouncementJobgrade
+			hire_announcement_jobposition AS hireAnnouncementJobPosition
+			hire_announcement_preferential_conditions AS hireAnnouncementPreferentialConditions
+			hire_announcement_salary AS hireAnnouncementSalary
+			hire_announcement_working_form_name AS hireAnnouncementWorkingFormName
+			hire_announcement_start_date AS hireAnnouncementStartDate
+			hire_announcement_end_date AS hireAnnouncementEndDate
 		FROM linkjobs_hire_announcement
 		WHERE hire_announcement_no = #{hireAnnouncementNo}
 	</select>
@@ -61,35 +44,33 @@
 		INSERT INTO linkjobs_hire_announcement(
 			cpmember_id,
 			hire_announcement_title,
-			hire_announcement_manager,			
 			hire_announcement_recruitment_field,
 			hire_announcement_career,
-			hire_announcement_department,
-			hire_announcement_jobgrade_jobposition,
-			hire_announcement_preferential_conditions,
+			hire_announcement_manager,
+			hire_announcement_contents,
 			hire_announcement_education,
+			hire_announcement_jobgrade,
+			hire_announcement_jobposition,
+			hire_announcement_preferential_conditions,
 			hire_announcement_salary,
 			hire_announcement_working_form_name,
-			hire_announcement_main_job,
 			hire_announcement_start_date,
-			hire_announcement_end_date,			
-			hire_announcement_contents			
+			hire_announcement_end_date
 		) VALUES (
 			#{cpmemberId},
 			#{hireAnnouncementTitle},
-			#{hireAnnouncementManager},			
-			#{hireAnnouncementRecruitmentField},
+			#{hireAnnouncementRecuitmentField},
 			#{hireAnnouncementCareer},
-			#{hireAnnouncementDepartment},
-			#{hireAnnouncementJobgradeJobposition},
-			#{hireAnnouncementPreferentialConditions},
+			#{hireAnnouncementManager},
+			#{hireAnnouncementContents},
 			#{hireAnnouncementEducation},
+			#{hireAnnouncementJobgrade},
+			#{hireAnnouncementJobPosition},
+			#{hireAnnouncementPreferentialConditions},
 			#{hireAnnouncementSalary},
 			#{hireAnnouncementWorkingFormName},
-			#{hireAnnouncementMainJob},
 			NOW(),
-			#{hireAnnouncementEndDate},
-			#{hireAnnouncementContents}	
+			#{hireAnnouncementEndDate}
 		)
 	</insert>
 </mapper>	

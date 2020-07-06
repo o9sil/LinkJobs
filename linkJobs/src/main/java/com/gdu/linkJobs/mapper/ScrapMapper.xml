@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.linkJobs.mapper.ScrapMapper">
+
+
+
+
+
+
+<!-- 스크랩 추가 -->
+<insert id="insertScrap" parameterType="com.gdu.linkJobs.vo.Scrap">
+INSERT INTO linkjobs_scrap 
+			(scrap_boolean, member_id, hire_announcement_no, scrap_date)
+	SELECT 
+			scrap_boolean AS scrapBoolean, 
+			member_id AS memberId, 
+			hire_announcement_no AS hireAnnouncementNo, 
+			scrap_date AS scrapDate
+	FROM dual
+	WHERE NOT EXISTS 
+		(SELECT scrap_no 
+		FROM linkjobs_scrap 
+		where member_id=#{memberId} 
+		AND hire_announcement_no=#{hireAnnouncementNo})
+
+</insert>
+
+
+<!-- 스크랩 추가,취소-->
+<update id="updateScrap" parameterType="com.gdu.linkJobs.vo.Scrap">
+
+UPDATE linkjobs_scrap SET 
+	scrap_boolean = #{scrapBoolean},
+	scrap_date = NOW()
+WHERE member_id = #{memberId} 
+	  AND hire_announcement_no = #{hireAnnouncementNo};
+
+</update>
+</mapper>
