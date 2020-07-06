@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>modifyMember</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Custom fonts for this template-->
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Custom scripts for all pages-->
+<!-- <script src="js/sb-admin-2.min.js"></script> -->
+<!-- Custom styles for this template-->
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+<script th:inline="javascript">
+   
+   
+   let helperInit = function() {
+         $('#idHelper').text("");
+         $('#pwHelper').text("");
+         $('#nameHelper').text("");
+         $('#detailAddrHelper').text("");
+         $('#phoneHelper').text("");
+         $('#emailHelper').text("");
+         $('#birthHelper').text("");
+         $('#genderHelper').text("");
+         $('#areaCodeHelper').text("");
+         $('#areaCode2Helper').text("");
+      }
+   
+   
+   
+   
+   
+   $(document).ready(function () {
+      
+      //지역
+      
+      /*<![CDATA[*/
+      $('#areaCode').change(function () {
+            let areaSido=$(this).val();
+            console.log("areaSido : "+areaSido);
+            $('#area2Code').empty();
+             $.ajax({
+               url   :/*[[@{/selectArea2}]]*/, 
+                 type: "POST",
+                data:{'areaSido':areaSido},
+                success: function (data) {
+                   console.log(data);                   
+               $.each(data, function (index,item) {
+                  
+                  console.log(item);
+                  
+                  var addContent = $("<option th:value='"+item.area2Gungu+"' th:text='"+item.area2Gungu+"'>"+item.area2Gungu+"</option>");
+                    $("#area2Code").append(addContent);
+
+                  
+               });
+            }
+             });
+     });   
+      /*]]>*/
+      
+      
+      $('#myFormBtn').click(function() {
+         console.log("click");
+         
+       if($('#memberId').val().length == ""){
+             helperInit(); //값이 다시 초기화 됨
+              $('#idHelper').text("ID를 중복체크 해주세요");
+              $('#memberId').focus();
+         }else if($('#memberPw').val() != $('#memberPw2').val()) {
+            helperInit();
+            $('#pwHelper').text("비밀번호가 일치하지 않습니다.");
+            $('#memberPw').focus();
+         }else if($('#memberName').val() == "") {
+            helperInit();
+            $('#nameHelper').text("이름을 입력 하세요");
+            $('#memberName').focus();
+         } else if($('#areaCode').val() == "") {
+             helperInit();
+             $('#areaCodeHelper').text("시/도를 선택하세요"); 
+             $('#areaCode').focus();
+          } else if($('#area2Code').val() == "") {
+              helperInit();
+              $('#area2CodeHelper').text("군/구를 선택 하세요"); 
+              $('#area2Code').focus();
+           } else if($('#memberDetailedAddress').val() == "") {
+            helperInit();
+            $('#addrHelper').text("상세 주소를 입력 하세요");
+            $('#memberDetailedAddress').focus();
+         } else if($('#memberPhone').val() == "") {
+            helperInit();
+            $('#phoneHelper').text("전화번호를 입력 하세요"); 
+            $('#memberPhone').focus();
+         } else if($('#memberEmail').val() == "") {
+            helperInit();
+            $('#emailHelper').text("이메일을 입력 하세요");
+            $('#memberEmail').focus();
+         } else if($('#memberBirthdate').val() == "") {
+            helperInit();
+            $('#birthHelper').text("생년월일을 입력 하세요");
+            $('#memberBirthdate').focus();
+         } else if($('#memberGender').val() == "") {
+            helperInit();
+            $('#genderHelper').text("성별을 선택하세요");
+            $('#memberGender').focus();
+         } else{
+            $('#myForm').submit();            
+         }
+         
+      });
+   });
+   
+</script>
+</head>
+<body id="page-top">
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<!-- SideBar -->
+		<ul th:include="/include/menuSide::navSide"
+			class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+		</ul>
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div th:include="/include/menuTop::navTop"></div>
+			<!-- Main Content -->
+			<div id="content">
+				
+				<!-- 페이지 내용 -->
+				<div class="container-fluid">
+					<h1 align="center">회원정보 수정</h1>
+					<br>
+					
+					<!-- 회원가입 폼 -->
+					<form th:action="@{/modifyMember}" method="post" id="myForm">
+						<div class="row">
+							<div class="col-sm-3">아이디 :</div>
+							<div class="col-sm-9">
+								<input type="text" id="memberId" name="memberId"
+									class="form-control" th:value="${m.memberId}"
+									readonly="readonly"> <span id="idHelper"></span>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">이름 :</div>
+							<div class="col-sm-9">
+								<input type="text" name="memberName" id="memberName"  th:value="${m.memberName}"
+									class="form-control"> <span id="nameHelper"></span>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">주소 :</div>
+							<div class="col-sm-4">
+								<select name="areaSido" id="areaCode" class="form-control">
+									<option th:text="${m.areaSido}" th:value="${m.areaSido}"></option>
+									<option th:each="areaList : ${areaList}"
+										th:value="${areaList.areaSido}" th:text="${areaList.areaSido}"></option>
+								</select> <span id="areaCodeHelper"></span>
+							</div>
+							<div class="col-sm-5">
+								<select id="area2Code" class="form-control" name="area2Gungu">
+									<option th:text="${m.area2Gungu}" th:value="${m.area2Gungu}">군 / 구</option>
+
+								</select> <span id="area2CodeHelper"></span>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">상세주소 :</div>
+							<div class="col-sm-9">
+								<input type="text" name="memberDetailedAddress"
+									id="memberDetailedAddress" class="form-control" th:value="${m.memberDetailedAddress}"> <span
+									id="detailAddrHelper"></span>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">전화번호 :</div>
+							<div class="col-sm-9">
+								<input type="text" name="memberPhone" id="memberPhone"  th:value="${m.memberPhone}"
+									class="form-control"> <span id="phoneHelper"></span>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">이메일 :</div>
+							<div class="col-sm-9">
+								<input type="text" name="memberEmail" id="memberEmail"  th:value="${m.memberEmail}"
+									class="form-control"> <span id="emailHelper"></span>
+							</div>
+
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">생년월일 :</div>
+							<div class="col-sm-9">
+								<input type="date" name="memberBirthdate" id="memberBirthdate"  th:value="${m.memberBirthdate}"
+									class="form-control"> <span id="birthHelper"></span>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">성별 :</div>
+							<div class="col-sm-9">
+								<th:block th:if="${m.memberGender == '남'}">
+									<input type="radio" value="남" id="memberGender" name="memberGender" checked="checked">&nbsp;&nbsp;&nbsp;&nbsp;남&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+									<input type="radio" value="여" id="memberGender" name="memberGender">&nbsp;&nbsp;&nbsp;&nbsp;여
+								</th:block>
+								<th:block th:if="${m.memberGender == '여'}">
+									<input type="radio" value="남" id="memberGender" name="memberGender" >&nbsp;&nbsp;&nbsp;&nbsp;남&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+									<input type="radio" value="여" id="memberGender" name="memberGender" checked="checked">&nbsp;&nbsp;&nbsp;&nbsp;여
+								</th:block>
+								<span id="genderHelper"></span>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">비밀번호 :</div>
+							<div class="col-sm-9">
+								<input type="password" name="memberPw" id="memberPw"
+									class="form-control"> 
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">비밀번호 확인:</div>
+							<div class="col-sm-9">
+								<input type="password" id="memberPw2"
+									class="form-control"> <span id="pwHelper"></span>
+							</div>
+						</div>
+						<div align="right">
+							<button id="myFormBtn" type="button"
+								class="btn btn-info" >수정하기</button>
+						</div>
+					</form>
+				</div>
+				<hr>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -31,4 +31,9 @@ public class MemberService {
 	public String loginMember(LoginMember loginMember) {
 		return memberMapper.loginMember(loginMember);
 	}
+	
+	//회원정보수정
+	public int modifyMember(Member member) {
+		return memberMapper.updateMember(member);
+	}
 }

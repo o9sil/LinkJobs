@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>getMemberDetail</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script
+   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Custom fonts for this template-->
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}"
+   rel="stylesheet" type="text/css">
+<link
+   href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+   rel="stylesheet">
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Custom scripts for all pages-->
+<!-- <script src="js/sb-admin-2.min.js"></script> -->
+<!-- Custom styles for this template-->
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+<script th:inline="javascript">
+   
+   
+   let helperInit = function() {
+         $('#idHelper').text("");
+         $('#pwHelper').text("");
+         $('#nameHelper').text("");
+         $('#detailAddrHelper').text("");
+         $('#phoneHelper').text("");
+         $('#emailHelper').text("");
+         $('#birthHelper').text("");
+         $('#genderHelper').text("");
+         $('#areaCodeHelper').text("");
+         $('#areaCode2Helper').text("");
+      }
+   
+   
+   
+   
+   
+   $(document).ready(function () {
+      
+      //지역
+      
+      /*<![CDATA[*/
+      $('#areaCode').change(function () {
+            let areaSido=$(this).val();
+            console.log("areaSido : "+areaSido);
+            $('#area2Code').empty();
+             $.ajax({
+               url   :/*[[@{/selectArea2}]]*/, 
+                 type: "POST",
+                data:{'areaSido':areaSido},
+                success: function (data) {
+                   console.log(data);                   
+               $.each(data, function (index,item) {
+                  
+                  console.log(item);
+                  
+                  var addContent = $("<option th:value='"+item.area2Gungu+"' th:text='"+item.area2Gungu+"'>"+item.area2Gungu+"</option>");
+                    $("#area2Code").append(addContent);
+
+                  
+               });
+            }
+             });
+     });   
+      /*]]>*/
+      
+      
+      $('#myFormBtn').click(function() {
+         
+         
+       if($('#memberId').val().length == ""){
+             helperInit(); //값이 다시 초기화 됨
+              $('#idHelper').text("ID를 중복체크 해주세요");
+              $('#memberId').focus();
+         }else if($('#memberPw').val().length < 4){
+           helperInit(); //값이 다시 초기화 됨
+            $('#pwHelper').text("PW는 4자 이상");
+            $('#memberPw').focus();
+         } else if($('#memberPw').val() != $('#memberPw2').val()) {
+            helperInit();
+            $('#pwHelper').text("PW를 확인 하세요");
+            $('#memberPw').focus();
+         } else if($('#memberName').val() == "") {
+            helperInit();
+            $('#nameHelper').text("이름을 입력 하세요");
+            $('#memberName').focus();
+         } else if($('#areaCode').val() == "") {
+             helperInit();
+             $('#areaCodeHelper').text("시/도를 선택하세요"); 
+             $('#areaCode').focus();
+          } else if($('#area2Code').val() == "") {
+              helperInit();
+              $('#area2CodeHelper').text("군/구를 선택 하세요"); 
+              $('#area2Code').focus();
+           } else if($('#memberDetailedAddress').val() == "") {
+            helperInit();
+            $('#addrHelper').text("상세 주소를 입력 하세요");
+            $('#memberDetailedAddress').focus();
+         } else if($('#memberPhone').val() == "") {
+            helperInit();
+            $('#phoneHelper').text("전화번호를 입력 하세요"); 
+            $('#memberPhone').focus();
+         } else if($('#memberEmail').val() == "") {
+            helperInit();
+            $('#emailHelper').text("이메일을 입력 하세요");
+            $('#memberEmail').focus();
+         } else if($('#memberBirthdate').val() == "") {
+            helperInit();
+            $('#birthHelper').text("생년월일을 입력 하세요");
+            $('#memberBirthdate').focus();
+         } else if($('#memberGender').val() == "") {
+            helperInit();
+            $('#genderHelper').text("성별을 선택하세요");
+            $('#memberGender').focus();
+         } else{
+            $('#myForm').submit();            
+         }
+         
+      });
+   });
+   
+</script>
+</head>
+<body id="page-top">
+   <!-- Page Wrapper -->
+   <div id="wrapper">
+      <!-- SideBar -->
+      <ul th:include="/include/menuSide::navSide"
+         class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
+         id="accordionSidebar">
+      </ul>
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+         <div th:include="/include/menuTop::navTop"></div>
+         <!-- Main Content -->
+         <div id="content">
+
+            <!-- 페이지 내용 -->
+            <div class="container-fluid">
+               <h1 align="center">회원정보</h1>
+                  <br>
+
+               <div class="row">
+               <table class="table col-sm-10">
+                  <tr >
+                     <td>아이디 :</td>
+                     <td><input type="text" id="memberId" name="memberId"
+                                 class="form-control" th:value="${m.memberId}"
+                                 readonly="readonly"> 
+                              <span id="idHelper"></span></td>
+                  </tr>
+                  <tr>
+                     <td>이름 :</td>
+                     <td><input type="text" name="memberName" id="memberName"
+                              class="form-control" th:value="${m.memberName}"
+                              readonly="readonly"> 
+                           <span id="nameHelper"></span></td>
+                  </tr>
+                  <tr>
+                     <td>주소 :</td>
+                     <td><input type="text"  th:value="${m.areaSido +m.area2Gungu}" readonly="readonly"  class="form-control"></td>
+                  </tr>
+                  <tr>
+                     <td>상세주소 :</td>
+                     <td><input type="text" name="memberDetailedAddress" readonly="readonly"
+                           id="memberDetailedAddress" class="form-control" th:value="${m.memberDetailedAddress}"> <span
+                           id="detailAddrHelper"></span></td>
+                  </tr>
+                  <tr>
+                     <td>전화번호 :</td>
+                     <td> <input type="text" name="memberPhone" id="memberPhone" readonly="readonly" th:value="${m.memberPhone}"
+                           class="form-control"> <span id="phoneHelper"></span></td>
+                  </tr>
+               </table>
+                 
+                 
+                  
+                  <div class="col-sm-2">
+                     <div>
+                        <img th:src="@{/img/default.jpg}" alt="My Image" height="250px">
+                     </div>
+                     <br>
+                     <div align="center">
+                        <a th:href="@{/modifyMemberPic}" class="btn btn-info">사진 수정</a>
+                     </div>
+                  </div>
+               </div>
+               
+                  <br>
+                  <div class="row">
+                     <div class="col-sm-3">이메일 :</div>
+                     <div class="col-sm-9">
+                        <input type="text" name="memberEmail" id="memberEmail" readonly="readonly" th:value="${m.memberEmail}"
+                           class="form-control"> <span id="emailHelper"></span>
+                     </div>
+
+                  </div>
+                  <br>
+                  <div class="row">
+                     <div class="col-sm-3">생년월일 :</div>
+                     <div class="col-sm-9">
+                        <input type="date" name="memberBirthdate" id="memberBirthdate" readonly="readonly" th:value="${m.memberBirthdate}"
+                           class="form-control"> <span id="birthHelper"></span>
+                     </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                     <div class="col-sm-3">성별 :</div>
+                     <div class="col-sm-9">
+                        <th:block th:if="${m.memberGender == '남'}">
+                           <input type="radio" value="남" id="memberGender" name="memberGender" checked onclick="return(false);">&nbsp;&nbsp;&nbsp;&nbsp;남&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                           <input type="radio" value="여" id="memberGender" name="memberGender"  onclick="return(false);">&nbsp;&nbsp;&nbsp;&nbsp;여
+                        </th:block>
+                        <th:block th:if="${m.memberGender == '여'}">
+                           <input type="radio" value="남" id="memberGender" name="memberGender" onclick="return(false);">&nbsp;&nbsp;&nbsp;&nbsp;남&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                           <input type="radio" value="여" id="memberGender" name="memberGender"  checked onclick="return(false);">&nbsp;&nbsp;&nbsp;&nbsp;여
+                        </th:block>
+                        <span id="genderHelper"></span>
+                     </div>
+                  </div>
+                  <br>
+                  <div align="right">
+                     <a th:href="@{/modifyMember}" id="myFormBtn" type="button"
+                        class="btn btn-info" >수정하기</a>
+                  </div>
+            </div>
+            <hr>
+         </div>
+      </div>
+   </div>
+</body>
+
+</html>

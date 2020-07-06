@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.MemberMapper">
+   <!-- 회원정보 수정 -->
+   <update id="updateMember" parameterType="com.gdu.linkJobs.vo.Member">
+	UPDATE linkjobs_member
+	SET
+		member_id = #{memberId},
+		member_name = #{memberName},
+		area_sido = #{areaSido},
+		area2_gungu= #{area2Gungu},
+		member_detailed_address = #{memberDetailedAddress},
+		member_phone = #{memberPhone},
+		member_email = #{memberEmail},
+		member_birthdate = #{memberBirthdate},
+		member_gender= #{memberGender}
+	WHERE member_id = #{memberId} 
+		AND member_pw = PASSWORD(#{memberPw})
+   </update>
+   
    <!-- 회원가입 -->
    <insert id="insertMember" parameterType="com.gdu.linkJobs.vo.Member">
       INSERT INTO linkjobs_member(
@@ -34,13 +51,15 @@
 	<!-- 이력서 회원정보 출력 -->
 	<select id="selectMemberOne" parameterType="String" resultType="com.gdu.linkJobs.vo.Member">
 		SELECT 
+			member_id memberId,
+			member_pw memberPw,
 			member_name memberName,
+			area_sido areaSido,
+			area2_gungu area2Gungu,
 			member_birthdate memberBirthdate,
 			member_gender memberGender,
 			member_email memberEmail,
 			member_phone memberPhone,
-			area_sido areaSido,
-			area2_gungu area2Gungu,
 			member_detailed_address memberDetailedAddress
 		FROM linkjobs_member
 		WHERE member_id = #{memberId}
