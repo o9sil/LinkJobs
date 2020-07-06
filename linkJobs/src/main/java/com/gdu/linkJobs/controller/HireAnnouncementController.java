@@ -86,10 +86,19 @@ public class HireAnnouncementController {
 			return "redirect:/";
 		}
 		
-		System.out.println("채용공고 등록 여부확인");
+		String loginCpMemberId = (String) session.getAttribute("loginCpMember");
+		
+//		System.out.println("채용공고 등록 여부확인");
+//		
+//		System.out.println(hireAnnouncement);
+//		System.out.println(cpMember);
+//		System.out.println(address);
+		
+		hireAnnouncement.setCpmemberId(loginCpMemberId);
+		hireAnnouncement.setHireAnnouncementManager(cpMember.getCpMemberManager());
 		
 		hireAnnouncementService.addHireAnnouncement(hireAnnouncement);
-		cpMemberService.modifyCpMemberDetail(cpMember, areaSido, areaGungu);
+		
 		return "redirect:/";
 	}
 }

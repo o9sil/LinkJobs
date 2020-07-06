@@ -56,7 +56,7 @@
 					<div class="row">
 						<div class="col-xl-8 col-lg-7">
 						
-						<form class="user" id="alterCpMemberDetailForm" method="post" th:action="@{/alterCpMemberDetail}">
+						<form class="user" id="cpMemberAnnouncementForm" method="post" th:action="@{/recordAnnouncement}">
 			             	<div class="card shadow mb-4">
 				               
 				                <!-- 공고 제목 -->
@@ -85,7 +85,7 @@
 												<h5 class="m-0 font-weight-bold">담당자 성함</h5>	                  							
 	                  						</div>
 	                  						<div class="col-xl-10">			                  				
-												<input type="text" class="form-control" name="cpMemberManager" id="cpMemberManager" placeholder="담당자 이름을 입력하세요." th:value="${cpMember.cpMemberManager}">
+												<input type="text" class="form-control" name="cpMemberManager" id="cpMemberManager" placeholder="담당자 이름을 입력하세요." th:value="${cpMember.cpMemberManager}" readonly="readonly">
 												<span id="cpMemberManagerSpan" style="color: red; margin: auto;"></span>
 											</div>
 	                  					</div>
@@ -94,7 +94,7 @@
 												<h5 class="m-0 font-weight-bold">휴대폰</h5>	                  							
 	                  						</div>
 	                  						<div class="col-xl-10">			                  				
-												<input type="text" class="form-control" name="cpMemberPhonenum" id="cpMemberPhonenum" placeholder="담당자 전화번호를 입력하세요." th:value="${cpMember.cpMemberPhonenum}">
+												<input type="text" class="form-control" name="cpMemberPhonenum" id="cpMemberPhonenum" placeholder="담당자 전화번호를 입력하세요." th:value="${cpMember.cpMemberPhonenum}" readonly="readonly">
 	                    						<span id="cpMemberPhonenumSpan" style="color: red; margin: auto;"></span>
 											</div>
 	                  					</div>
@@ -103,7 +103,7 @@
 												<h5 class="m-0 font-weight-bold">이메일</h5>	                  							
 	                  						</div>
 	                  						<div class="col-xl-10">			                  				
-												<input type="text" class="form-control" name="cpMemberEmail" id="cpMemberEmail" placeholder="이메일을 입력하세요." th:value="${cpMember.cpMemberEmail}">
+												<input type="text" class="form-control" name="cpMemberEmail" id="cpMemberEmail" placeholder="이메일을 입력하세요." th:value="${cpMember.cpMemberEmail}" readonly="readonly">
 	                    						<span id="cpMemberEmailSpan" style="color: red; margin: auto;"></span>
 											</div>
 	                  					</div>
@@ -112,18 +112,14 @@
 												<h5 class="m-0 font-weight-bold">업종</h5>	                  							
 	                  						</div>
 	                  						<div class="col-xl-10">			                  				
-												<select name="cpMemberIndustryNo" class="custom-select">
-		                    						<option value="0">- 산업이름 -</option>		                    							                    								                    						
-		                    						<th:block th:each="industry : ${industryList}">
-		                    							<th:block th:if="${industry.industryNo == cpMember.cpMemberIndustryNo}">
-		                    								<option th:value="${industry.industryNo}" th:text="${industry.industryCategory}" selected="selected"></option>
-		                    							</th:block>
-		                    							<th:block th:if="${industry.industryNo != cpMember.cpMemberIndustryNo}">
-		                    								<option th:value="${industry.industryNo}" th:text="${industry.industryCategory}"></option>
-		                    							</th:block>
-		                    							
-		                    						</th:block>
-		                    					</select>
+														                    								                    							                    								                    						
+	                    						<th:block th:each="industry : ${industryList}">
+	                    							<th:block th:if="${industry.industryNo == cpMember.cpMemberIndustryNo}">
+	                    								<input type="hidden" class="form-control" name="cpMemberIndustryNo" th:value="${industry.industryNo}" readonly="readonly">
+	                    								<input type="text" class="form-control" name="cpMemberIndustryCategory" th:value="${industry.industryCategory}" readonly="readonly">		                    					
+	                    							</th:block>		                    							
+	                    						</th:block>
+		                    					
 											</div>
 		                  				</div>
 	                  					<div class="form-group row">
@@ -176,15 +172,17 @@
 	                  						</div>
 	                  						<div class="col-xl-10">			                  				
 												<input type="text" class="form-control" name="hireAnnouncementRecuitmentField" id="hireAnnouncementRecuitmentField" placeholder="예) R&D, 경영지원">
+												<span id="hireAnnouncementRecuitmentFieldSpan" style="color: red; margin: auto;"></span>
 											</div>
 	                  					</div>
 	                  					<div class="form-group row">
 	                  						<div class="col-xl-2">	
-												<h5 class="m-0 font-weight-bold">경력여부</h5>	                  							
+												<h5 class="m-0 font-weight-bold">경력여부</h5>
+												<span id="hireAnnouncementRecuitmentFieldSpan" style="color: red; margin: auto;"></span>	                  							
 	                  						</div>
 	                  						<div class="col-xl-10">
 		                  						<div class="custom-control custom-radio custom-control-inline">
-													<input type="radio" class="custom-control-input" id="hireAnnouncementCareerRadio1" name="hireAnnouncementCareer" value="신입">
+													<input type="radio" class="custom-control-input" id="hireAnnouncementCareerRadio1" name="hireAnnouncementCareer" value="신입" checked="checked">
 												    <label class="custom-control-label" for="hireAnnouncementCareerRadio1">신입</label>
 												</div>
 												<div class="custom-control custom-radio custom-control-inline">
@@ -203,8 +201,8 @@
 												<h5 class="m-0 font-weight-bold">근무부서</h5>	                  							
 	                  						</div>
 	                  						<div class="col-xl-10">			                  				
-												<input type="text" class="form-control" name="hireAnnouncementJobPosition" id="hireAnnouncementJobPosition" placeholder="근무하게 될 부서 또는 근무지를 입력해주세요.">
-	                    						<span id="hireAnnouncementJobPositionSpan" style="color: red; margin: auto;"></span>
+												<input type="text" class="form-control" name="hireAnnouncementDepartment" id="hireAnnouncementDepartment" placeholder="근무하게 될 부서 또는 근무지를 입력해주세요.">
+	                    						<span id="hireAnnouncementDepartmentSpan" style="color: red; margin: auto;"></span>
 											</div>
 	                  					</div>
 	                  					<div class="form-group row">
@@ -212,7 +210,174 @@
 												<h5 class="m-0 font-weight-bold">직급/직책</h5>	                  							
 	                  						</div>
 	                  						<div class="col-xl-10">			                  				
-												<input type="text" class="form-control" name="hireAnnouncementJobGradeJobPosition" id="hireAnnouncementJobGradeJobPosition">
+												<input type="text" class="form-control" name="hireAnnouncementJobgradeJobposition" id="hireAnnouncementJobgradeJobposition">
+												<span id="hireAnnouncementJobgradeJobpositionSpan" style="color: red; margin: auto;"></span>
+												
+												<table class="table table-bordered dataTable">
+													<tr>
+														<td style="width: 80px;">직급</td>
+														<td>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition1">																
+																<label class="custom-control-label" for="jobgradeJobposition1">연구원</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition2">																
+																<label class="custom-control-label" for="jobgradeJobposition2">주임연구원</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition3">																
+																<label class="custom-control-label" for="jobgradeJobposition3">선임연구원</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition4">																
+																<label class="custom-control-label" for="jobgradeJobposition4">책임연구원</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition5">																
+																<label class="custom-control-label" for="jobgradeJobposition5">수석연구원</label>
+															</div>
+															
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition6">																
+																<label class="custom-control-label" for="jobgradeJobposition6">연구소장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition7">																
+																<label class="custom-control-label" for="jobgradeJobposition7">사원</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition8">																
+																<label class="custom-control-label" for="jobgradeJobposition8">주임</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition9">																
+																<label class="custom-control-label" for="jobgradeJobposition9">계장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition10">																
+																<label class="custom-control-label" for="jobgradeJobposition10">대리</label>
+															</div>
+															
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition11">																
+																<label class="custom-control-label" for="jobgradeJobposition11">과장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition12">																
+																<label class="custom-control-label" for="jobgradeJobposition12">차장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition13">																
+																<label class="custom-control-label" for="jobgradeJobposition13">부장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition14">																
+																<label class="custom-control-label" for="jobgradeJobposition14">감사</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition15">																
+																<label class="custom-control-label" for="jobgradeJobposition15">이사</label>
+															</div>
+															
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition16">																
+																<label class="custom-control-label" for="jobgradeJobposition16">상무</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition17">																
+																<label class="custom-control-label" for="jobgradeJobposition17">전무</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition18">																
+																<label class="custom-control-label" for="jobgradeJobposition18">부사장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition19">																
+																<label class="custom-control-label" for="jobgradeJobposition19">임원</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition20">																
+																<label class="custom-control-label" for="jobgradeJobposition20">사장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition21">																
+																<label class="custom-control-label" for="jobgradeJobposition21">면접 후 결정</label>
+															</div>
+															
+														
+														
+														</td>
+													</tr>
+													<tr>
+														<td>직책</td>
+														<td>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition22">																
+																<label class="custom-control-label" for="jobgradeJobposition22">팀원</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition23">																
+																<label class="custom-control-label" for="jobgradeJobposition23">팀장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition24">																
+																<label class="custom-control-label" for="jobgradeJobposition24">실장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition25">																
+																<label class="custom-control-label" for="jobgradeJobposition25">총무</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition26">																
+																<label class="custom-control-label" for="jobgradeJobposition26">지점장</label>
+															</div>
+															
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition27">																
+																<label class="custom-control-label" for="jobgradeJobposition27">지사장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition28">																
+																<label class="custom-control-label" for="jobgradeJobposition28">파트장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition29">																
+																<label class="custom-control-label" for="jobgradeJobposition29">그룹장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition30">																
+																<label class="custom-control-label" for="jobgradeJobposition30">센터장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition31">																
+																<label class="custom-control-label" for="jobgradeJobposition31">매니저</label>
+															</div>
+															
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition32">																
+																<label class="custom-control-label" for="jobgradeJobposition32">본부장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition33">																
+																<label class="custom-control-label" for="jobgradeJobposition33">사업부장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition34">																
+																<label class="custom-control-label" for="jobgradeJobposition34">원장</label>
+															</div>
+															<div class="custom-control custom-checkbox" style="display: inline-block; width: 120px;">
+																<input type="checkbox" class="custom-control-input" name="jobgradeJobposition" id="jobgradeJobposition35">																
+																<label class="custom-control-label" for="jobgradeJobposition35">국장</label>
+															</div>
+														
+														</td>
+													</tr>
+												</table>
+												
+												
+												
+												
 	                    						<span id="hireAnnouncementJobGradeJobPositionSpan" style="color: red; margin: auto;"></span>
 											</div>
 	                  					</div>
@@ -246,12 +411,12 @@
                                        </div>
                                        <div class="col-xl-10">   
                                           <select name="hireAnnouncementEducation" id="hireAnnouncementEducation" class="custom-select">                                          
-                                            <option value="0">학력무관</option>
-                                            <option value="1">고등학교졸업이상</option>
-                                            <option value="2">대학졸업(2,3년)이상</option>
-                                            <option value="3">대학졸업(4년)이상</option>
-                                            <option value="4">석사졸업이상</option>
-                                            <option value="5">박사졸업</option>
+                                            <option value="1">학력무관</option>
+                                            <option value="2">고등학교졸업이상</option>
+                                            <option value="3">대학졸업(2,3년)이상</option>
+                                            <option value="4">대학졸업(4년)이상</option>
+                                            <option value="5">석사졸업이상</option>
+                                            <option value="6">박사졸업</option>
                                          </select>
                                        </div>
                                     </div>
@@ -261,29 +426,29 @@
                                        </div>
                                        <div class="col-xl-10">   
                                           <select name="hireAnnouncementSalary" id="hireAnnouncementSalary" class="custom-select">
-                                            <option value="0">회사내규에 따름</option>
-                                            <option value="1">1400 만원 이하</option>
-                                            <option value="2">1400~1600만원</option>
-                                            <option value="3">대학졸업(4년)이상</option>
-                                            <option value="4">1600~1800만원</option>
-                                            <option value="5">1800~2000만원</option>
-                                            <option value="6">2000~2200만원</option>
-                                            <option value="7">2400~2600만원</option>
-                                            <option value="8">2600~2800만원</option>
-                                            <option value="9">2800~3000만원</option>
-                                            <option value="10">3000~3200만원</option>
-                                            <option value="11">3200~3400만원</option>
-                                            <option value="12">3400~3600만원</option>
-                                            <option value="13">3600~3800만원</option>
-                                            <option value="14">3800~4000만원</option>
-                                            <option value="15">4000~5000만원</option>
-                                            <option value="16">5000~6000만원</option>
-                                            <option value="17">6000~7000만원</option>
-                                            <option value="18">7000~8000만원</option>
-                                            <option value="19">8000~9000만원</option>
-                                            <option value="20">9000~1억원</option>
-                                            <option value="21">1억원 이상</option>
-                                            <option value="22">면접 후 결정</option>
+                                            <option value="1">회사내규에 따름</option>
+                                            <option value="2">1400 만원 이하</option>
+                                            <option value="3">1400~1600만원</option>
+                                            <option value="4">대학졸업(4년)이상</option>
+                                            <option value="5">1600~1800만원</option>
+                                            <option value="6">1800~2000만원</option>
+                                            <option value="7">2000~2200만원</option>
+                                            <option value="8">2400~2600만원</option>
+                                            <option value="9">2600~2800만원</option>
+                                            <option value="10">2800~3000만원</option>
+                                            <option value="11">3000~3200만원</option>
+                                            <option value="12">3200~3400만원</option>
+                                            <option value="13">3400~3600만원</option>
+                                            <option value="14">3600~3800만원</option>
+                                            <option value="15">3800~4000만원</option>
+                                            <option value="16">4000~5000만원</option>
+                                            <option value="17">5000~6000만원</option>
+                                            <option value="18">6000~7000만원</option>
+                                            <option value="19">7000~8000만원</option>
+                                            <option value="20">8000~9000만원</option>
+                                            <option value="21">9000~1억원</option>
+                                            <option value="22">1억원 이상</option>
+                                            <option value="23">면접 후 결정</option>
                                          </select>
                                        </div>
                                     </div>
@@ -293,18 +458,18 @@
                                        </div>
                                        <div class="col-xl-10">
                                           <select name="hireAnnouncementWorkingFormName" id="hireAnnouncementWorkingFormName" class="custom-select">
-                                            <option value="0">계약직</option>
-                                            <option value="1">교육생</option>
-                                            <option value="2">별정직</option>
-                                            <option value="3">병역특례</option>      
-                                            <option value="4">아르바이트</option>      
-                                            <option value="5">위촉직</option>      
-                                            <option value="6">인턴직</option>      
-                                            <option value="7">전임</option>      
-                                            <option value="8">정규직</option>      
-                                            <option value="9">파견직</option>      
-                                            <option value="10">파트</option>
-                                            <option value="11">프리랜서</option>                                                  
+                                            <option value="1">계약직</option>
+                                            <option value="2">교육생</option>
+                                            <option value="3">별정직</option>
+                                            <option value="4">병역특례</option>      
+                                            <option value="5">아르바이트</option>      
+                                            <option value="6">위촉직</option>      
+                                            <option value="7">인턴직</option>      
+                                            <option value="8">전임</option>      
+                                            <option value="9">정규직</option>      
+                                            <option value="10">파견직</option>      
+                                            <option value="11">파트</option>
+                                            <option value="12">프리랜서</option>                                                  
                                          </select>
                                        </div>
                                     </div>
@@ -328,14 +493,15 @@
 	                                <div class="form-group row">
 	                                   <div class="col-xl-2">
 	                                      <h5 class="m-0 font-weight-bold">공고 대표직무</h5>
+	                                      <span id="jobClear" style="cursor: pointer;">직무 초기화</span>
 	                                   </div>
 	                                   <div class="col-xl-10">   
 										<input type="text" class="form-control" name="hireAnnouncementMainJob" id="hireAnnouncementMainJob" readonly="readonly">
-	                                      
+										<span id="hireAnnouncementMainJobSpan" style="color: red; margin: auto;"></span>
+	                                     
 	                                    
 	                                    
-	                                    
-											<div id="job1DivId" class="dropdown-list" style="float: left; height: 245px; overflow: scroll; width: 20%;">
+											<div id="job1DivId" class="dropdown-list" style="float: left; height: 245px; overflow: auto; width: auto;">
 												<th:block th:each="job : ${job}">
 													<div th:id="|job1Id_${job.jobNo}|" th:text="${job.jobCategory}" th:name="job1Div" class="dropdown-item d-flex align-items-center font-weight-bold text-truncate" style="cursor: pointer;">
 															                                      		       		
@@ -350,7 +516,7 @@
 	                                      		
 		                                    </div>
 		                                      
-		                                      <div id="job2DivId" class="dropdown-list" style="float: left; height: 245px; overflow: scroll; width: 25%;" >
+		                                      <div id="job2DivId" class="dropdown-list" style="float: left; height: 245px; overflow: auto; width: auto;" >
 		                                      	<th:block th:each="job2 : ${job2}">
 													<div th:name="|job2_job1Id_${job2.jobNo}|" th:id="|job2Id_${job2.job2No}|" th:text="${job2.job2Category}" class="job2Div" style="cursor: pointer; display: none;">
 															                                      		       		
@@ -360,7 +526,7 @@
 		                                      </div>
 		                                      
 		                                      
-		                                      <div class="dropdown-list" style="float: left; height: 245px; overflow: scroll; width: 55%;">
+		                                      <div class="dropdown-list" style="float: left; height: 245px; overflow: auto; width: 55%;">
 		                                      	<ul class="nav job3Ul">
 		                                      		<th:block th:each="job3 : ${job3}">
 		                                      			<li th:name="|job3_job2Id_${job3.job2No}|" class="nav-item job3Li" style="display: none;">
@@ -434,6 +600,11 @@
                             </div>
                             
                          </div>
+                         
+                         
+                         <button type="button" class="btn btn-success btn-icon-split" id="insertHireAnnouncementBtn"><span class="text">채용공고 등록</span></button>
+                         
+                         
                          </form>
 					</div>
 					
@@ -499,6 +670,7 @@
 	         $('#cpMemberPhonenumSpan').text("");
 	         $('#cpMemberEmailSpan').text("");
 	         $('#hireAnnouncementRecuitmentFieldSpan').text("");
+	         $('#hireAnnouncementDepartmentSpan').text("");
 	         $('#hireAnnouncementJobGradeJobPositionSpan').text("");
 	         $('#hireAnnouncementPreferentialConditionsSpan').text("");
 	         $('#hireAnnouncementMainJobSpan').text("");
@@ -523,8 +695,13 @@
 	            $('#hireAnnouncementRecuitmentFieldSpan').text("모집분야를 입력하세요.");
 	            return;
 	         }
-	         if($('#hireAnnouncementJobGradeJobPosition').val().length === 0){
-	            $('#hireAnnouncementJobGradeJobPositionSpan').text("근무부서를 입력하세요.");
+	         if($('#hireAnnouncementDepartment').val().length === 0){
+	            $('#hireAnnouncementDepartmentSpan').text("근무부서를 입력하세요.");
+	            return;
+	         }
+	         
+	         if($('#hireAnnouncementJobgradeJobposition').val().length === 0){
+	            $('#hireAnnouncementJobgradeJobpositionSpan').text("직급/직책을 입력하세요.");
 	            return;
 	         }
 	         if($('#hireAnnouncementPreferentialConditions').val().length === 0){
@@ -534,7 +711,7 @@
 	         if($('#hireAnnouncementMainJob').val().length === 0){
 	            $('#hireAnnouncementMainJobSpan').text("대표직무를 선택하세요.");
 	            return;
-	         }
+	         }	         
 	         
 	         $('#cpMemberAnnouncementForm').submit();
 	      });
@@ -573,11 +750,19 @@
 				if($(this).is(":checked")){
 					str += $(this).val() + " ";
 				}				
-			});
-			
+			});			
 			$('#hireAnnouncementMainJob').val(str);
 		})
-	</script>
+
+		
+		$('#jobClear').click(function(){
+			$('#hireAnnouncementMainJob').val('');
+			$('[name=job3Click]').each(function(){
+				$(this).prop('checked', false);
+			});
+		});
+		
+</script>
 
 </body>
 

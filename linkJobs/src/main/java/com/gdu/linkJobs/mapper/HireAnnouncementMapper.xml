@@ -40,33 +40,35 @@
 		INSERT INTO linkjobs_hire_announcement(
 			cpmember_id,
 			hire_announcement_title,
+			hire_announcement_manager,			
 			hire_announcement_recruitment_field,
 			hire_announcement_career,
-			hire_announcement_manager,
-			hire_announcement_contents,
-			hire_announcement_education,
-			hire_announcement_jobgrade,
-			hire_announcement_jobposition,
+			hire_announcement_department,
+			hire_announcement_jobgrade_jobposition,
 			hire_announcement_preferential_conditions,
+			hire_announcement_education,
 			hire_announcement_salary,
 			hire_announcement_working_form_name,
+			hire_announcement_main_job,
 			hire_announcement_start_date,
-			hire_announcement_end_date
+			hire_announcement_end_date,			
+			hire_announcement_contents			
 		) VALUES (
 			#{cpmemberId},
 			#{hireAnnouncementTitle},
+			#{hireAnnouncementManager},			
 			#{hireAnnouncementRecuitmentField},
 			#{hireAnnouncementCareer},
-			#{hireAnnouncementManager},
-			#{hireAnnouncementContents},
-			#{hireAnnouncementEducation},
-			#{hireAnnouncementJobgrade},
-			#{hireAnnouncementJobPosition},
+			#{hireAnnouncementDepartment},
+			#{hireAnnouncementJobgradeJobposition},
 			#{hireAnnouncementPreferentialConditions},
+			#{hireAnnouncementEducation},
 			#{hireAnnouncementSalary},
 			#{hireAnnouncementWorkingFormName},
+			#{hireAnnouncementMainJob},
 			NOW(),
-			#{hireAnnouncementEndDate}
+			#{hireAnnouncementEndDate},
+			#{hireAnnouncementContents}	
 		)
 	</insert>
 </mapper>	
