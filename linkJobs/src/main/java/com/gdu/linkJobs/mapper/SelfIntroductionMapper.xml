@@ -6,7 +6,7 @@
 	<select id="selectSelfIntroductionList" parameterType="String" resultType="com.gdu.linkJobs.vo.SelfIntroduction">
 		SELECT 
 			self_introduction_no selfIntroductionNo,
-			member_id, memberId,
+			member_id memberId,
 			self_introduction_title selfIntroductionTitle,
 			self_introduction_contents selfIntroductionContents,
 			self_introduction_date selfIntroductionDate
@@ -19,7 +19,7 @@
 	<select id="selectSelfIntroductionOne" parameterType="int" resultType="com.gdu.linkJobs.vo.SelfIntroduction">
 		SELECT 
 			self_introduction_no selfIntroductionNo,
-			member_id, memberId,
+			member_id memberId,
 			self_introduction_title selfIntroductionTitle,
 			self_introduction_contents selfIntroductionContents,
 			self_introduction_date selfIntroductionDate

@@ -22,14 +22,17 @@ public class SelfIntroductionController {
 	
 	//자소서 리스트 출력
 	@GetMapping("/getSelfIntroductionList")
-	public String getSelfIntroductionList(@RequestParam("memberId") String memberId, Model model,HttpSession session){
+	public String getSelfIntroductionList( Model model,HttpSession session){
 		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
-		
+		String memberId = (String) session.getAttribute("loginMember");
+		System.out.println(memberId + "<--memberId.SelfIntroduction");
+		SelfIntroduction si=new SelfIntroduction();
+		si.setMemberId(memberId);
 		List<SelfIntroduction> selfIntroList = selfIntroductionService.getSelfIntroductionList(memberId);
 		System.out.println(selfIntroList);
-		model.addAttribute("selfIntroductionList", selfIntroList);
+		model.addAttribute("selfIntroList", selfIntroList);
 		return "member/getSelfIntroductionList";
 	}
 	//자소서 상세보기
@@ -38,7 +41,11 @@ public class SelfIntroductionController {
 		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
-		SelfIntroduction si = selfIntroductionService.getSelfIntroductionOne(selfIntroductionNo);
+		String memberId = (String) session.getAttribute("loginMember");
+		System.out.println(memberId + "<--memberId.SelfIntroduction");
+		SelfIntroduction si=new SelfIntroduction();
+		si.setMemberId(memberId);
+		si = selfIntroductionService.getSelfIntroductionOne(selfIntroductionNo);
 		model.addAttribute("selfIntroductionOne", si);
 		return "member/getSelfIntroductionOne";
 	}
@@ -62,8 +69,9 @@ public class SelfIntroductionController {
 		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
+		System.out.println(selfIntroduction);
 		selfIntroductionService.modifySelfIntroductio(selfIntroduction);
-		return "redirect:/member/getSelfIntroductionList";
+		return "redirect:/getSelfIntroductionList";
 	}
 	
 	
@@ -74,7 +82,7 @@ public class SelfIntroductionController {
 			return "redirect:/";
 		}
 		selfIntroductionService.removeSelfIntroduction(selfIntroductionNo);
-		return "redirect:/member/getSelfIntroductionList";
+		return "redirect:/getSelfIntroductionList";
 	}
 	
 	//자소서 추가 폼
@@ -92,7 +100,9 @@ public class SelfIntroductionController {
 		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
+		String memberId = (String) session.getAttribute("loginMember");
+		selfIntroduction.setMemberId(memberId);
 		selfIntroductionService.addSelfIntroduction(selfIntroduction);
-		return "redirect:/member/getSelfIntroductionList";
+		return "redirect:/getSelfIntroductionList";
 	}
 }

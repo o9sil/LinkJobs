@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:td="http://www.tdymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>getMemberAcademicList</title>
+<title>getMemberCertificate</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
@@ -27,7 +27,6 @@
 <!-- Custom styles for this template-->
 <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
 </head>
-
 <body id="page-top">
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -38,53 +37,51 @@
 <div id="content-wrapper" class="d-flex flex-column">
 	<div th:include="/include/menuTop::navTop"></div>
 	<!-- Main Content -->
-<div id="content">			
+<div id="content">
+				
 	<!-- 페이지 내용 -->
-	<div class="container-fluid">
+	<div class="container-fluid">  
          
             <h1>학력 리스트</h1>
-            <table class="table" border="1">
-               <tbody>
-                  <tr>
-                     <td>학력</td>
-                     <td></td>
-                  </tr>
+            <a th:href="@{/addMemberAcademic}" class="btn btn-info">학력사항 추가</a>
+            <table class="table">
+           	 <th:block th:each="ac : ${academicList}"> 
                   <!-- <td>회원정보</td> -->
                   <tr>               
                      <td>최종학력</td>
-                     <td></td>
+                     <td th:value="${ac.academicGrade}" th:text="${ac.academicGrade}"></td>
                   </tr>
                   <tr>
                      <td>학교명</td>
-                     <td></td>
+                     <td th:value="${ac.academicName}" th:text="${ac.academicName}"></td>
                   </tr>
                   <tr>
                      <td>전공계열</td>
-                     <td></td>
+                     <td th:value="${ac.academicMajor}" th:text="${ac.academicMajor}"></td>
                   </tr>
                   <tr>
                      <td>전공명</td>
-                     <td></td>
+                     <td th:value="${ac.academicMajorDetail}" th:text="${ac.academicMajorDetail}"></td>
                   </tr>
                   <tr>
                      <td>재학기간(입학)</td>
-                     <td></td>
+                     <td th:value="${ac.academicFromDate}" th:text="${ac.academicFromDate}"></td>
                   </tr>
                   <tr>
                      <td>재학기간(졸업)</td>
-                     <td></td>
+                     <td th:value="${ac.academicToDate}" th:text="${ac.academicToDate}"></td>
                   </tr>
                   <tr>
                      <td>학점</td>
-                     <td></td>
+                     <td th:value="${ac.academicScore}" th:text="${ac.academicScore}"></td>
                   </tr>
                   <tr>
                      <td colspan="2" align="right">
-                        <a th:href="@{/modifyMemberAcademic(academicNo=${academicNo})}" class="btn btn-info">수정</a>
-                        <a th:href="@{/removeMemberAcademic(academicNo=${academicNo})}" class="btn btn-info">삭제</a>
+                        <a th:href="@{/modifyMemberAcademic(academicNo=${ac.academicNo})}" class="btn btn-info">수정</a>
+                        <a th:href="@{/removeMemberAcademic(academicNo=${ac.academicNo})}" class="btn btn-info">삭제</a>
                      </td>
                   </tr>
-               </tbody>
+               </th:block>
             </table>
          </div>
       </div>

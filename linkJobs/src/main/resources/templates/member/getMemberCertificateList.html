@@ -26,13 +26,27 @@
 <!-- <script src="js/sb-admin-2.min.js"></script> -->
 <!-- Custom styles for this template-->
 <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
-<body>
-   <div class="container">   
+</head>
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+	<!-- SideBar -->
+<ul th:include="/include/menuSide::navSide" class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
+</ul>
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+	<div th:include="/include/menuTop::navTop"></div>
+	<!-- Main Content -->
+<div id="content">
+				
+	<!-- 페이지 내용 -->
+	<div class="container-fluid">  
       <h1>자격증</h1>
       <h3>회원 아이디 들어가는 자리</h3>
-      	<table>
+      
+      	<a th:href="@{/addMemberCertificate}" class="btn btn-info">자격증 추가</a>
+      	<table class="table">
       		<tr>
-      			<td>번호</td>
       			<td>자격증명</td>
       			<td>취득일</td>
       			<td>수정</td>
@@ -40,14 +54,15 @@
       		</tr>
       		
       		<tr th:each="c :${certificateList}">
-      			<td></td>
-      			<td></td>
-      			<td></td>
-      			<td><a th:href="@{/modifyMemberCertificate(certificateNo=${c.certificateNo})}" class="btn btn-primary">수정하기</a></td>
-      			<td> <a th:href="@{/removeMemberCertificate(certificateNo=${c.certificateNo})}" class="btn btn-primary">삭제하기</a></td>
+      			<td th:value="${c.certificateName}" th:text="${c.certificateName}"></td>
+      			<td th:value="${c.certificateDate}" th:text="${c.certificateDate}"></td>
+      			<td><a th:href="@{/modifyMemberCertificate(certificateNo=${c.certificateNo})}" class="btn btn-info">수정하기</a></td>
+      			<td><a th:href="@{/removeMemberCertificate(certificateNo=${c.certificateNo})}" class="btn btn-info">삭제하기</a></td>
       		</tr>
       	</table>
-      
+</div>
+</div>
+</div>      
           
    </div>
 </body>

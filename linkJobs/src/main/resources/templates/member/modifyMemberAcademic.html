@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:td="http://www.tdymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>modifyMemberAcademic</title>
+<title>getMemberCertificate</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
@@ -89,7 +89,6 @@
       });
 </script>
 </head>
-
 <body id="page-top">
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -100,61 +99,83 @@
 <div id="content-wrapper" class="d-flex flex-column">
 	<div th:include="/include/menuTop::navTop"></div>
 	<!-- Main Content -->
-<div id="content">			
+<div id="content">
+				
 	<!-- 페이지 내용 -->
-	<div class="container-fluid">
+	<div class="container-fluid">  
+
+
+
+
          
             <h1>학력 수정</h1>
             
-            <form method="post" id="modifyForm" th:action="@{/modifyMemberAcademic}">
+            <form method="post" id="modifyForm" th:action="@{/modifyMemberAcademic(academicNo=${ma.academicNo})}">
                <table class="table" border="1">
                   <tbody>
                      <tr>               
                         <td>최종학력</td>
                         <td>
-                           <input type="text" id="academicGrade" name="academicGrade">
+                        	<select id="academicGrade" name="academicGrade" class="form-control">
+                        		<option th:value="${ma.academicGrade}" th:text="${ma.academicGrade}"></option>
+                        		<option value="초등학교 졸업">초등학교 졸업</option>
+                        		<option value="중학교 졸업">중학교 졸업</option>
+                        		<option value="고등학교 졸업">고등학교 졸업</option>
+                        		<option value="2·3년제 재학">2·3년제 재학</option>
+                        		<option value="2·3년제 졸업">2·3년제 졸업</option>
+                        		<option value="4년제 재학">4년제 재학</option>
+                        		<option value="4년제 졸업">4년제 졸업</option>
+                        		<option value="대학원 이상">대학원 이상</option>
+                        	</select>
+                        
                            <span id="gradeHelper" class="text text-danger"></span>
                         </td>
                      </tr>
                      <tr>
                         <td>학교명</td>
                         <td>
-                           <input type="text" id="academicName" name="academicName">
+                           <input type="text" id="academicName" name="academicName" class="form-control"
+                           th:value="${ma.academicName}" >
                            <span id="nameHelper" class="text text-danger"></span>
                         </td>
                      </tr>
                      <tr>
                         <td>전공계열</td>
                         <td>
-                           <input type="text" id="academicMajor" name="academicMajor">
+                           <input type="text" id="academicMajor" name="academicMajor" class="form-control"
+                           th:value="${ma.academicMajor}" >
                            <span id="majorHelper" class="text text-danger"></span>
                         </td>
                      </tr>
                      <tr>
                         <td>전공명</td>
                         <td>
-                           <input type="text" id="academicMajorDetail" name="academicMajorDetail">
+                           <input type="text" id="academicMajorDetail" name="academicMajorDetail" class="form-control"
+                           th:value="${ma.academicMajorDetail}">
                            <span id="majorDetailHelper" class="text text-danger"></span>
                         </td>
                      </tr>
                      <tr>
                         <td>재학기간(입학)</td>
                         <td>
-                           <input type="date" id="academicFromDate" name="academicFromDate">
+                           <input type="date" id="academicFromDate" name="academicFromDate" class="form-control"
+                           th:value="${ma.academicFromDate}" >
                            <span id="fromDateHelper" class="text text-danger"></span>
                         </td>
                      </tr>
                      <tr>
                         <td>재학기간(졸업)</td>
                         <td>
-                           <input type="date" id="academiToDate" name="academiToDate">
+                           <input type="date" id="academicToDate" name="academicToDate" class="form-control"
+                            th:value="${ma.academicToDate}">
                            <span id="toDateHelper" class="text text-danger"></span>
                         </td>   
                      </tr>
                      <tr>
                         <td>학점</td>
                         <td>
-                           <input type="text" id="academicScore" name="academicScore">
+                           <input type="text" id="academicScore" name="academicScore" class="form-control"
+                            th:value="${ma.academicScore}">
                            <span id="scoreHelper" class="text text-danger"></span>
                         </td>
                      </tr>

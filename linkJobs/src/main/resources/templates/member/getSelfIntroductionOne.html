@@ -44,27 +44,23 @@
 	<div class="container-fluid">
       <h1>자기소개서 상세페이지</h1>
       <br>
-      <a th:href="@{/modifySelfIntroduction(selfIntroductionNo=${selfIntroductionNo})}"  class="btn btn-info">수정</a> 
-      <a th:href="@{/removeSelfIntroduction(selfIntroductionNo=${selfIntroductionNo})}"  class="btn btn-info">삭제</a>
+      <a th:href="@{/modifySelfIntroduction(selfIntroductionNo=${selfIntroductionOne.selfIntroductionNo})}"  class="btn btn-info">수정</a> 
+      <a th:href="@{/removeSelfIntroduction(selfIntroductionNo=${selfIntroductionOne.selfIntroductionNo})}"  class="btn btn-info">삭제</a>
       <br>
       <br>
       
       <table class="table">
          <tr>
             <td>제목</td>
-            <td th:value="${}"></td>
+            <td th:value="${selfIntroductionOne.selfIntroductionTitle}" th:text="${selfIntroductionOne.selfIntroductionTitle}"></td>
          </tr>
          <tr>
             <td>내용</td>
-            <td></td>
-         </tr>
-         <tr>
-            <td>작성자</td>
-            <td></td>
+            <td th:value="${selfIntroductionOne.selfIntroductionContents}" th:text="${selfIntroductionOne.selfIntroductionContents}"></td>
          </tr>
          <tr>
             <td>작성일자</td>
-            <td></td>
+            <td th:value="${selfIntroductionOne.selfIntroductionDate}" th:text="${selfIntroductionOne.selfIntroductionDate}"></td>
          </tr>
       </table>
    </div>

@@ -34,17 +34,19 @@ public class MemberCertificateController {
 		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
-		String memberId=((LoginMember)(session.getAttribute("loginMember"))).getMemberId();
+		
+		String memberId=(String) session.getAttribute("loginMember");
+		System.out.println(memberId);
 		memberCertificate.setMemberId(memberId);
 		memberCertificateService.addMemberCertificate(memberCertificate);
 		
-		return "rediect:/member/getMemberCertificateList";
+		return "redirect:/getMemberCertificateList";
 	}
 	
 	//자격증 수정 폼
 	@GetMapping("/modifyMemberCertificate")
 	public String modifyMemberCertificate(@RequestParam("certificateNo") int certificateNo,
-									Model model, MemberCertificate memberCertificate,HttpSession session) {
+									Model model,HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
@@ -54,12 +56,15 @@ public class MemberCertificateController {
 	}
 	//자격증 수정 액션
 	@PostMapping("/modifyMemberCertificate")
-	public String modifyMemberCertificate(MemberCertificate memberCertificate,HttpSession session) {
+	public String modifyMemberCertificate(MemberCertificate memberCertificate, HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
+		String memberId=(String) session.getAttribute("loginMember");
+		System.out.println(memberId+"<--memberId.memberCertificate");
+		memberCertificate.setMemberId(memberId);
 		memberCertificateService.modifyMemberCertificate(memberCertificate);
-		return "rediect:/member/getMemberCertificateList";
+		return "redirect:/getMemberCertificateList";
 	}
 	
 	//자격증 삭제
@@ -68,16 +73,21 @@ public class MemberCertificateController {
 		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
+		
 		memberCertificateService.removeMemberCertificate(certificateNo);
-		return "rediect:/member/getMemberCertificateList";
+		return "redirect:/getMemberCertificateList";
 	}
 	
 	//자격증 회원별 리스트 출력 폼
 	@GetMapping("/getMemberCertificateList")
-	public String getMemberCertificateList(@RequestParam("memberId") String memberId, Model model,HttpSession session) {
+	public String getMemberCertificateList( Model model,HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
+		String memberId=(String) session.getAttribute("loginMember");
+		System.out.println(memberId+"<--memberId.memberCertificate");
+		MemberCertificate memberCertificate=new MemberCertificate();
+		memberCertificate.setMemberId(memberId);
 		List<MemberCertificate> certificateList=memberCertificateService.getMemberCertificateList(memberId);
 		model.addAttribute("certificateList", certificateList);
 		return "member/getMemberCertificateList";

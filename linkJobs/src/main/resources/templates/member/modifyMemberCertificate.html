@@ -35,47 +35,55 @@ let helperInit = function(){
 $(document).ready(function(){
    $('#certiBtn').click(function(){
       
-      if($('#certificateName').val() == $('#certificateName').val()){
+      if($('#certificateName').val() == ''){
          helperInit();
-         $('#certificateNameHelper').text("수정된 값이 없습니다.");
+         $('#certificateNameHelper').text("값을 입려해 주세요");
          $('#certificateName').focus();
-         return;
+      } else{
+    	  $('#certiFome').submit();
       }
-      
-      if($('#certificateDate').val() == $('#certificateDate').val()){
-         helperInit();
-         $('#certificateDateHelper').text("수정된 값이 없습니다.");
-         $('#certificateDate').focus();
-         return;
-      }
-      
-      $('#certiFome').submit();
    });
 });
 </script>
-<body>
-   <div class="container">   
+</head>
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+	<!-- SideBar -->
+<ul th:include="/include/menuSide::navSide" class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
+</ul>
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+	<div th:include="/include/menuTop::navTop"></div>
+	<!-- Main Content -->
+<div id="content">
+				
+	<!-- 페이지 내용 -->
+	<div class="container-fluid">   
       <h1>자격증 수정</h1>
       <form th:action="@{/modifyMemberCertificate}" id="certiFome" method="post">
+      	
          <div>
-            <input type="hidden" th:value="" name="memberId">
-         </div>
-         <div>
-            <input type="hidden" name="certificateNo">
+            <input type="hidden" name="certificateNo" th:value="${memberCertificate.certificateNo}">
          </div>
          <div  class="col-sm-3">자격증명 :</div>
          <div class="col-sm-9">
-            <input type="text" th:vlaue="" name="certificateName" id="certificateName" class="form-control">
+            <input type="text" th:value="${memberCertificate.certificateName}"
+            	name="certificateName" id="certificateName" class="form-control">
             <span id="certificateNameHelper" class="text text-danger"></span>
          </div>
          <div  class="col-sm-3">취득일 :</div>
          <div class="col-sm-9">
-            <input type="date" th:vlaue="" name="certificateDate" id="certificateDate" class="form-control">
+            <input type="date" th:value="${memberCertificate.certificateDate}"
+            	name="certificateDate" id="certificateDate" class="form-control">
             <span id="certificateDateHelper" class="text text-danger"></span>
          </div>
       </form>
       <br>
-      <button type="button" id="certiBtn" class="btn btn-primary">수정하기</button>
+      <button type="button" id="certiBtn" class="btn btn-info">수정하기</button>
    </div>
+</div>
+</div>
+</div>
 </body>
 </html>

@@ -6,6 +6,7 @@
 		parameterType="com.gdu.linkJobs.vo.MemberAcademic"
 		resultType="com.gdu.linkJobs.vo.MemberAcademic">
 		SELECT
+			
 			academic_name academicName,
 			academic_major academicMajor,
 			academic_major_detail academicMajorDetail,
@@ -22,6 +23,7 @@
 		parameterType="String"
 		resultType="com.gdu.linkJobs.vo.MemberAcademic">
 		SELECT
+			academic_no academicNo,
 			academic_name academicName,
 			academic_major academicMajor,
 			academic_major_detail academicMajorDetail,
@@ -38,6 +40,7 @@
 		parameterType="int"
 		resultType="com.gdu.linkJobs.vo.MemberAcademic">
 		SELECT
+			academic_no academicNo,
 			academic_name academicName,
 			academic_major academicMajor,
 			academic_major_detail academicMajorDetail,
@@ -83,12 +86,12 @@
 		academic_from_date=#{academicFromDate},
 		academic_to_date=#{academicToDate},
 		academic_score=#{academicScore}
-	FROM academic_no=#{academicNo}
+	WHERE academic_no=#{academicNo}
 	</update>
 	
 	<!-- 학력 삭제 -->
 	<delete id="deleteMemberAcademic" parameterType="int">
-		DELETE FROM  linkjobs_member_academic 
+		DELETE FROM linkjobs_member_academic 
 		WHERE academic_no=#{academicNo}
 	</delete>
 	
