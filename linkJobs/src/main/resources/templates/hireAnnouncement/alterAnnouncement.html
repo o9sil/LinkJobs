@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>recordAnnouncement</title>
+<title>alterAnnouncement</title>
 <!-- Custom fonts for this template -->
 <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -46,7 +46,7 @@
 		
 					<!-- Page 헤드 -->
 					<div>
-						<h1 class="h3 mb-2 text-gray-800">채용공고 등록</h1>
+						<h1 class="h3 mb-2 text-gray-800">채용공고 수정</h1>
 					</div>
 					<br><br>
 					
@@ -56,7 +56,8 @@
 					<div class="row">
 						<div class="col-xl-8 col-lg-7">
 						
-						<form class="user" id="cpMemberAnnouncementForm" method="post" th:action="@{/recordAnnouncement}">
+						<form class="user" id="cpMemberAnnouncementForm" method="post" th:action="@{/modifyAnnouncementOne}">
+							<input name="hireAnnouncementNo" type="hidden" th:value="${hireAnnouncement.hireAnnouncementNo}">
 			             	<div class="card shadow mb-4">
 				               
 				                <!-- 공고 제목 -->
@@ -64,7 +65,7 @@
 				                	<h2 class="m-0 font-weight-bold text-info">공고 제목</h2>				                 		
 				                </div>
 				                <div class="card-body">
-				                	<input type="text" class="form-control form-control-user" id="hireAnnouncementTitle" name="hireAnnouncementTitle" placeholder="공고 제목을 입력하세요.">
+				                	<input type="text" class="form-control form-control-user" id="hireAnnouncementTitle" name="hireAnnouncementTitle" placeholder="공고 제목을 입력하세요." th:value="${hireAnnouncement.hireAnnouncementTitle}">
                                		<span id="hireAnnouncementTitleSpan" style="color: red; margin: auto;"></span>
 				                </div>
 				                
@@ -171,26 +172,26 @@
 												<h5 class="m-0 font-weight-bold">모집 분야명</h5>	                  							
 	                  						</div>
 	                  						<div class="col-xl-10">			                  				
-												<input type="text" class="form-control" name="hireAnnouncementRecruitmentField" id="hireAnnouncementRecruitmentField" placeholder="예) R&D, 경영지원">
+												<input type="text" class="form-control" name="hireAnnouncementRecruitmentField" id="hireAnnouncementRecruitmentField" placeholder="예) R&D, 경영지원" th:value="${hireAnnouncement.hireAnnouncementRecruitmentField}">
 												<span id="hireAnnouncementRecruitmentFieldSpan" style="color: red; margin: auto;"></span>
 											</div>
 	                  					</div>
 	                  					<div class="form-group row">
 	                  						<div class="col-xl-2">	
 												<h5 class="m-0 font-weight-bold">경력여부</h5>
-												<span id="hireAnnouncementCareerSpan" style="color: red; margin: auto;"></span>	                  							
+												<span id="hireAnnouncementRecuitmentFieldSpan" style="color: red; margin: auto;"></span>	                  							
 	                  						</div>
 	                  						<div class="col-xl-10">
-		                  						<div class="custom-control custom-radio custom-control-inline">
-													<input type="radio" class="custom-control-input" id="hireAnnouncementCareerRadio1" name="hireAnnouncementCareer" value="신입" checked="checked">
+		                  						<div class="custom-control custom-radio custom-control-inline">		                  					
+		                  							<input type="radio" class="custom-control-input" id="hireAnnouncementCareerRadio1" name="hireAnnouncementCareer" value="신입" th:checked="${hireAnnouncement.hireAnnouncementCareer} == '신입' ? 'checked' : 'false'">													
 												    <label class="custom-control-label" for="hireAnnouncementCareerRadio1">신입</label>
 												</div>
-												<div class="custom-control custom-radio custom-control-inline">
-													<input type="radio" class="custom-control-input" id="hireAnnouncementCareerRadio2" name="hireAnnouncementCareer" value="경력">
+												<div class="custom-control custom-radio custom-control-inline">													
+													<input type="radio" class="custom-control-input" id="hireAnnouncementCareerRadio2" name="hireAnnouncementCareer" value="경력" th:checked="${hireAnnouncement.hireAnnouncementCareer} == '경력' ? 'checked' : 'false'">																										
 												    <label class="custom-control-label" for="hireAnnouncementCareerRadio2">경력</label>
 												</div>
-												<div class="custom-control custom-radio custom-control-inline">
-													<input type="radio" class="custom-control-input" id="hireAnnouncementCareerRadio3" name="hireAnnouncementCareer" value="경력무관">
+												<div class="custom-control custom-radio custom-control-inline">													
+													<input type="radio" class="custom-control-input" id="hireAnnouncementCareerRadio3" name="hireAnnouncementCareer" value="경력무관"  th:checked="${hireAnnouncement.hireAnnouncementCareer=='경력무관'} ? 'checked' : 'false'">													
 												    <label class="custom-control-label" for="hireAnnouncementCareerRadio3">경력무관</label>
 												</div>
 		                    					<span id="hireAnnouncementCareerSpan" style="color: red; margin: auto;"></span>
@@ -201,7 +202,7 @@
 												<h5 class="m-0 font-weight-bold">근무부서</h5>	                  							
 	                  						</div>
 	                  						<div class="col-xl-10">			                  				
-												<input type="text" class="form-control" name="hireAnnouncementDepartment" id="hireAnnouncementDepartment" placeholder="근무하게 될 부서 또는 근무지를 입력해주세요.">
+												<input type="text" class="form-control" name="hireAnnouncementDepartment" id="hireAnnouncementDepartment" placeholder="근무하게 될 부서 또는 근무지를 입력해주세요." th:value="${hireAnnouncement.hireAnnouncementDepartment}">
 	                    						<span id="hireAnnouncementDepartmentSpan" style="color: red; margin: auto;"></span>
 											</div>
 	                  					</div>
@@ -387,7 +388,7 @@
 												<h5 class="m-0 font-weight-bold">우대조건</h5>	                  							
 	                  						</div>
 	                  						<div class="col-xl-10">			                  				
-												<input type="text" class="form-control" name="hireAnnouncementPreferentialConditions" id="hireAnnouncementPreferentialConditions" placeholder="보유역량, 자격증, 외국어. 전공학과등 우대사항을 입력해보세요!">
+												<input type="text" class="form-control" name="hireAnnouncementPreferentialConditions" id="hireAnnouncementPreferentialConditions" placeholder="보유역량, 자격증, 외국어. 전공학과등 우대사항을 입력해보세요!" th:value="${hireAnnouncement.hireAnnouncementPreferentialConditions}">
 	                    						<span id="hireAnnouncementPreferentialConditionsSpan" style="color: red; margin: auto;"></span>
 											</div>
 	                  					</div>
@@ -410,14 +411,14 @@
                                  <div class="col-xl-2">
                                           <h5 class="m-0 font-weight-bold">지원자 학력</h5>
                                        </div>
-                                       <div class="col-xl-10">   
-                                          <select name="hireAnnouncementEducation" id="hireAnnouncementEducation" class="custom-select">                                          
-                                            <option value="학력무관">학력무관</option>
-                                            <option value="고등학교졸업이상">고등학교졸업이상</option>
-                                            <option value="대학졸업(2,3년)이상">대학졸업(2,3년)이상</option>
-                                            <option value="대학졸업(4년)이상">대학졸업(4년)이상</option>
-                                            <option value="석사졸업이상">석사졸업이상</option>
-                                            <option value="박사졸업">박사졸업</option>
+                                       <div class="col-xl-10">                                       		
+                                          <select name="hireAnnouncementEducation" id="hireAnnouncementEducation" class="custom-select">
+                                            <option value="1" th:selected="${hireAnnouncement.hireAnnouncementEducation} == '학력무관' ? 'true' : 'false'">학력무관</option>
+                                            <option value="2" th:selected="${hireAnnouncement.hireAnnouncementEducation} == '고등학교졸업이상' ? 'true' : 'false'">고등학교졸업이상</option>
+                                            <option value="3" th:selected="${hireAnnouncement.hireAnnouncementEducation} == '대학졸업(2,3년)이상' ? 'true' : 'false'">대학졸업(2,3년)이상</option>
+                                            <option value="4" th:selected="${hireAnnouncement.hireAnnouncementEducation} == '대학졸업(4년)이상' ? 'true' : 'false'">대학졸업(4년)이상</option>
+                                            <option value="5" th:selected="${hireAnnouncement.hireAnnouncementEducation} == '석사졸업이상' ? 'true' : 'false'">석사졸업이상</option>
+                                            <option value="6" th:selected="${hireAnnouncement.hireAnnouncementEducation} == '박사졸업' ? 'true' : 'false'">박사졸업</option>
                                          </select>
                                        </div>
                                     </div>
@@ -427,29 +428,29 @@
                                        </div>
                                        <div class="col-xl-10">   
                                           <select name="hireAnnouncementSalary" id="hireAnnouncementSalary" class="custom-select">
-                                            <option value="회사내규에 따름">회사내규에 따름</option>
-                                            <option value="1400 만원 이하">1400 만원 이하</option>
-                                            <option value="1400~1600만원">1400~1600만원</option>
-                                            <option value="대학졸업(4년)이상">대학졸업(4년)이상</option>
-                                            <option value="1600~1800만원">1600~1800만원</option>
-                                            <option value="1800~2000만원">1800~2000만원</option>
-                                            <option value="2000~2200만원">2000~2200만원</option>
-                                            <option value="2400~2600만원">2400~2600만원</option>
-                                            <option value="2600~2800만원">2600~2800만원</option>
-                                            <option value="2800~3000만원">2800~3000만원</option>
-                                            <option value="3000~3200만원">3000~3200만원</option>
-                                            <option value="3200~3400만원">3200~3400만원</option>
-                                            <option value="3400~3600만원">3400~3600만원</option>
-                                            <option value="3600~3800만원">3600~3800만원</option>
-                                            <option value="3800~4000만원">3800~4000만원</option>
-                                            <option value="4000~5000만원">4000~5000만원</option>
-                                            <option value="5000~6000만원">5000~6000만원</option>
-                                            <option value="6000~7000만원">6000~7000만원</option>
-                                            <option value="7000~8000만원">7000~8000만원</option>
-                                            <option value="8000~9000만원">8000~9000만원</option>
-                                            <option value="9000~1억원">9000~1억원</option>
-                                            <option value="1억원 이상">1억원 이상</option>
-                                            <option value="면접 후 결정">면접 후 결정</option>
+                                            <option value="1" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '회사내규에 따름' ? 'true' : 'false'">회사내규에 따름</option>
+                                            <option value="2" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '1400 만원 이하' ? 'true' : 'false'">1400 만원 이하</option>
+                                            <option value="3" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '1400~1600만원' ? 'true' : 'false'">1400~1600만원</option>
+                                            <option value="4" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '대학졸업(4년)이상' ? 'true' : 'false'">대학졸업(4년)이상</option>
+                                            <option value="5" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '1600~1800만원' ? 'true' : 'false'">1600~1800만원</option>
+                                            <option value="6" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '1800~2000만원' ? 'true' : 'false'">1800~2000만원</option>
+                                            <option value="7" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '2000~2200만원' ? 'true' : 'false'">2000~2200만원</option>
+                                            <option value="8" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '2400~2600만원' ? 'true' : 'false'">2400~2600만원</option>
+                                            <option value="9" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '2600~2800만원' ? 'true' : 'false'">2600~2800만원</option>
+                                            <option value="10" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '2800~3000만원' ? 'true' : 'false'">2800~3000만원</option>
+                                            <option value="11" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '3000~3200만원' ? 'true' : 'false'">3000~3200만원</option>
+                                            <option value="12" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '3200~3400만원' ? 'true' : 'false'">3200~3400만원</option>
+                                            <option value="13" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '3400~3600만원' ? 'true' : 'false'">3400~3600만원</option>
+                                            <option value="14" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '3600~3800만원' ? 'true' : 'false'">3600~3800만원</option>
+                                            <option value="15" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '3800~4000만원' ? 'true' : 'false'">3800~4000만원</option>
+                                            <option value="16" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '4000~5000만원' ? 'true' : 'false'">4000~5000만원</option>
+                                            <option value="17" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '5000~6000만원' ? 'true' : 'false'">5000~6000만원</option>
+                                            <option value="18" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '6000~7000만원' ? 'true' : 'false'">6000~7000만원</option>
+                                            <option value="19" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '7000~8000만원' ? 'true' : 'false'">7000~8000만원</option>
+                                            <option value="20" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '8000~9000만원' ? 'true' : 'false'">8000~9000만원</option>
+                                            <option value="21" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '9000~1억원' ? 'true' : 'false'">9000~1억원</option>
+                                            <option value="22" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '1억원 이상' ? 'true' : 'false'">1억원 이상</option>
+                                            <option value="23" th:selected="${hireAnnouncement.hireAnnouncementSalary} == '면접 후 결정' ? 'true' : 'false'">면접 후 결정</option>
                                          </select>
                                        </div>
                                     </div>
@@ -459,18 +460,18 @@
                                        </div>
                                        <div class="col-xl-10">
                                           <select name="hireAnnouncementWorkingFormName" id="hireAnnouncementWorkingFormName" class="custom-select">
-                                            <option value="계약직">계약직</option>
-                                            <option value="교육생">교육생</option>
-                                            <option value="별정직">별정직</option>
-                                            <option value="병역특례">병역특례</option>      
-                                            <option value="아르바이트">아르바이트</option>      
-                                            <option value="위촉직">위촉직</option>      
-                                            <option value="인턴직">인턴직</option>      
-                                            <option value="전임">전임</option>      
-                                            <option value="정규직">정규직</option>      
-                                            <option value="파견직">파견직</option>      
-                                            <option value="파트">파트</option>
-                                            <option value="프리랜서">프리랜서</option>                                                  
+                                            <option value="1" th:selected="${hireAnnouncement.hireAnnouncementWorkingFormName} == '계약직' ? 'true' : 'false'">계약직</option>
+                                            <option value="2" th:selected="${hireAnnouncement.hireAnnouncementWorkingFormName} == '교육생' ? 'true' : 'false'">교육생</option>
+                                            <option value="3" th:selected="${hireAnnouncement.hireAnnouncementWorkingFormName} == '별정직' ? 'true' : 'false'">별정직</option>
+                                            <option value="4" th:selected="${hireAnnouncement.hireAnnouncementWorkingFormName} == '병역특례' ? 'true' : 'false'">병역특례</option>      
+                                            <option value="5" th:selected="${hireAnnouncement.hireAnnouncementWorkingFormName} == '아르바이트' ? 'true' : 'false'">아르바이트</option>      
+                                            <option value="6" th:selected="${hireAnnouncement.hireAnnouncementWorkingFormName} == '위촉직' ? 'true' : 'false'">위촉직</option>      
+                                            <option value="7" th:selected="${hireAnnouncement.hireAnnouncementWorkingFormName} == '인턴직' ? 'true' : 'false'">인턴직</option>      
+                                            <option value="8" th:selected="${hireAnnouncement.hireAnnouncementWorkingFormName} == '전임' ? 'true' : 'false'">전임</option>      
+                                            <option value="9" th:selected="${hireAnnouncement.hireAnnouncementWorkingFormName} == '정규직' ? 'true' : 'false'">정규직</option>      
+                                            <option value="10" th:selected="${hireAnnouncement.hireAnnouncementWorkingFormName} == '파견직' ? 'true' : 'false'">파견직</option>      
+                                            <option value="11" th:selected="${hireAnnouncement.hireAnnouncementWorkingFormName} == '파트' ? 'true' : 'false'">파트</option>
+                                            <option value="12" th:selected="${hireAnnouncement.hireAnnouncementWorkingFormName} == '프리랜서' ? 'true' : 'false'">프리랜서</option>                                                  
                                          </select>
                                        </div>
                                     </div>
@@ -563,11 +564,11 @@
 	                                          <div class="row">
 												<div class="col-xl-6">
 													공고 시작일
-													<input type="date" class="form-control" name="hireAnnouncementStartDate" id="hireAnnouncementStartDate" th:value="${#dates.format(#dates.createToday(),'YYYY-MM-dd')}" readonly="readonly">
+													<input type="date" class="form-control" name="hireAnnouncementStartDate" id="hireAnnouncementStartDate" th:value="${hireAnnouncement.hireAnnouncementStartDate}" readonly="readonly">
 												</div>
 												<div class="col-xl-6">
 	 												공고 종료일
-	                                                <input type="date" class="form-control" name="hireAnnouncementEndDate" id="hireAnnouncementEndDate" th:value="${#dates.format(#dates.createToday(),'YYYY-MM-dd')}">
+	                                                <input type="date" class="form-control" name="hireAnnouncementEndDate" id="hireAnnouncementEndDate" th:value="${hireAnnouncement.hireAnnouncementEndDate}">
 												</div>                                             
 	                                          </div>
 	                                                                                   
@@ -593,7 +594,7 @@
                                           <h5 class="m-0 font-weight-bold">공고 내용</h5>
                                        </div>
                                        <div class="col-xl-10">   
-                                          <textarea id="hireAnnouncementContents" name="hireAnnouncementContents" rows="20" class="form-control"></textarea>
+                                          <textarea id="hireAnnouncementContents" name="hireAnnouncementContents" rows="20" class="form-control" th:inline="text">[[${hireAnnouncement.hireAnnouncementContents}]]</textarea>
                                          <span id="hireAnnouncementContentsSpan" style="color: red; margin: auto;"></span>
                                        </div>
                                     </div>
@@ -603,7 +604,7 @@
                          </div>
                          
                          
-                         <button type="button" class="btn btn-success btn-icon-split" id="insertHireAnnouncementBtn"><span class="text">채용공고 등록</span></button>
+                         <button type="button" class="btn btn-success btn-icon-split" id="updateHireAnnouncementBtn"><span class="text">채용공고 수정</span></button>
                          
                          
                          </form>
@@ -665,12 +666,12 @@
 	
 	<script>
 	   
-	      $('#insertHireAnnouncementBtn').click(function() {
+	      $('#updateHireAnnouncementBtn').click(function() {
 	         $('#hireAnnouncementTitleSpan').text("");
 	         $('#cpMemberManagerSpan').text("");
 	         $('#cpMemberPhonenumSpan').text("");
 	         $('#cpMemberEmailSpan').text("");
-	         $('#hireAnnouncementRecuitmentFieldSpan').text("");
+	         $('#hireAnnouncementRecruitmentFieldSpan').text("");
 	         $('#hireAnnouncementDepartmentSpan').text("");
 	         $('#hireAnnouncementJobGradeJobPositionSpan').text("");
 	         $('#hireAnnouncementPreferentialConditionsSpan').text("");

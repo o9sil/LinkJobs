@@ -22,6 +22,11 @@ public class HireAnnouncementService extends HttpServlet {
 	@Autowired
 	private AreaMapper areaMapper;
 	
+	//채용공고 수정
+	public int modifyHireAnnouncementOne(HireAnnouncement hireAnnouncement) {
+		return hireAnnouncementMapper.updateHireAnnouncementOne(hireAnnouncement);
+	}
+	
 	//기업회원 상세정보 가져오기
 	public Map getCpMemberDetail(String cpMemberId) {
 		
@@ -38,7 +43,7 @@ public class HireAnnouncementService extends HttpServlet {
 	}
 	
 	// 채용공고 상세보기
-	public HireAnnouncement selectHireAnnouncementDetail(int hireAnnouncementNo) {
+	public HireAnnouncement getHireAnnouncementDetail(int hireAnnouncementNo) {
 		return hireAnnouncementMapper.selectHireAnnouncementDetail(hireAnnouncementNo);
 	}
 	

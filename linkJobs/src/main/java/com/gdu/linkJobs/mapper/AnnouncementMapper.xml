@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.linkJobs.mapper.AnnouncementMapper">
+
+	<select id="selectAnnouncementListByCpMember" parameterType="String" resultType="com.gdu.linkJobs.vo.AnnouncementList">
+		SELECT 
+			hireAnnouncement.hire_announcement_no AS hireAnnouncementNo,
+			hireAnnouncement.hire_announcement_title AS title, 
+			cpmember.cpmember_company AS company,  
+			hireAnnouncement.hire_announcement_end_date AS endDate, 
+			concat(AREA.area_sido, ' ', AREA2.area2_gungu) AS areaName, 
+			hireAnnouncement.hire_announcement_career AS career, 
+			hireAnnouncement.hire_announcement_education AS education, 
+			hireAnnouncement.hire_announcement_working_form_name AS workingFormName, 
+			hireAnnouncement.hire_announcement_salary AS salary, 
+			hireAnnouncement.hire_announcement_main_job AS mainJob
+		FROM linkjobs_hire_announcement hireAnnouncement 
+			INNER JOIN linkjobs_cpmember cpmember 
+			INNER JOIN linkjobs_area2 AREA2 
+			INNER JOIN linkjobs_area area
+		ON hireAnnouncement.cpmember_id = cpmember.cpmember_id 
+			AND cpmember.area2_no = AREA2.area2_no 
+			AND AREA2.area_no = AREA.area_no
+		WHERE hireAnnouncement.cpmember_id = #{cpMemberId}	
+		ORDER BY hireAnnouncement.hire_announcement_no DESC
+	</select>
+
+</mapper>
