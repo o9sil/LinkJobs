@@ -44,6 +44,12 @@
 		WHERE self_introduction_no = #{selfIntroductionNo}
 	</delete>
 	
+	<!-- 회원 탈퇴용 자기소개서 삭제 -->
+	<delete id="removeSelfIntroduction" parameterType="String">
+		DELETE FROM linkjobs_self_introduction
+		WHERE member_id = #{memberId}
+	</delete>
+	
 	<!-- 자기소개서 추가 -->
 	<insert id="insertSelfIntroduction" parameterType="com.gdu.linkJobs.vo.SelfIntroduction">
 		INSERT INTO linkjobs_self_introduction(

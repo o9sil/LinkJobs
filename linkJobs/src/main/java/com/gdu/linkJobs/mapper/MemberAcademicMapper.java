@@ -25,4 +25,7 @@ public interface MemberAcademicMapper {
 	
 	// 학력 삭제
 	public int deleteMemberAcademic(int academicNo);
+	
+	//회원 탈퇴용 학력 삭제
+	public int removeMemberAcademic(String memberId);
 }

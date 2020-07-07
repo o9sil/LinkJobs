@@ -8,14 +8,21 @@ import com.gdu.linkJobs.vo.SelfIntroduction;
 
 @Mapper
 public interface SelfIntroductionMapper {
-	//자소서 리스트 출력
+	// 자소서 리스트 출력
 	public List<SelfIntroduction> selectSelfIntroductionList(String memberId);
-	//자소서 하나만 가지고 와 보여주기
+
+	// 자소서 하나만 가지고 와 보여주기
 	public SelfIntroduction selectSelfIntroductionOne(int selfIntroductionNo);
-	//자소서 수정
+
+	// 자소서 수정
 	public int updateSelfIntroduction(SelfIntroduction selfIntroduction);
-	//자소서 삭제
+
+	// 자소서 삭제
 	public int deleteSelfIntroduction(int selfIntroductionNo);
-	//자소서 추가
+
+	// 회원탈퇴용 자소서 삭제
+	public int removeSelfIntroduction(String memberId);
+
+	// 자소서 추가
 	public int insertSelfIntroduction(SelfIntroduction selfIntroduction);
-}	
+}

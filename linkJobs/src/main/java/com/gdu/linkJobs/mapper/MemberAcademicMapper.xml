@@ -95,4 +95,10 @@
 		WHERE academic_no=#{academicNo}
 	</delete>
 	
+	<!-- 회원 탈퇴용 학력 삭제 -->
+	<delete id="removeMemberAcademic" parameterType="String">
+		DELETE FROM linkjobs_member_academic 
+		WHERE member_id=#{memberId}
+	</delete>
+	
 </mapper>

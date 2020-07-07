@@ -24,7 +24,7 @@ public class MemberController {
 	@Autowired
 	private AreaService areaService;
 	
-	// 회원 탈퇴 폼
+	// 회원 탈퇴 
 	@GetMapping("/removeMember")
 	public String removeMember(HttpSession session) {
 		if (session.getAttribute("loginMember") == null) {
@@ -42,6 +42,7 @@ public class MemberController {
 		String memberId = (String)session.getAttribute("loginMember");
 		member.setMemberId(memberId);
 		memberService.removeMember(member);
+		session.invalidate();
 		return "redirect:/";
 	}
 	
@@ -188,7 +189,7 @@ public class MemberController {
 	// logout
 	@GetMapping("/logoutMember")
 	public String logoutMember(HttpSession session) {
-		session.removeAttribute("loginMember");
+		session.invalidate();
 
 		return "redirect:/";
 	}
