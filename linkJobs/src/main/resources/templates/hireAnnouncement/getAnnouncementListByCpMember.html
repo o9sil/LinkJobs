@@ -45,22 +45,6 @@
 							<div class="card-body">
 								<div class="table-responsive">
 									<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-										<!-- <div class="row">
-											<div class="col-sm-12 col-md-6">
-												<div class="dataTables_length" id="dataTable_length">
-													<label>
-														Show
-														<select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
-															<option value="10">10</option>
-															<option value="25">25</option>
-															<option value="50">50</option>
-															<option value="100">100</option>
-														</select>
-													</label>
-												</div>
-											</div>
-										</div> -->
-										
 										<div class="row">
 											<div class="col-sm-12">
 												<table class="table table-bordered dataTable" id="dataTable" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
@@ -91,7 +75,13 @@
 																</td>																
 																<td>																	
 																	<div>
-																		<h4 class="font-weight-bold" style="width: 50%; float:left;"><a th:href="@{/aboutAnnouncementOne(hireAnnouncementNo=${list.hireAnnouncementNo})}" th:text="${list.title}"></a></h4>											
+																		<th:block th:if="${#dates.format(#dates.createNow(),'YYYY-MM-dd HH:mm:ss') > list.endDate}">
+																			<h4 class="font-weight-bold" style="width: 50%; float:left;"><a th:href="@{/aboutAnnouncementOne(hireAnnouncementNo=${list.hireAnnouncementNo})}" th:text="${list.title}" style="color: #858796;"></a></h4>
+																		</th:block>
+																		<th:block th:if="${#dates.format(#dates.createNow(), 'YYYY-MM-dd HH:mm:ss') <= list.endDate}">
+																			<h4 class="font-weight-bold" style="width: 50%; float:left;"><a th:href="@{/aboutAnnouncementOne(hireAnnouncementNo=${list.hireAnnouncementNo})}" th:text="${list.title}"></a></h4>
+																		</th:block>
+																													
 										
 																		<strong th:text="|~${list.endDate}|"></strong><br><br>
 																	</div>
@@ -105,8 +95,25 @@
 																	<small><strong th:text="${list.mainJob}"></strong></small>
 																</td>
 																<td th:text="${list.company}"></td>
-																<td><a th:href="@{/modifyAnnouncementOne(hireAnnouncementNo=${list.hireAnnouncementNo})}" type="button" class="btn btn-primary">수정</a></td>
-																<td><a type="button"th:href="@{/modifyDeadlineAnnouncement(hireAnnouncementNo=${list.hireAnnouncementNo})}"  class="btn btn-danger">마감</a></td>
+																<td>
+																	<th:block th:if="${#dates.format(#dates.createNow(), 'YYYY-MM-dd HH:mm:ss') > list.endDate}">																		
+																		<button class="btn btn-primary" disabled="disabled">수정</button>
+																	</th:block>
+																	<th:block th:if="${#dates.format(#dates.createNow(), 'YYYY-MM-dd HH:mm:ss') <= list.endDate}">
+																		<a th:href="@{/modifyAnnouncementOne(hireAnnouncementNo=${list.hireAnnouncementNo})}" type="button" class="btn btn-primary">수정</a>
+																	</th:block>	
+																</td>
+																<td>
+																<th:block th:if="${#dates.format(#dates.createNow(), 'YYYY-MM-dd HH:mm:ss') > list.endDate}">
+																	<button class="btn btn-danger" disabled="disabled">마감</button>																																	
+																</th:block>
+																<th:block th:if="${#dates.format(#dates.createNow(), 'YYYY-MM-dd HH:mm:ss') <= list.endDate}">
+																	<a type="button"th:href="@{/modifyDeadlineAnnouncement(hireAnnouncementNo=${list.hireAnnouncementNo})}"  class="btn btn-danger">마감</a>
+																</th:block>
+																
+																
+																
+																</td>
 															</tr>
 														</th:block>
 													</tbody>

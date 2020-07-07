@@ -1,11 +1,15 @@
 package com.gdu.linkJobs.controller;
 
+
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +42,37 @@ public class HireAnnouncementController {
 	
 	@Autowired
 	private AnnouncementService announcementService;
+	
+   // 월별 채용공고 페이지 요청
+   @GetMapping("/getPlan")
+   public String getPlan(Model model, HttpSession session, @RequestParam("hireAnnouncementNo") int hireAnnouncementNo, @RequestParam(value="day", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate day) {
+      // 로그인이 되어있지 않으면
+      if(session.getAttribute("loginMember") == null) {
+         return "redirect:/";
+      }
+      Calendar cDay = Calendar.getInstance();
+      if(day == null) {
+         day = LocalDate.now();
+      } else {
+         // day -- cDay 변환
+         // LocalDate -> Calendar
+         // 오늘 날짜에서 day값과 동일하게 변경
+         cDay.set(day.getYear(), day.getMonthValue()-1, day.getDayOfMonth());
+      }
+      
+      
+      model.addAttribute("day", day);
+      model.addAttribute("year", cDay.get(Calendar.YEAR));
+      model.addAttribute("month", cDay.get(Calendar.MONTH)+1);
+      model.addAttribute("lastDay", cDay.getActualMaximum(Calendar.DATE));
+      Calendar firstDay = cDay;
+      firstDay.set(Calendar.DATE, 1);
+      model.addAttribute("firstDayOfWeek", firstDay.get(Calendar.DAY_OF_WEEK));
+      
+      return "/hireAnnouncement/getPlan";
+   }
+	
+	
 	// 마감처리
 	@GetMapping("/modifyDeadlineAnnouncement")
 	public String modifyDeadlineAnnouncement(HttpSession session, @RequestParam("hireAnnouncementNo") int hireAnnouncementNo) {
@@ -53,6 +88,12 @@ public class HireAnnouncementController {
 		hireAnnouncement.setCpmemberId(loginCpMember);
 		
 		hireAnnouncementService.modifyDeadlineAnnouncement(hireAnnouncement);
+		
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 		
 		return "redirect:/getAnnouncementListByCpMember";
@@ -154,13 +195,13 @@ public class HireAnnouncementController {
 	// 채용공고 상세보기
 	
 	@GetMapping("/aboutAnnouncementOne")
-	public String aboutAnnouncementOne(Model model, HttpSession session, @RequestParam("hireAnnouncementNo") int hireAnnouncementNo) {
-		// 로그인중이 아닐때
-		if(session.getAttribute("loginCpMember") == null) {
-			return "redirect:/";
-		}
+	public String aboutAnnouncementOne(Model model, HttpSession session, @RequestParam("hireAnnouncementNo") int hireAnnouncementNo) {		
+		
+		System.out.println(hireAnnouncementService.getHireAnnouncementOne(hireAnnouncementNo));
+		
+		model.addAttribute("hireAnnouncement", hireAnnouncementService.getHireAnnouncementOne(hireAnnouncementNo));
 	  
-		return "";
+		return "hireAnnouncement/getAnnouncementOne";
 	  }
 	 
 	

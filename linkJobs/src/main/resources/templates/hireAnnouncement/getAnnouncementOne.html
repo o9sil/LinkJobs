@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>getAnnouncementOne</title>
+<!-- Custom fonts for this template -->
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+
+<!-- Custom styles for this page -->
+<link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+	<!-- SideBar -->
+	<ul th:include="/include/menuSide::navSide" class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
+	</ul>
+	
+
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+		<div th:include="/include/menuTop::navTop"></div>
+		<!-- Main Content -->
+		<div id="content">		
+			<div class="container-fluid">				
+				
+				<div class="row">
+					<div class="col-xl-12 col-md-12 mb-4">
+						<div class="card border-left-info shadow h-100 py-2">
+							<div class="card-body">
+								<div class="row no-gutters align-items-center">
+									<div class="col mr-2">
+										<div th:text="${hireAnnouncement.company}"></div>
+										<h2 th:text="${hireAnnouncement.title}"></h2>
+										
+										<hr>
+										<div class="row">
+											<div class="col-xl-6 col-md-6 mb-4">
+												<div>
+													경력 :
+													<span th:text="${hireAnnouncement.career}"></span>
+												</div>
+												<div>
+													학력 : 
+													<span th:text="${hireAnnouncement.education}"></span>
+												</div>
+												<div>
+													근무형태 : 
+													<span th:text="${hireAnnouncement.workingFormName}"></span>
+												</div>
+											</div>
+											<div class="col-xl-6 col-md-6 mb-4">
+												<div>
+													급여 :
+													<span th:text="${hireAnnouncement.salary}"></span>
+												</div>
+												<div>
+													직급/직책 :
+													<span th:text="${hireAnnouncement.job}"></span>
+												</div>
+												<div>
+													근무부서 :
+													<span th:text="${hireAnnouncement.department}"></span>
+												</div>
+												<div>
+													근무지역 :
+													<span th:text="|${hireAnnouncement.area} ${hireAnnouncement.address}|"></span>
+												</div>
+											</div>										
+										</div>
+										<hr>
+										
+										<h3>모집부문 및 자격요건</h3>
+										
+										<h5>모집분야</h5>
+										<div>
+											근무부서 :
+											<span th:text="${hireAnnouncement.department}"></span>											
+										</div>
+										<div>
+											우대조건 :
+											<span th:text="${hireAnnouncement.preferentialConditions}"></span>											
+										</div>
+										<div>
+											대표직무 :
+											<span th:text="${hireAnnouncement.mainJob}"></span>											
+										</div>
+										
+										<h5>근무조건</h5>
+										<div>
+											근무형태 :
+											<span th:text="${hireAnnouncement.workingFormName}"></span>										
+										</div>
+										<div>
+											연봉/급여 :
+											<span th:text="${hireAnnouncement.salary}"></span>										
+										</div>
+										<div>
+											근무지역 :
+											<span th:text="|${hireAnnouncement.area} ${hireAnnouncement.address}|"></span>											
+										</div>
+										
+										<h5>상세내용</h5>
+										<div>											
+											<span th:text="${hireAnnouncement.contents}"></span>											
+										</div>
+										
+										<hr>
+										
+										<h3>접수기간 및 방법</h3>
+										<div>				
+											기간 : 							
+											<span th:text="|${hireAnnouncement.startDate} ~ ${hireAnnouncement.endDate}"></span>											
+										</div>
+										<div>				
+											접수방법 : 							
+											<span>LinkJobs 입사지원</span>											
+										</div>
+										<div>				
+											이력서 양식 : 							
+											<span>LinkJobs 온라인 이력서</span>											
+										</div>
+										
+										<hr>
+										<h3>유의사항</h3>
+										<div>
+											<span>*입사지원 서류에 허위사실이 발견될 경우, 채용확정 이후에도 채용이 취소될 수 있습니다.</span>
+										</div>
+										
+										<hr>
+										
+										<h3>기업정보</h3>
+										<div class="row">
+											<div class="col-xl-6 col-md-6 mb-4">
+												지도출력
+											</div>
+											
+											<div class="col-xl-6 col-md-6 mb-4">
+												<h5 th:text="${hireAnnouncement.company}"></h5>
+												<div>
+													사원수 : 
+													<span th:text="${hireAnnouncement.numEmployees}"></span> 
+												</div>
+												<div>
+													대표자명 : 
+													<span th:text="${hireAnnouncement.ceo}"></span> 
+												</div>
+												<div>
+													업종 : 
+													<span th:text="${hireAnnouncement.industry}"></span> 
+												</div>
+												<div>
+													설립일 : 
+													<span th:text="${hireAnnouncement.establishDate}"></span> 
+												</div>
+												<div>
+													주소 : 
+													<span th:text="|${hireAnnouncement.area} ${hireAnnouncement.address}|"></span>
+												</div>
+												
+											</div>
+											
+										</div>
+										
+										
+										
+									</div>
+									
+								</div>
+							
+							
+							</div>
+						</div>
+					</div>		
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+<!-- Page level plugins -->
+<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+<!-- Page level custom scripts -->
+<script th:src="@{/js/demo/datatables-demo.js}"></script>
+
+</body>
+
+</html>

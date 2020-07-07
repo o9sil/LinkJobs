@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.linkJobs.mapper.MemberByCpMemberMapper">
+
+	<select id="selectMemberListByResume" resultType="com.gdu.linkJobs.vo.MemberByResume">
+		SELECT
+			RESUME.resume_no resumeNo,
+			RESUME.resume_title resumeTitle, 
+			RESUME.member_id memberId,
+			RESUME.resume_working_form resumeWorkingForm,
+			RESUME.resume_salary resumeSalary,
+			RESUME.resume_wish_area resumeWishArea,
+			RESUME.resume_wish_job resumeWishJob,
+			RESUME.resume_wish_industry resumeWishIndustry,
+			RESUME.resume_avaliability resumeAvaliability,
+			RESUME.resume_self_introduction_title resumeSelfIntroductionTitle,
+			RESUME.resume_self_introduction_contents resumeSelfIntroductionContents,
+			RESUME.resume_career resumeCareer,
+			RESUME.resume_date resumeDate,
+			member.member_name memberName,
+			member.member_phone memberPhone,
+			member.member_birthdate memberBirthdate,
+			member.member_gender memberGender
+		FROM linkjobs_resume RESUME 
+			INNER JOIN linkjobs_member AS member			
+			ON RESUME.member_id = member.member_id
+		WHERE RESUME.resume_avaliability = '공개'
+	</select>
+
+
+</mapper>
