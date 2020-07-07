@@ -75,6 +75,12 @@
 															<th style="width:15%;">
 																기업명
 															</th>
+															<th style="width: 5%;">
+																수정
+															</th>
+															<th style="width: 5%;">
+																마감
+															</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -85,7 +91,8 @@
 																</td>																
 																<td>																	
 																	<div>
-																		<h4 class="font-weight-bold" style="width: 50%; float:left;"><a th:href="@{/aboutAnnouncementOne(hireAnnouncementNo=${list.hireAnnouncementNo})}" th:text="${list.title}"></a></h4>																
+																		<h4 class="font-weight-bold" style="width: 50%; float:left;"><a th:href="@{/aboutAnnouncementOne(hireAnnouncementNo=${list.hireAnnouncementNo})}" th:text="${list.title}"></a></h4>											
+										
 																		<strong th:text="|~${list.endDate}|"></strong><br><br>
 																	</div>
 																	<div>
@@ -98,6 +105,8 @@
 																	<small><strong th:text="${list.mainJob}"></strong></small>
 																</td>
 																<td th:text="${list.company}"></td>
+																<td><a th:href="@{/modifyAnnouncementOne(hireAnnouncementNo=${list.hireAnnouncementNo})}" type="button" class="btn btn-primary">수정</a></td>
+																<td><a type="button"th:href="@{/modifyDeadlineAnnouncement(hireAnnouncementNo=${list.hireAnnouncementNo})}"  class="btn btn-danger">마감</a></td>
 															</tr>
 														</th:block>
 													</tbody>
@@ -140,6 +149,9 @@
 	<!-- Page level custom scripts -->
 	<script th:src="@{/js/demo/datatables-demo.js}"></script>
 	
+	<script>
+		
+	</script>
 
 </body>
 

@@ -13,89 +13,97 @@
 <body class="bg-gradient-info">
 
 
-	<div th:fragment="navTop">
-		<!-- Topbar -->
-		<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
-			<!-- Topbar Search -->
-	        <form class="navbar-search">
-	        	<!-- <img th:src="@{/img/LinkJobsLogo.png}" style="height: 4rem;"/> -->
-	        	
-	        	<a class="m-0 font-weight-bold text-info" style="padding-left: 5%">지역별</a>
-	        	
-	        	<a class="m-0 font-weight-bold text-info" style="padding-left: 5%">직업별</a>
-	        	
-	        	<a class="m-0 font-weight-bold text-info" style="padding-left: 5%">산업별</a>        	      	
-	        </form>
-		
-			
-			<!-- Topbar Navbar -->
-         	<ul class="navbar-nav ml-auto">
+   <div th:fragment="navTop">
+      <!-- Topbar -->
+      <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
+         <!-- Topbar Search -->
+           <form class="navbar-search">
+              <!-- <img th:src="@{/img/LinkJobsLogo.png}" style="height: 4rem;"/> -->
+              
+              <a th:href="@{/getAreaAnnouncementList}" class="m-0 font-weight-bold text-info" style="padding-left: 5%">지역별</a>
+              
+              <a th:href="@{/getJobHireAnnouncementList}" class="m-0 font-weight-bold text-info" style="padding-left: 5%">직업별</a>
+              
+              <a th:href="@{/getIndustryAnnouncementList}" class="m-0 font-weight-bold text-info" style="padding-left: 5%">산업별</a>                    
+           </form>
+      
+         
+         <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
     
-	           	<!-- Nav Item - User Information -->
-	           	<li class="nav-item dropdown no-arrow">
-	              
-	              	<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                    
-	                  	<th:block th:if="${session['loginCpMember'] != null}">
-	                     	<span class="mr-3 d-lg-inline text-gray-600" th:text="${session['loginCpMember']}"></span>
-	                  	</th:block>
-	                  	<th:block th:if="${session['loginMember'] != null}">
-	                     	<span class="mr-3 d-lg-inline text-gray-600" th:text="${session['loginMember']}"></span>
-	                  	</th:block>
-	                  	<th:block th:if="${session['loginCpMember'] == null && session['loginMember'] == null }">
-	                     	<span class="mr-3 d-lg-inline text-gray-600">로그인하세요</span>
-	                  	</th:block>
-	                	</a>
-	                
-			           	<th:block th:if="${session['loginCpMember'] != null}">
-			              <!-- Dropdown - User Information -->
-			              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-			                 <a class="dropdown-item" th:href="@{/alterCpMemberDetail}">
-			                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-								기업회원 정보 수정
-			                 </a>
-			                 <a class="dropdown-item" th:href="@{/alterCpMemberPw}">
-			                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-								기업회원 비밀번호 수정
-			                 </a>
-			                 <a class="dropdown-item" th:href="@{/logoutCpMember}">
-			                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-								로그아웃
-			                 </a>
-			               </div>             
-			            </th:block>     
-			                 
-			            <th:block th:if="${session['loginCpMember'] == null}">
-						<!-- Dropdown - User Information -->
-			               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-			                  <a class="dropdown-item" th:href="@{/loginMember}">
-			                      <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-								일반회원 로그인
-			                  </a>
-			                  <a class="dropdown-item" th:href="@{/loginCpMember}">
-			                      <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-								기업회원 로그인
-			                  </a>
-			                </div>
-			            </th:block>
-				</li>
-			</ul>
-			
-			
-			
-		
-		</nav>
-		<!-- End of Topbar -->
-	</div>
-	<!-- Bootstrap core JavaScript-->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	
-	<!-- Core plugin JavaScript-->
-	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-	
-	<!-- Custom scripts for all pages-->
-	<script src="js/sb-admin-2.min.js"></script>
-	
+                 <!-- Nav Item - User Information -->
+                 <li class="nav-item dropdown no-arrow">
+                 
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                    
+                        <th:block th:if="${session['loginCpMember'] != null}">
+                           <span class="mr-3 d-lg-inline text-gray-600" th:text="${session['loginCpMember']}"></span>
+                        </th:block>
+                        <th:block th:if="${session['loginMember'] != null}">
+                           <span class="mr-3 d-lg-inline text-gray-600" th:text="${session['loginMember']}"></span>
+                        </th:block>
+                        <th:block th:if="${session['loginCpMember'] == null && session['loginMember'] == null }">
+                           <span class="mr-3 d-lg-inline text-gray-600">로그인하세요</span>
+                        </th:block>
+                      </a> <!-- Dropdown - User Information -->
+               <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown">
+
+
+                  <th:block th:if="${session['loginCpMember'] != null}">
+                     <a class="dropdown-item" th:href="@{/alterCpMemberDetail}"> <i
+                        class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 기업회원 정보
+                        수정
+                     </a>
+                     <a class="dropdown-item" th:href="@{/alterCpMemberPw}"> <i
+                        class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 기업회원
+                        비밀번호 수정
+                     </a>
+                     <a class="dropdown-item" th:href="@{/logoutCpMember}"> <i
+                        class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 로그아웃
+                     </a>
+
+                  </th:block>
+
+                  <th:block th:if="${session['loginMember'] != null}">
+                     <a class="dropdown-item" th:href="@{/getMemberDetail}"> <i
+                        class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 마이페이지
+                     </a>
+                     <a class="dropdown-item" th:href="@{/logoutMember}"> <i
+                        class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 로그아웃
+                     </a>
+                  </th:block>
+
+                  <th:block
+                     th:if="${session['loginCpMember'] == null && session['loginMember'] == null}">
+                     <a class="dropdown-item" th:href="@{/loginMember}"> <i
+                        class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 일반회원 로그인
+                     </a>
+                     <a class="dropdown-item" th:href="@{/loginCpMember}"> <i
+                        class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 기업회원 로그인
+                     </a>
+                  </th:block>
+               </div>
+
+            </li>
+         </ul>
+         
+         
+         
+      
+      </nav>
+      <!-- End of Topbar -->
+   </div>
+   <!-- Bootstrap core JavaScript-->
+   <script src="vendor/jquery/jquery.min.js"></script>
+   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   
+   <!-- Core plugin JavaScript-->
+   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+   
+   <!-- Custom scripts for all pages-->
+   <script src="js/sb-admin-2.min.js"></script>
+   
 </body>
 </html>
-	
+   

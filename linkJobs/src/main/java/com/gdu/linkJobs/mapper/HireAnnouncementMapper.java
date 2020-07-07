@@ -11,6 +11,9 @@ import com.gdu.linkJobs.vo.HireAnnouncementAndCpMember;
 @Mapper
 public interface HireAnnouncementMapper {
 	
+	//채용공고 마감처리
+	public int updateDeadlineAnnouncement(HireAnnouncement hireAnnouncement);
+	
 	//채용공고 리스트 (일반회원)
 	public List<HireAnnouncementAndCpMember> selectHireAnnouncementList(HireAnnouncementAndCpMember hireAnnouncementAndCpMember);
 	

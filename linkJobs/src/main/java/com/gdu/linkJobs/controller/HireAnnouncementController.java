@@ -38,7 +38,25 @@ public class HireAnnouncementController {
 	
 	@Autowired
 	private AnnouncementService announcementService;
-	
+	// 마감처리
+	@GetMapping("/modifyDeadlineAnnouncement")
+	public String modifyDeadlineAnnouncement(HttpSession session, @RequestParam("hireAnnouncementNo") int hireAnnouncementNo) {
+		// 로그인중이 아닐때
+		if(session.getAttribute("loginCpMember") == null) {
+			return "redirect:/";
+		}
+		
+		String loginCpMember = (String) session.getAttribute("loginCpMember");
+		
+		HireAnnouncement hireAnnouncement = new HireAnnouncement();
+		hireAnnouncement.setHireAnnouncementNo(hireAnnouncementNo);
+		hireAnnouncement.setCpmemberId(loginCpMember);
+		
+		hireAnnouncementService.modifyDeadlineAnnouncement(hireAnnouncement);
+		
+		
+		return "redirect:/getAnnouncementListByCpMember";
+	}
 	
 	// 채용공고 리스트(일반회원)
 	@GetMapping("/getAnnouncementList")
@@ -49,7 +67,16 @@ public class HireAnnouncementController {
 	}
 		    
 	
-	
+	//채용공고 리스트 액션
+	@PostMapping("/getAnnouncementListByCpMember")
+	public String getAnnouncementListByCpMemberAction(HttpSession session) {
+		// 로그인중이 아닐때
+		if(session.getAttribute("loginCpMember") == null) {
+			return "redirect:/";
+		}	
+		
+		return "redirect:/";
+	}
 	
 	//채용공고 리스트 보기
 	@GetMapping("/getAnnouncementListByCpMember")

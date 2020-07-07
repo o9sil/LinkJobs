@@ -24,6 +24,11 @@ public class HireAnnouncementService extends HttpServlet {
 	@Autowired
 	private AreaMapper areaMapper;
 	
+	//채용공고 마감처리
+	public int modifyDeadlineAnnouncement(HireAnnouncement hireAnnouncement) {
+		return hireAnnouncementMapper.updateDeadlineAnnouncement(hireAnnouncement);
+	}
+	
 	//채용공고 수정
 	public int modifyHireAnnouncementOne(HireAnnouncement hireAnnouncement) {
 		return hireAnnouncementMapper.updateHireAnnouncementOne(hireAnnouncement);
