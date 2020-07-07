@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>getAreaAnnouncementList</title>
+<!-- Custom fonts for this template -->
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+
+<!-- Custom styles for this page -->
+<link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+</head>
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<!-- SideBar -->
+		<ul th:include="/include/menuSide::navSide"
+			class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+		</ul>
+
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div th:include="/include/menuTop::navTop"></div>
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- 페이지 내용 -->
+				<div class="container-fluid"></div>
+				<table border="1">
+      <tr>
+         <td>기업명</td>
+         <td>공고 제목</td>
+         <td>지원 자격</td>
+         <td>근무조건</td>
+         <td>마감일·등록일</td>
+         
+		 <td>비고</td>
+      </tr>
+      <tr th:each="list : ${list}">
+    	 
+    	 <td>
+	      	 <span th:text=${list.cpMemberCompany}>
+	      	 </span>
+      		<input type="checkbox">
+      	 </td>
+         <td>
+         <span th:text=${list.hireAnnouncementTitle}>
+         </span>
+        	 <input type="checkbox" name="scrap" id="scrap" value="N">
+         </td>
+         <td th:text=${list.hireAnnouncementEducation}></td>
+         <td>
+         	<span th:text=${list.hireAnnouncementWorkingFormName}></span><br>
+         	<span th:text=${list.areaSido}></span><a></a>
+         	<span th:text=${list.area2Gungu}></span>
+         </td>
+         <td>
+        	<span th:text=${list.hireAnnouncementStartDate}></span><br>
+         	~ <span th:text=${list.hireAnnouncementEndDate}></span>
+         </td> 
+         <td>
+         	<input type="hidden" th:value="${list.hireAnnouncementNo}" name="hireAnnouncementNo" id="hireAnnouncementNo">
+         	<input type="hidden" th:value="${list.hireAnnouncementNo}" name="hireAnnouncementNo" id="hireAnnouncementNo">
+         </td>
+        
+      </tr>
+   </table>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

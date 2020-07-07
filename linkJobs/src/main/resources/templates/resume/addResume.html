@@ -13,15 +13,25 @@
 <!-- Core plugin JavaScript-->
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Custom scripts for all pages-->
-<!-- <script src="js/sb-admin-2.min.js"></script> -->
 <!-- Custom styles for this template-->
 <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
 <script th:inline="javascript">
    
 $(document).ready(function(){
-      //지역
-    
+   
+   // 경력사항
+   // 기존페이지  숨김 (신입기본)  --> 경력 클릭시 이벤트 발생
+   $('#resumeCareerDiv').hide();
+   
+   $('#resumeCareer_1').click(function() {
+      $('#resumeCareerDiv').hide();
+   });
+   
+   $('#resumeCareer_2').click(function() {
+      $('#resumeCareerDiv').show();
+   });
+   
+   //지역   
     /*<![CDATA[*/
     $('#resumeWishArea').change(function () {
           let areaSido=$(this).val();
@@ -40,134 +50,273 @@ $(document).ready(function(){
               var addContent = $("<label><input type='checkbox' id='resumeWishArea2' name='resumeWishArea2' th:value='"+item.area2Gungu+"'>"+item.area2Gungu+"</label>");
               $("#resumeWishArea2").append(addContent);
              });
-          	}
+             }
            });
           
    });   
     /*]]>*/
    
 });
-   
 </script>
-
-
 </head>
 <body id="page-top">
-<div class="container">
+
+   <!-- Page Wrapper -->
+   <div id="wrapper">
+
+      <!-- Sidebar -->
+      <ul
+         class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
+         id="accordionSidebar">
+
+         <!-- Sidebar - Brand -->
+         <li>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/}">
+                 <span class="sidebar-brand-icon rotate-n-15">                   
+                      <i class="fas fa-link"></i>
+                 </span>              
+                  
+                 <span class="sidebar-brand-text mx-3">
+                    <!-- <img th:src="@{/img/LinkJobsLogo.png}" style="height: 3.5rem;"/> -->
+                    Link Jobs
+                 </span>
+               </a>
+         </li>
+
+         <li class="nav-item"><a class="nav-link collapsed" href="#"
+            data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="true" aria-controls="collapseTwo"> <i
+               class="fas fa-fw fa-tachometer-alt"></i> <span>채용공고</span>
+         </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+               data-parent="#accordionSidebar">
+               <div class="bg-white py-2 collapse-inner rounded">
+                  <a class="collapse-item" th:href="@{/recordAnnouncement}">채용공고등록</a>
+                  <a class="collapse-item" th:href="@{/}">등록한 채용공고 조회</a>
+               </div>
+            </div>
+         </li>
+         
+         <li class="nav-item">
+            <div class="text-center">
+               <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+         </li>         
+      </ul>
+      <!-- End of Sidebar --> 
+      
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+         <div th:include="/include/menuTop::navTop"></div>
+         <!-- Main Content -->
+         <div id="content">
+            
+            <!-- 페이지 내용 -->
+            <div class="container-fluid">
 <form method="post" th:action="@{/addResume}">
-      <div>
-         <input type="text" name="resumeTitle" id="resumeTitle" size=120 placeholder="이력서 제목을 입력하세요(50자까지 입력가능)." maxlength=50>
-      </div>
+      <div class="form-group">
+         <input class="form-control" style="height: 100px;" type="text" name="resumeTitle" id="resumeTitle" size=120 placeholder="이력서 제목을 입력하세요(50자까지 입력가능)." maxlength=50>
+      </div><br><br><br>
       
    <h3>기본정보</h3>
-   <div>
-      이름
-    <input type="text" th:value="${member.memberName}" readonly="readonly">
-   </div>
-   <div>
-      생년월일
-     <input type="text" th:value="${member.memberBirthdate}" readonly="readonly">
-      성별
-     <input type="radio" th:value="남" readonly="readonly" id="memberGender">남
-     <input type="radio" th:value="여" readonly="readonly" id="memberGender">여
-   </div>
-   <div>
-      이메일
-       <input type="text" th:value="${member.memberEmail}" readonly="readonly">
-   </div>
-   <div>
-      휴대폰
-       <input type="text" th:value="${member.memberPhone}" readonly="readonly">
-   </div>
-   <div>
-      주소
-       <input type="text" th:value="${member.areaSido}" readonly="readonly">
-        <input type="text" th:value="${member.area2Gungu}" readonly="readonly">
-   </div>
-   <div>
-   		 <input type="text" th:value="${member.memberDetailedAddress}" readonly="readonly">
+     <div class="row">
+         <div class="col-sm-3">
+            이름
+        </div>
+      <div class="col-sm-9">
+            <input class="form-control" style="width:300px;" type="text" th:value="${member.memberName}" readonly="readonly">
+      </div>
    </div>
    
+  <div class="row">
+   <div class="col-sm-3">생년월일</div>
+   <div class="col-sm-9">
+        <input class="form-control" type="text" th:value="${member.memberBirthdate}" readonly="readonly">
+         성별
+       <input  type="radio" th:value="남" readonly="readonly" id="memberGender">남
+       <input  type="radio" th:value="여" readonly="readonly" id="memberGender">여
+    </div>   
+  </div>
+  
+  <div class="row">
+      <div class="col-sm-3">이메일</div>
+      <div class="col-sm-9">
+          <input class="form-control" type="text" th:value="${member.memberEmail}" readonly="readonly">
+      </div>
+   </div>
+   
+   
+   <div class="row">
+         <div class="col-sm-3">   
+            휴대폰
+       </div>
+       <div class="col-sm-9">
+          <input class="form-control" type="text" th:value="${member.memberPhone}" readonly="readonly">
+      </div>
+   </div>
+   
+   <div class="row">
+      <div class="col-sm-3">
+            주소
+      </div>
+      <div class="col-sm-9">
+          <input class="form-control" type="text" th:value="${member.areaSido}" readonly="readonly">
+      </div>
+      <div class="col-sm-9"><!-- 오른쪽으로 옮기셈!!!! -->
+           <input class="form-control" type="text" th:value="${member.area2Gungu}" readonly="readonly">
+      </div>
+      <div class="col-sm-9"><!-- 오른쪽으로 옮기셈!!!! -->
+             <input class="form-control" type="text" th:value="${member.memberDetailedAddress}" readonly="readonly">
+      </div>
+   </div><br><br>
+   
+   
+   
+   
    <h3>학력 사항</h3>
-   <h4>학교 정보 입력</h4>
-   <div>
-      학력
-      <input type="text" name="academicGrade" id="academicGrade" value="고등학교 졸업">
+   <!-- <h4>학교 정보 입력</h4> -->
+   <div class="row">
+      <div class="col-sm-2">학력</div>
+       <div class="col-sm-10">
+         <input class="form-control" type="text" name="academicGrade" id="academicGrade" value="고등학교 졸업">
+         </div>
    </div>
-   <div>   
-      학교명
-      <input type="text" th:value="${memberAcademic.academicName}"  id="academicName">
+   
+   <div class="row">
+      <div class="col-sm-2">학교명</div>
+      <div class="col-sm-10">
+         <input class="form-control" type="text" th:value="${memberAcademic.academicName}"  id="academicName">
+      </div>
+   </div>     
+   
+   <div class="row">
+      <div class="col-sm-2">재학기간</div>
+      <div>
+         <input class=" col-sm-5" type="text" th:value="${memberAcademic.academicFromDate}"  id="academicFromDate">
+         ~
+         <input class="col-sm-5" type="text" th:value="${memberAcademic.academicToDate}"  id="academicToDate">
+      </div>
+   </div> 
+   
+   
+   <div class="row">
+      <div class="col-sm-2">학점</div>
+      <div class="col-sm-8">
+         <input class="form-control" type="text" th:value="${memberAcademic.academicScore}"  id="academicScore">
+      </div>
    </div>
-   <div>
-      재학기간
-      <input type="date" th:value="${memberAcademic.academicFromDate}"  id="academicFromDate">
-      ~
-      <input type="date" th:value="${memberAcademic.academicToDate}"  id="academicToDate">
-   </div>
-   <div>
-      학점
-      <input type="text" th:value="${memberAcademic.academicScore}"  id="academicScore">
-   </div>
-   <div>
-      전공계열
-      <input type="text" th:value="${memberAcademic.academicMajor}"  id="academicMajor">
+   
+   <div class="row">
+      <div class="col-sm-2">전공계열</div>
+      <div class="col-sm-8">
+         <input class="form-control" type="text" th:value="${memberAcademic.academicMajor}"  id="academicMajor">
+      </div>
    </div>
 
    
    <h3>경력사항</h3>
-   	 <div>
+    <!-- 
+           <div>
          <select name="resumeCareer" id="resumeCareer">
             <option>선택</option>
             <option>신입</option>
             <option>경력</option>
          </select>
       </div>
-      <div>
-      	회사명
-      	<input type="text" th:value="${memberCareer.careerCompanyName}" placeholder="회사명 입력" readonly="readonly">
-      </div>
-      <div>
-      	재직기간
-      	<input type="date" th:value="${memberCareer.careerStartDate}" placeholder="YYYY-MM-DD" readonly="readonly">
-      	~
-      	<input type="date" th:value="${memberCareer.careerEndDate}" placeholder="YYYY-MM-DD" readonly="readonly">
-      	<input type="text" th:value="${memberCareer.careerLeaving}" readonly="readonly">
-      </div>
-      <div>
-      	퇴사 사유
-      	<input type="text" th:value="${memberCareer.careerReasonForLeaving}" placeholder="퇴사사유 선택" readonly="readonly">
-      </div>
-      <div>
-      	직급/직책, 년차
-      	<input type="text" th:value="${memberCareer.careerJobgradeJobposition}" placeholder="퇴사사유 선택" readonly="readonly">
-      	<input type="text" th:value="${memberCareer.careerJobgradeJobpositionYear}" placeholder="퇴사사유 선택" readonly="readonly">
-      </div>
-      <div>
-      	직종
-      	<input type="text" th:value="${memberCareer.job2No}" placeholder="직종" readonly="readonly">
-      </div>
-      <div>
-      	근무지역
-      	<input type="text" th:value="${memberCareer.areaNo}" placeholder="근무지역" readonly="readonly">
-      </div>
-      <div>
-      	근무부서
-      	<input type="text" th:value="${memberCareer.careerDepartment}" placeholder="근무부서" readonly="readonly">
-      </div>
-      <div>
-      	연봉
-      	<input type="text" th:value="${memberCareer.careerSalary}" placeholder="연봉" readonly="readonly">
-      </div>
-      <div>
-      	담당업무
-      	<input type="text" th:value="${memberCareer.careerResponsibilities}" placeholder="담당업무" readonly="readonly">
-      </div>
-       <div>
-      	프로젝트 내용
-      	<input type="text" th:value="${memberCareer.carrerProjectContents}" placeholder="프로젝트 내용" readonly="readonly">
+      -->
+      
+      
+            <div>
+                <label class="btn btn-danger">
+                    <input name="resumeCareer" id="resumeCareer_1" type="radio"  value="신입"  checked="checked">
+                    <span>신입</span>
+                </label>
+                <label class="btn btn-danger">
+                    <input name="resumeCareer" id="resumeCareer_2" type="radio"  value="경력" >
+                    <span>경력</span>
+                </label>
+             
+            </div>
+        
+      <div id="resumeCareerDiv" >
+      <div class="row">
+         <div class="col-sm-2">회사명</div>
+         <div class="col-sm-8">
+            <input class="form-control" type="text" th:value="${memberCareer.careerCompanyName}" placeholder="회사명 입력" readonly="readonly">
+         </div>
       </div>
       
-   <h1>희망 근무 조건</h1>  
+      <div class="row">
+      <div class="col-sm-3">재직기간</div>
+      <div>
+         <input class="col-sm-3" type="text" th:value="${memberCareer.careerStartDate}" placeholder="YYYY-MM-DD" readonly="readonly">
+         ~
+         <input class="col-sm-3" type="text" th:value="${memberCareer.careerEndDate}" placeholder="YYYY-MM-DD" readonly="readonly">
+         <input class="col-sm-3" type="text" th:value="${memberCareer.careerLeaving}" readonly="readonly">
+      </div>
+      </div>
+    
+      
+       <div class="row">
+      <div class="col-sm-2">퇴사 사유</div>
+      <div class="col-sm-8">
+         <input class="form-control" type="text" th:value="${memberCareer.careerReasonForLeaving}" placeholder="퇴사사유 선택" readonly="readonly">
+      </div>
+       </div>
+      
+       <div class="row">
+      <div class="col-sm-2">직급/직책, 년차</div>
+      <div class="col-sm-8">
+         <input class="form-control" type="text" th:value="${memberCareer.careerJobgradeJobposition}" placeholder="퇴사사유 선택" readonly="readonly">
+         <input class="form-control" type="text" th:value="${memberCareer.careerJobgradeJobpositionYear}" placeholder="퇴사사유 선택" readonly="readonly">
+      </div>
+       </div>
+       
+       
+        <div class="row">
+      <div class="col-sm-2">직종</div>
+      <div class="col-sm-8">
+         <input class="form-control" type="text" th:value="${memberCareer.job3Category}" placeholder="직종" readonly="readonly">
+      </div>
+       </div>
+       
+       <div class="row">
+      <div class="col-sm-2">근무지역</div>
+      <div class="col-sm-8">
+         <input class="form-control" type="text" th:value="${memberCareer.area2Gungu}" placeholder="근무지역" readonly="readonly">
+      </div>
+       </div>
+      
+       <div class="row">
+      <div class="col-sm-2">근무부서</div>
+      <div class="col-sm-8">
+         <input class="form-control" type="text" th:value="${memberCareer.careerDepartment}" placeholder="근무부서" readonly="readonly">
+      </div>
+       </div>
+       
+        <div class="row">
+      <div class="col-sm-2">연봉</div>
+      <div class="col-sm-8">
+         <input class="form-control" type="text" th:value="${memberCareer.careerSalary}" placeholder="연봉" readonly="readonly">
+      </div>
+       </div>
+       
+        <div class="row">
+      <div class="col-sm-2">담당업무</div>
+      <div class="col-sm-8">
+         <input class="form-control" type="text" th:value="${memberCareer.careerResponsibilities}" placeholder="담당업무" readonly="readonly">
+      </div>
+       </div>
+      
+       <div class="row">
+       <div class="col-sm-2">프로젝트 내용</div>
+       <div class="col-sm-8">
+         <input class="form-control" type="text" th:value="${memberCareer.careerProjectContents}" placeholder="프로젝트 내용" readonly="readonly">
+      </div>
+       </div>
+     </div>
+     
+   <h3>희망 근무 조건</h3>  
      
       <div>
          근무형태
@@ -245,7 +394,11 @@ $(document).ready(function(){
       </div>
       <button type="submit">이력서 등록</button>
    </form>
-</div>
+   </div>
+   </div>
+   </div>
+   
+</div>  
 <!-- Bootstrap core JavaScript-->
 <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
 <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>

@@ -33,6 +33,28 @@ public class HireAnnouncementAndCpMember {
 	private String cpMemberEstablishDate;
 	private String cpMemberDate;
 	private String cpMemberAdminAdmission;
+	private int areaNo;
+	private String area2Gungu;
+	private String areaSido;
+	
+	public int getAreaNo() {
+		return areaNo;
+	}
+	public void setAreaNo(int areaNo) {
+		this.areaNo = areaNo;
+	}
+	public String getArea2Gungu() {
+		return area2Gungu;
+	}
+	public void setArea2Gungu(String area2Gungu) {
+		this.area2Gungu = area2Gungu;
+	}
+	public String getAreaSido() {
+		return areaSido;
+	}
+	public void setAreaSido(String areaSido) {
+		this.areaSido = areaSido;
+	}
 	public int getHireAnnouncementNo() {
 		return hireAnnouncementNo;
 	}
@@ -245,6 +267,7 @@ public class HireAnnouncementAndCpMember {
 				+ ", cpMemberArea2No=" + cpMemberArea2No + ", cpMemberDetailedAddress=" + cpMemberDetailedAddress
 				+ ", cpMemberPhonenum=" + cpMemberPhonenum + ", cpMemberNumberOfEmployees=" + cpMemberNumberOfEmployees
 				+ ", cpMemberEstablishDate=" + cpMemberEstablishDate + ", cpMemberDate=" + cpMemberDate
-				+ ", cpMemberAdminAdmission=" + cpMemberAdminAdmission + "]";
+				+ ", cpMemberAdminAdmission=" + cpMemberAdminAdmission + ", areaNo=" + areaNo + ", area2Gungu="
+				+ area2Gungu + ", areaSido=" + areaSido + "]";
 	}
 }

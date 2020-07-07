@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.linkJobs.mapper.ListMapper">
+	
+	<!-- 채용공고 리스트 출력 -->
+	<select id="selectHireAnnouncementList" parameterType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMember" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMember">
+		SELECT
+	   		ha.hire_announcement_no AS hireAnnouncementNo,
+	      	ha.hire_announcement_title AS hireAnnouncementTitle,
+	      	ha.cpmember_id AS cpmemberId,
+	      	ha.hire_announcement_working_form_name hireAnnouncementWorkingFormName,
+	      	ha.hire_announcement_education hireAnnouncementEducation,
+	      	ha.hire_announcement_start_date AS hireAnnouncementStartDate,
+	      	ha.hire_announcement_end_date AS hireAnnouncementEndDate,
+			cp.cpmember_company AS cpMemberCompany,
+			la2.area2_gungu AS area2Gungu,
+			la.area_sido AS areaSido
+		FROM linkjobs_hire_announcement AS ha 
+		INNER JOIN linkjobs_cpmember AS cp
+		INNER JOIN linkjobs_area2 AS la2
+		INNER JOIN linkjobs_area AS la
+	   	ON ha.cpmember_id = cp.cpmember_id
+	   	AND cp.area2_no = la2.area2_no
+	   	AND la2.area_no = la.area_no
+	 
+	</select>
+	
+</mapper>
