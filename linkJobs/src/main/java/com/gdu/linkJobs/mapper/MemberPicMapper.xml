@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.linkJobs.mapper.MemberPicMapper">
+	
+	<!-- 회원가입 시 사진 default값 지정 -->
+	<insert id="insertMemberPic" parameterType="String">
+		INSERT INTO linkjobs_member_pic(
+			member_id,
+			member_pic
+		) VALUES(
+			#{memberId},
+			'default.jpg'
+		)
+	</insert>
+	
+	<!-- 사진 수정 -->
+	<update id="updateMemberPic" parameterType="com.gdu.linkJobs.vo.MemberPic">
+		UPDATE linkjobs_member_pic
+		SET member_pic=#{memberPic}
+		WHERE member_id=#{memberId}
+	</update>
+	
+	<!-- 사진 수정용 select -->
+	<select id="selectMeberPic" parameterType="String" resultType="com.gdu.linkJobs.vo.MemberPic">
+		SELECT
+			member_id memberId,
+			member_pic memberPic 
+		FROM linkjobs_member_pic
+		WHERE member_id=#{memberId}
+	</select>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteMemberPic" parameterType="String">
+		DELETE FROM linkjobs_member_pic
+		WHERE member_id=#{memberId}
+	</delete>
+</mapper>
