@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gdu.linkJobs.mapper.MemberAcademicMapper;
 import com.gdu.linkJobs.service.AreaService;
 import com.gdu.linkJobs.service.MemberCareerService;
+import com.gdu.linkJobs.service.MemberCertificateService;
 import com.gdu.linkJobs.service.MemberService;
 import com.gdu.linkJobs.service.ResumeService;
 import com.gdu.linkJobs.service.MemberAcademicService;
@@ -25,15 +26,17 @@ import com.gdu.linkJobs.vo.Area;
 import com.gdu.linkJobs.vo.Member;
 import com.gdu.linkJobs.vo.MemberAcademic;
 import com.gdu.linkJobs.vo.MemberCareer;
+import com.gdu.linkJobs.vo.MemberCareerAndJobAndArea;
+import com.gdu.linkJobs.vo.MemberCertificate;
 
 @Controller
 public class ResumeController {
 	@Autowired private ResumeService resumeService;
 	@Autowired private AreaService areaService;
 	@Autowired private MemberService memberService;
-	@Autowired private MemberCareerService memberCareerService;
+	// @Autowired private MemberCareerService memberCareerService;
 	@Autowired private MemberAcademicService memberAcademicService;
-	
+	@Autowired private MemberCertificateService memberCertificateService;
 	
 	// 이력서 공개/비공개
 	@PostMapping("/resumeAvaliability")
@@ -69,13 +72,15 @@ public class ResumeController {
 		
 		memberId = "user";
 		Member member = memberService.getMemberOne(memberId);
-		MemberCareer memberCareer = memberCareerService.getMemberCareerOne(memberId);
+		// MemberCareerAndJobAndArea memberCareerAndJobAndArea = memberCareerService.getMemberCareerOne(memberId);
 		List<Area> areaList = areaService.getArea();
 		MemberAcademic memberAcademic = memberAcademicService.getMemberAcademic(memberId);
+		List<MemberCertificate> certificateList = memberCertificateService.getMemberCertificateList(memberId);
 	    System.out.println(memberAcademic+"<--이력서 회원학력");
 	    model.addAttribute("memberAcademic", memberAcademic);
 		model.addAttribute("member", member);
-		model.addAttribute("memberCareer", memberCareer);
+		model.addAttribute("certificateList", certificateList);
+		// model.addAttribute("memberCareer", memberCareerAndJobAndArea);
 		model.addAttribute("areaList", areaList);
 		return "resume/addResume";
 	}

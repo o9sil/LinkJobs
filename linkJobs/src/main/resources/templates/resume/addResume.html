@@ -18,7 +18,7 @@
 <script th:inline="javascript">
    
 $(document).ready(function(){
-   
+   /* 수정중
    // 경력사항
    // 기존페이지  숨김 (신입기본)  --> 경력 클릭시 이벤트 발생
    $('#resumeCareerDiv').hide();
@@ -29,6 +29,17 @@ $(document).ready(function(){
    
    $('#resumeCareer_2').click(function() {
       $('#resumeCareerDiv').show();
+   });
+   */
+   
+   // 자격증 내역
+   $('#addCertificate').click(function() {
+	  
+	   if($('#certificate').css('display') == 'none') {
+		   $('#certificate').show();
+	   } else{
+		   $('#certificate').hide();
+	   }
    });
    
    //지역   
@@ -55,7 +66,28 @@ $(document).ready(function(){
           
    });   
     /*]]>*/
+    
+// 자격증 추가
    
+   $('#addcertificateBtn2').click(function () {
+         let certificateName2= $('#certificateName2').val();
+         let certificateDate2 = $('#certificateDate2').val();
+         console.log("certificateName2 : "+certificateName2);
+         console.log("certificateDate2 : "+certificateDate2);
+          $.ajax({
+             url :/*[[@{/addCertificate}]]*/, 
+             type: "POST",
+             data:{'certificateName':certificateName2, 'certificateDate':certificateDate2},
+             success: function (data) {
+             console.log(data);                   
+            },
+             error: function (data) {
+                console.log('Error:', data);
+            }
+          });
+         
+  });   
+    
 });
 </script>
 </head>
@@ -212,18 +244,10 @@ $(document).ready(function(){
          <input class="form-control" type="text" th:value="${memberAcademic.academicMajor}"  id="academicMajor">
       </div>
    </div>
-
-   
+	<button type="button" id="addCertificate">자격증 정보 추가</button>
+   <!-- 
    <h3>경력사항</h3>
-    <!-- 
-           <div>
-         <select name="resumeCareer" id="resumeCareer">
-            <option>선택</option>
-            <option>신입</option>
-            <option>경력</option>
-         </select>
-      </div>
-      -->
+   
       
       
             <div>
@@ -315,7 +339,46 @@ $(document).ready(function(){
       </div>
        </div>
      </div>
-     
+     -->
+   
+     <br><br>
+   
+   <fieldset th:each="certificateList : ${certificateList}" id="certificate" style="display:none">
+   <h3>자격증 정보</h3>
+	   <div>
+	   		자격증 명
+	   		<span>
+	   			<input type="text" th:value="${certificateList.certificateName}" id="certificateName" name="certificateName">
+	   		</span>
+	   </div>
+	   <div>
+	  		취득일
+	   		<span>
+	   			<input type="date" th:value="${certificateList.certificateDate}" id="certificateDate" name="certificateDate">
+	   		</span>
+	   </div>
+	   <button type="button" id="addcertificateBtn">자격증 추가</button>
+	   
+	   
+	   <fieldset id="certificate2" >
+	   <div>
+	   		자격증 명
+	   		<span>
+	   			<input type="text" th:value="${certificateList.certificateName}" id="certificateName2" name="certificateName2">
+	   		</span>
+	   </div>
+	   <div>
+	  		취득일
+	   		<span>
+	   			<input type="date" th:value="${certificateList.certificateDate}" id="certificateDate2" name="certificateDate2">
+	   		</span>
+	   </div>
+	   <button type="button" id="addcertificateBtn2">자격증 추가</button>
+	   </fieldset>
+	   <button type="button" id="certificateBtn">자격증 수정</button>
+   </fieldset>
+   
+   <br><br>
    <h3>희망 근무 조건</h3>  
      
       <div>

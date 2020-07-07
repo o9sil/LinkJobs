@@ -2,7 +2,6 @@ package com.gdu.linkJobs.vo;
 
 public class HireAnnouncementAndCpMember {
 	private int hireAnnouncementNo;
-	private String cpmemberId;
 	private String hireAnnouncementTitle;
 	private String hireAnnouncementManager;
     private String hireAnnouncementRecuitmentField;
@@ -61,12 +60,7 @@ public class HireAnnouncementAndCpMember {
 	public void setHireAnnouncementNo(int hireAnnouncementNo) {
 		this.hireAnnouncementNo = hireAnnouncementNo;
 	}
-	public String getCpmemberId() {
-		return cpmemberId;
-	}
-	public void setCpmemberId(String cpmemberId) {
-		this.cpmemberId = cpmemberId;
-	}
+
 	public String getHireAnnouncementTitle() {
 		return hireAnnouncementTitle;
 	}
@@ -249,8 +243,7 @@ public class HireAnnouncementAndCpMember {
 	}
 	@Override
 	public String toString() {
-		return "HireAnnouncementAndCpMember [hireAnnouncementNo=" + hireAnnouncementNo + ", cpmemberId=" + cpmemberId
-				+ ", hireAnnouncementTitle=" + hireAnnouncementTitle + ", hireAnnouncementManager="
+		return "HireAnnouncementAndCpMember [hireAnnouncementNo=" + hireAnnouncementNo + ", hireAnnouncementTitle=" + hireAnnouncementTitle + ", hireAnnouncementManager="
 				+ hireAnnouncementManager + ", hireAnnouncementRecuitmentField=" + hireAnnouncementRecuitmentField
 				+ ", hireAnnouncementCareer=" + hireAnnouncementCareer + ", hireAnnouncementDepartment="
 				+ hireAnnouncementDepartment + ", hireAnnouncementJobgrade=" + hireAnnouncementJobgrade

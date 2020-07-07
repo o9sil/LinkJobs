@@ -1,24 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.MemberCareerMapper">
-	<select id="selectMemberCareerOne" parameterType="com.gdu.linkJobs.vo.MemberCareer" resultType="com.gdu.linkJobs.vo.MemberCareer">
-		SELECT
-			career_no careerNo,
-			member_id memberId,
-			career_company_name careerCompanyName,
-			career_start_date careerStartDate,
-			career_end_date careerEndDate,
-			career_leaving careerLeaving,
-			career_reason_for_leaving careerReasonForLeaving,
-			career_jobgrade_jobposition careerJobgradeJobposition,
-			career_jobgrade_jobposition_year careerJobgradeJobpositionYear,
-			job2_no job2No,
-			area_no areaNo,
-			career_department careerDepartment,
-			career_salary careerSalary,
-			career_responsibilities careerResponsibilities,
-			carrer_project_contents carrerProjectContents
-		FROM linkjobs_member_career
-		WHERE member_id = #{memberId}
-	</select>
+   <select id="selectMemberCareerOne" parameterType="String" resultType="com.gdu.linkJobs.vo.MemberCareerAndJobAndArea">
+      SELECT
+         lmc.career_no careerNo,
+         lmc.member_id memberId,
+         lmc.career_company_name careerCompanyName,
+         lmc.career_start_date careerStartDate,
+         lmc.career_end_date careerEndDate,
+         lmc.career_leaving careerLeaving,
+         lmc.career_reason_for_leaving careerReasonForLeaving,
+         lmc.career_jobgrade_jobposition careerJobgradeJobposition,
+         lmc.career_jobgrade_jobposition_year careerJobgradeJobpositionYear,
+         lmc.job2_no job2No,
+         lj2.job2_category job2Category,
+            lj.job_category jobCategory,
+            lj3.job3_category job3Category,
+         lmc.area_no areaNo,
+         la.area_sido areaSido,
+         la2.area2_gungu area2Gungu,
+         lmc.career_department careerDepartment,
+         lmc.career_salary careerSalary,
+         lmc.career_responsibilities careerResponsibilities,
+         lmc.carrer_project_contents carrerProjectContents
+      FROM linkjobs_member_career lmc
+      INNER JOIN linkjobs_job2 lj2 ON lmc.job2_no = lj2.job2_no
+       INNER JOIN linkjobs_job lj ON lj.job_no=lj2.job_no
+        INNER JOIN linkjobs_job3 lj3 ON lj2.job2_no=lj3.job2_no
+      INNER JOIN linkjobs_area la ON lmc.area_no = la.area_no
+      INNER JOIN linkjobs_area2 la2 ON la2.area_no = la.area_no
+      WHERE member_id = #{memberId}
+   </select>
+   <insert id="insertMemberCareer" parameterType="com.gdu.linkJobs.vo.MemberCareer">
+      INSERT INTO linkjobs_member_career(
+         member_id,
+         career_company_name,
+         career_start_date,
+         career_end_date,
+         career_leaving,
+         career_reason_for_leaving,
+         career_jobgrade_jobposition,
+         career_jobgrade_jobposition_year,
+         job2_no,
+         area_no,
+         career_department,
+         career_salary,
+         career_responsibilities,
+         carrer_project_contents
+      ) VALUES(
+         #{memberId},
+         #{careerCompanyName},
+         #{careerStartDate},
+         #{careerEndDate},
+         #{careerLeaving},
+         #{careerReasonForLeaving},
+         #{careerJobgradeJobposition},
+         #{careerJobgradeJobpositionYear},
+         #{job2No},
+         #{areaNo},
+         #{careerDepartment},
+         #{careerSalary},
+         #{careerResponsibilities},
+         #{carrerProjectContents}
+      )
+   </insert>
 </mapper>
