@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>getMemberDetail</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script
+   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Custom fonts for this template-->
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}"
+   rel="stylesheet" type="text/css">
+<link
+   href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+   rel="stylesheet">
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Custom scripts for all pages-->
+<!-- <script src="js/sb-admin-2.min.js"></script> -->
+<!-- Custom styles for this template-->
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+<script th:inline="javascript">
+   
+   
+   let helperInit = function() {
+        $('#pwHelper').text("");
+        $('#newPwHelper').text("");
+         $('#newPwHelper2').text("");
+      }
+   
+   
+   $(document).ready(function () {
+     
+      $('#pwBtn').click(function() {
+         
+       if($('#memberPw').val().length == ""){
+             helperInit(); //값이 다시 초기화 됨
+              $('#pwHelper').text("비밀번호를 입력하지 않았습니다.");
+              $('#memberPw').focus();
+         }else if($('#newMemberPw').val().length < 4){
+           helperInit(); //값이 다시 초기화 됨
+            $('#newPwHelper').text("PW는 4자 이상입니다.");
+            $('#newMemberPw').focus();
+         }else if($('#newMemberPw2').val() != $('#newMemberPw').val()){
+             helperInit(); //값이 다시 초기화 됨
+             $('#newPwHelper2').text("비밀번호가 맞지 않습니다.");
+             $('#newMemberPw2').focus();
+          }else{
+            $('#pwForm').submit();            
+         }
+         
+      });
+   });
+   
+</script>
+</head>
+<body id="page-top">
+   <!-- Page Wrapper -->
+   <div id="wrapper">
+      <!-- SideBar -->
+      <ul th:include="/include/menuSide::navSide"
+         class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
+         id="accordionSidebar">
+      </ul>
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+         <div th:include="/include/menuTop::navTop"></div>ㄴ
+         <!-- Main Content -->
+         <div id="content">
+
+            <!-- 페이지 내용 -->
+            <div class="container-fluid">
+            <h1>비밀번호 수정</h1>
+            <form th:action="@{/modifyMemberPw}" method="post" id="pwForm">
+               <div class="row">
+                  <div class="col-sm-3">현재 비밀번호 :</div>
+                  <div class="col-sm-9">
+                     <input type="password" id="memberPw" name="memberPw" class="form-control"> 
+                     <span id="pwHelper"></span>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-3">새 비밀번호 :</div>
+                  <div class="col-sm-9">
+                     <input type="password" id="newMemberPw" name="newMemberPw" class="form-control"> 
+                     <span id="newPwHelper"></span>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-3">새 비밀번호 확인 :</div>
+                  <div class="col-sm-9">
+                     <input type="password" id="newMemberPw2" name="newMemberPw2" class="form-control"> 
+                     <span id="newPwHelper2"></span>
+                  </div>
+               </div>
+               <div align="right">
+                  <button id="pwBtn" type="button" class="btn btn-info" >수정하기</button>
+               </div>
+            </form>
+            </div>
+            <hr>
+         </div>
+      </div>
+   </div>
+</body>
+
+</html>

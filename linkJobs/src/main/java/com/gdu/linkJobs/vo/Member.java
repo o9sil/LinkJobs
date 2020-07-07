@@ -12,7 +12,14 @@ public class Member {
    private String memberBirthdate;
    private String memberGender;
    private String memberSocialLogin;
-   public String getMemberId() {
+   private String newMemberPw;
+   public String getNewMemberPw() {
+	return newMemberPw;
+}
+public void setNewMemberPw(String newMemberPw) {
+	this.newMemberPw = newMemberPw;
+}
+public String getMemberId() {
       return memberId;
    }
    public void setMemberId(String memberId) {

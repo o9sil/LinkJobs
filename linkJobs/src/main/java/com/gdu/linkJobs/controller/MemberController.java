@@ -23,6 +23,48 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private AreaService areaService;
+	
+	// 회원 탈퇴 폼
+	@GetMapping("/removeMember")
+	public String removeMember(HttpSession session) {
+		if (session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		return "member/removeMember";
+		
+	}
+	//회원 탈퇴 액션
+	@PostMapping("removeMember")
+	public String removeMember(HttpSession session, Member member) {
+		if (session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		String memberId = (String)session.getAttribute("loginMember");
+		member.setMemberId(memberId);
+		memberService.removeMember(member);
+		return "redirect:/";
+	}
+	
+	// 회원 비밀번호 수정 폼
+	@GetMapping("/modifyMemberPw")
+	public String modifyMemberPw(HttpSession session) {
+		if (session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		return "member/modifyMemberPw";
+	}
+	
+	// 회원 비밀번호 수정 액션 
+	@PostMapping("/modifyMemberPw")
+	public String modifyMemberPw(HttpSession session, Member member) {
+		if (session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		String memberId = (String)session.getAttribute("loginMember");
+		member.setMemberId(memberId);
+		memberService.modifyMemberPw(member);
+		return "redirect:/modifyMemberPw";
+	}
 
 	// 회원정보 수정 폼
 	@GetMapping("/modifyMember")

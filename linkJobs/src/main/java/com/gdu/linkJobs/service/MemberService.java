@@ -8,9 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gdu.linkJobs.mapper.MemberMapper;
 import com.gdu.linkJobs.mapper.MemberPicMapper;
+import com.gdu.linkJobs.mapper.MemberWithdrawalMapper;
 import com.gdu.linkJobs.vo.LoginMember;
 import com.gdu.linkJobs.vo.Member;
 import com.gdu.linkJobs.vo.MemberPic;
+import com.gdu.linkJobs.vo.MemberWithdrawal;
 
 @Service
 @Transactional
@@ -19,6 +21,24 @@ public class MemberService {
 	private MemberMapper memberMapper;
 	@Autowired
 	private MemberPicMapper memberPicMapper;
+	@Autowired
+	private MemberWithdrawalMapper withdrawalMapper;
+	
+
+	// 회원 탈퇴 -> 회원 삭제
+	public void removeMember(Member member) {
+		int sucess=memberMapper.deleteMember(member);
+		if(sucess==1 ) {
+			withdrawalMapper.addMemberWithdrawal(member.getMemberId());
+		}else {
+			return;
+		}
+	}
+
+	// 회원 비밀번호 수정
+	public int modifyMemberPw(Member member) {
+		return memberMapper.updateMemberPw(member);
+	}
 
 	// 이력서 회원정보 출력
 	public Member getMemberOne(String memberId) {

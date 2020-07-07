@@ -7,7 +7,10 @@ import com.gdu.linkJobs.vo.Member;
 
 @Mapper
 public interface MemberMapper {
-	
+	//회원 탈퇴 -> 회원 삭제
+	public int deleteMember(Member member);
+	//회원 비밀번호 수정
+	public int updateMemberPw(Member member);
 	//일반 회원가입
 	public int insertMember(Member member);
 	//중복체크
