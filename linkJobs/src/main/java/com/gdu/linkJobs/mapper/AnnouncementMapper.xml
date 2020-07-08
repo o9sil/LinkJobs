@@ -8,7 +8,7 @@
 			hireAnnouncement.hire_announcement_title AS title, 
 			cpmember.cpmember_company AS company,  
 			hireAnnouncement.hire_announcement_end_date AS endDate, 
-			concat(AREA.area_sido, ' ', AREA2.area2_gungu) AS areaName, 
+			concat(area.area_sido, ' ', area2.area2_gungu) AS areaName, 
 			hireAnnouncement.hire_announcement_career AS career, 
 			hireAnnouncement.hire_announcement_education AS education, 
 			hireAnnouncement.hire_announcement_working_form_name AS workingFormName, 
@@ -16,11 +16,11 @@
 			hireAnnouncement.hire_announcement_main_job AS mainJob
 		FROM linkjobs_hire_announcement hireAnnouncement 
 			INNER JOIN linkjobs_cpmember cpmember 
-			INNER JOIN linkjobs_area2 AREA2 
+			INNER JOIN linkjobs_area2 area2 
 			INNER JOIN linkjobs_area area
 		ON hireAnnouncement.cpmember_id = cpmember.cpmember_id 
-			AND cpmember.area2_no = AREA2.area2_no 
-			AND AREA2.area_no = AREA.area_no
+			AND cpmember.area2_no = area2.area2_no 
+			AND area2.area_no = area.area_no
 		WHERE hireAnnouncement.cpmember_id = #{cpMemberId}	
 		ORDER BY hireAnnouncement.hire_announcement_no DESC
 	</select>

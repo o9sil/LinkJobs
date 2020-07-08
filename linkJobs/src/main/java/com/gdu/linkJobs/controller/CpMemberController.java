@@ -207,7 +207,7 @@ public class CpMemberController {
 			return "redirect:/loginCpMember";
 		}else {
 			session.setAttribute("loginCpMember", loginId);
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 	}
 	

@@ -23,7 +23,7 @@ public class MemberAcademicController {
 	@GetMapping("/getMemberAcademicList")
 	public String getMemberAcademic(HttpSession session,Model model) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		String memberId=(String)session.getAttribute("loginMember");
 		MemberAcademic MA=new MemberAcademic();
@@ -38,7 +38,7 @@ public class MemberAcademicController {
 	@GetMapping("/addMemberAcademic")
 	public String addMemberAcademic(HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		return "member/addMemberAcademic";
 	}
@@ -46,7 +46,7 @@ public class MemberAcademicController {
 	@PostMapping("/addMemberAcademic")
 	public String addMemberAcademic(HttpSession session,MemberAcademic memberAcademic) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		String memberId=(String)session.getAttribute("loginMember");
 		memberAcademic.setMemberId(memberId);
@@ -59,7 +59,7 @@ public class MemberAcademicController {
 	public String modifyMemberAcademic(HttpSession session,Model model,
 			@RequestParam("academicNo") int academicNo) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		MemberAcademic ma=academicService.getMemberAcademicOne(academicNo);
 		model.addAttribute("ma", ma);
@@ -70,7 +70,7 @@ public class MemberAcademicController {
 	@PostMapping("/modifyMemberAcademic")
 	public String modifyMemberAcademic(HttpSession session,MemberAcademic memberAcademic) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		
 		academicService.modifyMemberAcademic(memberAcademic);
@@ -81,7 +81,7 @@ public class MemberAcademicController {
 	@GetMapping("/removeMemberAcademic")
 	public String removeMemberAcademic(HttpSession session, @RequestParam("academicNo") int academicNo) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		System.out.println(academicNo+"<--academicNo.removeMemberAcademic");
 		academicService.removeMemberAcademic(academicNo);

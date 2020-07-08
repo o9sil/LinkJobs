@@ -24,7 +24,7 @@ public class MemberCertificateController {
 	@GetMapping("/addMemberCertificate")
 	public String addMemberCertificate(HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		return "member/addMemberCertificate";
 	}
@@ -48,7 +48,7 @@ public class MemberCertificateController {
 	public String modifyMemberCertificate(@RequestParam("certificateNo") int certificateNo,
 									Model model,HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		MemberCertificate MC= memberCertificateService.getMemberCertificateOne(certificateNo);
 		model.addAttribute("memberCertificate", MC);
@@ -58,7 +58,7 @@ public class MemberCertificateController {
 	@PostMapping("/modifyMemberCertificate")
 	public String modifyMemberCertificate(MemberCertificate memberCertificate, HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		String memberId=(String) session.getAttribute("loginMember");
 		System.out.println(memberId+"<--memberId.memberCertificate");
@@ -71,7 +71,7 @@ public class MemberCertificateController {
 	@GetMapping("/removeMemberCertificate")
 	public String removeMemberCertificate(@RequestParam("certificateNo") int certificateNo,HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		
 		memberCertificateService.removeMemberCertificate(certificateNo);
@@ -82,7 +82,7 @@ public class MemberCertificateController {
 	@GetMapping("/getMemberCertificateList")
 	public String getMemberCertificateList( Model model,HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		String memberId=(String) session.getAttribute("loginMember");
 		System.out.println(memberId+"<--memberId.memberCertificate");

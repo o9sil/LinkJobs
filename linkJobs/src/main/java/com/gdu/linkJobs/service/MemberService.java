@@ -1,6 +1,7 @@
 package com.gdu.linkJobs.service;
 
 import java.io.File;
+import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -102,13 +103,18 @@ public class MemberService {
 		int row = memberPicMapper.updateMemberPic(pic);
 
 		// 2.파일 저장
-		String path = "C:\\Users\\gd\\Desktop\\linkjobsSpring\\maven.1594088790603\\linkJobs\\src\\main\\resources\\static\\img";
-
+		URL location = this.getClass().getResource("/static/img/default.jpg");
+	    String path = location.getPath();
+	    String rightPath = path.substring(0, path.lastIndexOf("/"));
+	    System.out.println("경로 = " + rightPath);
 		
-		File file = new File(path +"\\"+ memberPic);
+		
+		File file = new File(rightPath +"\\"+ memberPic);
 		//기존의 파일 삭제
 		if(file.exists()) {
-			file.delete();
+			if(file.getName() != "default.jpg") {
+				file.delete();
+			}
 		}
 		
 		//새로 추가
@@ -122,12 +128,12 @@ public class MemberService {
 		return row;
 
 	}
-
+	/*
 	private MultipartFile MultipartFile(String string) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	*/
 	// 사진 수정 폼
 	public MemberPic getMemberPic(String memberId) {
 		return memberPicMapper.selectMeberPic(memberId);

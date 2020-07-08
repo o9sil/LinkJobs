@@ -24,7 +24,7 @@ public class SelfIntroductionController {
 	@GetMapping("/getSelfIntroductionList")
 	public String getSelfIntroductionList( Model model,HttpSession session){
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		String memberId = (String) session.getAttribute("loginMember");
 		System.out.println(memberId + "<--memberId.SelfIntroduction");
@@ -39,7 +39,7 @@ public class SelfIntroductionController {
 	@GetMapping("/getSelfIntroductionOne")
 	public String getSelfIntroductionOne (@RequestParam("selfIntroductionNo") int selfIntroductionNo, Model model, HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		String memberId = (String) session.getAttribute("loginMember");
 		System.out.println(memberId + "<--memberId.SelfIntroduction");
@@ -55,7 +55,7 @@ public class SelfIntroductionController {
 	public String getSelfIntroductionOne (@RequestParam("selfIntroductionNo") int selfIntroductionNo, Model model, 
 									SelfIntroduction selfIntroduction, HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		SelfIntroduction si = selfIntroductionService.getSelfIntroductionOne(selfIntroductionNo);
 		model.addAttribute("selfIntroductionOne", si);
@@ -67,7 +67,7 @@ public class SelfIntroductionController {
 	@PostMapping("/modifySelfIntroduction")
 	public String modifySelfIntroduction(SelfIntroduction selfIntroduction, HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		System.out.println(selfIntroduction);
 		selfIntroductionService.modifySelfIntroductio(selfIntroduction);
@@ -79,7 +79,7 @@ public class SelfIntroductionController {
 	@GetMapping("/removeSelfIntroduction")
 	public String removeSelfIntroduction(@RequestParam("selfIntroductionNo") int selfIntroductionNo, HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		selfIntroductionService.removeSelfIntroduction(selfIntroductionNo);
 		return "redirect:/getSelfIntroductionList";
@@ -89,7 +89,7 @@ public class SelfIntroductionController {
 	@GetMapping("/addSelfIntroduction")
 	public String addSelfIntroduction(HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		return "member/addSelfIntroduction";
 	}
@@ -98,7 +98,7 @@ public class SelfIntroductionController {
 	@PostMapping("/addSelfIntroduction")
 	public String addSelfIntroduction(SelfIntroduction selfIntroduction, HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		String memberId = (String) session.getAttribute("loginMember");
 		selfIntroduction.setMemberId(memberId);

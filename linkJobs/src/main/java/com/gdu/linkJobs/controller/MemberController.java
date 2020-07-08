@@ -26,40 +26,41 @@ public class MemberController {
 	@Autowired
 	private AreaService areaService;
 
-	//사진 수정 폼
+	// 사진 수정 폼
 	@GetMapping("/modifyMemberPic")
 	public String modifyMemberPic(HttpSession session) {
 		if (session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		return "member/modifyMemberPic";
 
 	}
-	//사진 수정 액션
+
+	// 사진 수정 액션
 	@PostMapping("/modifyMemberPic")
-	public String modifyMemberPic(HttpSession session,MemberPicForm memberPicForm) {
+	public String modifyMemberPic(HttpSession session, MemberPicForm memberPicForm) {
 		if (session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		String memberId = (String) session.getAttribute("loginMember");
 		memberPicForm.setMemberId(memberId);
-		if(memberPicForm.getMemberPic() != null) {
-			if(!memberPicForm.getMemberPic().getContentType().equals("image/jpeg") 
+		if (memberPicForm.getMemberPic() != null) {
+			if (!memberPicForm.getMemberPic().getContentType().equals("image/jpeg")
 					&& !memberPicForm.getMemberPic().getContentType().equals("image/png")) {
 				return "redirect:/modifyMemberPic";
 			}
 		}
-		
+
 		memberService.modifyMemberPic(memberPicForm);
-		
+
 		return "redirect:/getMemberDetail";
 	}
-	
+
 	// 회원 탈퇴
 	@GetMapping("/removeMember")
 	public String removeMember(HttpSession session) {
 		if (session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		return "member/removeMember";
 
@@ -69,20 +70,20 @@ public class MemberController {
 	@PostMapping("removeMember")
 	public String removeMember(HttpSession session, Member member) {
 		if (session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		String memberId = (String) session.getAttribute("loginMember");
 		member.setMemberId(memberId);
 		memberService.removeMember(member);
 		session.invalidate();
-		return "redirect:/";
+		return "redirect:/getAnnouncementList";
 	}
 
 	// 회원 비밀번호 수정 폼
 	@GetMapping("/modifyMemberPw")
 	public String modifyMemberPw(HttpSession session) {
 		if (session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		return "member/modifyMemberPw";
 	}
@@ -91,19 +92,19 @@ public class MemberController {
 	@PostMapping("/modifyMemberPw")
 	public String modifyMemberPw(HttpSession session, Member member) {
 		if (session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		String memberId = (String) session.getAttribute("loginMember");
 		member.setMemberId(memberId);
 		memberService.modifyMemberPw(member);
-		return "redirect:/modifyMemberPw";
+		return "redirect:/getMemberDetail";
 	}
 
 	// 회원정보 수정 폼
 	@GetMapping("/modifyMember")
 	public String modifyMember(Model model, HttpSession session) {
 		if (session.getAttribute("loginMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 
 		String memberId = (String) session.getAttribute("loginMember");
@@ -117,24 +118,6 @@ public class MemberController {
 		return "member/modifyMember";
 	}
 
-	// 회원정보 출력
-	@GetMapping("/getMemberDetail")
-	public String getMemberDetail(Model model, HttpSession session) {
-		if (session.getAttribute("loginMember") == null) {
-			return "redirect:/";
-		}
-
-		String memberId = (String) session.getAttribute("loginMember");
-		Member member = memberService.getMemberOne(memberId);
-		model.addAttribute("m", member);
-		MemberPic mp=memberService.getMemberPic(memberId);
-		model.addAttribute("mp", mp);
-		
-		System.out.println(member + "<---member");
-
-		return "member/getMemberDetail";
-	}
-
 	// 회원정보 수정 액션
 	@PostMapping("/modifyMember")
 	public String modifyMember(Member member) {
@@ -142,11 +125,29 @@ public class MemberController {
 		return "redirect:/getMemberDetail";
 	}
 
+	// 회원정보 출력
+	@GetMapping("/getMemberDetail")
+	public String getMemberDetail(Model model, HttpSession session) {
+		if (session.getAttribute("loginMember") == null) {
+			return "redirect:/getAnnouncementList";
+		}
+
+		String memberId = (String) session.getAttribute("loginMember");
+		Member member = memberService.getMemberOne(memberId);
+		model.addAttribute("m", member);
+		MemberPic mp = memberService.getMemberPic(memberId);
+		model.addAttribute("mp", mp);
+
+		System.out.println(member + "<---member");
+
+		return "member/getMemberDetail";
+	}
+
 	// 일반회원 회원가입 폼
 	@GetMapping("/addMember")
 	public String addMember(Model model, HttpSession session) {
 		if (session.getAttribute("loginMember") != null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		System.out.println("member insert sucess");
 		List<Area> areaList = areaService.getArea();
@@ -156,11 +157,14 @@ public class MemberController {
 
 	// 일반회원 회원가입 액션
 	@PostMapping("/addMember")
-	public String addMember(Member member) {
+	public String addMember(Member member,HttpSession session) {
+		if (session.getAttribute("loginMember") != null) {
+			return "redirect:/getAnnouncementList";
+		}
 		System.out.println(member);
 		memberService.addMember(member);
 		System.out.println(member);
-		return "redirect:/";
+		return "redirect:/getAnnouncementList";
 	}
 
 	// 중복 체크
@@ -168,7 +172,7 @@ public class MemberController {
 	public String checkMemberId(@RequestParam("memberIdCheck") String memberIdCheck, Model model, Member member,
 			HttpSession session) {
 		if (session.getAttribute("loginMember") != null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 
 		System.out.println(member);
@@ -193,7 +197,7 @@ public class MemberController {
 	@GetMapping("/loginMember")
 	public String loginMember(HttpSession session) {
 		if (session.getAttribute("loginMember") != null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 
 		return "login/login";
@@ -204,7 +208,7 @@ public class MemberController {
 	public String loginMember(Model model, HttpSession session, LoginMember loginMember) {
 		// 로그인 중
 		if (session.getAttribute("loginMember") != null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 
 		String loginMemberId = memberService.loginMember(loginMember);
@@ -216,7 +220,7 @@ public class MemberController {
 		} else {
 			System.out.println(loginMemberId + "<--loginId");
 			session.setAttribute("loginMember", loginMemberId);
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 
 	}
@@ -226,6 +230,6 @@ public class MemberController {
 	public String logoutMember(HttpSession session) {
 		session.invalidate();
 
-		return "redirect:/";
+		return "redirect:/getAnnouncementList";
 	}
 }
