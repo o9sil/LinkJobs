@@ -39,12 +39,9 @@
       
       $('#picFormBtn').click(function() {
     	  
-       if($('#memberPic').val().length == ""){
-              $('#picHelper').text("사진 파일이 없습니다.");
-              $('#memberPic').focus();
-         } else{
+       
             $('#picForm').submit();            
-         }
+         
          
       });
    });
@@ -71,7 +68,7 @@
 					<br>
 					
 					<!-- 회원사진 수정 폼 -->
-					<form th:action="@{/modifyMemberPic}" method="post" id="picForm">
+					<form th:action="@{/modifyMemberPic}" id="picForm" method="post" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-sm-3">사진 :</div>
 							<div class="col-sm-9">

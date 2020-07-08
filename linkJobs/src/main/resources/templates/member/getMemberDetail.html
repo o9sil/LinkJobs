@@ -176,7 +176,7 @@
                   </tr>
                   <tr>
                      <td>주소 :</td>
-                     <td><input type="text"  th:value="${m.areaSido +m.area2Gungu}" readonly="readonly"  class="form-control"></td>
+                     <td><input type="text"  th:value="${m.areaSido +m.area2Gungu}" readonly="readonly" class="form-control"></td>
                   </tr>
                   <tr>
                      <td>상세주소 :</td>
@@ -195,7 +195,7 @@
                   
                   <div class="col-sm-2">
                      <div>
-                        <img th:src="@{/img/default.jpg}" alt="My Image" height="250px">
+                        <img th:src="@{${'/img/' + mp.memberPic}}" alt="My Image" height="250px">
                      </div>
                      <br>
                      <div align="center">

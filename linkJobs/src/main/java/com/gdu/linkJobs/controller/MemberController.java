@@ -16,6 +16,8 @@ import com.gdu.linkJobs.service.MemberService;
 import com.gdu.linkJobs.vo.Area;
 import com.gdu.linkJobs.vo.LoginMember;
 import com.gdu.linkJobs.vo.Member;
+import com.gdu.linkJobs.vo.MemberPic;
+import com.gdu.linkJobs.vo.MemberPicForm;
 
 @Controller
 public class MemberController {
@@ -23,29 +25,59 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private AreaService areaService;
+
+	//사진 수정 폼
+	@GetMapping("/modifyMemberPic")
+	public String modifyMemberPic(HttpSession session) {
+		if (session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		return "member/modifyMemberPic";
+
+	}
+	//사진 수정 액션
+	@PostMapping("/modifyMemberPic")
+	public String modifyMemberPic(HttpSession session,MemberPicForm memberPicForm) {
+		if (session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		String memberId = (String) session.getAttribute("loginMember");
+		memberPicForm.setMemberId(memberId);
+		if(memberPicForm.getMemberPic() != null) {
+			if(!memberPicForm.getMemberPic().getContentType().equals("image/jpeg") 
+					&& !memberPicForm.getMemberPic().getContentType().equals("image/png")) {
+				return "redirect:/modifyMemberPic";
+			}
+		}
+		
+		memberService.modifyMemberPic(memberPicForm);
+		
+		return "redirect:/getMemberDetail";
+	}
 	
-	// 회원 탈퇴 
+	// 회원 탈퇴
 	@GetMapping("/removeMember")
 	public String removeMember(HttpSession session) {
 		if (session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
 		return "member/removeMember";
-		
+
 	}
-	//회원 탈퇴 액션
+
+	// 회원 탈퇴 액션
 	@PostMapping("removeMember")
 	public String removeMember(HttpSession session, Member member) {
 		if (session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
-		String memberId = (String)session.getAttribute("loginMember");
+		String memberId = (String) session.getAttribute("loginMember");
 		member.setMemberId(memberId);
 		memberService.removeMember(member);
 		session.invalidate();
 		return "redirect:/";
 	}
-	
+
 	// 회원 비밀번호 수정 폼
 	@GetMapping("/modifyMemberPw")
 	public String modifyMemberPw(HttpSession session) {
@@ -54,14 +86,14 @@ public class MemberController {
 		}
 		return "member/modifyMemberPw";
 	}
-	
-	// 회원 비밀번호 수정 액션 
+
+	// 회원 비밀번호 수정 액션
 	@PostMapping("/modifyMemberPw")
 	public String modifyMemberPw(HttpSession session, Member member) {
 		if (session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
-		String memberId = (String)session.getAttribute("loginMember");
+		String memberId = (String) session.getAttribute("loginMember");
 		member.setMemberId(memberId);
 		memberService.modifyMemberPw(member);
 		return "redirect:/modifyMemberPw";
@@ -73,40 +105,43 @@ public class MemberController {
 		if (session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
-		
-		String memberId = (String)session.getAttribute("loginMember");
+
+		String memberId = (String) session.getAttribute("loginMember");
 		Member member = memberService.getMemberOne(memberId);
 		model.addAttribute("m", member);
 		System.out.println(member + "<---member");
-		
+
 		List<Area> areaList = areaService.getArea();
 		model.addAttribute("areaList", areaList);
-		
+
 		return "member/modifyMember";
 	}
-	
-	//회원정보 출력
+
+	// 회원정보 출력
 	@GetMapping("/getMemberDetail")
 	public String getMemberDetail(Model model, HttpSession session) {
 		if (session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
-		
-		String memberId = (String)session.getAttribute("loginMember");
+
+		String memberId = (String) session.getAttribute("loginMember");
 		Member member = memberService.getMemberOne(memberId);
 		model.addAttribute("m", member);
-		System.out.println(member + "<---member");
+		MemberPic mp=memberService.getMemberPic(memberId);
+		model.addAttribute("mp", mp);
 		
+		System.out.println(member + "<---member");
+
 		return "member/getMemberDetail";
 	}
 
-	//회원정보 수정 액션
+	// 회원정보 수정 액션
 	@PostMapping("/modifyMember")
 	public String modifyMember(Member member) {
 		memberService.modifyMember(member);
 		return "redirect:/getMemberDetail";
 	}
-	
+
 	// 일반회원 회원가입 폼
 	@GetMapping("/addMember")
 	public String addMember(Model model, HttpSession session) {

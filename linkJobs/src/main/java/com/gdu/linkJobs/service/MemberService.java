@@ -5,6 +5,7 @@ import java.io.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gdu.linkJobs.mapper.MemberAcademicMapper;
 import com.gdu.linkJobs.mapper.MemberCertificateMapper;
@@ -15,7 +16,7 @@ import com.gdu.linkJobs.mapper.SelfIntroductionMapper;
 import com.gdu.linkJobs.vo.LoginMember;
 import com.gdu.linkJobs.vo.Member;
 import com.gdu.linkJobs.vo.MemberPic;
-import com.gdu.linkJobs.vo.MemberWithdrawal;
+import com.gdu.linkJobs.vo.MemberPicForm;
 
 @Service
 @Transactional
@@ -32,25 +33,21 @@ public class MemberService {
 	private MemberAcademicMapper academicMapper;
 	@Autowired
 	private SelfIntroductionMapper introductionMapper;
-	
 
 	// 회원 탈퇴 -> 회원 삭제
 	public void removeMember(Member member) {
-		int academicSuccess=academicMapper.removeMemberAcademic(member.getMemberId());
-		int certificateSuccess=certificateMapper.removeMemberCertificate(member.getMemberId());
-		int introductionSuccess=introductionMapper.removeSelfIntroduction(member.getMemberId());
-		
-		if(academicSuccess==1) {
-			if (certificateSuccess==1) {
-				if(introductionSuccess==1) {
-					if(memberMapper.deleteMember(member)==1 ) {
-						withdrawalMapper.addMemberWithdrawal(member.getMemberId());
-					}else {
-						return;
-					}
-				}
-			}
+		academicMapper.removeMemberAcademic(member.getMemberId());
+		certificateMapper.removeMemberCertificate(member.getMemberId());
+		introductionMapper.removeSelfIntroduction(member.getMemberId());
+
+		if (memberMapper.deleteMember(member) == 1) {
+			System.out.println("memberDelete");
+			memberMapper.deleteMember(member);
+			withdrawalMapper.addMemberWithdrawal(member.getMemberId());
+		} else {
+			return;
 		}
+
 	}
 
 	// 회원 비밀번호 수정
@@ -85,17 +82,55 @@ public class MemberService {
 		return memberMapper.updateMember(member);
 	}
 
-	// 사진 수정
-	public void modifyMemberPic(MemberPic memberPic) {
+	// 사진 수정 액션
+	public int modifyMemberPic(MemberPicForm memberPicForm) {
 
-		memberPicMapper.updateMemberPic(memberPic);
+		// memberForm -> member
+		MultipartFile mf = memberPicForm.getMemberPic();
+		
+		// 확장자 
+		String originName = mf.getOriginalFilename();
+		int lastDot = originName.lastIndexOf(".");
+		String extention = originName.substring(lastDot);
+		String memberPic = memberPicForm.getMemberId() + extention;
+
+		// db에 저장
+		MemberPic pic=new MemberPic();
+		pic.setMemberId(memberPicForm.getMemberId());
+		pic.setMemberPic(memberPic);
+
+		int row = memberPicMapper.updateMemberPic(pic);
+
+		// 2.파일 저장
+		String path = "C:\\Users\\gd\\Desktop\\linkjobsSpring\\maven.1594088790603\\linkJobs\\src\\main\\resources\\static\\img";
+
+		
+		File file = new File(path +"\\"+ memberPic);
+		//기존의 파일 삭제
+		if(file.exists()) {
+			file.delete();
+		}
+		
+		//새로 추가
+		try {
+			mf.transferTo(file);
+		} catch (Exception e) { 
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+
+		return row;
+
+	}
+
+	private MultipartFile MultipartFile(String string) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// 사진 수정 폼
 	public MemberPic getMemberPic(String memberId) {
 		return memberPicMapper.selectMeberPic(memberId);
 	}
-
-	// 회원 탈퇴
 
 }
