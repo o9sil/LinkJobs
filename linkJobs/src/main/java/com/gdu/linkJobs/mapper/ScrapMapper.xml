@@ -5,24 +5,25 @@
 
 
 
-
+<select id="selectBoolean" parameterType="com.gdu.linkJobs.vo.Scrap" resultType="String">
+	SELECT scrap_boolean scrapBoolean
+	FROM linkjobs_scrap 
+	WHERE hire_announcement_no = #{hireAnnouncementNo}
+</select>
 
 <!-- 스크랩 추가 -->
 <insert id="insertScrap" parameterType="com.gdu.linkJobs.vo.Scrap">
-INSERT INTO linkjobs_scrap 
-			(scrap_boolean, member_id, hire_announcement_no, scrap_date)
-	SELECT 
-			scrap_boolean AS scrapBoolean, 
-			member_id AS memberId, 
-			hire_announcement_no AS hireAnnouncementNo, 
-			scrap_date AS scrapDate
-	FROM dual
-	WHERE NOT EXISTS 
-		(SELECT scrap_no 
-		FROM linkjobs_scrap 
-		where member_id=#{memberId} 
-		AND hire_announcement_no=#{hireAnnouncementNo})
-
+	INSERT INTO linkjobs_scrap(
+		member_id,
+		scrap_boolean,
+		hire_announcement_no,
+		scrap_date
+	) VALUES (
+		#{memberId},
+		#{scrapBoolean},
+		#{hireAnnouncementNo},
+		NOW()
+	)
 </insert>
 
 
@@ -32,8 +33,6 @@ INSERT INTO linkjobs_scrap
 UPDATE linkjobs_scrap SET 
 	scrap_boolean = #{scrapBoolean},
 	scrap_date = NOW()
-WHERE member_id = #{memberId} 
-	  AND hire_announcement_no = #{hireAnnouncementNo};
-
+WHERE scrap_no = #{scrapNo}
 </update>
 </mapper>

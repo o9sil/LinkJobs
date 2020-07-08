@@ -11,10 +11,13 @@ public class ScrapService {
 	@Autowired private ScrapMapper scrapMapper;
 	
 	
+	//boolean값 확인
+	public Scrap selectBoolean(int hireAnnouncementNo) {
+		return scrapMapper.selectBoolean(hireAnnouncementNo);
+	}
 	
 	//스크랩 추가 
 	public int insertScrap(Scrap scrap) {
-	
 		return scrapMapper.insertScrap(scrap);
 	}
 	

@@ -49,19 +49,6 @@
 	</update>
 	
 	
-	<!-- 채용공고 리스트 출력 -->
-	<select id="selectHireAnnouncementList" parameterType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMember" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMember">
-		SELECT
-	   		ha.hire_announcement_no AS hireAnnouncementNo,
-	      	ha.hire_announcement_title AS hireAnnouncementTitle,
-	      	ha.cpmember_id AS cpmemberId,
-	      	ha.hire_announcement_end_date AS hireAnnouncementEndDate,
-			cp.cpmember_company AS cpMemberCompany  
-		FROM linkjobs_hire_announcement AS ha INNER JOIN linkjobs_cpmember AS cp
-	   	ON ha.cpmember_id = cp.cpmember_id
-	 
-	</select>
-	
 	<!-- 채용공고 수정 -->
 	<update id="updateHireAnnouncementOne" parameterType="com.gdu.linkJobs.vo.HireAnnouncement">
 		UPDATE linkjobs_hire_announcement

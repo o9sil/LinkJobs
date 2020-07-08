@@ -18,11 +18,11 @@ public class ScrapRestController {
 		String memberId = "user";	
 		Scrap scrap = new Scrap();
 		scrap.setMemberId(memberId);
-		scrap.setHireAnnouncementNo(hireAnnouncementNo);
 		scrap.setScrapBoolean(scrapBoolean);
+		scrap.setHireAnnouncementNo(hireAnnouncementNo);
 		System.out.println(memberId+"<--memberId");
 		System.out.println(hireAnnouncementNo+"<--hireAnnouncementNo");
-		System.out.println(scrapBoolean+"<--scrapBoolean");
+
 	
 		return scrapService.insertScrap(scrap);
 	}
@@ -30,15 +30,14 @@ public class ScrapRestController {
 	
 	
 	@PostMapping("/modifyScrap")
-	public int modifyScrap(@RequestParam("hireAnnouncementNo") int hireAnnouncementNo, @RequestParam("scrapBoolean") String scrapBoolean) {
+	public int modifyScrap(@RequestParam("scrapNo") int scrapNo, @RequestParam("scrapBoolean") String scrapBoolean) {
 		String memberId = "user";	
 		Scrap scrap = new Scrap();
 		scrap.setMemberId(memberId);
 		System.out.println(memberId+"<--memberId");
-		scrap.setHireAnnouncementNo(hireAnnouncementNo);
-		System.out.println(hireAnnouncementNo+"<--hireAnnouncementNo");
+		scrap.setScrapNo(scrapNo);
 		scrap.setScrapBoolean(scrapBoolean);
-		System.out.println(scrapBoolean+"<--scrapBoolean");
+		
 		return scrapService.modifyScrap(scrap);
 	}
 }

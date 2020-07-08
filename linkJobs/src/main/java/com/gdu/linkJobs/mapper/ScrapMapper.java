@@ -8,6 +8,8 @@ import com.gdu.linkJobs.vo.Scrap;
 @Mapper
 public interface ScrapMapper {
 	
+	//boolean값 확인
+	public Scrap selectBoolean(int hireAnnouncementNo);
 	
 	//스크랩 추가
 	public int insertScrap(Scrap scrap);

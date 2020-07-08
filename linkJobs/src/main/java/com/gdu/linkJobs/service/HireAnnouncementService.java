@@ -14,7 +14,7 @@ import com.gdu.linkJobs.mapper.HireAnnouncementMapper;
 import com.gdu.linkJobs.vo.AreaAndArea2;
 import com.gdu.linkJobs.vo.CpMember;
 import com.gdu.linkJobs.vo.HireAnnouncement;
-import com.gdu.linkJobs.vo.HireAnnouncementAndCpMember;
+
 import com.gdu.linkJobs.vo.HireAnnouncementDetail;
 
 @Service
@@ -42,11 +42,6 @@ public class HireAnnouncementService extends HttpServlet {
 	}
 	
 	
-	//채용공고 리스트 출력
-	public List<HireAnnouncementAndCpMember> selectHireAnnouncementList(HireAnnouncementAndCpMember hireAnnouncementAndCpMember){
-		List<HireAnnouncementAndCpMember> list = hireAnnouncementMapper.selectHireAnnouncementList(hireAnnouncementAndCpMember);
-		return list;
-	}
 	
 	
 	//기업회원 상세정보 가져오기
