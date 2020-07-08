@@ -14,9 +14,10 @@ public class ScrapRestController {
 	
 	
 	@PostMapping("/insertScrap")
-	public int insertScrap(@RequestParam("hireAnnouncementNo") int hireAnnouncementNo, @RequestParam("scrapBoolean") String scrapBoolean) {
+	public int insertScrap(@RequestParam("scrapNo") int scrapNo ,@RequestParam("hireAnnouncementNo") int hireAnnouncementNo, @RequestParam("scrapBoolean") String scrapBoolean) {
 		String memberId = "user";	
 		Scrap scrap = new Scrap();
+		scrap.setScrapNo(scrapNo);
 		scrap.setMemberId(memberId);
 		scrap.setScrapBoolean(scrapBoolean);
 		scrap.setHireAnnouncementNo(hireAnnouncementNo);
@@ -30,12 +31,13 @@ public class ScrapRestController {
 	
 	
 	@PostMapping("/modifyScrap")
-	public int modifyScrap(@RequestParam("scrapNo") int scrapNo, @RequestParam("scrapBoolean") String scrapBoolean) {
+	public int modifyScrap(@RequestParam("scrapNo") int scrapNo, @RequestParam("hireAnnouncementNo") int hireAnnouncementNo, @RequestParam("scrapBoolean") String scrapBoolean) {
 		String memberId = "user";	
 		Scrap scrap = new Scrap();
 		scrap.setMemberId(memberId);
 		System.out.println(memberId+"<--memberId");
 		scrap.setScrapNo(scrapNo);
+		scrap.setHireAnnouncementNo(hireAnnouncementNo);
 		scrap.setScrapBoolean(scrapBoolean);
 		
 		return scrapService.modifyScrap(scrap);

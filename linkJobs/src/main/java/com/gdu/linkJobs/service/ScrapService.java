@@ -12,9 +12,10 @@ public class ScrapService {
 	
 	
 	//boolean값 확인
-	public Scrap selectBoolean(int hireAnnouncementNo) {
-		return scrapMapper.selectBoolean(hireAnnouncementNo);
-	}
+	/*
+	 * public String selectBoolean(int hireAnnouncementNo) { return
+	 * scrapMapper.selectBoolean(hireAnnouncementNo); }
+	 */
 	
 	//스크랩 추가 
 	public int insertScrap(Scrap scrap) {

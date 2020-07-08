@@ -26,21 +26,21 @@ public class ListController {
 	
 	
 			// 채용공고 리스트(지역별) 조건 없을경우
-			/*
-			 * @GetMapping("/getAreaAnnouncementList") public String
-			 * getAreaAnnouncementList(Model model, HireAnnouncementAndCpMemberAndScrap
-			 * hireAnnouncementAndCpMember) { List<HireAnnouncementAndCpMemberAndScrap> list
-			 * = listService.selectHireAreaAnnouncementList(hireAnnouncementAndCpMember);
-			 * model.addAttribute("list", list); return
-			 * "hireAnnouncement/getAreaAnnouncementList"; }
-			 * 
-			 * // 채용공고 리스트(직업별) 조건 없을경우
-			 * 
-			 * @GetMapping("/getJobAnnouncementList") public String
-			 * getJobAnnouncementList(Model model, HireAnnouncementAndCpMemberAndScrap
-			 * hireAnnouncementAndCpMember) { List<HireAnnouncementAndCpMemberAndScrap> list
-			 * = listService.selectHireAnnouncementList(hireAnnouncementAndCpMember);
-			 * model.addAttribute("list", list); return
-			 * "hireAnnouncement/getJobAnnouncementList"; }
-			 */
+			
+			 @GetMapping("/getAreaAnnouncementList") public String
+			   getAreaAnnouncementList(Model model, HireAnnouncementAndCpMemberAndScrap
+			  hireAnnouncementAndCpMember) { List<HireAnnouncementAndCpMemberAndScrap> list
+			  = listService.selectHireAreaAnnouncementList(hireAnnouncementAndCpMember);
+			  model.addAttribute("list", list); return
+			  "hireAnnouncement/getAreaAnnouncementList"; }
+			  
+			  // 채용공고 리스트(직업별) 조건 없을경우
+			  
+			  @GetMapping("/getJobAnnouncementList") public String
+			  getJobAnnouncementList(Model model, HireAnnouncementAndCpMemberAndScrap
+			  hireAnnouncementAndCpMember) { List<HireAnnouncementAndCpMemberAndScrap> list
+			  = listService.selectHireAnnouncementList(hireAnnouncementAndCpMember);
+			  model.addAttribute("list", list); return
+			  "hireAnnouncement/getJobAnnouncementList"; }
+			 
 	}

@@ -8,18 +8,14 @@
 	   		ha.hire_announcement_no AS hireAnnouncementNo,
 	      	ha.hire_announcement_title AS hireAnnouncementTitle,
 	      	ha.cpmember_id AS cpmemberId,
+	      	ha.hire_announcement_start_date AS hireAnnouncementStartDate,
 	      	ha.hire_announcement_end_date AS hireAnnouncementEndDate,
-			cp.cpmember_company AS cpMemberCompany,
-			sc.member_id AS memberID,
-			sc.scrap_no AS scrapNo,
-			sc.scrap_boolean AS scrapBoolean
+			cp.cpmember_company AS cpMemberCompany
 		FROM linkjobs_hire_announcement AS ha 
-		INNER JOIN linkjobs_cpmember AS cp 
-		INNER JOIN linkjobs_scrap AS sc 
-		ON ha.cpmember_id = cp.cpmember_id 
-		AND ha.hire_announcement_no = sc.hire_announcement_no
+		INNER JOIN linkjobs_cpmember AS cp ON ha.cpmember_id = cp.cpmember_id
+		ORDER BY hire_announcement_start_date DESC
+		
 	</select>
-	
 	
 	
 	

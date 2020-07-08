@@ -5,8 +5,8 @@
 
 
 
-<select id="selectBoolean" parameterType="com.gdu.linkJobs.vo.Scrap" resultType="String">
-	SELECT scrap_boolean scrapBoolean
+<select id="selectBoolean" parameterType="int" resultType="String">
+	SELECT scrap_boolean AS scrapBoolean
 	FROM linkjobs_scrap 
 	WHERE hire_announcement_no = #{hireAnnouncementNo}
 </select>
@@ -30,9 +30,9 @@
 <!-- 스크랩 추가,취소-->
 <update id="updateScrap" parameterType="com.gdu.linkJobs.vo.Scrap">
 
-UPDATE linkjobs_scrap SET 
-	scrap_boolean = #{scrapBoolean},
-	scrap_date = NOW()
-WHERE scrap_no = #{scrapNo}
+	UPDATE linkjobs_scrap SET 
+		scrap_boolean = #{scrapBoolean},
+		scrap_date = NOW()
+	WHERE scrap_no = #{scrapNo}
 </update>
 </mapper>
