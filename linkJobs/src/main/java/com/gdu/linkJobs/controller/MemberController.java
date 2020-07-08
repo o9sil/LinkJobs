@@ -160,7 +160,7 @@ public class MemberController {
 		System.out.println(member);
 		memberService.addMember(member);
 		System.out.println(member);
-		return "redirect:/index";
+		return "redirect:/";
 	}
 
 	// 중복 체크
