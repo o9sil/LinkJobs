@@ -48,7 +48,7 @@ public class HireAnnouncementController {
    public String getPlan(Model model, HttpSession session, @RequestParam("hireAnnouncementNo") int hireAnnouncementNo, @RequestParam(value="day", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate day) {
       // 로그인이 되어있지 않으면
       if(session.getAttribute("loginMember") == null) {
-         return "redirect:/";
+         return "redirect:/getAnnouncementList";
       }
       Calendar cDay = Calendar.getInstance();
       if(day == null) {
@@ -78,7 +78,7 @@ public class HireAnnouncementController {
 	public String modifyDeadlineAnnouncement(HttpSession session, @RequestParam("hireAnnouncementNo") int hireAnnouncementNo) {
 		// 로그인중이 아닐때
 		if(session.getAttribute("loginCpMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		
 		String loginCpMember = (String) session.getAttribute("loginCpMember");
@@ -107,10 +107,10 @@ public class HireAnnouncementController {
 	public String getAnnouncementListByCpMemberAction(HttpSession session) {
 		// 로그인중이 아닐때
 		if(session.getAttribute("loginCpMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}	
 		
-		return "redirect:/";
+		return "redirect:/getAnnouncementList";
 	}
 	
 	//채용공고 리스트 보기
@@ -118,7 +118,7 @@ public class HireAnnouncementController {
 	public String getAnnouncementListByCpMember(Model model, HttpSession session) {
 		// 로그인중이 아닐때
 		if(session.getAttribute("loginCpMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		
 		String cpMemberId = (String) session.getAttribute("loginCpMember");
@@ -136,7 +136,7 @@ public class HireAnnouncementController {
 	public String modifyAnnouncementOneAction(HttpSession session, HireAnnouncement hireAnnouncement) {
 		// 로그인중이 아닐때
 		if(session.getAttribute("loginCpMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		String cpMemberId = (String) session.getAttribute("loginCpMember");
 				
@@ -153,7 +153,7 @@ public class HireAnnouncementController {
 	public String modifyAnnouncementOne(Model model, HttpSession session, @RequestParam("hireAnnouncementNo") int hireAnnouncementNo) {
 		// 로그인중이 아닐때
 		if(session.getAttribute("loginCpMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 	  
 		System.out.println("공고번호 = " + hireAnnouncementNo);
@@ -204,7 +204,7 @@ public class HireAnnouncementController {
 	public String recordAnnouncement(HttpSession session, Model model) {
 		// 로그인 중
 		if(session.getAttribute("loginCpMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		String loginCpMemberID = (String) session.getAttribute("loginCpMember");
 		
@@ -233,7 +233,7 @@ public class HireAnnouncementController {
 			@RequestParam(value="areaSido") String areaSido, @RequestParam(value="areaGungu") String areaGungu) {
 		// 로그인 중
 		if(session.getAttribute("loginCpMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		
 		String loginCpMemberId = (String) session.getAttribute("loginCpMember");
@@ -249,6 +249,6 @@ public class HireAnnouncementController {
 		
 		hireAnnouncementService.addHireAnnouncement(hireAnnouncement);
 		
-		return "redirect:/";
+		return "redirect:/getAnnouncementList";
 	}
 }

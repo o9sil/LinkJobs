@@ -36,7 +36,7 @@ public class CpMemberController {
 	public String alterCpMemberDetailAction(HttpSession session, CpMember cpMember, @RequestParam(value="address") String address, 
 			@RequestParam(value="areaSido") String areaSido, @RequestParam(value="areaGungu") String areaGungu) {
 		if(session.getAttribute("loginCpMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		
 //		System.out.println("cpMember = " + cpMember);
@@ -53,7 +53,7 @@ public class CpMemberController {
 	@GetMapping("/alterCpMemberDetail")
 	public String alterCpMemberDetail(HttpSession session, Model model) {
 		if(session.getAttribute("loginCpMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		
 		String loginCpMemberID = (String) session.getAttribute("loginCpMember");
@@ -79,7 +79,7 @@ public class CpMemberController {
 	public String alterCpMemberPwAction(HttpSession session, AlterCpMemberPw alterCpMemberPw) {
 
 		if(session.getAttribute("loginCpMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		
 		//System.out.println("session = " + session.getAttribute("loginCpMember"));
@@ -88,7 +88,7 @@ public class CpMemberController {
 		//비밀번호 수정 성공
 		if(cpMemberService.modifyCpMemberPw(alterCpMemberPw) == 1) {
 			//System.out.println("비밀번호 수정 성공");
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}else {
 			//System.out.println("비밀번호 수정 실패");
 			return "redirect:/alterCpMemberPw";
@@ -100,7 +100,7 @@ public class CpMemberController {
 	public String alterCpMemberPw(HttpSession session) {
 
 		if(session.getAttribute("loginCpMember") == null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		
 		return "cpMember/alterCpMemberPw";
@@ -137,7 +137,7 @@ public class CpMemberController {
 	public String findCpMember(HttpSession session) {
 		// 로그인 중
 		if(session.getAttribute("loginCpMember") != null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		
 		return "cpMember/findCpMember";
@@ -148,7 +148,7 @@ public class CpMemberController {
 	public String signUpCpMember(HttpSession session) {
 		// 로그인 중
 		if(session.getAttribute("loginCpMember") != null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		return "cpMember/signUpCpMember";
 		
@@ -159,7 +159,7 @@ public class CpMemberController {
 	public String signUp(HttpSession session, CpMember cpMember) {
 		// 로그인 중
 		if(session.getAttribute("loginCpMember") != null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		
 		//System.out.println("회원가입 성공 여부 = ");
@@ -173,7 +173,7 @@ public class CpMemberController {
 	public String logoutCpMember(HttpSession session) {
 		session.removeAttribute("loginCpMember");
 		
-		return "redirect:/";
+		return "redirect:/getAnnouncementList";
 	}
 	   
 	
@@ -182,7 +182,7 @@ public class CpMemberController {
 	public String login(Model model, HttpSession session) {
 		// 로그인 중
 		if(session.getAttribute("loginCpMember") != null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		// 로그인이 아닐시
 		
@@ -196,7 +196,7 @@ public class CpMemberController {
 	public String login(Model model, HttpSession session, LoginCpMember loginCpmember) {
 		// 로그인 중
 		if(session.getAttribute("loginCpMember") != null) {
-			return "redirect:/";
+			return "redirect:/getAnnouncementList";
 		}
 		System.out.println(loginCpmember);
 		String loginId = cpMemberService.login(loginCpmember);
