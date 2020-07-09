@@ -2,6 +2,7 @@ package com.gdu.linkJobs;
 
 import java.util.Properties;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -11,13 +12,13 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @SpringBootApplication
 public class LinkJobsApplication {
-
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(LinkJobsApplication.class, args);
 	}
 
-	
+
 	@Bean
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();

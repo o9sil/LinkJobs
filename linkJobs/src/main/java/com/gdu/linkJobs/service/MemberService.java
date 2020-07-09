@@ -2,8 +2,11 @@ package com.gdu.linkJobs.service;
 
 import java.io.File;
 import java.net.URL;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,7 +37,51 @@ public class MemberService {
 	private MemberAcademicMapper academicMapper;
 	@Autowired
 	private SelfIntroductionMapper introductionMapper;
+	@Autowired 
+	private JavaMailSender javaMailSender;
 
+	
+	//회원 아이디 찾기
+	public int findMemberId(Member member) {
+		Member returnMember = memberMapper.findMemberId(member);
+		
+		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+		simpleMailMessage.setTo(returnMember.getMemberEmail());
+		simpleMailMessage.setFrom("LinkJobs");
+		simpleMailMessage.setSubject("LinkJobs ID 찾기");
+		simpleMailMessage.setText("기업회원 ID" + returnMember.getMemberId() + "입니다.");
+		
+		javaMailSender.send(simpleMailMessage);
+		
+		return 0; 
+	}
+	
+	
+	//회원 비밀번호 찾기
+	public int findMemberPw(Member member) {
+		UUID uid = UUID.randomUUID(); //랜덤 문자열 생성
+		
+		String pw = uid.toString().substring(0,8);
+		System.out.println(pw+ "<-- memberPW");
+		member.setMemberPw(pw);
+		
+		int row = memberMapper.findMemberPw(member);
+		System.out.println(row + "<=====row");
+		
+		if(row ==1) {
+			SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+			simpleMailMessage.setTo(member.getMemberEmail());
+			simpleMailMessage.setFrom("");
+			simpleMailMessage.setSubject("비밀번호 찾기 메일");
+			simpleMailMessage.setText("변경된 비밀번호는" + pw + "입니다.");
+			
+			javaMailSender.send(simpleMailMessage);
+		}
+		
+		return row;
+	}
+	
+	
 	// 회원 탈퇴 -> 회원 삭제
 	public void removeMember(Member member) {
 		academicMapper.removeMemberAcademic(member.getMemberId());

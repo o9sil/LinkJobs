@@ -26,6 +26,41 @@ public class MemberController {
 	@Autowired
 	private AreaService areaService;
 
+	
+	//비밀번호 , 아이디 찾기 폼
+	@GetMapping("/findMember")
+	public String findMemberPW(HttpSession session) {
+		if (session.getAttribute("loginMember") != null) {
+			return "redirect:/getAnnouncementList";
+		}
+		return "member/findMember";
+	}
+	
+	//아이디 찾기 액션
+	@PostMapping("/findMemberId")
+	public String findMemberId(HttpSession session, Model model, Member member) {
+		if (session.getAttribute("loginMember") != null) {
+			return "redirect:/getAnnouncementList";
+		}
+		System.out.println(memberService.findMemberId(member));
+		
+		return "redirect:/loginMember";
+	}
+	
+	//비밀번호 찾기 액션
+	@PostMapping("/findMemberPw")
+	public String findMemberPw(Member member, Model model, HttpSession session) {
+		if (session.getAttribute("loginMember") != null) {
+			return "redirect:/getAnnouncementList";
+		}
+		
+		if(memberService.findMemberPw(member) == 1) {
+			return "redirect:/loginMember";
+		} else {
+			return "redirect:/findMember";
+		}
+	}
+	
 	// 사진 수정 폼
 	@GetMapping("/modifyMemberPic")
 	public String modifyMemberPic(HttpSession session) {

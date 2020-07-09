@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.MemberMapper">
+	<!-- 비밀번호 찾기 -->
+	<update id="findMemberPw" parameterType="com.gdu.linkJobs.vo.Member">
+		UPDATE linkjobs_member
+		SET member_pw = PASSWORD(#{memberPw})
+		WHERE member_id = #{memberId}
+		AND member_email = #{memberEmail}
+	</update>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findMemberId" parameterType="com.gdu.linkJobs.vo.Member" resultType="com.gdu.linkJobs.vo.Member">
+		SELECT 
+			member_id memberId, member_email memberEmail
+		FROM linkjobs_member
+		WHERE member_name = #{memberName}
+		AND member_email = #{memberEmail}
+	</select>
+	 
 	<!-- 회원 탈퇴->회원 삭제 -->
 	<delete id="deleteMember" parameterType="com.gdu.linkJobs.vo.Member">
 		DELETE FROM linkjobs_member
