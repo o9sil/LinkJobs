@@ -4,30 +4,30 @@
 <meta charset="UTF-8">
 <title>getPlan</title>
 <style>
-	div.gd-left {
-		float: left;
-		width: 120px; 
-		height: 100px;
-		border: 1px solid #000000;
-		margin-right: 10px;
-		margin-bottom: 10px;
-		border-radius: 5px; 
-	}
-	div.gd-clear {
-		clear:both;
-		margin-left: 10px; 
-		border-radius: 5px;
-		text-color: #FF0000;
-	}
-	div.gd-title {
-		height: 40px;
-		background-color: gray;
-	}
-	span.gd-blue {
-		color: #0000FF;
+   div.gd-left {
+      float: left;
+      width: 140px; 
+      height: 120px;
+      border: 1px solid #000000;
+      margin-right: 10px;
+      margin-bottom: 5px;
+      border-radius: 5px; 
+   }
+   div.gd-clear {
+      clear:both;
+      margin-left: 5px; 
+      border-radius: 5px;
+      text-color: #FF0000;
+   }
+   div.gd-title {
+      height: 35px;
+      background-color: #D5D5D5;
+   }
+   span.gd-blue {
+      color: #0000FF;
     }
-   span.gd-red {
-		color: #FF0000;
+    span.gd-red {
+      color: #FF0000;
     }
 </style>
 <!-- Custom fonts for this template -->
@@ -41,60 +41,64 @@
 <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
 </head>
 <body id="page-top">
-	<!-- Page Wrapper -->
-	<div class="container-fluid" id="wrapper">
-	
-	<!-- SideBar -->
-	<ul th:include="/include/menuSide::navSide"
-		class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
-		id="accordionSidebar">
-	</ul>
-	
-	<!-- Content Wrapper -->
-	<div id="content-wrapper" class="d-flex flex-column">
-		<div th:include="/include/menuTop::navTop"></div>
-		<!-- Main Content -->
-		<div id="content">
-		
-		<div class="row">
-			
-			<div class="col-sm-2">
-			</div>
-			<div class="col-sm-6">
-				<div>
-					<h1 align="left" class="m-5" th:text="${year + '년 채용일정'}"></h1>
-					<div class="d-flex justify-content-between">
-						<div align="left">
-							<a th:href="@{/getAnnnounceListByMonth(day=${day.plusMonths(-1)})}" class="btn btn-primary">이전</a>
-						</div>
-						<div align="center">
-							<!-- 년 월 일 -->
-							<h3 th:text="${#temporals.format(day, 'yyyy년 MM월')}"></h3>
-						</div>
-						<div align="right">
-							<a th:href="@{/getAnnounceListByMonth(day=${day.plusMonths(1)})}" class="btn btn-primary">다음</a>
-						</div>
-					</div>
-					<br>
-					<div align="center">
-						<div class="gd-left gd-clear gd-title">일</div>
-						<div class="gd-left gd-title">월</div>
-						<div class="gd-left gd-title">화</div>
-						<div class="gd-left gd-title">수</div>
-						<div class="gd-left gd-title">목</div>
-						<div class="gd-left gd-title">금</div>
-						<div class="gd-left gd-title">토</div>
-					</div>
-					<!-- 5월은 lastDay == 31 index는 줄바꿈을 위해 -->
-					<div th:class="${index.index%7} == 0 ? 'gd-clear gd-left': 'gd-left'" th:each="i,index : ${#numbers.sequence(1, lastDay+(firstDayOfWeek-1))}">
-						<!-- 날짜 -->
-						<a th:href="${(i-(firstDayOfWeek-1))}>10 ? @{/getAnnouncementListByDate(day=${#temporals.format(day, 'yyyy-MM-')})}+${(i-(firstDayOfWeek-1))}: @{/getAnnouncementListByDate(day=${#temporals.format(day, 'yyyy-MM-')})}+'0'+${(i-(firstDayOfWeek-1))}" th:text="${i-(firstDayOfWeek-1)}>0 ? ${i-(firstDayOfWeek-1)} : ''" class="text-info"></a>
-					</div>
-				</div>
-			</div>
-			</div>
-			</div>
-		</div>
-	</div>
+   <!-- Page Wrapper -->
+   <div id="wrapper">
+   
+   <!-- SideBar -->
+   <ul th:include="/include/menuSide::navSide"
+      class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
+      id="accordionSidebar">
+   </ul>
+   
+   <!-- Content Wrapper -->
+   <div id="content-wrapper" class="d-flex flex-column">
+      <div th:include="/include/menuTop::navTop"></div>
+      <!-- Main Content -->
+      <div id="content">
+      
+      <div class="row">
+         
+         <div class="col-sm-2">
+         </div>
+         <div class="col-sm-8">
+            <div>
+               <h1 align="center" class="m-5" th:text="${year + '년 채용일정'}"></h1>
+               <div class="d-flex justify-content-between">
+                  <div align="left">
+                     <a th:href="@{/getPlan(day=${day.plusMonths(-1)})}" class="btn btn-primary">이전</a>
+                  </div>
+                  <div align="center">
+                     <!-- 년 월 일 -->
+                     <h3 th:text="${#temporals.format(day, 'yyyy년 MM월')}"></h3>
+                  </div>
+                  <div align="right">
+                     <a th:href="@{/getPlan(day=${day.plusMonths(1)})}" class="btn btn-primary">다음</a>
+                  </div>
+               </div>
+               <br>
+               <div>
+               <div align="center">
+                  <div class="gd-left gd-clear gd-title"><span class="gd-red">일</span></div>
+                  <div class="gd-left gd-title">월</div>
+                  <div class="gd-left gd-title">화</div>
+                  <div class="gd-left gd-title">수</div>
+                  <div class="gd-left gd-title">목</div>
+                  <div class="gd-left gd-title">금</div>
+                  <div class="gd-left gd-title"><span class="gd-blue">토</span></div>
+               </div>
+               <!-- 5월은 lastDay == 31 index는 줄바꿈을 위해 -->
+               <div th:class="${index.index%7} == 0 ? 'gd-clear gd-left': 'gd-left'" th:each="i,index : ${#numbers.sequence(1, lastDay+(firstDayOfWeek-1))}">
+                  <!-- 날짜 -->
+                  <a th:href="${(i-(firstDayOfWeek-1))}>10 ? @{/getAnnouncementListByDate(day=${#temporals.format(day, 'yyyy-MM-')})}+${(i-(firstDayOfWeek-1))}: @{/getAnnouncementListByDate(day=${#temporals.format(day, 'yyyy-MM-')})}+'0'+${(i-(firstDayOfWeek-1))}" th:text="${i-(firstDayOfWeek-1)}>0 ? ${i-(firstDayOfWeek-1)} : ''" class="text-info"></a>
+               </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-sm-2">
+         </div>
+         </div>
+         </div>
+      </div>
+   </div>
 </body>
 </html>

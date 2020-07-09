@@ -23,6 +23,7 @@ import com.gdu.linkJobs.service.IndustryService;
 import com.gdu.linkJobs.service.JobService;
 import com.gdu.linkJobs.vo.AnnouncementList;
 import com.gdu.linkJobs.vo.CpMember;
+import com.gdu.linkJobs.vo.DayAndAnnouncement;
 import com.gdu.linkJobs.vo.HireAnnouncement;
 
 
@@ -43,34 +44,38 @@ public class HireAnnouncementController {
 	@Autowired
 	private AnnouncementService announcementService;
 	
-   // 월별 채용공고 페이지 요청
-   @GetMapping("/getPlan")
-   public String getPlan(Model model, HttpSession session, @RequestParam("hireAnnouncementNo") int hireAnnouncementNo, @RequestParam(value="day", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate day) {
-      // 로그인이 되어있지 않으면
-      if(session.getAttribute("loginMember") == null) {
-         return "redirect:/getAnnouncementList";
-      }
-      Calendar cDay = Calendar.getInstance();
-      if(day == null) {
-         day = LocalDate.now();
-      } else {
-         // day -- cDay 변환
-         // LocalDate -> Calendar
-         // 오늘 날짜에서 day값과 동일하게 변경
-         cDay.set(day.getYear(), day.getMonthValue()-1, day.getDayOfMonth());
-      }
-      
-      
-      model.addAttribute("day", day);
-      model.addAttribute("year", cDay.get(Calendar.YEAR));
-      model.addAttribute("month", cDay.get(Calendar.MONTH)+1);
-      model.addAttribute("lastDay", cDay.getActualMaximum(Calendar.DATE));
-      Calendar firstDay = cDay;
-      firstDay.set(Calendar.DATE, 1);
-      model.addAttribute("firstDayOfWeek", firstDay.get(Calendar.DAY_OF_WEEK));
-      
-      return "/hireAnnouncement/getPlan";
-   }
+	// 월별 채용공고 페이지 요청
+	   @GetMapping("/getPlan")
+	   public String getPlan(Model model, HttpSession session, String cpMemberId, @RequestParam(value="day", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate day) {
+	      // 로그인이 되어있지 않으면
+	      if(session.getAttribute("loginCpMember") == null) {
+	         return "redirect:/";
+	      }
+	     Calendar cDay = Calendar.getInstance();
+	     if(day == null) {
+	        day = LocalDate.now();
+	     } else {
+	        // day -- cDay 변환
+	        // LocalDate -> Calendar
+	        // 오늘 날짜에서 day값과 동일하게 변경
+	        cDay.set(day.getYear(), day.getMonthValue()-1, day.getDayOfMonth());
+	     }
+	     String loginCpMember = (String) session.getAttribute("loginCpMember");
+	     int year = cDay.get(Calendar.YEAR);
+	     int month = cDay.get(Calendar.MONTH)+1;
+	     List<DayAndAnnouncement> dayAndAnnouncementList  = hireAnnouncementService.getDayAndAnnouncement(cpMemberId, year, month);
+	     
+	     
+	     model.addAttribute("day", day);
+	     model.addAttribute("year", cDay.get(Calendar.YEAR));
+	     model.addAttribute("month", cDay.get(Calendar.MONTH)+1);
+	     model.addAttribute("lastDay", cDay.getActualMaximum(Calendar.DATE));
+	     Calendar firstDay = cDay;
+	     firstDay.set(Calendar.DATE, 1);
+	     model.addAttribute("firstDayOfWeek", firstDay.get(Calendar.DAY_OF_WEEK));
+	     
+	     return "hireAnnouncement/getPlan";
+	 }
 	
 	
 	// 마감처리

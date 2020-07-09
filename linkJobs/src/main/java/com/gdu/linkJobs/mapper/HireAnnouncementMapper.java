@@ -1,15 +1,21 @@
 package com.gdu.linkJobs.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gdu.linkJobs.vo.CpMember;
+import com.gdu.linkJobs.vo.DayAndAnnouncement;
 import com.gdu.linkJobs.vo.HireAnnouncement;
 import com.gdu.linkJobs.vo.HireAnnouncementDetail;
 
 @Mapper
 public interface HireAnnouncementMapper {
+	
+	//채용공고 일정
+	public List<DayAndAnnouncement> selectDayAndAnnouncementList(Map<String, Object>map);
+	
 	
 	//채용공고 상세보기(실제 공고)
 	public HireAnnouncementDetail selectHireAnnouncementOne(int hireAnnouncementNo);

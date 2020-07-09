@@ -13,6 +13,7 @@ import com.gdu.linkJobs.mapper.AreaMapper;
 import com.gdu.linkJobs.mapper.HireAnnouncementMapper;
 import com.gdu.linkJobs.vo.AreaAndArea2;
 import com.gdu.linkJobs.vo.CpMember;
+import com.gdu.linkJobs.vo.DayAndAnnouncement;
 import com.gdu.linkJobs.vo.HireAnnouncement;
 
 import com.gdu.linkJobs.vo.HireAnnouncementDetail;
@@ -42,7 +43,14 @@ public class HireAnnouncementService extends HttpServlet {
 	}
 	
 	
-	
+	//채용공고 일정관리
+   public List<DayAndAnnouncement> getDayAndAnnouncement(String cpMemberId, int year, int month) {
+      Map<String, Object> map = new HashMap<>();
+      map.put("cpMemberId", cpMemberId);
+      map.put("year", year);
+      map.put("month", month);
+      return hireAnnouncementMapper.selectDayAndAnnouncementList(map);
+   }
 	
 	//기업회원 상세정보 가져오기
 	public Map getCpMemberDetail(String cpMemberId) {

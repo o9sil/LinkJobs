@@ -16,8 +16,13 @@ public class MemberByResume {
 	private String resumeDate;
 	private String memberName;
 	private String memberPhone;	
+	private String memberEmail;
 	private String memberBirthdate;
 	private String memberGender;
+	private String address;
+	private String memberPic;
+	private String grade;
+	private String careerMonth;
 	public int getResumeNo() {
 		return resumeNo;
 	}
@@ -108,6 +113,12 @@ public class MemberByResume {
 	public void setMemberPhone(String memberPhone) {
 		this.memberPhone = memberPhone;
 	}
+	public String getMemberEmail() {
+		return memberEmail;
+	}
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
+	}
 	public String getMemberBirthdate() {
 		return memberBirthdate;
 	}
@@ -120,6 +131,30 @@ public class MemberByResume {
 	public void setMemberGender(String memberGender) {
 		this.memberGender = memberGender;
 	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getMemberPic() {
+		return memberPic;
+	}
+	public void setMemberPic(String memberPic) {
+		this.memberPic = memberPic;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+	public String getCareerMonth() {
+		return careerMonth;
+	}
+	public void setCareerMonth(String careerMonth) {
+		this.careerMonth = careerMonth;
+	}
 	@Override
 	public String toString() {
 		return "MemberByResume [resumeNo=" + resumeNo + ", resumeTitle=" + resumeTitle + ", memberId=" + memberId
@@ -128,9 +163,12 @@ public class MemberByResume {
 				+ ", resumeAvliability=" + resumeAvliability + ", resumeSelfIntroductionTitle="
 				+ resumeSelfIntroductionTitle + ", resumeSelfIntroductionContents=" + resumeSelfIntroductionContents
 				+ ", resumeCareer=" + resumeCareer + ", resumeDate=" + resumeDate + ", memberName=" + memberName
-				+ ", memberPhone=" + memberPhone + ", memberBirthdate=" + memberBirthdate + ", memberGender="
-				+ memberGender + "]";
+				+ ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail + ", memberBirthdate="
+				+ memberBirthdate + ", memberGender=" + memberGender + ", address=" + address + ", memberPic="
+				+ memberPic + ", grade=" + grade + ", careerMonth=" + careerMonth + "]";
 	}
+	
+	
 	
 	
 	

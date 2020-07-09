@@ -19,11 +19,20 @@
 			RESUME.resume_date resumeDate,
 			member.member_name memberName,
 			member.member_phone memberPhone,
+			member.member_email memberEmail,
 			member.member_birthdate memberBirthdate,
-			member.member_gender memberGender
+			member.member_gender memberGender,
+			CONCAT(member.area_sido, ' ', member.area2_gungu, ' ', member.member_detailed_address) AS address,
+			pic.member_pic memberPic,
+			(SELECT group_concat(academic_grade) FROM linkjobs_member_academic WHERE academic_no in 
+				(SELECT academic_no FROM linkjobs_member_resume_academic WHERE resume_no = RESUME.resume_no)) AS grade,
+			(SELECT sum(timestampdiff(MONTH, career_start_date, career_end_date)) FROM linkjobs_member_career WHERE career_no IN 
+				(select career_no FROM linkjobs_member_resume_career WHERE resume_no = RESUME.resume_no)) AS careerMonth
 		FROM linkjobs_resume RESUME 
 			INNER JOIN linkjobs_member AS member			
-			ON RESUME.member_id = member.member_id
+			INNER JOIN linkjobs_member_pic AS pic
+			ON RESUME.member_id = member.member_id and
+			RESUME.member_id = pic.member_id
 		WHERE RESUME.resume_avaliability = '공개'
 	</select>
 
