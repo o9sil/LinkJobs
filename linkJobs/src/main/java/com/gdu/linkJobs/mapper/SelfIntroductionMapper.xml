@@ -3,7 +3,7 @@
 <mapper namespace="com.gdu.linkJobs.mapper.SelfIntroductionMapper">
 
 	<!-- 로그인 되어 있는 회원의 자기소개서 리스트 출력 -->
-	<select id="selectSelfIntroductionList" parameterType="String" resultType="com.gdu.linkJobs.vo.SelfIntroduction">
+	<select id="selectSelfIntroductionList" parameterType="java.util.Map" resultType="com.gdu.linkJobs.vo.SelfIntroduction">
 		SELECT 
 			self_introduction_no selfIntroductionNo,
 			member_id memberId,
@@ -11,8 +11,15 @@
 			self_introduction_contents selfIntroductionContents,
 			self_introduction_date selfIntroductionDate
 		FROM linkjobs_self_introduction
-		WHERE 
-			member_id = #{memberId}
+		WHERE member_id = #{memberId}
+		LIMIT #{beginRow},#{rowPerPage}
+	</select>
+	<!-- 전체 행수 -->
+	<select id="totalSelfIntroduction" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM 
+			linkjobs_self_introduction
 	</select>
 	
 	<!-- 자기소개서 하나만 가지고 오기 -->

@@ -9,7 +9,7 @@ import com.gdu.linkJobs.vo.SelfIntroduction;
 @Mapper
 public interface SelfIntroductionMapper {
 	// 자소서 리스트 출력
-	public List<SelfIntroduction> selectSelfIntroductionList(String memberId);
+	public List<SelfIntroduction> selectSelfIntroductionList(String memberId, int beginRow, int rowPerPage);
 
 	// 자소서 하나만 가지고 와 보여주기
 	public SelfIntroduction selectSelfIntroductionOne(int selfIntroductionNo);
@@ -25,4 +25,8 @@ public interface SelfIntroductionMapper {
 
 	// 자소서 추가
 	public int insertSelfIntroduction(SelfIntroduction selfIntroduction);
+
+	// 게시글 행 수
+	public int totalSelfIntroduction();
+
 }
