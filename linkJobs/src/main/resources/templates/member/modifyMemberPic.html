@@ -66,19 +66,27 @@
 				<!-- 페이지 내용 -->
 				<div class="container-fluid">
 					<h1 align="center">회원사진 수정</h1>
-					<br>
+					<br><br>
 					
 					<!-- 회원사진 수정 폼 -->
 					<form th:action="@{/modifyMemberPic}" id="picForm" method="post" enctype="multipart/form-data">
 						<div class="row">
-							<div class="col-sm-3">사진 :</div>
+							<div class="col-sm-3"><span th:text="${pic.memberId}"></span>님 : </div>
+							<div class="col-sm-9">
+								<img th:src="@{${'/img/' + pic.memberPic}}" alt="My Image" height="250px">
+							</div>
+						</div>
+						<br><br>
+						<div class="row">
+							<div class="col-sm-3">변경할 사진 첨부 :</div>
 							<div class="col-sm-9">
 								<input type="file" name="memberPic">
 							</div>
 						</div>
 					</form>
-					<div>
-						<button type="button" id="picFormBtn">수정하기</button>
+					<br><br>
+					<div align="right">
+						<button type="button" id="picFormBtn" class="btn btn-info">수정하기</button>
 					</div>
 				</div>
 				<hr>

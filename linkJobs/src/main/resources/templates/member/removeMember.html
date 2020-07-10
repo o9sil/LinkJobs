@@ -80,7 +80,8 @@
 
             <!-- 페이지 내용 -->
             <div class="container-fluid">
-            <h1>비밀번호 수정</h1>
+            <h1 align="center">회원탈퇴</h1>
+            <h5 align="center">비밀번호를 입력하신 후 탈퇴하기 버튼을 누르시면 본인이 입력했던 데이터가 모두 사라지며 탈퇴 가능합니다.</h5><br>
             <form th:action="@{/removeMember}" method="post" id="pwForm">
                <div class="row">
                   <div class="col-sm-3">비밀번호 :</div>
@@ -97,6 +98,7 @@
                      <span id="pwHelper2"></span>
                   </div>
                </div>
+               <br><br>
                <div align="right">
                   <button id="pwBtn" type="button" class="btn btn-info" >탈퇴하기</button>
                </div>

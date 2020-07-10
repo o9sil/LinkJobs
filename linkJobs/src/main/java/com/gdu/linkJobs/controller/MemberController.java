@@ -63,10 +63,17 @@ public class MemberController {
 	
 	// 사진 수정 폼
 	@GetMapping("/modifyMemberPic")
-	public String modifyMemberPic(HttpSession session) {
+	public String modifyMemberPic(HttpSession session,String memberId, Model model) {
 		if (session.getAttribute("loginMember") == null) {
 			return "redirect:/getAnnouncementList";
 		}
+		
+		memberId = (String)session.getAttribute("loginMember");
+		
+		MemberPic pic = memberService.getMemberPic(memberId);
+		pic.setMemberId(memberId);
+		
+		model.addAttribute("pic", pic);
 		return "member/modifyMemberPic";
 
 	}
