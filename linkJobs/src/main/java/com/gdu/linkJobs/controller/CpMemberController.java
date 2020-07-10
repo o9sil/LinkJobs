@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.gdu.linkJobs.common.KakaoLogin;
@@ -31,6 +32,51 @@ public class CpMemberController {
 	@Autowired
 	private IndustryService industryService;
 	
+
+	//기업회원 사진 수정 액션
+	@PostMapping("/alterCpMemberPic")
+	public String alterCpMemberPicPost(HttpSession session, @RequestParam("cpMemberPic") MultipartFile cpMemberPic) {
+		if(session.getAttribute("loginCpMember") == null) {
+			return "redirect:/getAnnouncementList";
+		}
+		
+		System.out.println(cpMemberPic);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("cpMemberId", session.getAttribute("loginCpMember"));
+		map.put("cpMemberPic", cpMemberPic);
+		
+		if(cpMemberPic != null) {
+			if(!cpMemberPic.getContentType().equals("image/jpeg")
+				&& !cpMemberPic.getContentType().equals("image/png")){
+				return "redirect:/alterCpMemberPic";
+			}
+		}
+		
+		cpMemberService.modifyCpMemberPic(map);
+		
+		
+		
+		return "redirect:/alterCpMemberPic";
+	}
+	
+	//기업회원 사진 수정폼
+	@GetMapping("/alterCpMemberPic")
+	public String alterCpMemberPic(HttpSession session, Model model) {
+		if(session.getAttribute("loginCpMember") == null) {
+			return "redirect:/getAnnouncementList";
+		}
+		
+		String loginCpMemberId = (String) session.getAttribute("loginCpMember");
+		
+		model.addAttribute("cpMemberPic", cpMemberService.getCpMemberPic(loginCpMemberId));		
+		
+		return "cpMember/alterCpMemberPic";
+	}
+	
+	
+	
+	
 	//기업회원 정부 수정 액션
 	@PostMapping("/alterCpMemberDetail")
 	public String alterCpMemberDetailAction(HttpSession session, CpMember cpMember, @RequestParam(value="address") String address, 
@@ -46,7 +92,7 @@ public class CpMemberController {
 		
 		cpMemberService.modifyCpMemberDetail(cpMember, areaSido, areaGungu);
 		
-		return "redirect:/alterCpMemberDetail";
+		return "redirect:/getAnnouncementList";
 	}
 	
 	//기업회원 정보 수정 폼

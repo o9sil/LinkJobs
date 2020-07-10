@@ -11,6 +11,15 @@ import com.gdu.linkJobs.vo.LoginCpMember;
 @Mapper
 public interface CpMemberMapper {
 	
+	//기업회원 회원가입시 사진추가
+	public int insertCpMemberPic(String cpMemberId);
+	
+	//기업회원 사진 수정
+	public int updateCpMemberPic(Map<String, Object> map);
+	
+	//기업회원 사진 가져오기
+	public String selectCpMemberPic(String cpMemberId);
+		
 	//기업회원 상세정보 가져오기
 	public CpMember selectCpMemberDetail(String cpMemberId);
 	

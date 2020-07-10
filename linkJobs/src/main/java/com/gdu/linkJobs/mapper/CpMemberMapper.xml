@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.CpMemberMapper">
 	
+	<!-- 기업회원 회원가입시 사진도 추가 -->
+	<insert id="insertCpMemberPic" parameterType="String">
+		INSERT INTO linkjobs_cpmember_pic(cpmember_id, cpmember_pic)
+		VALUES(#{cpMemberId}, 'LinkJobsLogo.png')
+	</insert>
+	
+	<!-- 기업회원 사진 업데이트(DB) -->
+	<update id="updateCpMemberPic" parameterType="hashmap">
+		UPDATE linkjobs_cpmember_pic 
+		SET cpmember_pic = #{cpmemberPic} 
+		WHERE cpmember_id = #{cpmemberId}
+	</update>
+	
+	<!-- 기업회원 사진정보 가져오기 -->
+	<select id="selectCpMemberPic" parameterType="String" resultType="String">
+		SELECT cpmember_pic cpmemberPic 
+		FROM linkjobs_cpmember_pic 
+		WHERE cpmember_id = #{cpMemberId}
+	</select>
 
 	<!-- 기업회원 상세정보 가져오기 -->
 	<select id="selectCpMemberDetail" parameterType="String" resultType="com.gdu.linkJobs.vo.CpMember">

@@ -184,7 +184,10 @@
                 document.getElementById('address').value = data.sido + " " + data.sigungu;
                 document.getElementById('areaSido').value = data.sido;
                 document.getElementById('areaGungu').value = data.sigungu;
-                document.getElementById('cpMemberDetatiledAddress').value = data.bname + " ";
+				//document.getElementById('cpMemberDetatiledAddress').value = data.bname + " " + data.jibunAddressEnglish[0];
+                
+                let load = data.jibunAddressEnglish.split(',');
+                document.getElementById('cpMemberDetatiledAddress').value = data.bname + " " + load[0] + " ";
                 
                 
                 console.log(data);

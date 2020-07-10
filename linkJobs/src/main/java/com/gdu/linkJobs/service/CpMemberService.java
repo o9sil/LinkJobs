@@ -1,5 +1,7 @@
 package com.gdu.linkJobs.service;
 
+import java.io.File;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gdu.linkJobs.mapper.AreaMapper;
 import com.gdu.linkJobs.mapper.CpMemberMapper;
@@ -29,6 +32,63 @@ public class CpMemberService extends HttpServlet {
 	
 	@Autowired private JavaMailSender javaMailSender;
 	
+	//기업회원 사진 저장
+	public int modifyCpMemberPic(Map<String, Object> map) {
+		
+		String cpMemberId = (String) map.get("cpMemberId");
+		MultipartFile cpMemberPic = (MultipartFile) map.get("cpMemberPic");
+
+		// memberForm -> member
+		//MultipartFile mf = cpMemberPic;
+		
+		System.out.println(cpMemberPic);
+		// 확장자 
+		String originName = cpMemberPic.getOriginalFilename();
+		int lastDot = originName.lastIndexOf(".");
+		String extention = originName.substring(lastDot);
+		String memberPic = cpMemberId + extention;
+		
+		System.out.println("cpmemberPic = " + memberPic);
+
+		// db에 저장
+		Map<String, Object> map2 = new HashMap<>();
+		map2.put("cpmemberId", cpMemberId);
+		map2.put("cpmemberPic", memberPic);
+		
+		int row = cpMemberMapper.updateCpMemberPic(map2);
+
+		// 2.파일 저장
+		URL location = this.getClass().getResource("/static/img/LinkJobsLogo.png");
+	    String path = location.getPath();
+	    String rightPath = path.substring(0, path.lastIndexOf("/"));
+	    System.out.println("경로 = " + rightPath);
+		
+		
+		File file = new File(rightPath +"\\"+ memberPic);
+		//기존의 파일 삭제
+		if(file.exists()) {
+			if(file.getName() != "LinkJobsLogo.png") {
+				file.delete();
+			}
+		}
+		
+		//새로 추가
+		try {
+			cpMemberPic.transferTo(file);
+		} catch (Exception e) { 
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+
+		return row;
+
+	}
+	
+	//기업회원 사진 가져오기
+	public String getCpMemberPic(String cpMemberId) {
+		return cpMemberMapper.selectCpMemberPic(cpMemberId);
+	}
+		
 	
 	//기업회원 상세정보 수정
 	public int modifyCpMemberDetail(CpMember cpMember, String areaSido, String areaGungu) {
@@ -49,7 +109,7 @@ public class CpMemberService extends HttpServlet {
 	}
 	
 	//기업회원 상세정보 가져오기
-	public Map getCpMemberDetail(String cpMemberId) {
+	public Map<String, Object> getCpMemberDetail(String cpMemberId) {
 		
 		CpMember cpMember = cpMemberMapper.selectCpMemberDetail(cpMemberId);
 		
