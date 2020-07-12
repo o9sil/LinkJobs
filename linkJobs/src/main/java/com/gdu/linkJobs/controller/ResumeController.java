@@ -36,6 +36,7 @@ public class ResumeController {
    @Autowired private MemberService memberService;
    // @Autowired private MemberCareerService memberCareerService;
    @Autowired private MemberAcademicService memberAcademicService;
+   @Autowired private MemberCareerService memberCareerService;
    @Autowired private MemberCertificateService memberCertificateService;
    
    // 이력서 공개/비공개
@@ -68,19 +69,25 @@ public class ResumeController {
    
    // 이력서 추가 폼
    @GetMapping("/addResume")
-   public String addResume(Model model, String memberId) {
+   public String addResume(HttpSession session, Model model) {
+	   if(session.getAttribute("loginMember") == null) {
+	         return "redirect:/";
+	   }
+
+	  String memberId = (String) session.getAttribute("loginMember");
+	   
       
-      memberId = "user";
-      Member member = memberService.getMemberOne(memberId);
-      // MemberCareerAndJobAndArea memberCareerAndJobAndArea = memberCareerService.getMemberCareerOne(memberId);
+	  Member memberInfo = memberService.getMemberOne(memberId);
+      List<MemberCareerAndJobAndArea> memberCareer = memberCareerService.getMemberCareerOne(memberId);
       List<Area> areaList = areaService.getArea();
-      MemberAcademic memberAcademic = memberAcademicService.getMemberAcademic(memberId);
+      List<MemberAcademic> memberAcademic = memberAcademicService.getMemberAcademic(memberId);
       List<MemberCertificate> certificateList = memberCertificateService.getMemberCertificateList(memberId);
-       System.out.println(memberAcademic+"<--이력서 회원학력");
-       model.addAttribute("memberAcademic", memberAcademic);
-      model.addAttribute("member", member);
-      model.addAttribute("certificateList", certificateList);
-      // model.addAttribute("memberCareer", memberCareerAndJobAndArea);
+      model.addAttribute("memberInfo", memberInfo);
+      model.addAttribute("memberAcademic", memberAcademic);
+      System.out.println(memberAcademic+"<--이력서 회원학력");
+      model.addAttribute("certificateList", certificateList);	
+      System.out.println("자격증정보-->"+certificateList);
+      model.addAttribute("memberCareer", memberCareer);
       model.addAttribute("areaList", areaList);
       return "resume/addResume";
    }

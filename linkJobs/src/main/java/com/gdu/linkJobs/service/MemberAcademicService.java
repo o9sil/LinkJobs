@@ -14,7 +14,7 @@ public class MemberAcademicService {
 	private MemberAcademicMapper memberAcademicMapper;
 
 	// 학력정보(이력서)
-	public MemberAcademic getMemberAcademic(String memberId) {
+	public List<MemberAcademic> getMemberAcademic(String memberId) {
 		return memberAcademicMapper.selectMemberAcademic(memberId);
 	}
 	

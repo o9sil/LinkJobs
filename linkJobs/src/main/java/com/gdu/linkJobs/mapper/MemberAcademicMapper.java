@@ -9,7 +9,7 @@ import com.gdu.linkJobs.vo.MemberAcademic;
 @Mapper
 public interface MemberAcademicMapper {
 	//학력 정보 (이력서)
-	public MemberAcademic selectMemberAcademic(String memberId);
+	public List<MemberAcademic> selectMemberAcademic(String memberId);
 	
 	// 멤버용 학력
 	public List<MemberAcademic> selectMemberAcademicList(String memberId);

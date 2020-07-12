@@ -1,5 +1,7 @@
 package com.gdu.linkJobs.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +12,7 @@ import com.gdu.linkJobs.vo.MemberCareerAndJobAndArea;
 public class MemberCareerService {
 	@Autowired  private MemberCareerMapper memberCareerMapper;
 	// 이력서 학력 리스트 출력
-	public MemberCareerAndJobAndArea getMemberCareerOne(String memberId) {
+	public List<MemberCareerAndJobAndArea> getMemberCareerOne(String memberId) {
 		return memberCareerMapper.selectMemberCareerOne(memberId);
 	}
 }
