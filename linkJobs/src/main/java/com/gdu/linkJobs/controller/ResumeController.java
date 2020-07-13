@@ -78,7 +78,7 @@ public class ResumeController {
 	   
       
 	  Member memberInfo = memberService.getMemberOne(memberId);
-      List<MemberCareerAndJobAndArea> memberCareer = memberCareerService.getMemberCareerOne(memberId);
+      List<MemberCareerAndJobAndArea> memberCareer = memberCareerService.getMemberCareerList(memberId);
       List<Area> areaList = areaService.getArea();
       List<MemberAcademic> memberAcademic = memberAcademicService.getMemberAcademic(memberId);
       List<MemberCertificate> certificateList = memberCertificateService.getMemberCertificateList(memberId);

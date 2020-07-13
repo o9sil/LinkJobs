@@ -14,9 +14,9 @@ public class MemberCareerAndJobAndArea {
    private String jobCategory;
    private int job2No;
    private String job2Category;
-   private int job3No;
+   private int job3No; 
    private String job3Category;
-   private int areaNo;
+   private int areaNo; 
    private String areaSido;
    private int area2No;
    private String area2Gungu;

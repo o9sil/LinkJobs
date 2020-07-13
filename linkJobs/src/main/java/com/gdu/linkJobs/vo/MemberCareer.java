@@ -13,8 +13,8 @@ public class MemberCareer {
 	private int job2No;
 	private int areaNo;
 	private String careerDepartment;
-	private int careerSalary;
-	private String careerResponsibilities;
+	private int careerSalary; 
+	private String careerResponsibilities; 
 	private String careerProjectContents;
 	public int getCareerNo() {
 		return careerNo;
