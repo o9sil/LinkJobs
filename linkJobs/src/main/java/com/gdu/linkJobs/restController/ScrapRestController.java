@@ -1,5 +1,7 @@
 package com.gdu.linkJobs.restController;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,8 +33,10 @@ public class ScrapRestController {
 	
 	
 	@PostMapping("/modifyScrap")
-	public int modifyScrap(@RequestParam("scrapNo") int scrapNo, @RequestParam("hireAnnouncementNo") int hireAnnouncementNo, @RequestParam("scrapBoolean") String scrapBoolean) {
-		String memberId = "user";	
+	public int modifyScrap(HttpSession session, @RequestParam("scrapNo") int scrapNo, @RequestParam("hireAnnouncementNo") int hireAnnouncementNo, @RequestParam("scrapBoolean") String scrapBoolean) {
+		
+		String memberId = (String)session.getAttribute("loginMember");
+		
 		Scrap scrap = new Scrap();
 		scrap.setMemberId(memberId);
 		System.out.println(memberId+"<--memberId");

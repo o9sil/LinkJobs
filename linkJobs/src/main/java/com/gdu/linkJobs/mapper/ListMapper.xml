@@ -33,7 +33,15 @@
 	      	ha.hire_announcement_end_date AS hireAnnouncementEndDate,
 			cp.cpmember_company AS cpMemberCompany,
 			la2.area2_gungu AS area2Gungu,
-			la.area_sido AS areaSido
+			la.area_sido AS areaSido,
+			(SELECT scrap_boolean
+			 FROM linkjobs_scrap ls
+			 WHERE ls.hire_announcement_no = ha.hire_announcement_no 
+			) AS scrapBoolean,
+			(SELECT scrap_no
+			 FROM linkjobs_scrap ls
+			 WHERE ls.hire_announcement_no = ha.hire_announcement_no 
+			) AS scrapNo
 		FROM linkjobs_hire_announcement AS ha 
 		INNER JOIN linkjobs_cpmember AS cp
 		INNER JOIN linkjobs_area2 AS la2

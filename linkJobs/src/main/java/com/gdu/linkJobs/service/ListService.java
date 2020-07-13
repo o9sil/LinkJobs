@@ -23,7 +23,7 @@ public class ListService {
 	
 	//채용공고 리스트 출력
 		public List<HireAnnouncementAndCpMemberAndScrap> selectHireAreaAnnouncementList(HireAnnouncementAndCpMemberAndScrap hireAnnouncementAndCpMemberAndScrap){
-			List<HireAnnouncementAndCpMemberAndScrap> list = listMapper.selectHireAnnouncementList(hireAnnouncementAndCpMemberAndScrap);
+			List<HireAnnouncementAndCpMemberAndScrap> list = listMapper.selectHireAreaAnnouncementList(hireAnnouncementAndCpMemberAndScrap);
 			return list;
 		}
 }

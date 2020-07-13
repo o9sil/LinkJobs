@@ -1,5 +1,7 @@
 package com.gdu.linkJobs.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +13,11 @@ public class ScrapService {
 	@Autowired private ScrapMapper scrapMapper;
 	
 	
-	//boolean값 확인
-	/*
-	 * public String selectBoolean(int hireAnnouncementNo) { return
-	 * scrapMapper.selectBoolean(hireAnnouncementNo); }
-	 */
+	//scrap 출
+	 public List<Scrap> selectBoolean() { 
+		 return scrapMapper.selectScrap();
+	 }
+	 
 	
 	//스크랩 추가 
 	public int insertScrap(Scrap scrap) {

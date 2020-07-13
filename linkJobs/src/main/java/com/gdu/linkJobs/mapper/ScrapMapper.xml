@@ -4,11 +4,15 @@
 
 
 
-
-<select id="selectBoolean" parameterType="int" resultType="String">
-	SELECT scrap_boolean AS scrapBoolean
+<!-- 스크랩 출력 -->
+<select id="selectScrap"  resultType="com.gdu.linkJobs.vo.Scrap">
+	SELECT 
+	scrap_boolean AS scrapBoolean,
+	scrap_no AS scrapNo,
+	member_id memberId,
+	hire_announcement_no hireAnnouncementNo,
+	scrap_date scrapDate
 	FROM linkjobs_scrap 
-	WHERE hire_announcement_no = #{hireAnnouncementNo}
 </select>
 
 <!-- 스크랩 추가 -->
@@ -34,5 +38,6 @@
 		scrap_boolean = #{scrapBoolean},
 		scrap_date = NOW()
 	WHERE scrap_no = #{scrapNo}
+	AND hire_announcement_no = #{hireAnnouncementNo}
 </update>
 </mapper>
