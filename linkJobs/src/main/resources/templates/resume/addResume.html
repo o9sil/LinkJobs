@@ -162,9 +162,6 @@ $(document).ready(function(){
       </ul>
       <!-- End of Sidebar --> 
 
-         
-         
-         
       
       <!-- Content Wrapper -->
       <div id="content-wrapper" class="d-flex flex-column">
@@ -253,28 +250,8 @@ $(document).ready(function(){
      
      
      
-	<!-- 경력사항  미완!!!!-->
-   <div class="card shadow mb-4"> 
-   <!-- 경력사항  헤드-->
-	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-		<h2 class="m-0 font-weight-bold text-info">경력사항</h2>
-	</div>
-
-   <!-- 경력사항  바디-->
-   <div th:each="certificateList : ${certificateList}" class="card-body">   	
-		<div class="form-group row">
-			<div class="col-xl-2">	
-				<h5 class="m-0 font-weight-bold">경력사항###</h5>	                  							
-		  	</div>
-		    <div class="col-xl-10">			                  				
-				<input type="text" class="form-control" th:value="#" readonly="readonly">
-			</div>
-		</div>
-   	</div>
-   </div><!-- 경력사항  end-->
      
-     
-	<!-- 자격증정보 -->
+    <!-- 자격증정보 -->
    <div class="card shadow mb-4"> 
    <!-- 자격증정보  헤드-->
 	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -289,7 +266,7 @@ $(document).ready(function(){
 				<h5 class="m-0 font-weight-bold">자격증 이름</h5>	                  							
 		  	</div>
 		    <div class="col-xl-10">			                  				
-				<input type="text" class="form-control" name="certificateName" id="certificateName" th:value="${certificateList.certificateName}" readonly="readonly">
+				<input type="text" class="form-control" th:value="${certificateList.certificateName}" readonly="readonly">
 			</div>
 		</div>
 	  
@@ -304,6 +281,124 @@ $(document).ready(function(){
    	</div>
    </div><!-- 자격증정보  end-->
      
+     
+     
+
+     
+	<!-- 경력사항  미완!!!!-->
+   <div class="card shadow mb-4"> 
+   <!-- 경력사항  헤드-->
+	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+		<h2 class="m-0 font-weight-bold text-info">경력사항</h2>
+	</div>
+
+   <!-- 경력사항  바디-->
+   <div th:each="memberCareer : ${memberCareer}" class="card-body">   	
+		<div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">회사명</h5>	                  							
+		  	</div>
+		    <div class="col-xl-10">			                  				
+				<input type="text" class="form-control" th:value="${memberCareer.careerCompanyName}" readonly="readonly">
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">재직기간</h5>	                  							
+		  	</div>
+		    <div class="col-xl-10">			                  				
+				<input type="text" class="form-control" th:value="${memberCareer.careerStrarDate}" readonly="readonly">
+				~
+				<input type="text" class="form-control" th:value="${memberCareer.careerEndDate}" readonly="readonly">
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">년차</h5>	                  							
+		  	</div>
+		    <div class="col-xl-10">			                  				
+				<input type="text" class="form-control" th:value="${memberCareer.careerJobgradeJobpositionYear}" readonly="readonly">
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">퇴사사유</h5>	                  							
+		  	</div>
+		    <div class="col-xl-10">			                  				
+				<input type="text" class="form-control" th:value="${memberCareer.careerReasonForLeaving}" readonly="readonly">
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">직급/직책</h5>	                  							
+		  	</div>
+		    <div class="col-xl-10">			                  				
+				<input type="text" class="form-control" th:value="${memberCareer.careerJobgradeJobposition}" readonly="readonly">
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">직종</h5>	                  							
+		  	</div>
+		    <div class="col-xl-10">			                  				
+				<input type="text" class="form-control" th:value="${memberCareer.jobCategory}" readonly="readonly">
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">근무지역</h5>	                  							
+		  	</div>
+		    <div class="col-xl-10">			                  				
+				<input type="text" class="form-control" th:value="${memberCareer.areaSido}" readonly="readonly">
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">근무부서</h5>	                  							
+		  	</div>
+		    <div class="col-xl-10">			                  				
+				<input type="text" class="form-control" th:value="${memberCareer.careerDepartment}" readonly="readonly">
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">연봉</h5>	                  							
+		  	</div>
+		    <div class="col-xl-10">			                  				
+				<input type="text" class="form-control" th:value="${memberCareer.careerSalary}" readonly="readonly">
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">담당업무</h5>	                  							
+		  	</div>
+		    <div class="col-xl-10">			                  				
+				<input type="text" class="form-control" th:value="${memberCareer.careerResponsibilities}" readonly="readonly">
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">퇴사/재직중</h5>	                  							
+		  	</div>
+		    <div class="col-xl-10">			                  				
+				<input type="text" class="form-control" th:value="${memberCareer.careerLeaving}" readonly="readonly">
+			</div>
+		</div>
+		
+   	</div>
+   </div><!-- 경력사항  end-->
+     
+ 
      
      
      
@@ -322,7 +417,7 @@ $(document).ready(function(){
 				<h5 class="m-0 font-weight-bold">희망근무조건</h5>	                  							
 		  	</div>
 		    <div class="col-xl-10">			                  				
-				<input type="text" class="form-control" name="memberName" id="memberName" th:value="${memberInfo.memberName}" readonly="readonly">
+				<input type="text" class="form-control">
 			</div>
 		</div>
 		
@@ -383,21 +478,54 @@ $(document).ready(function(){
 			</div>
 		</div>
 		
-	  
+	<!--   
 	  <div>
-	  <fieldset style="display:inline-block;">
+
 	  	<div align="left">
-         	<select name="resumeWishArea" id="resumeWishArea">
+         	<select name="resumeWishArea" id="resumeWishArea" class="form-control">
             	<option value="">시 / 도</option>
             	<option th:each="areaList : ${areaList}" th:value="${areaList.areaSido}" th:text="${areaList.areaSido}"></option>
          	</select>
+         		
          <div id="resumeWishArea2">
          
          </div>
          </div>
-	  </fieldset>
+        
 	</div>	  
-	  
+ -->	  
+ 
+ 
+ 
+	    <div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">주소 : </h5>	                  							
+		  	</div>
+		    <div class="col-xl-10">			                  				
+				<select name="areaSido" id="areaSido" class="form-control">
+					<option value="">시 / 도</option>
+					<option th:each="areaList : ${areaList}" th:value="${areaList.areaSido}" th:text="${areaList.areaSido}"></option>
+				</select>
+			<span id="areaCodeHelper"></span>
+			</div>
+			<div class="col-xl-10">			                  				
+				<select id="area2Code" class="form-control" name="area2Code" >
+					<option value="">군 / 구</option>
+		                                      
+				</select>
+			<span id="area2CodeHelper"></span>
+			</div>
+			</div>
+	
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
 	  
 	    <div class="form-group row">
 			<div class="col-xl-2">	

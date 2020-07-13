@@ -29,6 +29,11 @@ public class MemberCertificate {
 	public void setCertificateDate(String certificateDate) {
 		this.certificateDate = certificateDate;
 	}
+	@Override
+	public String toString() {
+		return "MemberCertificate [certificateNo=" + certificateNo + ", memberId=" + memberId + ", certificateName="
+				+ certificateName + ", certificateDate=" + certificateDate + "]";
+	}
 	
 	
 }

@@ -15,6 +15,10 @@ public class Area {
 	public void setAreaSido(String areaSido) {
 		this.areaSido = areaSido;
 	}
+	@Override
+	public String toString() {
+		return "Area [areaNo=" + areaNo + ", areaSido=" + areaSido + "]";
+	}
 	
 	
 }

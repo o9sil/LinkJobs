@@ -39,9 +39,6 @@ public class MemberCareerService {
 	
 	//경력사항 삭제 (트렌젝션)
 	public int removeMemberCareer(int careerNo) {
-	
-			
-		
 		return memberCareerMapper.deleteMemberCareer(careerNo);
 	}
 }

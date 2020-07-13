@@ -34,7 +34,7 @@ public class ResumeController {
    @Autowired private ResumeService resumeService;
    @Autowired private AreaService areaService;
    @Autowired private MemberService memberService;
-   // @Autowired private MemberCareerService memberCareerService;
+   
    @Autowired private MemberAcademicService memberAcademicService;
    @Autowired private MemberCareerService memberCareerService;
    @Autowired private MemberCertificateService memberCertificateService;
@@ -82,13 +82,16 @@ public class ResumeController {
       List<Area> areaList = areaService.getArea();
       List<MemberAcademic> memberAcademic = memberAcademicService.getMemberAcademic(memberId);
       List<MemberCertificate> certificateList = memberCertificateService.getMemberCertificateList(memberId);
+      System.out.println("경력사항-->"+memberCareer+"ㅇㅁ너ㅏㅣ러미야ㅑㄹ");
+      System.out.println(certificateList+"<--자격증ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
       model.addAttribute("memberInfo", memberInfo);
       model.addAttribute("memberAcademic", memberAcademic);
       System.out.println(memberAcademic+"<--이력서 회원학력");
-      model.addAttribute("certificateList", certificateList);	
+      model.addAttribute("certificateList", certificateList);
       System.out.println("자격증정보-->"+certificateList);
-      model.addAttribute("memberCareer", memberCareer);
+      //model.addAttribute("memberCareer", memberCareer);
       model.addAttribute("areaList", areaList);
+      System.out.println("지역목록"+areaList);
       return "resume/addResume";
    }
    
