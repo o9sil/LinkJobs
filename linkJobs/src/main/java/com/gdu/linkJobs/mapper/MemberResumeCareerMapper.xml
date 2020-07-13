@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.linkJobs.mapper.MemberResumeCareerMapper">
+	<!-- 경력사항 트렌젝션 처리 -->
+	<delete id="deleteResumeCareer" parameterType="com.gdu.linkJobs.vo.MemberResumeCareer">
+		DELETE FROM linkjobs_member_resume_career
+		WHERE resume_no = #{resumeNo}
+		AND career_no = #{careerNo}
+	</delete>
+    
+</mapper>

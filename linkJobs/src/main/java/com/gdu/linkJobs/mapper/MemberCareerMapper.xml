@@ -23,7 +23,7 @@
          lmc.career_department careerDepartment,
          lmc.career_salary careerSalary,
          lmc.career_responsibilities careerResponsibilities,
-         lmc.carrer_project_contents carrerProjectCon tents
+         lmc.career_project_contents carrerProjectContents
       FROM linkjobs_member_career lmc
       INNER JOIN linkjobs_job2 lj2 ON lmc.job2_no = lj2.job2_no
        INNER JOIN linkjobs_job lj ON lj.job_no=lj2.job_no
@@ -31,6 +31,7 @@
       INNER JOIN linkjobs_area la ON lmc.area_no = la.area_no
       INNER JOIN linkjobs_area2 la2 ON la2.area_no = la.area_no
       WHERE member_id = #{memberId}
+      GROUP BY job2_category
    </select>
    
    <!-- 경력사항 상세보기 -->
@@ -55,7 +56,7 @@
          lmc.career_department careerDepartment,
          lmc.career_salary careerSalary,
          lmc.career_responsibilities careerResponsibilities,
-         lmc.carrer_project_contents carrerProjectContents
+         lmc.career_project_contents careerProjectContents
       FROM linkjobs_member_career lmc
       INNER JOIN linkjobs_job2 lj2 ON lmc.job2_no = lj2.job2_no
        INNER JOIN linkjobs_job lj ON lj.job_no=lj2.job_no
@@ -63,6 +64,7 @@
       INNER JOIN linkjobs_area la ON lmc.area_no = la.area_no
       INNER JOIN linkjobs_area2 la2 ON la2.area_no = la.area_no
       WHERE career_no = #{careerNo}
+      GROUP BY job2_category
    </select>
     
    <!-- 경력사항 추가 -->
@@ -81,7 +83,7 @@
          career_department,
          career_salary,
          career_responsibilities,
-         carrer_project_contents
+         career_project_contents
       ) VALUES(
          #{memberId},
          #{careerCompanyName},
@@ -96,7 +98,7 @@
          #{careerDepartment},
          #{careerSalary},
          #{careerResponsibilities},
-         #{carrerProjectContents}
+         #{careerProjectContents}
       )
    </insert>
    
@@ -115,7 +117,7 @@
 	         career_department=#{careerDepartment},
 	         career_salary=#{careerSalary},
 	         career_responsibilities=#{careerResponsibilities},
-	         carrer_project_contents=#{carrerProjectContents}
+	         career_project_contents=#{careerProjectContents}
 	     WHERE
 	     	career_no = #{careerNo}
    </update>

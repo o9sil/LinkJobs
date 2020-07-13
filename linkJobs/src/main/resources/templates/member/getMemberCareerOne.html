@@ -54,14 +54,14 @@
 				<div class="container-fluid">
 					<h1 align="center">경력사항</h1>
 					<div>
-					<br> <a th:href="@{/modifyMemberCareer}" class="btn btn-info"
+					<br> <a th:href="@{/modifyMemberCareer(careerNo=${mc.careerNo})}" class="btn btn-info"
 						style="color: white;">수정하기</a>
-						<a th:href="@{/removeMemberCareer}" class="btn btn-info"
+						<a th:href="@{/removeMemberCareer(careerNo=${mc.careerNo})}" class="btn btn-info"
 						style="color: white;">삭제하기</a>
 						<br> <br>
 					</div>
 					<table class="table">
-						<tbody th:each="c : ${}">
+						<tbody th:each="c : ${mc}">
 							<tr>
 								<td>번호</td>
 								<td th:value="${c.careerNo}" th:text="${c.careerNo}"></td>

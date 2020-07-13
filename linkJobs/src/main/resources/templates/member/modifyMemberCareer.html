@@ -52,76 +52,76 @@
 
 				<!-- 페이지 내용 -->
 				<div class="container-fluid">
-					<h1 align="center">경력사항 추가</h1>
+					<h1 align="center">경력사항 수정</h1>
 					<form th:action="@{/modifyMemberCareer}" method="post"
 						id="careerForm">
 						<div>
 							회사 이름 : <input type="text" id="careerCompanyName"
 								name="careerCompanyName" class="form-control"
-								th:value="${.careerCompanyName}">
+								th:value="${mc.careerCompanyName}">
 						</div>
 						<div>
 							입사일 : <input type="date" id="careerStartDate"
 								name="careerStartDate" class="form-control"
-								th:value="${.careerStartDate}">
+								th:value="${mc.careerStartDate}">
 						</div>
 						<div>
 							퇴사일 : <input type="date" id="careerEndDate" name="careerEndDate"
-								class="form-control" th:value="${.careerEndDate}">
+								class="form-control" th:value="${mc.careerEndDate}">
 						</div>
 						<div>
 							경력 상태 : <select id="careerLeaving" name="careerLeaving"
-								class="form-control" th:value="${.careerLeaving}">
-								<option value="퇴사">
-								<option value="재직중">
+								class="form-control" th:value="${mc.careerLeaving}">
+								<option th:value="퇴사">
+								<option th:value="재직중">
 							</select>
 						</div>
 						<div>
 							퇴사 사유 : <input type="text" id="careerReasonForLeaving"
 								name="careerReasonForLeaving" class="form-control"
-								th:value="${.careerReasonForLeaving}">
+								th:value="${mc.careerReasonForLeaving}">
 						</div>
 						<div>
 							직급/ 직책 : <input type="text" id="careerJobgradeJobposition"
 								name="careerJobgradeJobposition" class="form-control"
-								th:value="${.careerJobgradeJobposition}">
+								th:value="${mc.careerJobgradeJobposition}">
 						</div>
 						<div>
 							연차 : <input type="text" id="careerJobgradeJobpositionYear"
 								name="careerJobgradeJobpositionYear" class="form-control"
-								th:value="${.careerJobgradeJobpositionYear}">
+								th:value="${mc.careerJobgradeJobpositionYear}">
 						</div>
 						<div>
 							직종 : <input type="text" id="jab2No" name="jab2No"
-								class="form-control" th:value="${.jab2No}">
+								class="form-control" th:value="${job2List.jab2No}">
 						</div>
 						<div>
 							지역 번호 : <input type="text" id="areaNo" name="areaNo"
-								class="form-control" th:value="${.areaNo}">
+								class="form-control" th:value="${areaList.areaNo}">
 						</div>
 						<div>
 							경력 부서 : <input type="text" id="careerDepartment"
 								name="careerDepartment" class="form-control"
-								th:value="${.careerDepartment}">
+								th:value="${mc.careerDepartment}">
 						</div>
 						<div>
 							월급 : <input type="text" id="careerSalary" name="careerSalary"
-								class="form-control" th:value="${.careerSalary}">
+								class="form-control" th:value="${mc.careerSalary}">
 						</div>
 						<div>
 							책임 : <input type="text" id="careerResponsibilities"
 								name="careerResponsibilities" class="form-control"
-								th:value="${.careerResponsibilities}">
+								th:value="${mc.careerResponsibilities}">
 						</div>
 						<div>
 							프로젝트 내용 :
 							<textarea rows="10" id="careerProjectContents"
 								name="careerProjectContents" class="form-control"
-								th:value="${.careerProjectContents}"></textarea>
+								th:value="${mc.careerProjectContents}"></textarea>
 						</div>
 
 						<div>
-							<button id="Btn" class="btn btn-info">입력</button>
+							<button id="Btn" class="btn btn-info">수정</button>
 						</div>
 					</form>
 
