@@ -2,6 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.AnnouncementMapper">
 
+	<!-- 채용공고에 지원한 지원자 리스트 조회 -->
+	<select id="selectResumeApplyByAnnouncement" parameterType="hashmap" resultType="com.gdu.linkJobs.vo.ResumeApplyByAnnouncement">
+		SELECT
+			apply.resume_apply_no applyNo,
+			member.member_name memberName,
+			member.member_birthdate memberBirthdate,
+			member.member_gender memberGender,
+			apply.career_start_date careerStartDate,
+			apply.career_end_date careerEndDate,
+			apply.academic_from_date academicFromDate,
+			apply.academic_to_date academicToDate,
+			apply.resume_salary salary,
+			apply.apply_date applyDate,
+			(SELECT pic.member_pic FROM linkjobs_member_pic pic WHERE pic.member_id = member.member_id) pic
+		FROM
+			linkjobs_member member INNER JOIN
+			linkjobs_resume_apply apply
+			ON member.member_id = apply.member_id
+			WHERE apply.hire_announcement_no = #{hireAnnouncementNo}
+			AND EXISTS (SELECT hireAnnouncement.hire_announcement_no FROM linkjobs_hire_announcement hireAnnouncement WHERE hireAnnouncement.cpmember_id = #{loginCpMember})
+	</select>
+
+	<!-- 기업회원별 채용공고 리스트 조회 -->
 	<select id="selectAnnouncementListByCpMember" parameterType="String" resultType="com.gdu.linkJobs.vo.AnnouncementList">
 		SELECT 
 			hireAnnouncement.hire_announcement_no AS hireAnnouncementNo,

@@ -3,6 +3,7 @@ package com.gdu.linkJobs.controller;
 
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.linkJobs.service.AnnouncementService;
@@ -25,6 +27,7 @@ import com.gdu.linkJobs.vo.AnnouncementList;
 import com.gdu.linkJobs.vo.CpMember;
 import com.gdu.linkJobs.vo.DayAndAnnouncement;
 import com.gdu.linkJobs.vo.HireAnnouncement;
+import com.gdu.linkJobs.vo.ResumeApplyByAnnouncement;
 
 
 @Controller
@@ -43,6 +46,29 @@ public class HireAnnouncementController {
 	
 	@Autowired
 	private AnnouncementService announcementService;
+	
+	//채용공고에 지원한 지원자들 리스트 출력 페이지
+	@GetMapping("/getResumeApplyByAnnouncement")
+	public String getResumeApplyByAnnouncement(Model model, HttpSession session, @RequestParam(value="hireAnnouncementNo") int hireAnnouncementNo) {
+		if (session.getAttribute("loginCpMember") == null) {
+			return "redirect:/getAnnouncementList";
+		}
+		
+		String loginCpMember = (String) session.getAttribute("loginCpMember");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("loginCpMember", loginCpMember);
+		map.put("hireAnnouncementNo", hireAnnouncementNo);
+		
+		List<ResumeApplyByAnnouncement> list = announcementService.getResumeApplyByAnnouncement(map);
+		for(ResumeApplyByAnnouncement r : list) {
+			System.out.println(r);
+		}
+		
+		model.addAttribute("list", list);
+		
+		
+		return "hireAnnouncement/getAnnouncementByApply";
+	}
 	
 	// 월별 채용공고 페이지 요청
 	   @GetMapping("/getPlan")

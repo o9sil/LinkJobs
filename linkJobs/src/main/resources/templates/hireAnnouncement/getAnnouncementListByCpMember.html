@@ -82,8 +82,19 @@
 																			<h4 class="font-weight-bold" style="width: 50%; float:left;"><a th:href="@{/aboutAnnouncementOne(hireAnnouncementNo=${list.hireAnnouncementNo})}" th:text="${list.title}"></a></h4>
 																		</th:block>
 																													
-										
-																		<strong th:text="|~${list.endDate}|"></strong><br><br>
+																		<div style="width: 40%; float: left;">
+																			<strong th:text="|~${list.endDate}|"></strong>
+																		</div>
+																		
+																		<a th:href="@{/getResumeApplyByAnnouncement(hireAnnouncementNo=${list.hireAnnouncementNo})}" class="btn btn-light btn-icon-split">
+																			<span class="text">
+																				지원자 조회																				
+																			</span>
+																		</a>																	
+																		
+																		<br>
+																		<br>
+																		
 																	</div>
 																	<div>
 																		<strong th:text="${list.areaName}"></strong>
