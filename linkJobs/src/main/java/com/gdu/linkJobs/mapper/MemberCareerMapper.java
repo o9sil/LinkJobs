@@ -17,5 +17,11 @@ public interface MemberCareerMapper {
 	
 	// 이력서 추가
 	public int insertMemberCareer(MemberCareer memberCareer);
+	
+	// 이력서 수정
+	public int updateMemberCareer(MemberCareer memberCareer);
+	
+	// 이력서 삭제
+	public int deleteMemberCareer(int careerNo);
 }
  

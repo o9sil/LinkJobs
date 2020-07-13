@@ -28,4 +28,14 @@ public class MemberCareerService {
 	public int addMemberCareer(MemberCareer memberCareer) {
 		return memberCareerMapper.insertMemberCareer(memberCareer);
 	}
+	
+	//이력서 수정
+	public int modifyMemberCareer(MemberCareer memberCareer) {
+		return memberCareerMapper.updateMemberCareer(memberCareer);
+	}
+	
+	//이력서 삭제
+	public int removeMemberCareer(int careerNo) {
+		return memberCareerMapper.deleteMemberCareer(careerNo);
+	}
 }

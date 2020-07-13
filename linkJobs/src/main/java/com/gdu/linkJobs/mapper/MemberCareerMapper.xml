@@ -99,4 +99,31 @@
          #{carrerProjectContents}
       )
    </insert>
+   
+   <!-- 경력사항 수정 -->
+   <update id="updateMemberCareer" parameterType="com.gdu.linkJobs.vo.MemberCareer">
+   		UPDATE linkjobs_member_career
+   		SET  career_company_name= #{careerCompanyName},
+	         career_start_date =#{careerStartDate},
+	         career_end_date=#{careerLeaving},
+	         career_leaving=#{careerReasonForLeaving},
+	         career_reason_for_leaving= #{careerReasonForLeaving},
+	         career_jobgrade_jobposition=#{careerJobgradeJobposition},
+	         career_jobgrade_jobposition_year=#{careerJobgradeJobpositionYear},
+	         job2_no=#{job2No},
+	         area_no=#{areaNo},
+	         career_department=#{careerDepartment},
+	         career_salary=#{careerSalary},
+	         career_responsibilities=#{careerResponsibilities},
+	         carrer_project_contents=#{carrerProjectContents}
+	     WHERE
+	     	career_no = #{careerNo}
+   </update>
+   
+   <!-- 경력사항 삭제 -->
+   <delete id="deleteMemberCareer" parameterType="int">
+   		DELETE FROM linkjobs_member_career
+   		WHERE career_no = #{careerNo}
+   </delete>
+   
 </mapper>

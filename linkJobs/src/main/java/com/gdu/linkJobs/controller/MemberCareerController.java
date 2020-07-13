@@ -85,4 +85,45 @@ public class MemberCareerController {
 		
 		return "redirect:/getMemberCareerList";
 	}
+	
+	
+	//경력사항 수정 폼
+	@GetMapping("/modifyMemberCareer")
+	public String modifyMemberCareer(HttpSession session, Model model, int careerNo) {
+		//로그인 되지 않은 상태면 redirect
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/getAnnouncementList";
+		}
+		
+		MemberCareerAndJobAndArea mc = memberCareerService.getMemberCareerOne(careerNo);
+		model.addAttribute("mc", mc);
+		
+		List<Area> areaList = areaService.getArea();
+		model.addAttribute("areaList", areaList);
+		
+		Map<String, Object> map = jobService.getJobListAll();
+		model.addAttribute("jobList",map.get("jobList"));
+		model.addAttribute("job2List",map.get("job2List"));
+		model.addAttribute("job3List",map.get("job3List"));
+		
+		return "member/modifyMemberCareer";
+	}
+	
+	//경력사항 수정 액션
+	@PostMapping("/modifyMemberCareer")
+	public String modifyMemberCareer(HttpSession session, MemberCareer memberCareer) {
+		memberCareerService.modifyMemberCareer(memberCareer);
+		
+		return "redirect:/getMemberCareerOne";
+	}
+	
+	
+	//경력사항 삭제
+	@GetMapping("/removeMemberCareer")
+	public String removeMemberCareer(HttpSession session, int careerNo) {
+		memberCareerService.removeMemberCareer(careerNo);
+		
+		return "redirect:/getMemberCareerList";
+	}
+	
 }
