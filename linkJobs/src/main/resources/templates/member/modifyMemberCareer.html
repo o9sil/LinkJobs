@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>modifyMemberCareer</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Custom fonts for this template-->
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+<!-- Custom scripts for all pages-->
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+<!-- Custom styles for this template-->
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+</head>
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<!-- SideBar -->
+		<ul th:include="/include/menuSide::navSide"
+			class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+		</ul>
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div th:include="/include/menuTop::navTop"></div>
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- 페이지 내용 -->
+				<div class="container-fluid">
+					<h1 align="center">경력사항 추가</h1>
+					<form th:action="@{/modifyMemberCareer}" method="post"
+						id="careerForm">
+						<div>
+							회사 이름 : <input type="text" id="careerCompanyName"
+								name="careerCompanyName" class="form-control"
+								th:value="${.careerCompanyName}">
+						</div>
+						<div>
+							입사일 : <input type="date" id="careerStartDate"
+								name="careerStartDate" class="form-control"
+								th:value="${.careerStartDate}">
+						</div>
+						<div>
+							퇴사일 : <input type="date" id="careerEndDate" name="careerEndDate"
+								class="form-control" th:value="${.careerEndDate}">
+						</div>
+						<div>
+							경력 상태 : <select id="careerLeaving" name="careerLeaving"
+								class="form-control" th:value="${.careerLeaving}">
+								<option value="퇴사">
+								<option value="재직중">
+							</select>
+						</div>
+						<div>
+							퇴사 사유 : <input type="text" id="careerReasonForLeaving"
+								name="careerReasonForLeaving" class="form-control"
+								th:value="${.careerReasonForLeaving}">
+						</div>
+						<div>
+							직급/ 직책 : <input type="text" id="careerJobgradeJobposition"
+								name="careerJobgradeJobposition" class="form-control"
+								th:value="${.careerJobgradeJobposition}">
+						</div>
+						<div>
+							연차 : <input type="text" id="careerJobgradeJobpositionYear"
+								name="careerJobgradeJobpositionYear" class="form-control"
+								th:value="${.careerJobgradeJobpositionYear}">
+						</div>
+						<div>
+							직종 : <input type="text" id="jab2No" name="jab2No"
+								class="form-control" th:value="${.jab2No}">
+						</div>
+						<div>
+							지역 번호 : <input type="text" id="areaNo" name="areaNo"
+								class="form-control" th:value="${.areaNo}">
+						</div>
+						<div>
+							경력 부서 : <input type="text" id="careerDepartment"
+								name="careerDepartment" class="form-control"
+								th:value="${.careerDepartment}">
+						</div>
+						<div>
+							월급 : <input type="text" id="careerSalary" name="careerSalary"
+								class="form-control" th:value="${.careerSalary}">
+						</div>
+						<div>
+							책임 : <input type="text" id="careerResponsibilities"
+								name="careerResponsibilities" class="form-control"
+								th:value="${.careerResponsibilities}">
+						</div>
+						<div>
+							프로젝트 내용 :
+							<textarea rows="10" id="careerProjectContents"
+								name="careerProjectContents" class="form-control"
+								th:value="${.careerProjectContents}"></textarea>
+						</div>
+
+						<div>
+							<button id="Btn" class="btn btn-info">입력</button>
+						</div>
+					</form>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
