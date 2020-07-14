@@ -69,7 +69,7 @@
       //지역
       
       /*<![CDATA[*/
-      $('#areaNo').change(function () {
+      $('#areaCode').change(function () {
             let areaSido=$(this).val();
             console.log("areaSido : "+areaSido);
             $('#area2Code').empty();
@@ -117,7 +117,7 @@
                   
                });
             }
-             });
+         });
      });   
       /*]]>*/
       
@@ -335,7 +335,7 @@
                   <div class="row">
                      <div class="col-sm-2">주소 :</div>
                      <div class="col-sm-5">
-                        <select name="areaNo" id="areaCode"  class="form-control">
+                        <select name="areaCode" id="areaCode"  class="form-control">
                            <option value="">시 / 도</option>
                            <option th:each="areaList : ${areaList}"
                               th:value="${areaList.areaSido}" th:text="${areaList.areaSido}"></option>

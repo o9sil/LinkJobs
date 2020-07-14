@@ -100,6 +100,7 @@ public class MemberCareerController {
 		
 		MemberCareerAndJobAndArea mc = memberCareerService.getMemberCareerOne(careerNo);
 		model.addAttribute("mc", mc);
+		System.out.println(mc);
 		
 		List<Area> areaList = areaService.getArea();
 		model.addAttribute("areaList", areaList);

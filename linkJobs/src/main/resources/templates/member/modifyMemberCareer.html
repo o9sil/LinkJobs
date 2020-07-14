@@ -2,28 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>modifyMemberCareer</title>
+<title>addMemberCareer</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
 
 <!-- jQuery library -->
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- Popper JS -->
 <script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <!-- Custom fonts for this template-->
 <link th:href="@{/vendor/fontawesome-free/css/all.min.css}"
-	rel="stylesheet" type="text/css">
+   rel="stylesheet" type="text/css">
 <link
-	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
+   href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+   rel="stylesheet">
 <!-- Bootstrap core JavaScript-->
 <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
 <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
@@ -34,101 +35,372 @@
 <script th:src="@{/js/sb-admin-2.min.js}"></script>
 <!-- Custom styles for this template-->
 <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+<script th:inline="javascript">
+   
+   
+
+
+	let helperInit = function() {
+      $('#careerCompanyNameHelper').text("");
+      $('#careerStartDateHelper').text("");
+      $('#careerEndDateHelper').text("");
+      $('#careerLeavingHelper').text("");
+      $('#careerReasonForLeavingHelper').text("");
+      $('#careerJobgradeJobpositionHelper').text("");
+      $('#careerJobgradeJobpositionYearHelper').text("");
+      $('#jabNoHelper').text("");
+      $('#jab2NoHelper').text("");
+      $('#jab3NoHelper').text("");
+      $('#areaCodeHelper').text("");
+      $('#area2CodeHelper').text("");
+      $('#careerDepartmentHelper').text("");
+      $('#careerSalaryHelper').text("");
+      $('#careerResponsibilitiesHelper').text("");
+      $('#careerProjectContentsHelper').text("");
+   }
+
+
+   
+   
+   
+   $(document).ready(function () {
+      
+     
+      //지역
+      
+      /*<![CDATA[*/
+      $('#areaCode').change(function () {
+            let areaSido=$(this).val();
+            console.log("areaSido : "+areaSido);
+            $('#area2Code').empty();
+             $.ajax({
+               url   :/*[[@{/selectArea2}]]*/, 
+                 type: "POST",
+                data:{'areaSido':areaSido},
+                success: function (data) {
+                   console.log(data);                   
+               $.each(data, function (index,item) {
+                  
+                  console.log(item);
+                  
+                  var addContent = $("<option th:value='"+item.area2Gungu+"' th:text='"+item.area2Gungu+"'>"+item.area2Gungu+"</option>");
+                    $("#area2Code").append(addContent);
+
+                  
+               });
+            }
+             });
+     });   
+      /*]]>*/
+      
+      //job
+      
+      /*<![CDATA[*/
+      $('#jobNo').change(function () {
+            let jobNo=$(this).val();
+            console.log("jobNo : "+jobNo);
+            $('#job2No').empty();
+             $.ajax({
+               url   :/*[[@{/getRestJob}]]*/, 
+                 type: "POST",
+                data:{'jobNo':jobNo},
+                success: function (data) {
+                   console.log(data);                   
+               $.each(data, function (index,item) {
+                  
+                  console.log(item);
+                  
+                  var addContent =$("<option value='"+item.job2No+"' th:text='"+item.job2Category+"'>"+item.job2Category+"</option>");
+                  
+                    $("#job2No").append(addContent);
+
+                  
+               });
+            }
+         });
+     });   
+      /*]]>*/
+      
+      //job
+      
+      /*<![CDATA[*/
+      $('#job2No').change(function () {
+            let job2No=$(this).val();
+            console.log("job2No : "+job2No);
+            $('#job3No').empty();
+             $.ajax({
+               url   :/*[[@{/getRestJob2}]]*/, 
+                 type: "POST",
+                data:{'job2No':job2No},
+                success: function (data) {
+                   console.log(data);                   
+               $.each(data, function (index,item) {
+                  
+                  console.log(item);
+                  
+                  var addContent =$("<option value='"+item.job3No+"' th:text='"+item.job3Category+"'>"+item.job3Category+"</option>");
+                  
+                    $("#job3No").append(addContent);
+
+                  
+               });
+            }
+             });
+     });   
+      /*]]>*/
+      
+      
+        $('#Btn').click(function() {
+         if ($('#careerCompanyName').val() == '') {
+            $('#careerCompanyNameHelper').text("회사 이름을 입력하세요.");
+            return ;
+         }
+         if ($('#careerStartDate').val() == '') {
+             $('#careerStartDateHelper').text("입사일을 입력하세요.");
+             return ;
+          }
+         if ($('#careerEndDate').val() == '') {
+             $('#careerEndDateHelper').text("퇴사일을 입력하세요.");
+             return ;
+          }
+         if ($('#careerLeaving').val() == '') {
+             $('#careerLeavingHelper').text("경력상태를 선택하세요.");
+             return ;
+          }
+         if ($('#careerReasonForLeaving').val() == '') {
+             $('#careerReasonForLeavingHelper').text("퇴사사유를 입력하세요.");
+             return ;
+          }
+         if ($('#careerJobgradeJobposition').val() == '') {
+             $('#careerJobgradeJobpositionHelper').text("직급 / 직책을 입력하세요.");
+             return ;
+          }
+         if ($('#careerJobgradeJobpositionYear').val() == '') {
+             $('#careerJobgradeJobpositionYearHelper').text("연차를 입력하세요.");
+             return ;
+          }
+         if ($('#jabNo').val() == '' || $('#jab2No').val() == ''||$('#jab3No').val() == '') {
+             $('#jabNoHelper').text("직종을 입력하세요.");
+             return ;
+          }
+         if ($('#areaCode').val() == '') {
+             $('#areaCodeHelper').text("주소를 입력하세요.");
+             return ;
+          }
+         if ($('#area2Code').val() == '') {
+             $('#area2CodeHelper').text("주소를 입력하세요.");
+             return ;
+          }
+         if ($('#careerDepartment').val() == '') {
+             $('#careerDepartmentHelper').text("경력부서를 입력하세요.");
+             return ;
+          }
+         if ($('#careerSalary').val() == '') {
+             $('#careerSalaryHelper').text("월급을 입력하세요.");
+             return ;
+          }
+         
+         if ($('#careerResponsibilities').val() == '') {
+             $('#careerResponsibilitiesHelper').text("책임 내용을 입력하세요.");
+             return ;
+          }
+         if ($('#careerProjectContents').val() == '') {
+             $('#careerProjectContentsHelper').text("프로젝트 내용을 입력하세요.");
+             return ;
+          }
+         
+         
+         
+         $('#careerForm').submit();
+
+   });
+});   
+</script>
 </head>
 <body id="page-top">
 
-	<!-- Page Wrapper -->
-	<div id="wrapper">
-		<!-- SideBar -->
-		<ul th:include="/include/menuSide::navSide"
-			class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
-			id="accordionSidebar">
-		</ul>
-		<!-- Content Wrapper -->
-		<div id="content-wrapper" class="d-flex flex-column">
-			<div th:include="/include/menuTop::navTop"></div>
-			<!-- Main Content -->
-			<div id="content">
+   <!-- Page Wrapper -->
+   <div id="wrapper">
+      <!-- SideBar -->
+      <ul th:include="/include/menuSide::navSide"
+         class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
+         id="accordionSidebar">
+      </ul>
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+         <div th:include="/include/menuTop::navTop"></div>
+         <!-- Main Content -->
+         <div id="content">
 
-				<!-- 페이지 내용 -->
-				<div class="container-fluid">
-					<h1 align="center">경력사항 수정</h1>
-					<form th:action="@{/modifyMemberCareer}" method="post"
-						id="careerForm">
-						<div>
-							회사 이름 : <input type="text" id="careerCompanyName"
-								name="careerCompanyName" class="form-control"
-								th:value="${mc.careerCompanyName}">
-						</div>
-						<div>
-							입사일 : <input type="date" id="careerStartDate"
-								name="careerStartDate" class="form-control"
-								th:value="${mc.careerStartDate}">
-						</div>
-						<div>
-							퇴사일 : <input type="date" id="careerEndDate" name="careerEndDate"
-								class="form-control" th:value="${mc.careerEndDate}">
-						</div>
-						<div>
-							경력 상태 : <select id="careerLeaving" name="careerLeaving"
-								class="form-control" th:value="${mc.careerLeaving}">
-								<option th:value="퇴사">
-								<option th:value="재직중">
-							</select>
-						</div>
-						<div>
-							퇴사 사유 : <input type="text" id="careerReasonForLeaving"
-								name="careerReasonForLeaving" class="form-control"
-								th:value="${mc.careerReasonForLeaving}">
-						</div>
-						<div>
-							직급/ 직책 : <input type="text" id="careerJobgradeJobposition"
-								name="careerJobgradeJobposition" class="form-control"
-								th:value="${mc.careerJobgradeJobposition}">
-						</div>
-						<div>
-							연차 : <input type="text" id="careerJobgradeJobpositionYear"
-								name="careerJobgradeJobpositionYear" class="form-control"
-								th:value="${mc.careerJobgradeJobpositionYear}">
-						</div>
-						<div>
-							직종 : <input type="text" id="jab2No" name="jab2No"
-								class="form-control" th:value="${job2List.jab2No}">
-						</div>
-						<div>
-							지역 번호 : <input type="text" id="areaNo" name="areaNo"
-								class="form-control" th:value="${areaList.areaNo}">
-						</div>
-						<div>
-							경력 부서 : <input type="text" id="careerDepartment"
-								name="careerDepartment" class="form-control"
-								th:value="${mc.careerDepartment}">
-						</div>
-						<div>
-							월급 : <input type="text" id="careerSalary" name="careerSalary"
-								class="form-control" th:value="${mc.careerSalary}">
-						</div>
-						<div>
-							책임 : <input type="text" id="careerResponsibilities"
-								name="careerResponsibilities" class="form-control"
-								th:value="${mc.careerResponsibilities}">
-						</div>
-						<div>
-							프로젝트 내용 :
-							<textarea rows="10" id="careerProjectContents"
-								name="careerProjectContents" class="form-control"
-								th:value="${mc.careerProjectContents}"></textarea>
-						</div>
+            <!-- 페이지 내용 -->
+            <div class="container-fluid">
+               <h1 align="center">경력사항 수정</h1>
+               <form th:action="@{/modifyMemberCareer}" method="post" id="careerForm">
+                  <div class="row">
+                     <div  class="col-sm-2">
+                   		     회사 이름 : 
+                     </div>
+                     <div class="col-sm-10">
+                     <input type="text" id="careerCompanyName"
+                           name="careerCompanyName" class="form-control" th:value="${mc.careerCompanyName}">
+                     </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                     <div  class="col-sm-2">
+                    		    입사일 : 
+                     </div>
+                     <div class="col-sm-10">
+                     <input type="date" id="careerStartDate"
+                        name="careerStartDate" class="form-control" th:value="${mc.careerStartDate}">
+                     </div>
+                  </div>
+                  
+                  <br>
+                  <div class="row">
+                     <div  class="col-sm-2">
+                  		      퇴사일 : 
+                     </div>
+                     <div class="col-sm-10">
+                        <input type="date" id="careerEndDate" name="careerEndDate"  th:value="${mc.careerEndDate}"
+                        class="form-control">
+                     </div>
+                  </div>
+                  <br>
+                  
+                  <div class="row">
+                     <div  class="col-sm-2">
+                   		     경력 상태 : 
+                     </div>
+                     <div class="col-sm-10">
+                        <select id="careerLeaving" name="careerLeaving"
+                           class="form-control">
+                           <option th:value="퇴사" th:text="퇴사">
+                           <option th:value="재직중" th:text="재직중">
+                        </select>
+                     </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                     <div  class="col-sm-2">
+                   		  퇴사 사유 :
+                     </div>
+                     <div class="col-sm-10">
+                      <input type="text" id="careerReasonForLeaving"  th:value="${mc.careerReasonForLeaving}"
+                        name="careerReasonForLeaving" class="form-control">
+                     </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                     <div  class="col-sm-2">
+                     	   직급/ 직책 : 
+                     </div>
+                     <div    class="col-sm-10">
+                     <input type="text" id="careerJobgradeJobposition"  th:value="${mc.careerJobgradeJobposition}"
+                        name="careerJobgradeJobposition" class="form-control">
+                     </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                     <div  class="col-sm-2">
+                   		  연차 : 
+                     </div>
+                     <div class="col-sm-10">
+                     <input type="text" id="careerJobgradeJobpositionYear"  th:value="${mc.careerJobgradeJobpositionYear}"
+                        name="careerJobgradeJobpositionYear" class="form-control">
+                     </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                     <div  class="col-sm-2">
+                   		  직종 : 
+                     </div>
+                     <div class="col-sm-4">
+                        <select id="jobNo" name="jobNo" class="form-control">
+                        	<option th:value="${mc.jobCategory}" th:text="${mc.jobCategory}"></option>
+                           <option th:each="jl:${jobList}" th:value="${jl.jobNo}" th:text="${jl.jobCategory}"></option>
+                        </select>
+                     </div>
+                     <div class="col-sm-3">
+                        <select id="job2No" name="job2No" class="form-control">
+                        	<option th:value="${mc.job2Category}" th:text="${mc.job2Category}"></option>
+                        	<option value=""></option>
+                        </select>
+                     </div>
+                     <div class="col-sm-3">
+                        <select id="job3No" name="job3No" class="form-control">
+                           <option th:value="${mc.job3Category}" th:text="${mc.job3Category}"></option>
+                        </select>
+                     </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                     <div class="col-sm-2">주소 :</div>
+                     <div class="col-sm-5">
+                        <select name="areaCode" id="areaCode"  class="form-control">
+                           <option th:value="${mc.areaSido}" th:text="${mc.areaSido}"></option>
+                           <option th:each="areaList : ${areaList}"
+                              th:value="${areaList.areaSido}" th:text="${areaList.areaSido}"></option>
+                        </select> <span id="areaCodeHelper"></span>
+                     </div>
+                     <div class="col-sm-5">
+                        <select id="area2Code" class="form-control" name="area2Gungu">
+                          <option th:value="${mc.area2Gungu}" th:text="${mc.area2Gungu}"></option>
 
-						<div>
-							<button id="Btn" class="btn btn-info">수정</button>
-						</div>
-					</form>
+                        </select> <span id="area2CodeHelper"></span>
+                     </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                     <div  class="col-sm-2">
+                    		 경력 부서 : 
+                     </div>
+                     <div class="col-sm-10">
+                     <input type="text" id="careerDepartment" th:value="${mc.careerDepartment}"
+                        name="careerDepartment" class="form-control">
+                     </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                     <div  class="col-sm-2">
+                		     월급 : 
+                     </div>
+                     <div class="col-sm-10">
+                     <input type="text" id="careerSalary" name="careerSalary" th:value="${mc.careerSalary}"
+                        class="form-control">
+                     </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                     <div  class="col-sm-2">
+                		     책임 : 
+                     </div>
+                     <div class="col-sm-10">
+                     <input type="text" id="careerResponsibilities"  th:value="${mc.careerResponsibilities}"
+                        name="careerResponsibilities" class="form-control">
+                     </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                     <div  class="col-sm-2">
+                  		   프로젝트 내용 :
+                     </div>
+                     <div class="col-sm-10">
+                     <textarea rows="10" id="careerProjectContents" th:text="${mc.careerProjectContents}"
+                        name="careerProjectContents" class="form-control"></textarea>
+                     </div>
+                  </div>
+                  <br>
+
+                  <div>
+                     <button id="Btn" class="btn btn-info">수정하기</button>
+                  </div>
+               </form>
 
 
-				</div>
-			</div>
-		</div>
-	</div>
+            </div>
+         </div>
+      </div>
+   </div>
 </body>
 </html>
