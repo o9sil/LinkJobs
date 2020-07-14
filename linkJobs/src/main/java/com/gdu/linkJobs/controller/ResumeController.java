@@ -1,12 +1,9 @@
 package com.gdu.linkJobs.controller;
 
-
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gdu.linkJobs.mapper.MemberAcademicMapper;
+
 import com.gdu.linkJobs.service.AreaService;
+import com.gdu.linkJobs.service.IndustryService;
+import com.gdu.linkJobs.service.JobService;
 import com.gdu.linkJobs.service.MemberCareerService;
 import com.gdu.linkJobs.service.MemberCertificateService;
 import com.gdu.linkJobs.service.MemberService;
@@ -23,9 +22,9 @@ import com.gdu.linkJobs.service.ResumeService;
 import com.gdu.linkJobs.service.MemberAcademicService;
 import com.gdu.linkJobs.vo.Resume;
 import com.gdu.linkJobs.vo.Area;
+
 import com.gdu.linkJobs.vo.Member;
 import com.gdu.linkJobs.vo.MemberAcademic;
-import com.gdu.linkJobs.vo.MemberCareer;
 import com.gdu.linkJobs.vo.MemberCareerAndJobAndArea;
 import com.gdu.linkJobs.vo.MemberCertificate;
 
@@ -38,6 +37,10 @@ public class ResumeController {
    @Autowired private MemberAcademicService memberAcademicService;
    @Autowired private MemberCareerService memberCareerService;
    @Autowired private MemberCertificateService memberCertificateService;
+   @Autowired private JobService jobService;
+   @Autowired private IndustryService industryService;
+   
+   
    
    // 이력서 공개/비공개
    @PostMapping("/resumeAvaliability")
@@ -77,21 +80,34 @@ public class ResumeController {
 	  String memberId = (String) session.getAttribute("loginMember");
 	   
       
-	  Member memberInfo = memberService.getMemberOne(memberId);
-      List<MemberCareerAndJobAndArea> memberCareer = memberCareerService.getMemberCareerList(memberId);
-      List<Area> areaList = areaService.getArea();
-      List<MemberAcademic> memberAcademic = memberAcademicService.getMemberAcademic(memberId);
-      List<MemberCertificate> certificateList = memberCertificateService.getMemberCertificateList(memberId);
-      System.out.println("경력사항-->"+memberCareer+"ㅇㅁ너ㅏㅣ러미야ㅑㄹ");
-      System.out.println(certificateList+"<--자격증ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+	  
+	  
+	  @SuppressWarnings("unchecked")
+	  Member memberInfo = memberService.getMemberOne(memberId);													//회원정보
+      List<MemberCareerAndJobAndArea> memberCareer = memberCareerService.getMemberCareerList(memberId);			//경력사항
+      List<Area> areaList = areaService.getArea();																//지역선택	
+      List<MemberAcademic> memberAcademic = memberAcademicService.getMemberAcademic(memberId);					//학력사항
+      List<MemberCertificate> certificateList = memberCertificateService.getMemberCertificateList(memberId);	// 자격증정보
+      Map<String, Object> jobMap = jobService.getJobListAll();
+      model.addAttribute("job", jobMap.get("job"));
+      model.addAttribute("job2", jobMap.get("job2"));
+      model.addAttribute("job3", jobMap.get("job3"));
+		
+      model.addAttribute("memberCareer", memberCareer);
       model.addAttribute("memberInfo", memberInfo);
       model.addAttribute("memberAcademic", memberAcademic);
-      System.out.println(memberAcademic+"<--이력서 회원학력");
       model.addAttribute("certificateList", certificateList);
-      System.out.println("자격증정보-->"+certificateList);
-      //model.addAttribute("memberCareer", memberCareer);
       model.addAttribute("areaList", areaList);
-      System.out.println("지역목록"+areaList);
+      model.addAttribute("industryList", industryService.getIndustryList());
+      
+      
+      System.out.println("회원정보>>>>>>"+memberInfo);
+      System.out.println("경력사항>>>>>>"+memberCareer);
+      System.out.println("지역선택>>>>>>"+areaList);
+      System.out.println("학력사항>>>>>>"+memberAcademic);
+      System.out.println("자격증>>>>>>"+certificateList);
+      System.out.println("산업별-->>"+industryService.getIndustryList());
+      
       return "resume/addResume";
    }
    

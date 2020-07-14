@@ -2,16 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>recordAnnouncement</title>
-<!-- Custom fonts for this template -->
+<title>addResume</title>
+<!-- Custom fonts for this template-->
 <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-<!-- Custom styles for this template -->
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+<!-- Custom scripts for all pages-->
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+<!-- Custom styles for this template-->
 <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
 
-<!-- Custom styles for this page -->
-<link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
 
 
 
@@ -20,23 +25,17 @@
 
 
 
-<!-- <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>addResume</title>
-Custom fonts for this template
-<link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-Bootstrap core JavaScript
-<script th:src="@{/vendor/jquery/jquery.min.js"></script>  요거
- <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> --><!-- 요거
 
-Core plugin JavaScript
- <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js"></script> --><!-- 요거
 
-Custom styles for this template
-<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet"> -->
+
+
+
+
+
+
+
+
+
 
 
 
@@ -59,8 +58,70 @@ $(document).ready(function(){
    });
    */
    
+   
+   
+   
+   
+   //성별
+
+   
+   
+   
+   
+   //희망근무지역
+   
+   $('#hireAnnouncementMainJob').click(function(){
+			$('#jobListSelect').css('display', '');
+		});
+		
+		$('[name=job1Div]').click(function(){
+			$('#job2DivId').children().attr('class', '');
+			$('#job2DivId').children().css('display', 'none');
+			//console.log(this.id);
+			let job2Name = 'job2_' + this.id;
+			$('[name='+job2Name+']').attr('class', 'dropdown-item d-flex align-items-center font-weight-bold text-truncate');
+			$('[name='+job2Name+']').css('display','');
+		});
+		
+		$('[class=job2Div]').click(function(){
+			//console.log(this.id);
+			
+			$('.job3Li').css('display', 'none');			
+			let job3Name = 'job3_' + this.id;
+			$('[name=' + job3Name + ']').css('display', '');
+			
+		});
+		
+		
+		$('[name=job3Click]').click(function(){
+			//console.log(this);
+			let str = "";
+			$('[name=job3Click]').each(function(){
+				if($(this).is(":checked")){
+					str += $(this).val() + " ";
+				}				
+			});			
+			$('#hireAnnouncementMainJob').val(str);
+		})
+
+		
+		$('#jobClear').click(function(){
+			$('#hireAnnouncementMainJob').val('');
+			$('[name=job3Click]').each(function(){
+				$(this).prop('checked', false);
+			});
+		});
+   
+   
+   //희망근무지역 end
+   
+   
+   
+   
+   
    // 자격증 내역
    $('#addCertificate').click(function() {
+	  
 	  
 	   if($('#certificate').css('display') == 'none') {
 		   $('#certificate').show();
@@ -71,10 +132,10 @@ $(document).ready(function(){
    
    //지역   
     /*<![CDATA[*/
-    $('#resumeWishArea').change(function () {
+    $('#areaCode').change(function () {
           let areaSido=$(this).val();
           console.log("areaSido : "+areaSido);
-          $('#resumeWishArea2').empty();
+          $('#area2Code').empty();
            $.ajax({
              url   :/*[[@{/selectArea2}]]*/, 
                type: "POST",
@@ -85,8 +146,8 @@ $(document).ready(function(){
                 
                 console.log(item);
               
-              var addContent = $("<label><input type='checkbox' id='resumeWishArea2' name='resumeWishArea2' th:value='"+item.area2Gungu+"'>"+item.area2Gungu+"</label>");
-              $("#resumeWishArea2").append(addContent);
+                var addContent = $("<option th:value='"+item.area2Gungu+"' th:text='"+item.area2Gungu+"'>"+item.area2Gungu+"</option>");
+              $("#area2Code").append(addContent);
              });
              }
            });
@@ -113,7 +174,14 @@ $(document).ready(function(){
             }
           });
          
-  });   
+  });  
+    
+    
+    
+    
+    
+    
+    
     
 });
 </script>
@@ -211,8 +279,8 @@ $(document).ready(function(){
 			</div>
 			<div class="col-xl-10">			                  				
 				<input type="text" class="form-control" th:value="${memberInfo.memberBirthdate}" readonly="readonly" style="display:inline-block; width: 80%">
-				<input  type="radio" th:value="남" readonly="readonly" id="memberGender">남
-	       		<input  type="radio" th:value="여" readonly="readonly" id="memberGender">여
+				<input type="radio" readonly="readonly" id="man" th:value="남">남
+	       		<input type="radio" readonly="readonly" id="woman" th:value="여">여
 			</div>
 		</div>
 	   
@@ -307,10 +375,15 @@ $(document).ready(function(){
 			<div class="col-xl-2">	
 				<h5 class="m-0 font-weight-bold">재직기간</h5>	                  							
 		  	</div>
-		    <div class="col-xl-10">			                  				
-				<input type="text" class="form-control" th:value="${memberCareer.careerStrarDate}" readonly="readonly">
-				~
-				<input type="text" class="form-control" th:value="${memberCareer.careerEndDate}" readonly="readonly">
+		    <div class="col-xl-10">
+				<div class="row">
+					<div class="col-xl-6">
+						<input type="date" class="form-control" th:value="${memberCareer.careerStartDate}"  readonly="readonly">
+					</div>
+					<div class="col-xl-6">
+						<input type="date" class="form-control" th:value="${memberCareer.careerEndDate}" readonly="readonly">
+					</div>                                             
+				</div>
 			</div>
 		</div>
 		
@@ -414,7 +487,7 @@ $(document).ready(function(){
 
 		<div class="form-group row">
 			<div class="col-xl-2">	
-				<h5 class="m-0 font-weight-bold">희망근무조건</h5>	                  							
+				<h5 class="m-0 font-weight-bold">희망근무조건</h5>	                							
 		  	</div>
 		    <div class="col-xl-10">			                  				
 				<input type="text" class="form-control">
@@ -477,75 +550,106 @@ $(document).ready(function(){
 				</select>
 			</div>
 		</div>
-		
-	<!--   
-	  <div>
 
-	  	<div align="left">
-         	<select name="resumeWishArea" id="resumeWishArea" class="form-control">
-            	<option value="">시 / 도</option>
-            	<option th:each="areaList : ${areaList}" th:value="${areaList.areaSido}" th:text="${areaList.areaSido}"></option>
-         	</select>
-         		
-         <div id="resumeWishArea2">
-         
-         </div>
-         </div>
-        
-	</div>	  
- -->	  
- 
- 
  
 	    <div class="form-group row">
 			<div class="col-xl-2">	
-				<h5 class="m-0 font-weight-bold">주소 : </h5>	                  							
+				<h5 class="m-0 font-weight-bold">희망근무지역 : </h5>	                  							
 		  	</div>
 		    <div class="col-xl-10">			                  				
-				<select name="areaSido" id="areaSido" class="form-control">
+				<select name="areaSido" id="areaCode" class="form-control">
 					<option value="">시 / 도</option>
 					<option th:each="areaList : ${areaList}" th:value="${areaList.areaSido}" th:text="${areaList.areaSido}"></option>
 				</select>
-			<span id="areaCodeHelper"></span>
 			</div>
 			<div class="col-xl-10">			                  				
-				<select id="area2Code" class="form-control" name="area2Code" >
+				<select id="area2Code" class="form-control" name="area2Gungu" >
 					<option value="">군 / 구</option>
 		                                      
 				</select>
-			<span id="area2CodeHelper"></span>
+				<span id="area2CodeHelper"></span>
 			</div>
-			</div>
-	
- 
- 
- 
-
- 
- 
- 
- 
- 
+			</div> 
 	  
-	    <div class="form-group row">
-			<div class="col-xl-2">	
-				<h5 class="m-0 font-weight-bold">희망근무직종</h5>	                  							
-		  	</div>
-		    <div class="col-xl-10">			                  				
-				<input type="text"  class="form-control" name="resumeWishJob" id="resumeWishJob">
-			</div>
-		</div>
-	   
-	   <div class="form-group row">
+	  
+	  
+	  
+	  <div class="form-group row">
 			<div class="col-xl-2">	
 				<h5 class="m-0 font-weight-bold">희망근무업종</h5>	                  							
 		  	</div>
-		    <div class="col-xl-10">			                  				
-				<input type="text" class="form-control" name="resumeWishIndustry" id="resumeWishIndustry">
+		    <div class="col-xl-10">		
+		    	<select name="areaSido" id="areaCode" class="form-control">
+					<option value="">업종</option>
+					<option th:each="industryList : ${industryList}" th:value="${industryList.industryCategory}" th:text="${industryList.industryCategory}"></option>
+				</select>	                  				
+				<!-- <input type="text" class="form-control" name="resumeWishIndustry" id="resumeWishIndustry"> -->
 			</div>
 		</div>
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	    <div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">희망근무직종</h5>	   
+				<span id="jobClear" style="cursor: pointer;">직무 초기화</span>               							
+		  	</div>
+		  	
+		  	<div class="col-xl-10">   
+				<input type="text" class="form-control" name="hireAnnouncementMainJob" id="hireAnnouncementMainJob" readonly="readonly">
+				<span id="hireAnnouncementMainJobSpan" style="color: red; margin: auto;"></span>
+	      
+				<div id="job1DivId" class="dropdown-list" style="float: left; height: 245px; overflow: auto; width: auto;">
+					<th:block th:each="job : ${job}">
+						<div th:id="|job1Id_${job.jobNo}|" th:text="${job.jobCategory}" th:name="job1Div" class="dropdown-item d-flex align-items-center font-weight-bold text-truncate" style="cursor: pointer;">
+						
+						</div>
+		            </th:block>
+				
+					<!-- <div class="dropdown-item d-flex align-items-center font-weight-bold text-truncate" style="cursor: pointer;">
+		             		ASDF                                     		
+	               	 </div> -->
+	                                      		
+		 		</div>
+		                                      
+		        <div id="job2DivId" class="dropdown-list" style="float: left; height: 245px; overflow: auto; width: auto;" >
+		        	<th:block th:each="job2 : ${job2}">
+						<div th:name="|job2_job1Id_${job2.jobNo}|" th:id="|job2Id_${job2.job2No}|" th:text="${job2.job2Category}" class="job2Div" style="cursor: pointer; display: none;">
+						
+						</div>
+					</th:block>
+				</div>
+		                                   
+		        <div class="dropdown-list" style="float: left; height: 245px; overflow: auto; width: 55%;">
+		        	<ul class="nav job3Ul">
+		            	<th:block th:each="job3 : ${job3}">
+			                <li th:name="|job3_job2Id_${job3.job2No}|" class="nav-item job3Li" style="display: none;">
+					            <div class="form-check-inline">		
+						            <label class="form-check-label">
+						            	<input type="checkbox" class="form-check-input" name="job3Click" th:id="|job3Id_${job3.job3No}|" th:value="${job3.job3Category}" th:text="${job3.job3Category}">
+						            </label>															
+					            </div>
+			                </li>		                                      	
+		                </th:block>
+		        	</ul>
+				</div>  
+				
+				<span id="hireAnnouncementMainJobSpan" style="color: red; margin: auto;"></span>
+		        </div>
+		
+		</div><!-- ㅇㅁㄴ -->
+		  	
+		  
+	   
   	 </div>
-   </div>
+   </div><!-- 희망근무조건 end -->
      
 
     <button type="submit">이력서 등록</button>
