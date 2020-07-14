@@ -12,7 +12,7 @@ import com.gdu.linkJobs.mapper.JobMapper;
 import com.gdu.linkJobs.vo.Job;
 import com.gdu.linkJobs.vo.Job2;
 import com.gdu.linkJobs.vo.Job3;
-import com.gdu.linkJobs.vo.JobAndJob2;
+import com.gdu.linkJobs.vo.JobAndJob2AndJob3;
 
 @Service
 @Transactional
@@ -55,7 +55,13 @@ public class JobService {
 	}
 
 	// selectRestJob
-	public List<JobAndJob2> getRestJob(int jobNo) {
+	public List<JobAndJob2AndJob3> getRestJob(int jobNo) {
 		return jobMapper.selectRestJob(jobNo);
+	}
+
+	// selectRestJob2
+	public List<JobAndJob2AndJob3> getRestJob2(int job2No) {
+		System.out.println("selectRestJob2");
+		return jobMapper.selectRestJob2(job2No);
 	}
 }

@@ -31,14 +31,29 @@
 	</select>
 
 	<!-- 레스트 컨트롤러 용 job,job2리스트 -->
-	<select id="selectRestJob" parameterType="int">
+	<select id="selectRestJob" parameterType="int" resultType="com.gdu.linkJobs.vo.JobAndJob2AndJob3">
 		SELECT
-			job.job_category,
-			job2.job2_category
+			job.job_category jobCategory,
+			job.job_no jobNo,
+			job2.job2_category job2Category,
+			job2.job2_no job2No
 		FROM linkjobs_job job
 		INNER JOIN linkjobs_job2 job2
 		ON job.job_no=job2.job_no
 		WHERE job.job_no=#{jobNo}
+	</select>
+	
+	<!-- 레스트 컨트롤러 용 job3,job2리스트 -->
+	<select id="selectRestJob2" parameterType="int" resultType="com.gdu.linkJobs.vo.JobAndJob2AndJob3">
+		SELECT
+			job2.job2_no job2No,
+			job2.job2_category job2Category,
+			job3.job3_no job3No,
+			job3.job3_category job3Category
+		FROM linkjobs_job2 job2
+		INNER JOIN linkjobs_job3 job3
+		ON job2.job2_no=job3.job2_no
+		WHERE job2.job2_no=#{job2No}
 	</select>
 
 

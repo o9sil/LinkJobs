@@ -66,9 +66,9 @@ public class MemberCareerController {
 		model.addAttribute("areaList", areaList);
 		
 		Map<String, Object> map = jobService.getJobListAll();
-		System.out.println(map.get("jobList")+"<--map.get(\"jobList\")");
-		model.addAttribute("jobList",map.get("jobList"));
+		//System.out.println(map.get("jobList")+"<--map.get(\"jobList\")");
 		
+		model.addAttribute("jobList",map.get("jobList"));
 		model.addAttribute("job2List",map.get("job2List"));
 		model.addAttribute("job3List",map.get("job3List"));
 		
@@ -82,7 +82,8 @@ public class MemberCareerController {
 		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/getAnnouncementList";
 		}
-		
+		String memberId = (String)(session.getAttribute("loginMember"));
+		memberCareer.setMemberId(memberId);
 		memberCareerService.addMemberCareer(memberCareer);
 		
 		return "redirect:/getMemberCareerList";
