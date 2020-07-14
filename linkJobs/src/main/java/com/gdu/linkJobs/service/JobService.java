@@ -12,21 +12,24 @@ import com.gdu.linkJobs.mapper.JobMapper;
 import com.gdu.linkJobs.vo.Job;
 import com.gdu.linkJobs.vo.Job2;
 import com.gdu.linkJobs.vo.Job3;
+import com.gdu.linkJobs.vo.JobAndJob2;
 
 @Service
 @Transactional
 public class JobService {
 
-	@Autowired private JobMapper jobMapper; 
-	
-	public Map<String, Object> getJobListAll(){
-		
+	@Autowired
+	private JobMapper jobMapper;
+
+	// job리스트 다 출력
+	public Map<String, Object> getJobListAll() {
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		List<Job> jobList = jobMapper.selectJobListAll();
 		List<Job2> job2List = jobMapper.selectJob2ListAll();
 		List<Job3> job3List = jobMapper.selectJob3ListAll();
-		
+
 //		System.out.println("jobList");
 //		for(Job job : jobList) {
 //			System.out.print(job + " ");
@@ -43,11 +46,16 @@ public class JobService {
 //		for(Job3 job3 : job3List) {
 //			System.out.print(job3 + " ");
 //		}
-		
-		map.put("job", jobList);
-		map.put("job2", job2List);
-		map.put("job3", job3List);
-		
+
+		map.put("jobList", jobList);
+		map.put("job2List", job2List);
+		map.put("job3List", job3List);
+
 		return map;
+	}
+
+	// selectRestJob
+	public List<JobAndJob2> getRestJob(int jobNo) {
+		return jobMapper.selectRestJob(jobNo);
 	}
 }

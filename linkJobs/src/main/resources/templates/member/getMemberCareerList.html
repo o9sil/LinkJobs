@@ -34,6 +34,88 @@
 <script th:src="@{/js/sb-admin-2.min.js}"></script>
 <!-- Custom styles for this template-->
 <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+<script th:inline="javascript">
+   
+   
+   let helperInit = function() {
+         $('#idHelper').text("");
+         $('#pwHelper').text("");
+         $('#nameHelper').text("");
+         $('#detailAddrHelper').text("");
+         $('#phoneHelper').text("");
+         $('#emailHelper').text("");
+         $('#birthHelper').text("");
+         $('#genderHelper').text("");
+         $('#areaCodeHelper').text("");
+         $('#areaCode2Helper').text("");
+      }
+   
+   
+   
+   
+   
+   $(document).ready(function () {
+      
+      
+      
+      
+      $('#idFormBtn').click(function() {
+         if ($('#memberIdCheck').val().length < 4) {
+            $('#idCheckHelper').text("id를 4자이상");
+         } else {
+            $('#idForm').submit();
+         }
+      });
+
+     
+      //지역
+      
+      /*<![CDATA[*/
+      $('#areaCode').change(function () {
+            let areaSido=$(this).val();
+            console.log("areaSido : "+areaSido);
+            $('#area2Code').empty();
+             $.ajax({
+               url   :/*[[@{/selectArea2}]]*/, 
+                 type: "POST",
+                data:{'areaSido':areaSido},
+                success: function (data) {
+                   console.log(data);                   
+               $.each(data, function (index,item) {
+                  
+                  console.log(item);
+                  
+                  var addContent = $("<option th:value='"+item.area2Gungu+"' th:text='"+item.area2Gungu+"'>"+item.area2Gungu+"</option>");
+                    $("#area2Code").append(addContent);
+
+                  
+               });
+            }
+             });
+     });   
+      /*]]>*/
+      
+      
+      //회원가입 폼
+      $('#myFormBtn').click(function() {
+         
+         
+       if($('#memberId').val().length == ""){
+             helperInit(); //값이 다시 초기화 됨
+              $('#idHelper').text("ID를 중복체크 해주세요");
+              $('#memberId').focus();
+         }else if($('#memberPw').val().length < 4){
+           helperInit(); //값이 다시 초기화 됨
+            $('#pwHelper').text("PW는 4자 이상");
+            $('#memberPw').focus();
+         } else{
+            $('#myForm').submit();            
+         }
+         
+      });
+   });
+   
+</script>
 </head>
 <body id="page-top">
 
