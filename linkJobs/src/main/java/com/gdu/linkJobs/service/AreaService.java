@@ -22,8 +22,8 @@ public class AreaService {
    }
    
    //gungu
-   public List<AreaAndArea2> getArea2(String areaSido){
-      return areaMapper.selectArea2(areaSido);
+   public List<AreaAndArea2> getArea2(int areaNo){
+      return areaMapper.selectArea2(areaNo);
    }
    
    

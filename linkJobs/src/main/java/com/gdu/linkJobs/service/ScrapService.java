@@ -20,7 +20,7 @@ public class ScrapService {
 	 
 	
 	//스크랩 추가 
-	public int insertScrap(Scrap scrap) {
+	public int addScrap(Scrap scrap) {
 		return scrapMapper.insertScrap(scrap);
 	}
 	

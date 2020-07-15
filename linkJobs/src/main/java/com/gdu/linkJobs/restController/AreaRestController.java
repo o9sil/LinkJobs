@@ -21,8 +21,8 @@ public class AreaRestController {
    
    // 군구
    @PostMapping("/selectArea2")
-   public List<AreaAndArea2> selectArea2( HttpSession session, @RequestParam("areaSido") String areaSido) {
-      System.out.println(areaSido+"<--areaSido");
-      return areaService.getArea2(areaSido);
+   public List<AreaAndArea2> selectArea2( HttpSession session, @RequestParam("areaNo") int areaNo) {
+      System.out.println(areaNo+"<--areaNo");
+      return areaService.getArea2(areaNo);
    }
 }  

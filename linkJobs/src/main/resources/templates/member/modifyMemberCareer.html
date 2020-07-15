@@ -70,20 +70,20 @@
       
       /*<![CDATA[*/
       $('#areaCode').change(function () {
-            let areaSido=$(this).val();
-            console.log("areaSido : "+areaSido);
+            let areaNo=$(this).val();
+            console.log("areaNo : "+areaNo);
             $('#area2Code').empty();
              $.ajax({
                url   :/*[[@{/selectArea2}]]*/, 
                  type: "POST",
-                data:{'areaSido':areaSido},
+                data:{'areaNo':areaNo},
                 success: function (data) {
                    console.log(data);                   
                $.each(data, function (index,item) {
                   
                   console.log(item);
                   
-                  var addContent = $("<option th:value='"+item.area2Gungu+"' th:text='"+item.area2Gungu+"'>"+item.area2Gungu+"</option>");
+                  var addContent = $("<option value='"+item.area2Gungu+"' th:text='"+item.area2Gungu+"'>"+item.area2Gungu+"</option>");
                     $("#area2Code").append(addContent);
 
                   
@@ -92,6 +92,12 @@
              });
      });   
       /*]]>*/
+      
+      
+     //숫자만 입력
+       $("input:text[numberOnly]").on("keyup", function() {
+        	    $(this).val($(this).val().replace(/[^0-9]/g,""));
+          });
       
       //job
       
@@ -235,7 +241,7 @@
             <!-- 페이지 내용 -->
             <div class="container-fluid">
                <h1 align="center">경력사항 수정</h1>
-               <form th:action="@{/modifyMemberCareer}" method="post" id="careerForm">
+               <form th:action="@{/modifyMemberCareer(careerNo=${mc.careerNo})}" method="post" id="careerForm">
                   <div class="row">
                      <div  class="col-sm-2">
                    		     회사 이름 : 
@@ -275,8 +281,8 @@
                      <div class="col-sm-10">
                         <select id="careerLeaving" name="careerLeaving"
                            class="form-control">
-                           <option th:value="퇴사" th:text="퇴사">
-                           <option th:value="재직중" th:text="재직중">
+                           <option value="퇴사" th:text="퇴사"></option>
+                           <option value="재직중" th:text="재직중"></option>
                         </select>
                      </div>
                   </div>
@@ -307,7 +313,7 @@
                      </div>
                      <div class="col-sm-10">
                      <input type="text" id="careerJobgradeJobpositionYear"  th:value="${mc.careerJobgradeJobpositionYear}"
-                        name="careerJobgradeJobpositionYear" class="form-control">
+                        name="careerJobgradeJobpositionYear" class="form-control" numberOnly>
                      </div>
                   </div>
                   <br>
@@ -323,8 +329,8 @@
                      </div>
                      <div class="col-sm-3">
                         <select id="job2No" name="job2No" class="form-control">
-                        	<option th:value="${mc.job2Category}" th:text="${mc.job2Category}"></option>
-                        	<option value=""></option>
+                        	<option th:value="${mc.job2No}" th:text="${mc.job2Category}"></option>
+                        	
                         </select>
                      </div>
                      <div class="col-sm-3">
@@ -340,7 +346,7 @@
                         <select name="areaCode" id="areaCode"  class="form-control">
                            <option th:value="${mc.areaSido}" th:text="${mc.areaSido}"></option>
                            <option th:each="areaList : ${areaList}"
-                              th:value="${areaList.areaSido}" th:text="${areaList.areaSido}"></option>
+                              th:value="${areaList.areaNo}" th:text="${areaList.areaSido}"></option>
                         </select> <span id="areaCodeHelper"></span>
                      </div>
                      <div class="col-sm-5">
@@ -367,7 +373,7 @@
                      </div>
                      <div class="col-sm-10">
                      <input type="text" id="careerSalary" name="careerSalary" th:value="${mc.careerSalary}"
-                        class="form-control">
+                        class="form-control" numberOnly>
                      </div>
                   </div>
                   <br>

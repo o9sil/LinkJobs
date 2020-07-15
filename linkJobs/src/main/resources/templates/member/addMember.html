@@ -54,22 +54,22 @@
      
       //지역
       
-      /*<![CDATA[*/
+     /*<![CDATA[*/
       $('#areaCode').change(function () {
-            let areaSido=$(this).val();
-            console.log("areaSido : "+areaSido);
+            let areaNo=$(this).val();
+            console.log("areaNo : "+areaNo);
             $('#area2Code').empty();
              $.ajax({
                url   :/*[[@{/selectArea2}]]*/, 
                  type: "POST",
-                data:{'areaSido':areaSido},
+                data:{'areaNo':areaNo},
                 success: function (data) {
                    console.log(data);                   
                $.each(data, function (index,item) {
                   
                   console.log(item);
                   
-                  var addContent = $("<option th:value='"+item.area2Gungu+"' th:text='"+item.area2Gungu+"'>"+item.area2Gungu+"</option>");
+                  var addContent = $("<option value='"+item.area2Gungu+"' th:text='"+item.area2Gungu+"'>"+item.area2Gungu+"</option>");
                     $("#area2Code").append(addContent);
 
                   
@@ -213,7 +213,7 @@
                                     <div class="col-sm-4">
                                        <select name="areaSido" id="areaCode" class="form-control">
                                           <option value="">시 / 도</option>
-                                          <option th:each="areaList : ${areaList}" th:value="${areaList.areaSido}" th:text="${areaList.areaSido}"></option>
+                                          <option th:each="areaList : ${areaList}" th:value="${areaList.areaNo}" th:text="${areaList.areaSido}"></option>
                                        </select>
                                        <span id="areaCodeHelper"></span>
                                     </div>   

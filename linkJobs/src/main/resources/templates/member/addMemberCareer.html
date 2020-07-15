@@ -66,32 +66,7 @@
    $(document).ready(function () {
       
      
-      //지역
       
-      /*<![CDATA[*/
-      $('#areaCode').change(function () {
-            let areaSido=$(this).val();
-            console.log("areaSido : "+areaSido);
-            $('#area2Code').empty();
-             $.ajax({
-               url   :/*[[@{/selectArea2}]]*/, 
-                 type: "POST",
-                data:{'areaSido':areaSido},
-                success: function (data) {
-                   console.log(data);                   
-               $.each(data, function (index,item) {
-                  
-                  console.log(item);
-                  
-                  var addContent = $("<option th:value='"+item.area2Gungu+"' th:text='"+item.area2Gungu+"'>"+item.area2Gungu+"</option>");
-                    $("#area2Code").append(addContent);
-
-                  
-               });
-            }
-             });
-     });   
-      /*]]>*/
       
       //job
       
@@ -117,7 +92,7 @@
                   
                });
             }
-         });
+             });
      });   
       /*]]>*/
       
@@ -150,7 +125,41 @@
       /*]]>*/
       
       
+      
+      //지역
+      
+      /*<![CDATA[*/
+      $('#areaCode').change(function () {
+            let areaNo=$(this).val();
+            console.log("areaNo : "+areaNo);
+            $('#area2Code').empty();
+             $.ajax({
+               url   :/*[[@{/selectArea2}]]*/, 
+                 type: "POST",
+                data:{'areaNo':areaNo},
+                success: function (data) {
+                   console.log(data);                   
+               $.each(data, function (index,item) {
+                  
+                  console.log(item);
+                  
+                  var addContent = $("<option value='"+item.area2Gungu+"' th:text='"+item.area2Gungu+"'>"+item.area2Gungu+"</option>");
+                    $("#area2Code").append(addContent);
+
+                  
+               });
+            }
+             });
+     });   
+      /*]]>*/
+      
+       $("input:text[numberOnly]").on("keyup", function() {
+        	    $(this).val($(this).val().replace(/[^0-9]/g,""));
+          });
+      
+      
         $('#Btn').click(function() {
+        	
          if ($('#careerCompanyName').val() == '') {
             $('#careerCompanyNameHelper').text("회사 이름을 입력하세요.");
             return ;
@@ -208,6 +217,11 @@
              $('#careerProjectContentsHelper').text("프로젝트 내용을 입력하세요.");
              return ;
           }
+         
+        
+
+
+          
          
          
          
@@ -307,7 +321,7 @@
                      </div>
                      <div class="col-sm-10">
                      <input type="text" id="careerJobgradeJobpositionYear"
-                        name="careerJobgradeJobpositionYear" class="form-control">
+                        name="careerJobgradeJobpositionYear" class="form-control" numberOnly>
                      </div>
                   </div>
                   <br>
@@ -332,13 +346,16 @@
                      </div>
                   </div>
                   <br>
+                  
                   <div class="row">
-                     <div class="col-sm-2">주소 :</div>
+                     <div class="col-sm-2">
+                     주소 :
+                     </div>
                      <div class="col-sm-5">
-                        <select name="areaCode" id="areaCode"  class="form-control">
+                        <select name="areaNo" id="areaCode"  class="form-control">
                            <option value="">시 / 도</option>
                            <option th:each="areaList : ${areaList}"
-                              th:value="${areaList.areaSido}" th:text="${areaList.areaSido}"></option>
+                              th:value="${areaList.areaNo}" th:text="${areaList.areaSido}"></option>
                         </select> <span id="areaCodeHelper"></span>
                      </div>
                      <div class="col-sm-5">
@@ -365,7 +382,7 @@
                      </div>
                      <div class="col-sm-10">
                      <input type="text" id="careerSalary" name="careerSalary"
-                        class="form-control">
+                        class="form-control" numberOnly>
                      </div>
                   </div>
                   <br>
