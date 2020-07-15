@@ -22,53 +22,57 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script th:inline="javascript">
    
 $(document).ready(function(){
-   /* 수정중
-   // 경력사항
-   // 기존페이지  숨김 (신입기본)  --> 경력 클릭시 이벤트 발생
-   $('#resumeCareerDiv').hide();
-   
-   $('#resumeCareer_1').click(function() {
-      $('#resumeCareerDiv').hide();
-   });
-   
-   $('#resumeCareer_2').click(function() {
-      $('#resumeCareerDiv').show();
-   });
-   */
    
    
    
-   
-   
-   //성별
+
+	//학력 사항  
+    $(".academicListCheckBox").click(function(){
+       console.log(this.checked);
+       if(this.checked === true){
+          $("#" + this.value).css('display', '');   
+       }else{
+          $("#" + this.value).css('display', 'none');
+       }
+    });
+	
+	
+	
+	
+	//자격증  
+    $(".certificateListCheckBox").click(function(){
+       console.log(this.checked);
+       if(this.checked === true){
+          $("#" + this.value).css('display', '');   
+       }else{
+          $("#" + this.value).css('display', 'none');
+       }
+    });
+	
+	
+	
+	
+	
+	
+  //경력사항  
+    $(".careerListCheckBox").click(function(){
+       console.log(this.checked);
+       if(this.checked === true){
+          $("#" + this.value).css('display', '');   
+       }else{
+          $("#" + this.value).css('display', 'none');
+       }
+    });
+	
+	
+    
 
    
    
-   
-   
-   //희망근무지역
+   //희망근무직업
    
    $('#hireAnnouncementMainJob').click(function(){
 			$('#jobListSelect').css('display', '');
@@ -93,10 +97,10 @@ $(document).ready(function(){
 		});
 		
 		
-		$('[name=job3Click]').click(function(){
+		$('[name=resumeWishJob3]').click(function(){
 			//console.log(this);
 			let str = "";
-			$('[name=job3Click]').each(function(){
+			$('[name=resumeWishJob3]').each(function(){
 				if($(this).is(":checked")){
 					str += $(this).val() + " ";
 				}				
@@ -107,28 +111,16 @@ $(document).ready(function(){
 		
 		$('#jobClear').click(function(){
 			$('#hireAnnouncementMainJob').val('');
-			$('[name=job3Click]').each(function(){
+			$('[name=resumeWishJob3]').each(function(){
 				$(this).prop('checked', false);
 			});
 		});
-   
-   
    //희망근무지역 end
    
    
    
    
-   
-   // 자격증 내역
-   $('#addCertificate').click(function() {
-	  
-	  
-	   if($('#certificate').css('display') == 'none') {
-		   $('#certificate').show();
-	   } else{
-		   $('#certificate').hide();
-	   }
-   });
+
    
    //지역   
     /*<![CDATA[*/
@@ -155,28 +147,15 @@ $(document).ready(function(){
    });   
     /*]]>*/
     
-// 자격증 추가
-   
-   $('#addcertificateBtn2').click(function () {
-         let certificateName2= $('#certificateName2').val();
-         let certificateDate2 = $('#certificateDate2').val();
-         console.log("certificateName2 : "+certificateName2);
-         console.log("certificateDate2 : "+certificateDate2);
-          $.ajax({
-             url :/*[[@{/addCertificate}]]*/, 
-             type: "POST",
-             data:{'certificateName':certificateName2, 'certificateDate':certificateDate2},
-             success: function (data) {
-             console.log(data);                   
-            },
-             error: function (data) {
-                console.log('Error:', data);
-            }
-          });
-         
-  });  
     
-    
+   $('#addResumeBtn').click(function(){
+	   console.log($('#areaCode > option:selected').val());
+	   console.log($('#area2Code > option:selected').val());
+	   
+	   $('#resumeWishArea').val($('#areaCode > option:selected').val() + ' ' + $('#area2Code > option:selected').val());	   
+	   
+	   $('#resumeForm').submit();     
+   })
     
     
     
@@ -244,7 +223,7 @@ $(document).ready(function(){
 	
 	
 	
-	<form method="post" th:action="@{/addResume}">
+	<form id="resumeForm" method="post" th:action="@{/addResumePost}">
      	<div class="card shadow mb-4">
      		<div class="card-body">
 				<input type="text" style="height: 100px;" class="form-control" id="resumeTitle" name="resumeTitle" placeholder="이력서 제목을 입력하세요(50자까지 입력가능)." maxlength=50>	
@@ -266,7 +245,8 @@ $(document).ready(function(){
 
 		<div class="form-group row">
 			<div class="col-xl-2">	
-				<h5 class="m-0 font-weight-bold">이름</h5>	                  							
+				<h5 class="m-0 font-weight-bold">이름</h5>	
+				<input type="hidden" name="memberId" th:value="${memberInfo.memberId}">                  							
 		  	</div>
 		    <div class="col-xl-10">			                  				
 				<input type="text" class="form-control" name="memberName" id="memberName" th:value="${memberInfo.memberName}" readonly="readonly">
@@ -279,8 +259,20 @@ $(document).ready(function(){
 			</div>
 			<div class="col-xl-10">			                  				
 				<input type="text" class="form-control" th:value="${memberInfo.memberBirthdate}" readonly="readonly" style="display:inline-block; width: 80%">
-				<input type="radio" readonly="readonly" id="man" th:value="남">남
-	       		<input type="radio" readonly="readonly" id="woman" th:value="여">여
+			</div>
+		</div>
+		
+		
+		<div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">성별</h5>	                  							
+			</div>
+			<div class="col-xl-10" th:if="${memberInfo.memberGender}==남">			                  				
+				<input type="radio" readonly="readonly" id="man" checked="checked"> 남
+			</div>
+			<div class="col-xl-10" th:if="${memberInfo.memberGender}==여">			                  				
+				<input type="radio" readonly="readonly" id="man" checked="checked"> 여
+	       		  
 			</div>
 		</div>
 	   
@@ -316,6 +308,80 @@ $(document).ready(function(){
   	 </div>
    </div>
      
+      
+  <!--    
+   학력사항
+   <div class="card shadow mb-4"> 
+   학력사항  헤드
+	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+		<h2 class="m-0 font-weight-bold text-info">학력사항</h2>
+	</div>
+
+
+  학력사항  바디
+   <div th:each="memberAcademic : ${memberAcademic}" class="card-body">
+  
+   
+   <input type="checkbox" class="academicListCheckBox" th:value="${memberAcademic.academicNo}" th:text="${memberAcademic.academicGrade}" >
+         
+   
+   <div th:id="${memberAcademic.academicNo}" style="display: none;">
+      <div class="form-group row">
+         <div class="col-xl-2">   
+            <h5 class="m-0 font-weight-bold">학교명</h5>                                       
+           </div>
+          <div class="col-xl-10">                                       
+            <input type="text" class="form-control" th:value="${memberAcademic.academicName}" readonly="readonly">
+         </div>
+      </div>
+       
+       <div class="form-group row">
+         <div class="col-xl-2">   
+            <h5 class="m-0 font-weight-bold">전공계열</h5>                                       
+           </div>
+          <div class="col-xl-10">                                       
+            <input type="text" class="form-control" th:value="${memberAcademic.academicMajor}" readonly="readonly">
+         </div>
+      </div>
+     
+       <div class="form-group row">
+         <div class="col-xl-2">   
+            <h5 class="m-0 font-weight-bold">전공</h5>                                          
+           </div>
+          <div class="col-xl-10">                                       
+            <input type="text" class="form-control" th:value="${memberAcademic.academicMajorDetail}" readonly="readonly">
+         </div>
+      </div>
+      
+      <div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">재학기간</h5>	                  							
+		  	</div>
+		    <div class="col-xl-10">
+				<div class="row">
+					<div class="col-xl-6">
+						<input type="date" class="form-control" th:value="${memberAcademic.academicToDate}"  readonly="readonly">
+					</div>
+					<div class="col-xl-6">
+						<input type="date" class="form-control" th:value="${memberAcademic.academicEndDate}" readonly="readonly">
+					</div>                                             
+				</div>
+			</div>
+		</div>
+    	<div class="form-group row">
+	         <div class="col-xl-2">   
+	            <h5 class="m-0 font-weight-bold">학점</h5>                                          
+	         </div>
+	         <div class="col-xl-10">                                       
+	            <input type="text" class="form-control" th:value="${memberAcademic.academicScore}" readonly="readonly">
+	         </div>
+      	</div>
+      
+      
+   </div>
+  </div>
+
+  </div>  학력사항 end-->
      
      
      
@@ -326,42 +392,60 @@ $(document).ready(function(){
 		<h2 class="m-0 font-weight-bold text-info">자격증정보</h2>
 	</div>
 
-   <!-- 자격증정보  바디-->
-   <div th:each="certificateList : ${certificateList}" class="card-body">   	
 
-		<div class="form-group row">
-			<div class="col-xl-2">	
-				<h5 class="m-0 font-weight-bold">자격증 이름</h5>	                  							
-		  	</div>
-		    <div class="col-xl-10">			                  				
-				<input type="text" class="form-control" th:value="${certificateList.certificateName}" readonly="readonly">
-			</div>
-		</div>
-	  
-	    <div class="form-group row">
-			<div class="col-xl-2">	
-				<h5 class="m-0 font-weight-bold">취득일</h5>	                  							
-		  	</div>
-		    <div class="col-xl-10">			                  				
-				<input type="text" class="form-control" th:value="${certificateList.certificateDate}" readonly="readonly">
-			</div>
-		</div>
-   	</div>
-   </div><!-- 자격증정보  end-->
+  <!-- 자격증정보  바디-->
+   <div th:each="certificateList : ${certificateList}" class="card-body">
+  
+   <input type="checkbox" name="certificateNo" class="certificateListCheckBox" th:value="${certificateList.certificateNo}" th:text="${certificateList.certificateName}" >
+         
+   
+   <div th:id="${certificateList.certificateNo}" style="display: none;">
+      <div class="form-group row">
+         <div class="col-xl-2">   
+            <h5 class="m-0 font-weight-bold">자격증 이름</h5>                                       
+           </div>
+          <div class="col-xl-10">                                       
+            <input type="text" class="form-control" th:value="${certificateList.certificateName}" readonly="readonly">
+         </div>
+      </div>
+     
+       <div class="form-group row">
+         <div class="col-xl-2">   
+            <h5 class="m-0 font-weight-bold">취득일</h5>                                          
+           </div>
+          <div class="col-xl-10">                                       
+            <input type="text" class="form-control" th:value="${certificateList.certificateDate}" readonly="readonly">
+         </div>
+      </div>
+   </div>
+  </div>
+  
+  </div>
+  
+   <!-- 자격증정보  end-->
      
      
      
 
      
-	<!-- 경력사항  미완!!!!-->
+	<!-- 경력사항 -->
    <div class="card shadow mb-4"> 
    <!-- 경력사항  헤드-->
 	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 		<h2 class="m-0 font-weight-bold text-info">경력사항</h2>
+		<div>			                  				
+			<input type="radio" id="new" name="resumeCareer" th:value="신입"> 신입
+		</div>
+		<div>			                  				
+			<input type="radio" id="old" name="resumeCareer" th:value="경력"> 경력 		  
+		</div>
 	</div>
 
    <!-- 경력사항  바디-->
    <div th:each="memberCareer : ${memberCareer}" class="card-body">   	
+   
+   <input type="checkbox" name="careerNo" class="careerListCheckBox" id="careerListCheckBox" th:value="${memberCareer.careerNo}" th:text="${memberCareer.careerNo}" >
+      <div th:id="${memberCareer.careerNo}" style="display: none;">
 		<div class="form-group row">
 			<div class="col-xl-2">	
 				<h5 class="m-0 font-weight-bold">회사명</h5>	                  							
@@ -467,7 +551,8 @@ $(document).ready(function(){
 				<input type="text" class="form-control" th:value="${memberCareer.careerLeaving}" readonly="readonly">
 			</div>
 		</div>
-		
+	 
+	 </div>		
    	</div>
    </div><!-- 경력사항  end-->
      
@@ -499,7 +584,7 @@ $(document).ready(function(){
 				<h5 class="m-0 font-weight-bold">근무 형태</h5>	                  							
 			</div>
 			<div class="col-xl-10">			                  				
-				<select name="resumeWorkingForm" id="resumeWorkingForm">
+				<select name="workingForm" id="resumeWorkingForm">
 					<option>선택</option>
 		            <option>계약직</option>
 		            <option>교육생</option>
@@ -556,7 +641,9 @@ $(document).ready(function(){
 			<div class="col-xl-2">	
 				<h5 class="m-0 font-weight-bold">희망근무지역 : </h5>	                  							
 		  	</div>
-		    <div class="col-xl-10">			                  				
+		    <div class="col-xl-10">	
+		    	<input type="hidden" name="resumeWishArea" id="resumeWishArea" value="">
+		    		                  				
 				<select name="areaSido" id="areaCode" class="form-control">
 					<option value="">시 / 도</option>
 					<option th:each="areaList : ${areaList}" th:value="${areaList.areaSido}" th:text="${areaList.areaSido}"></option>
@@ -579,23 +666,13 @@ $(document).ready(function(){
 				<h5 class="m-0 font-weight-bold">희망근무업종</h5>	                  							
 		  	</div>
 		    <div class="col-xl-10">		
-		    	<select name="areaSido" id="areaCode" class="form-control">
+		    	<select name="resumeWishIndustry" id="resumeWishIndustry" class="form-control">
 					<option value="">업종</option>
 					<option th:each="industryList : ${industryList}" th:value="${industryList.industryCategory}" th:text="${industryList.industryCategory}"></option>
 				</select>	                  				
-				<!-- <input type="text" class="form-control" name="resumeWishIndustry" id="resumeWishIndustry"> -->
 			</div>
 		</div>
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
+
 	    <div class="form-group row">
 			<div class="col-xl-2">	
 				<h5 class="m-0 font-weight-bold">희망근무직종</h5>	   
@@ -603,11 +680,11 @@ $(document).ready(function(){
 		  	</div>
 		  	
 		  	<div class="col-xl-10">   
-				<input type="text" class="form-control" name="hireAnnouncementMainJob" id="hireAnnouncementMainJob" readonly="readonly">
+				<input type="text" class="form-control" name="resumeWishJob" id="hireAnnouncementMainJob" readonly="readonly">
 				<span id="hireAnnouncementMainJobSpan" style="color: red; margin: auto;"></span>
 	      
 				<div id="job1DivId" class="dropdown-list" style="float: left; height: 245px; overflow: auto; width: auto;">
-					<th:block th:each="job : ${job}">
+					<th:block th:each="job : ${job}" >
 						<div th:id="|job1Id_${job.jobNo}|" th:text="${job.jobCategory}" th:name="job1Div" class="dropdown-item d-flex align-items-center font-weight-bold text-truncate" style="cursor: pointer;">
 						
 						</div>
@@ -633,7 +710,7 @@ $(document).ready(function(){
 			                <li th:name="|job3_job2Id_${job3.job2No}|" class="nav-item job3Li" style="display: none;">
 					            <div class="form-check-inline">		
 						            <label class="form-check-label">
-						            	<input type="checkbox" class="form-check-input" name="job3Click" th:id="|job3Id_${job3.job3No}|" th:value="${job3.job3Category}" th:text="${job3.job3Category}">
+						            	<input type="checkbox" class="form-check-input" name="resumeWishJob3" th:id="|job3Id_${job3.job3No}|" th:value="${job3.job3Category}" th:text="${job3.job3Category}">
 						            </label>															
 					            </div>
 			                </li>		                                      	
@@ -645,14 +722,62 @@ $(document).ready(function(){
 		        </div>
 		
 		</div><!-- ㅇㅁㄴ -->
-		  	
-		  
-	   
   	 </div>
    </div><!-- 희망근무조건 end -->
      
+     
+     
+     
+     
+     
+     
+     
+     
+     <!-- 자기소개서 -->
+     <div class="card shadow mb-4"> 
+  	 <!-- 자소서 헤드-->
+	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+		<h2 class="m-0 font-weight-bold text-info">자기소개서</h2>
+	</div>
 
-    <button type="submit">이력서 등록</button>
+   <!-- 자기소개서 바디-->
+   <div th:each="selfIntroList : ${selfIntroList}" class="card-body">   	
+
+		<div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">제목</h5>	                  							
+		  	</div>
+		    <div class="col-xl-10">			                  				
+				<input type="text" class="form-control" name="resumeSelfIntroductionTitle" id="selfIntroductionTitle" th:value="${selfIntroList.selfIntroductionTitle}">
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<div class="col-xl-2">	
+				<h5 class="m-0 font-weight-bold">내용</h5>	                  							
+		  	</div>
+		    <div class="col-xl-10">			                  				
+				<input type="text" id="selfIntroductionContents" style="height: 700px" name="resumeSelfIntroductionContents" class="form-control" th:value="${selfIntroList.selfIntroductionContents}"></textarea>
+			</div>
+		</div>
+
+		</div>
+		
+		
+		<div>
+		
+		
+		
+		<input type="radio" name="resumeAvaliability" value="공개">공개
+  		<input type="radio" name="resumeAvaliability" value="비공개">비공개
+		
+		</div>
+		
+	
+  
+  	 </div>
+  
+    <button id="addResumeBtn" type="button">이력서 등록</button>
 
    </form>
    
@@ -679,8 +804,6 @@ $(document).ready(function(){
 <!-- Page level plugins -->
 <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
 
-<!-- Page level custom scripts -->
-<script th:src="@{/js/demo/chart-area-demo.js}"></script>
-<script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+
 </body>
 </html>

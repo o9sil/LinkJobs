@@ -64,25 +64,29 @@
 	<insert id="insertResume" parameterType="com.gdu.linkJobs.vo.Resume">
 		INSERT INTO linkjobs_resume(
 							resume_title,
-							resume_career, 
 							member_id, 
+							resume_career, 
 							resume_working_form, 
 							resume_salary, 
 							resume_wish_area, 
 							resume_wish_job, 
 							resume_wish_industry, 
 							resume_avaliability, 
+							resume_self_introduction_title,
+							resume_self_introduction_contents,
 							resume_date
 				) VALUES(
 							#{resumeTitle},
-							#{resumeCareer},
 							#{memberId},
+							#{resumeCareer},
 							#{resumeWorkingForm},
 							#{resumeSalary},
 							#{resumeWishArea},
 							#{resumeWishJob},
 							#{resumeWishIndustry},
 							#{resumeAvaliability},
+							#{resumeSelfIntroductionTitle},
+							#{resumeSelfIntroductionContents}
 							NOW()
 						)
 	</insert>

@@ -1,5 +1,6 @@
 package com.gdu.linkJobs.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +20,10 @@ import com.gdu.linkJobs.service.MemberCareerService;
 import com.gdu.linkJobs.service.MemberCertificateService;
 import com.gdu.linkJobs.service.MemberService;
 import com.gdu.linkJobs.service.ResumeService;
+import com.gdu.linkJobs.service.SelfIntroductionService;
 import com.gdu.linkJobs.service.MemberAcademicService;
 import com.gdu.linkJobs.vo.Resume;
+import com.gdu.linkJobs.vo.AddResume;
 import com.gdu.linkJobs.vo.Area;
 
 import com.gdu.linkJobs.vo.Member;
@@ -39,6 +42,7 @@ public class ResumeController {
    @Autowired private MemberCertificateService memberCertificateService;
    @Autowired private JobService jobService;
    @Autowired private IndustryService industryService;
+   @Autowired private SelfIntroductionService selfIntroductionService;
    
    
    
@@ -61,7 +65,7 @@ public class ResumeController {
    
    
    //이력서 상세보기
-   @GetMapping("getDetailResume")
+   @GetMapping("/getDetailResume")
    public String getDetailResume(Resume resume, Model model) {
       List<Resume> resumelist = resumeService.getDetailResume(resume);
       model.addAttribute("resumelist", resumelist);
@@ -72,14 +76,15 @@ public class ResumeController {
    
    // 이력서 추가 폼
    @GetMapping("/addResume")
-   public String addResume(HttpSession session, Model model) {
+   public String addResume(HttpSession session, Model model, @RequestParam(value = "currentPage", defaultValue = "1") int currentPage) {
 	   if(session.getAttribute("loginMember") == null) {
 	         return "redirect:/";
 	   }
 
 	  String memberId = (String) session.getAttribute("loginMember");
 	   
-      
+	  int rowPerPage = 5;//
+	  int beginRow = (currentPage-1)*rowPerPage;//
 	  
 	  
 	  @SuppressWarnings("unchecked")
@@ -89,9 +94,17 @@ public class ResumeController {
       List<MemberAcademic> memberAcademic = memberAcademicService.getMemberAcademic(memberId);					//학력사항
       List<MemberCertificate> certificateList = memberCertificateService.getMemberCertificateList(memberId);	// 자격증정보
       Map<String, Object> jobMap = jobService.getJobListAll();
-      model.addAttribute("job", jobMap.get("job"));
-      model.addAttribute("job2", jobMap.get("job2"));
-      model.addAttribute("job3", jobMap.get("job3"));
+      Map<String, Object> map = selfIntroductionService.getSelfIntroductionList(memberId, beginRow, rowPerPage);//
+      model.addAttribute("selfIntroList", map.get("list"));//
+      model.addAttribute("lastPage", map.get("lastPage"));//
+      model.addAttribute("currentPage", currentPage);//
+      
+      
+      
+      
+      model.addAttribute("job", jobMap.get("jobList"));
+      model.addAttribute("job2", jobMap.get("job2List"));
+      model.addAttribute("job3", jobMap.get("job3List"));
 		
       model.addAttribute("memberCareer", memberCareer);
       model.addAttribute("memberInfo", memberInfo);
@@ -112,17 +125,28 @@ public class ResumeController {
    }
    
    // 이력서 추가 액션
-   @PostMapping("/addResume")
-   public String addResume(Resume resume, @RequestParam("resumeWishArea2") String[] resumeWishArea2) {
-      System.out.println(resumeWishArea2.length +"addResume.resumeWishArea2.count");
-      System.out.println(resume.getResumeWishArea()+ "addResume.getResumeWishArea");
-      for(int i=0; i<resumeWishArea2.length; i++) {
-         System.out.println(resumeWishArea2[i]);
-      }
-      resume.setMemberId("user"); // 샘플 데이터
-      resumeService.addResume(resume);
-      return "redirect:/getResume";
+   @PostMapping("/addResumePost")
+   public String addResumePost(HttpSession session, AddResume addresume) { 
+	   if (session.getAttribute("loginMember") == null) {
+			return "redirect:/getAnnouncementList";
+		}
+	   
+	  String memberId = (String) session.getAttribute("loginMember");
+
+	  System.out.println(addresume);
+	  
+	  //resume.setMemberId(memberId);
+      //resumeService.addResume(resume);
+      //return "redirect:/getResume";
+	  return null;
    }
+   
+   
+   
+   
+   
+   
+   
    
    
    
