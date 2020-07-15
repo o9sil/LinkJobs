@@ -25,4 +25,12 @@ public class AreaRestController {
       System.out.println(areaNo+"<--areaNo");
       return areaService.getArea2(areaNo);
    }
+   
+   
+   // 군구2
+   @PostMapping("/getArea2AreaSido")
+   public List<AreaAndArea2> getArea2AreaSido( HttpSession session, @RequestParam("areaSido") String areaSido) {
+      System.out.println(areaSido+"<--areaSido");
+      return areaService.getArea2AreaSido(areaSido);
+   }
 }  

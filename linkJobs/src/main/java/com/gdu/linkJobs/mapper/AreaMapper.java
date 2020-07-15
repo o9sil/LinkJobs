@@ -16,4 +16,7 @@ public interface AreaMapper {
    public List<Area> selectArea();
    //군구
    public List<AreaAndArea2> selectArea2(int areaNo);
+   
+   //군구2 areaSido
+   public List<AreaAndArea2> selectArea2AreaSido(String areaSido);
 }

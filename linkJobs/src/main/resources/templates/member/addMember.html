@@ -51,18 +51,18 @@
          }
       });
 
-     
+      
       //지역
       
      /*<![CDATA[*/
       $('#areaCode').change(function () {
-            let areaNo=$(this).val();
-            console.log("areaNo : "+areaNo);
+            let areaSido=$(this).val();
+            console.log("areaSido : "+areaSido);
             $('#area2Code').empty();
              $.ajax({
-               url   :/*[[@{/selectArea2}]]*/, 
+               url   :/*[[@{/getArea2AreaSido}]]*/, 
                  type: "POST",
-                data:{'areaNo':areaNo},
+                data:{'areaSido':areaSido},
                 success: function (data) {
                    console.log(data);                   
                $.each(data, function (index,item) {
@@ -75,7 +75,7 @@
                   
                });
             }
-             });
+          });
      });   
       /*]]>*/
       
@@ -213,7 +213,7 @@
                                     <div class="col-sm-4">
                                        <select name="areaSido" id="areaCode" class="form-control">
                                           <option value="">시 / 도</option>
-                                          <option th:each="areaList : ${areaList}" th:value="${areaList.areaNo}" th:text="${areaList.areaSido}"></option>
+                                          <option th:each="areaList : ${areaList}" th:value="${areaList.areaSido}" th:text="${areaList.areaSido}"></option>
                                        </select>
                                        <span id="areaCodeHelper"></span>
                                     </div>   

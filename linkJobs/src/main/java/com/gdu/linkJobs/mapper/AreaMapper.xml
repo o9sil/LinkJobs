@@ -36,6 +36,20 @@
       WHERE a1.area_no=#{areaNo}
    </select>
    
+     
+   <!-- Gungu -->
+   <select id="selectArea2AreaSido" parameterType="String" resultType="com.gdu.linkJobs.vo.AreaAndArea2">
+      SELECT 
+          a1.area_sido AS areaSido, 
+	      a1.area_no AS areaNo,
+	      a2.area2_gungu AS area2Gungu,
+	      a2.area2_no AS area2No
+      FROM linkjobs_area a1 
+      INNER JOIN linkjobs_area2 a2 
+      ON a1.area_no=a2.area_no
+      WHERE a1.area_sido=#{areaSido}
+   </select>
+   
    
 
 </mapper>

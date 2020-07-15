@@ -242,6 +242,10 @@ public class MemberController {
 			return "redirect:/getAnnouncementList";
 		}
 
+		if (session.getAttribute("loginCpMember") != null) {
+	         return "redirect:/getAnnouncementList";
+	      }
+		
 		return "login/login";
 	}
 
