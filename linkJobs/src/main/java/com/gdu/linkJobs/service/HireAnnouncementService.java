@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gdu.linkJobs.mapper.AnnouncementMapper;
 import com.gdu.linkJobs.mapper.AreaMapper;
 import com.gdu.linkJobs.mapper.HireAnnouncementMapper;
 import com.gdu.linkJobs.vo.AreaAndArea2;
@@ -26,6 +27,9 @@ public class HireAnnouncementService extends HttpServlet {
 	@Autowired
 	private AreaMapper areaMapper;
 	
+	@Autowired
+	private AnnouncementMapper announcementMapper;
+	
 	//채용공고 상세보기(실제 채용공고)
 	public HireAnnouncementDetail getHireAnnouncementOne(int hireAnnouncementNo) {
 		return hireAnnouncementMapper.selectHireAnnouncementOne(hireAnnouncementNo);
@@ -42,15 +46,10 @@ public class HireAnnouncementService extends HttpServlet {
 		return hireAnnouncementMapper.updateHireAnnouncementOne(hireAnnouncement);
 	}
 	
-	
-	//채용공고 일정관리
-   public List<DayAndAnnouncement> getDayAndAnnouncement(String cpMemberId, int year, int month) {
-      Map<String, Object> map = new HashMap<>();
-      map.put("cpMemberId", cpMemberId);
-      map.put("year", year);
-      map.put("month", month);
-      return hireAnnouncementMapper.selectDayAndAnnouncementList(map);
-   }
+	// 채용공고 일정표
+	public List<DayAndAnnouncement> getHireAnnouncementPlan(String cpMemberId) {
+		return hireAnnouncementMapper.selectDayAndAnnouncementList(cpMemberId);
+	}
 	
 	//기업회원 상세정보 가져오기
 	public Map getCpMemberDetail(String cpMemberId) {

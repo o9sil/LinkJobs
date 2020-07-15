@@ -72,10 +72,10 @@ public class HireAnnouncementController {
 	
 	// 월별 채용공고 페이지 요청
 	   @GetMapping("/getPlan")
-	   public String getPlan(Model model, HttpSession session, String cpMemberId, @RequestParam(value="day", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate day) {
+	   public String getPlan(Model model, HttpSession session, String cpMemberId , @RequestParam(value="day", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate day) {
 	      // 로그인이 되어있지 않으면
 	      if(session.getAttribute("loginCpMember") == null) {
-	         return "redirect:/";
+	         return "redirect:/getPlan";
 	      }
 	     Calendar cDay = Calendar.getInstance();
 	     if(day == null) {
@@ -88,16 +88,23 @@ public class HireAnnouncementController {
 	     }
 	     String loginCpMember = (String) session.getAttribute("loginCpMember");
 	     int year = cDay.get(Calendar.YEAR);
+	     System.out.println(year);
 	     int month = cDay.get(Calendar.MONTH)+1;
-	     List<DayAndAnnouncement> dayAndAnnouncementList  = hireAnnouncementService.getDayAndAnnouncement(cpMemberId, year, month);
 	     
+	     List<DayAndAnnouncement> list = hireAnnouncementService.getHireAnnouncementPlan(cpMemberId);
+	     
+	     for(DayAndAnnouncement j : list) {
+	    	 System.out.println(j);
+	     }
 	     
 	     model.addAttribute("day", day);
 	     model.addAttribute("year", cDay.get(Calendar.YEAR));
 	     model.addAttribute("month", cDay.get(Calendar.MONTH)+1);
 	     model.addAttribute("lastDay", cDay.getActualMaximum(Calendar.DATE));
+	     model.addAttribute("list", list);
 	     Calendar firstDay = cDay;
 	     firstDay.set(Calendar.DATE, 1);
+	     
 	     model.addAttribute("firstDayOfWeek", firstDay.get(Calendar.DAY_OF_WEEK));
 	     
 	     return "hireAnnouncement/getPlan";

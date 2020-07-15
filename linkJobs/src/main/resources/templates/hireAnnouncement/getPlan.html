@@ -4,6 +4,87 @@
 <meta charset="UTF-8">
 <title>getPlan</title>
 <style>
+ 	.clearfix::after,
+	.calendar ol::after {
+	  content: ".";
+	  display: block;
+	  height: 0;
+	  clear: both;
+	  visibility: hidden;
+	}
+
+	.calendar {
+	  border-radius: 10px;
+	}
+	
+	
+	
+	@media (min-width: 992px) {
+	  .month {
+	    font-size: 3.5rem;
+	  }
+	}
+	
+	
+	
+	.calendar .day-names {
+	  border-bottom: 1px solid #eee;
+	}
+	
+	.calendar .day-names li {
+	  text-transform: uppercase;
+	  margin-bottom: 0.5rem;
+	}
+	
+	.calendar .days li {
+	  border-bottom: 1px solid #eee;
+	  min-height: 8rem;
+	}
+	
+	.calendar .days li .date {
+	  margin: 0.5rem 0;
+	}
+	
+	.calendar .days li .event {
+	  font-size: 0.75rem;
+	  padding: 0.4rem;
+	  color: white;
+	  white-space: nowrap;
+	  overflow: hidden;
+	  text-overflow: ellipsis;
+	  border-radius: 4rem;
+	  margin-bottom: 1px;
+	}
+	
+	.calendar .days li .event.span-2 {
+	  width: 200%;
+	}
+	
+	.calendar .days li .event.begin {
+	  border-radius: 1rem 0 0 1rem;
+	}
+	
+	.calendar .days li .event.end {
+	  border-radius: 0 1rem 1rem 0;
+	}
+	
+	.calendar .days li .event.clear {
+	  background: none;
+	}
+	
+	.calendar .days li:nth-child(n+29) {
+	  border-bottom: none;
+	}
+	
+	.calendar .days li.outside .date {
+	  color: #ddd;
+	}
+	
+	body {
+	  min-height: 100vh;
+	  background-color: #3ca55c;
+	  background-image: linear-gradient(147deg, #3ca55c 0%, #b5ac49 100%);
+	}
    div.gd-left {
       float: left;
       width: 140px; 
@@ -25,10 +106,10 @@
    }
    span.gd-blue {
       color: #0000FF;
-    }
-    span.gd-red {
+   }
+   span.gd-red {
       color: #FF0000;
-    }
+   }
 </style>
 <!-- Custom fonts for this template -->
 <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
@@ -41,6 +122,7 @@
 <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
 </head>
 <body id="page-top">
+   
    <!-- Page Wrapper -->
    <div id="wrapper">
    
@@ -51,9 +133,9 @@
    </ul>
    
    <!-- Content Wrapper -->
-   <div id="content-wrapper" class="d-flex flex-column">
+   
+   <div id="content-wrapper">
       <div th:include="/include/menuTop::navTop"></div>
-      <!-- Main Content -->
       <div id="content">
       
       <div class="row">
@@ -62,8 +144,8 @@
          </div>
          <div class="col-sm-8">
             <div>
-               <h1 align="center" class="m-5" th:text="${year + '년 채용일정'}"></h1>
-               <div class="d-flex justify-content-between">
+      	<h1 align="center" class="month font-weight-bold mb-3 text-uppercase" th:text="${year + '년 채용일정'}"></h1>	
+      	<div class="d-flex justify-content-between">
                   <div align="left">
                      <a th:href="@{/getPlan(day=${day.plusMonths(-1)})}" class="btn btn-primary">이전</a>
                   </div>
@@ -75,30 +157,61 @@
                      <a th:href="@{/getPlan(day=${day.plusMonths(1)})}" class="btn btn-primary">다음</a>
                   </div>
                </div>
-               <br>
-               <div>
-               <div align="center">
-                  <div class="gd-left gd-clear gd-title"><span class="gd-red">일</span></div>
-                  <div class="gd-left gd-title">월</div>
-                  <div class="gd-left gd-title">화</div>
-                  <div class="gd-left gd-title">수</div>
-                  <div class="gd-left gd-title">목</div>
-                  <div class="gd-left gd-title">금</div>
-                  <div class="gd-left gd-title"><span class="gd-blue">토</span></div>
-               </div>
-               <!-- 5월은 lastDay == 31 index는 줄바꿈을 위해 -->
-               <div th:class="${index.index%7} == 0 ? 'gd-clear gd-left': 'gd-left'" th:each="i,index : ${#numbers.sequence(1, lastDay+(firstDayOfWeek-1))}">
-                  <!-- 날짜 -->
-                  <a th:href="${(i-(firstDayOfWeek-1))}>10 ? @{/getAnnouncementListByDate(day=${#temporals.format(day, 'yyyy-MM-')})}+${(i-(firstDayOfWeek-1))}: @{/getAnnouncementListByDate(day=${#temporals.format(day, 'yyyy-MM-')})}+'0'+${(i-(firstDayOfWeek-1))}" th:text="${i-(firstDayOfWeek-1)}>0 ? ${i-(firstDayOfWeek-1)} : ''" class="text-info"></a>
-               </div>
-               </div>
-            </div>
-         </div>
-         <div class="col-sm-2">
-         </div>
-         </div>
-         </div>
-      </div>
-   </div>
+      	
+	
+  <!-- Calendar -->
+  <div class="bg-white p-1">
+    <div class="d-flex align-items-center">
+     
+    </div>
+	
+    <div class="day-names list-unstyled" align="center">
+      <div class="font-weight-bold text-uppercase gd-left gd-clear gd-title"><span class="gd-red">Sun</span></div>
+      <div class="font-weight-bold text-uppercase gd-left gd-title">Mon</div>
+      <div class="font-weight-bold text-uppercase gd-left gd-title">Tue</div>
+      <div class="font-weight-bold text-uppercase gd-left gd-title">Wed</div>
+      <div class="font-weight-bold text-uppercase gd-left gd-title">Thu</div>
+      <div class="font-weight-bold text-uppercase gd-left gd-title">Fri</div>
+      <div class="font-weight-bold text-uppercase gd-left gd-title"><span class="gd-blue">Sat</span></div>
+    </div>
+	
+ 
+       <div th:class="${index.index%7} == 0 ? 'gd-clear gd-left': 'gd-left'" 
+       		th:each="i,index : ${#numbers.sequence(1, lastDay+(firstDayOfWeek-1))}">
+           <!-- 날짜 -->
+           <div th:href="${(i-(firstDayOfWeek-1))}>10 ? @{/getPlan(day=${#temporals.format(day, 'yyyy-MM-')})}+${(i-(firstDayOfWeek-1))}: 
+           		@{/getPlan(day=${#temporals.format(day, 'yyyy-MM-')})}+'0'+${(i-(firstDayOfWeek-1))}" 
+           		th:text="${i-(firstDayOfWeek-1)}>0 ? ${i-(firstDayOfWeek-1)} : ''" class="text-info">
+           		
+           		</div>
+       </div>
+
+    
+  </div>
+  
+  </div>
+  
+  </div>
+  
+  </div>
+  </div>
+</div>
+ </div>
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+<!-- Page level plugins -->
+<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+<!-- Page level custom scripts -->
+<script th:src="@{/js/demo/datatables-demo.js}"></script> 
 </body>
 </html>

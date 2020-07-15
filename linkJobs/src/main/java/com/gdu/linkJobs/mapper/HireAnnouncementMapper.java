@@ -14,7 +14,7 @@ import com.gdu.linkJobs.vo.HireAnnouncementDetail;
 public interface HireAnnouncementMapper {
 	
 	//채용공고 일정
-	public List<DayAndAnnouncement> selectDayAndAnnouncementList(Map<String, Object>map);
+	public List<DayAndAnnouncement> selectDayAndAnnouncementList(String cpMemberId);
 	
 	
 	//채용공고 상세보기(실제 공고)

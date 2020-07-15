@@ -1,25 +1,43 @@
 package com.gdu.linkJobs.vo;
 
 public class DayAndAnnouncement {
-	private int day;
-	private int price;
-   
-   
-	public int getDay() {
-		return day;
+	private int hireAnnouncementNo;
+	private String hireAnnouncementTitle;
+	private String hireAnnouncementStartDate;
+	private String hireAnnouncementEndDate;
+	
+	
+	public int getHireAnnouncementNo() {
+		return hireAnnouncementNo;
 	}
-	public void setDay(int day) {
-		this.day = day;
+	public void setHireAnnouncementNo(int hireAnnouncementNo) {
+		this.hireAnnouncementNo = hireAnnouncementNo;
 	}
-	public int getPrice() {
-		return price;
+	public String getHireAnnouncementTitle() {
+		return hireAnnouncementTitle;
 	}
-	public void setPrice(int price) {
-		this.price = price;
+	public void setHireAnnouncementTitle(String hireAnnouncementTitle) {
+		this.hireAnnouncementTitle = hireAnnouncementTitle;
 	}
-   
+	public String getHireAnnouncementStartDate() {
+		return hireAnnouncementStartDate;
+	}
+	public void setHireAnnouncementStartDate(String hireAnnouncementStartDate) {
+		this.hireAnnouncementStartDate = hireAnnouncementStartDate;
+	}
+	public String getHireAnnouncementEndDate() {
+		return hireAnnouncementEndDate;
+	}
+	public void setHireAnnouncementEndDate(String hireAnnouncementEndDate) {
+		this.hireAnnouncementEndDate = hireAnnouncementEndDate;
+	}
 	@Override
 	public String toString() {
-		return "DayAndAnnouncement [day=" + day + ", price=" + price + "]";
+		return "DayAndAnnouncement [hireAnnouncementNo=" + hireAnnouncementNo + ", hireAnnouncementTitle="
+				+ hireAnnouncementTitle + ", hireAnnouncementStartDate=" + hireAnnouncementStartDate
+				+ ", hireAnnouncementEndDate=" + hireAnnouncementEndDate + "]";
 	}
+	
+	
+	
 }

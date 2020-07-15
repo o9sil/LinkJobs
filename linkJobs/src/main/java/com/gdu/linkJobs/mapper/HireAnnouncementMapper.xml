@@ -3,11 +3,17 @@
 <mapper namespace="com.gdu.linkJobs.mapper.HireAnnouncementMapper">
 	
 	<!-- 채용공고 월별달력 -->
-   <select id="selectDayAndAnnouncementList" parameterType="java.util.Map" resultType="com.gdu.linkJobs.vo.DayAndAnnouncement">
-      SELECT DAY(hire_announcement_start_date) AS day
-      FROM linkjobs_hire_announcement
-      WHERE cpMember_id = #{cpMemberId}
-   </select>
+   	<select id="selectDayAndAnnouncementList" parameterType="String" resultType="com.gdu.linkJobs.vo.DayAndAnnouncement">
+      	SELECT 
+      		hire_announcement_title AS hireAnnouncementTitle,
+			hire_announcement_start_date AS hireAnnouncementStartDate,
+			hire_announcement_end_date AS hireAnnouncementEndDate
+	  	FROM linkjobs_hire_announcement
+		WHERE cpmember_id = #{cpmemberId}
+		AND hire_announcement_start_date <![CDATA[<=]]> #{hireAnnouncementStartDate}
+		AND hire_announcement_end_date >= #{hireAnnouncementEndDate}
+		ORDER BY hire_announcement_no ASC
+   	</select>
 	
 	<!-- 채용공고 상세보기(본문보기) -->
 	<select id="selectHireAnnouncementOne" resultType="com.gdu.linkJobs.vo.HireAnnouncementDetail" parameterType="int">
