@@ -343,10 +343,9 @@
                   <div class="row">
                      <div class="col-sm-2">주소 :</div>
                      <div class="col-sm-5">
-                        <select name="areaCode" id="areaCode"  class="form-control">
-                           <option th:value="${mc.areaSido}" th:text="${mc.areaSido}"></option>
-                           <option th:each="areaList : ${areaList}"
-                              th:value="${areaList.areaNo}" th:text="${areaList.areaSido}"></option>
+                        <select name="areaNo" id="areaCode"  class="form-control">
+                           <option th:value="${mc.areaNo}" th:text="${mc.areaSido}"></option>
+                           <option th:each="areaList : ${areaList}" th:value="${areaList.areaNo}" th:text="${areaList.areaSido}"></option>
                         </select> <span id="areaCodeHelper"></span>
                      </div>
                      <div class="col-sm-5">

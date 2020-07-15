@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.linkJobs.service.AreaService;
 import com.gdu.linkJobs.service.JobService;
@@ -115,10 +116,13 @@ public class MemberCareerController {
 	
 	//경력사항 수정 액션
 	@PostMapping("/modifyMemberCareer")
-	public String modifyMemberCareer(HttpSession session, MemberCareer memberCareer) {
-		memberCareerService.modifyMemberCareer(memberCareer);
+	public String modifyMemberCareer(HttpSession session, MemberCareer memberCareer ,@RequestParam("careerNo") int careerNo) {
+		memberCareer.setCareerNo(careerNo);
 		
-		return "redirect:/getMemberCareerOne";
+		memberCareerService.modifyMemberCareer(memberCareer);
+		System.out.println(memberCareer+"<--memberCareer");
+		
+		return "redirect:/getMemberCareerOne?careerNo="+careerNo;
 	}
 	
 	
