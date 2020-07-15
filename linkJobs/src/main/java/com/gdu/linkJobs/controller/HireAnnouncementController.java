@@ -194,8 +194,7 @@ public class HireAnnouncementController {
 		
 		
 		String loginCpMemberID = (String) session.getAttribute("loginCpMember");
-		
-		@SuppressWarnings("unchecked")
+				
 		Map<String, Object> map = cpMemberService.getCpMemberDetail(loginCpMemberID);		
 		
 		model.addAttribute("cpMember", map.get("cpMember"));
@@ -240,8 +239,6 @@ public class HireAnnouncementController {
 		String loginCpMemberID = (String) session.getAttribute("loginCpMember");
 		
 		
-		
-		@SuppressWarnings("unchecked")
 		Map<String, Object> map = cpMemberService.getCpMemberDetail(loginCpMemberID);		
 		
 		model.addAttribute("cpMember", map.get("cpMember"));

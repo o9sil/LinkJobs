@@ -227,7 +227,7 @@ public class CpMemberController {
 	@GetMapping("/loginCpMember")
 	public String login(Model model, HttpSession session) {
 		// 로그인 중
-		if(session.getAttribute("loginCpMember") != null) {
+		if(session.getAttribute("loginCpMember") != null || session.getAttribute("loginMember") != null) {
 			return "redirect:/getAnnouncementList";
 		}
 		// 로그인이 아닐시
