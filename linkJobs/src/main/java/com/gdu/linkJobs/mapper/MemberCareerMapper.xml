@@ -107,7 +107,7 @@
    		UPDATE linkjobs_member_career
    		SET  career_company_name= #{careerCompanyName},
 	         career_start_date =#{careerStartDate},
-	         career_end_date=#{careerLeaving},
+	         career_end_date=#{careerEndDate},
 	         career_leaving=#{careerLeaving},
 	         career_reason_for_leaving= #{careerReasonForLeaving},
 	         career_jobgrade_jobposition=#{careerJobgradeJobposition},
