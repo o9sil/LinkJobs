@@ -250,9 +250,10 @@ public class HireAnnouncementController {
 		System.out.println(("areaAndArea2 = " + map.get("areaAndArea2")));
 		
 		Map<String, Object> jobMap = jobService.getJobListAll();
-		model.addAttribute("job", jobMap.get("job"));
-		model.addAttribute("job2", jobMap.get("job2"));
-		model.addAttribute("job3", jobMap.get("job3"));
+		
+		model.addAttribute("job", jobMap.get("jobList"));
+		model.addAttribute("job2", jobMap.get("job2List"));
+		model.addAttribute("job3", jobMap.get("job3List"));
 		
 		model.addAttribute("industryList", industryService.getIndustryList());
 		return "hireAnnouncement/recordAnnouncement";

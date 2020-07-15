@@ -30,23 +30,6 @@ public class JobService {
 		List<Job2> job2List = jobMapper.selectJob2ListAll();
 		List<Job3> job3List = jobMapper.selectJob3ListAll();
 
-//		System.out.println("jobList");
-//		for(Job job : jobList) {
-//			System.out.print(job + " ");
-//		}
-//		
-//		System.out.println("job2List");
-//		
-//		for(Job2 job2 : job2List) {
-//			System.out.print(job2 + " ");
-//		}
-//		
-//		System.out.println("job3List");
-//		
-//		for(Job3 job3 : job3List) {
-//			System.out.print(job3 + " ");
-//		}
-
 		map.put("jobList", jobList);
 		map.put("job2List", job2List);
 		map.put("job3List", job3List);
