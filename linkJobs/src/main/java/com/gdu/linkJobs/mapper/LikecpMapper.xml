@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.linkJobs.mapper.LikecpMapper">
+
+
+
+<!-- 관심기업 출력 -->
+<select id="selectLikecp"  resultType="com.gdu.linkJobs.vo.Likecp">
+	SELECT 
+	likecp_boolean likecpBoolean,
+	likecp_no likecpNo,
+	likecp_date likecpDate
+	FROM linkjobs_likecp
+</select>
+
+<!-- 관심기업 추가 -->
+<insert id="insertLikecp" parameterType="com.gdu.linkJobs.vo.Likecp">
+	INSERT INTO linkjobs_likecp(
+		member_id,
+		cpmember_id,
+		likecp_boolean,
+		likecp_date
+	) VALUES (
+		#{memberId},
+		#{cpmemberId},
+		#{likecpBoolean},
+		NOW()
+	)
+</insert>
+
+
+<!-- 관심기업 수정-->
+<update id="updateLikecp" parameterType="com.gdu.linkJobs.vo.Likecp">
+
+	UPDATE 
+		linkjobs_likecp 
+	SET 
+		likecp_boolean = #{likecpBoolean},
+		likecp_date = NOW()
+	WHERE likecp_no = #{likecpNo}
+	AND cpmember_id = #{cpmemberId}
+</update>
+</mapper>

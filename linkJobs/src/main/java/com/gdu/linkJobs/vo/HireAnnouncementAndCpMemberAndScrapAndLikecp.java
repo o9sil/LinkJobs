@@ -1,6 +1,6 @@
 package com.gdu.linkJobs.vo;
 
-public class HireAnnouncementAndCpMemberAndScrap {
+public class HireAnnouncementAndCpMemberAndScrapAndLikecp {
 	private int hireAnnouncementNo;
 	private String hireAnnouncementTitle;
 	private String hireAnnouncementManager;
@@ -17,27 +17,30 @@ public class HireAnnouncementAndCpMemberAndScrap {
     private String hireAnnouncementStartDate;
     private String hireAnnouncementEndDate;   
     private String hireAnnouncementContents;
-    private String cpMemberId;
-	private String cpMemberPw;
-	private String cpMemberLicenseNo;
-	private String cpMemberManager;
-	private String cpMemberCompany;
-	private String cpMemberCeo;
-	private String cpMemberEmail;
-	private int cpMemberIndustryNo;
-	private int cpMemberArea2No;
-	private String cpMemberDetailedAddress;
-	private String cpMemberPhonenum;
-	private int cpMemberNumberOfEmployees;
-	private String cpMemberEstablishDate;
-	private String cpMemberDate;
-	private String cpMemberAdminAdmission;
+    private String cpmemberId;
+	private String cpmemberPw;
+	private String cpmemberLicenseNo;
+	private String cpmemberManager;
+	private String cpmemberCompany;
+	private String cpmemberCeo;
+	private String cpmemberEmail;
+	private int cpmemberIndustryNo;
+	private int cpmemberArea2No;
+	private String cpmemberDetailedAddress;
+	private String cpmemberPhonenum;
+	private int cpmemberNumberOfEmployees;
+	private String cpmemberEstablishDate;
+	private String cpmemberDate;
+	private String cpmemberAdminAdmission;
 	private int areaNo;
 	private String area2Gungu;
 	private String areaSido;
 	private int scrapNo;
 	private String scrapBoolean;
 	private String scrapDate;
+	private int likecpNo;
+	private String likecpBoolean;
+	private String likecpDate;
 	public int getHireAnnouncementNo() {
 		return hireAnnouncementNo;
 	}
@@ -134,95 +137,95 @@ public class HireAnnouncementAndCpMemberAndScrap {
 	public void setHireAnnouncementContents(String hireAnnouncementContents) {
 		this.hireAnnouncementContents = hireAnnouncementContents;
 	}
-	public String getCpMemberId() {
-		return cpMemberId;
+	public String getCpmemberId() {
+		return cpmemberId;
 	}
-	public void setCpMemberId(String cpMemberId) {
-		this.cpMemberId = cpMemberId;
+	public void setCpmemberId(String cpmemberId) {
+		this.cpmemberId = cpmemberId;
 	}
-	public String getCpMemberPw() {
-		return cpMemberPw;
+	public String getCpmemberPw() {
+		return cpmemberPw;
 	}
-	public void setCpMemberPw(String cpMemberPw) {
-		this.cpMemberPw = cpMemberPw;
+	public void setCpmemberPw(String cpmemberPw) {
+		this.cpmemberPw = cpmemberPw;
 	}
-	public String getCpMemberLicenseNo() {
-		return cpMemberLicenseNo;
+	public String getCpmemberLicenseNo() {
+		return cpmemberLicenseNo;
 	}
-	public void setCpMemberLicenseNo(String cpMemberLicenseNo) {
-		this.cpMemberLicenseNo = cpMemberLicenseNo;
+	public void setCpmemberLicenseNo(String cpmemberLicenseNo) {
+		this.cpmemberLicenseNo = cpmemberLicenseNo;
 	}
-	public String getCpMemberManager() {
-		return cpMemberManager;
+	public String getCpmemberManager() {
+		return cpmemberManager;
 	}
-	public void setCpMemberManager(String cpMemberManager) {
-		this.cpMemberManager = cpMemberManager;
+	public void setCpmemberManager(String cpmemberManager) {
+		this.cpmemberManager = cpmemberManager;
 	}
-	public String getCpMemberCompany() {
-		return cpMemberCompany;
+	public String getCpmemberCompany() {
+		return cpmemberCompany;
 	}
-	public void setCpMemberCompany(String cpMemberCompany) {
-		this.cpMemberCompany = cpMemberCompany;
+	public void setCpmemberCompany(String cpmemberCompany) {
+		this.cpmemberCompany = cpmemberCompany;
 	}
-	public String getCpMemberCeo() {
-		return cpMemberCeo;
+	public String getCpmemberCeo() {
+		return cpmemberCeo;
 	}
-	public void setCpMemberCeo(String cpMemberCeo) {
-		this.cpMemberCeo = cpMemberCeo;
+	public void setCpmemberCeo(String cpmemberCeo) {
+		this.cpmemberCeo = cpmemberCeo;
 	}
-	public String getCpMemberEmail() {
-		return cpMemberEmail;
+	public String getCpmemberEmail() {
+		return cpmemberEmail;
 	}
-	public void setCpMemberEmail(String cpMemberEmail) {
-		this.cpMemberEmail = cpMemberEmail;
+	public void setCpmemberEmail(String cpmemberEmail) {
+		this.cpmemberEmail = cpmemberEmail;
 	}
-	public int getCpMemberIndustryNo() {
-		return cpMemberIndustryNo;
+	public int getCpmemberIndustryNo() {
+		return cpmemberIndustryNo;
 	}
-	public void setCpMemberIndustryNo(int cpMemberIndustryNo) {
-		this.cpMemberIndustryNo = cpMemberIndustryNo;
+	public void setCpmemberIndustryNo(int cpmemberIndustryNo) {
+		this.cpmemberIndustryNo = cpmemberIndustryNo;
 	}
-	public int getCpMemberArea2No() {
-		return cpMemberArea2No;
+	public int getCpmemberArea2No() {
+		return cpmemberArea2No;
 	}
-	public void setCpMemberArea2No(int cpMemberArea2No) {
-		this.cpMemberArea2No = cpMemberArea2No;
+	public void setCpmemberArea2No(int cpmemberArea2No) {
+		this.cpmemberArea2No = cpmemberArea2No;
 	}
-	public String getCpMemberDetailedAddress() {
-		return cpMemberDetailedAddress;
+	public String getCpmemberDetailedAddress() {
+		return cpmemberDetailedAddress;
 	}
-	public void setCpMemberDetailedAddress(String cpMemberDetailedAddress) {
-		this.cpMemberDetailedAddress = cpMemberDetailedAddress;
+	public void setCpmemberDetailedAddress(String cpmemberDetailedAddress) {
+		this.cpmemberDetailedAddress = cpmemberDetailedAddress;
 	}
-	public String getCpMemberPhonenum() {
-		return cpMemberPhonenum;
+	public String getCpmemberPhonenum() {
+		return cpmemberPhonenum;
 	}
-	public void setCpMemberPhonenum(String cpMemberPhonenum) {
-		this.cpMemberPhonenum = cpMemberPhonenum;
+	public void setCpmemberPhonenum(String cpmemberPhonenum) {
+		this.cpmemberPhonenum = cpmemberPhonenum;
 	}
-	public int getCpMemberNumberOfEmployees() {
-		return cpMemberNumberOfEmployees;
+	public int getCpmemberNumberOfEmployees() {
+		return cpmemberNumberOfEmployees;
 	}
-	public void setCpMemberNumberOfEmployees(int cpMemberNumberOfEmployees) {
-		this.cpMemberNumberOfEmployees = cpMemberNumberOfEmployees;
+	public void setCpmemberNumberOfEmployees(int cpmemberNumberOfEmployees) {
+		this.cpmemberNumberOfEmployees = cpmemberNumberOfEmployees;
 	}
-	public String getCpMemberEstablishDate() {
-		return cpMemberEstablishDate;
+	public String getCpmemberEstablishDate() {
+		return cpmemberEstablishDate;
 	}
-	public void setCpMemberEstablishDate(String cpMemberEstablishDate) {
-		this.cpMemberEstablishDate = cpMemberEstablishDate;
+	public void setCpmemberEstablishDate(String cpmemberEstablishDate) {
+		this.cpmemberEstablishDate = cpmemberEstablishDate;
 	}
-	public String getCpMemberDate() {
-		return cpMemberDate;
+	public String getCpmemberDate() {
+		return cpmemberDate;
 	}
-	public void setCpMemberDate(String cpMemberDate) {
-		this.cpMemberDate = cpMemberDate;
+	public void setCpmemberDate(String cpmemberDate) {
+		this.cpmemberDate = cpmemberDate;
 	}
-	public String getCpMemberAdminAdmission() {
-		return cpMemberAdminAdmission;
+	public String getCpmemberAdminAdmission() {
+		return cpmemberAdminAdmission;
 	}
-	public void setCpMemberAdminAdmission(String cpMemberAdminAdmission) {
-		this.cpMemberAdminAdmission = cpMemberAdminAdmission;
+	public void setCpmemberAdminAdmission(String cpmemberAdminAdmission) {
+		this.cpmemberAdminAdmission = cpmemberAdminAdmission;
 	}
 	public int getAreaNo() {
 		return areaNo;
@@ -260,27 +263,49 @@ public class HireAnnouncementAndCpMemberAndScrap {
 	public void setScrapDate(String scrapDate) {
 		this.scrapDate = scrapDate;
 	}
+	public int getLikecpNo() {
+		return likecpNo;
+	}
+	public void setLikecpNo(int likecpNo) {
+		this.likecpNo = likecpNo;
+	}
+	public String getLikecpBoolean() {
+		return likecpBoolean;
+	}
+	public void setLikecpBoolean(String likecpBoolean) {
+		this.likecpBoolean = likecpBoolean;
+	}
+	public String getLikecpDate() {
+		return likecpDate;
+	}
+	public void setLikecpDate(String likecpDate) {
+		this.likecpDate = likecpDate;
+	}
 	@Override
 	public String toString() {
-		return "HireAnnouncementAndCpMember [hireAnnouncementNo=" + hireAnnouncementNo + ", hireAnnouncementTitle="
-				+ hireAnnouncementTitle + ", hireAnnouncementManager=" + hireAnnouncementManager
-				+ ", hireAnnouncementRecuitmentField=" + hireAnnouncementRecuitmentField + ", hireAnnouncementCareer="
-				+ hireAnnouncementCareer + ", hireAnnouncementDepartment=" + hireAnnouncementDepartment
-				+ ", hireAnnouncementJobgrade=" + hireAnnouncementJobgrade + ", hireAnnouncementJobPosition="
-				+ hireAnnouncementJobPosition + ", hireAnnouncementPreferentialConditions="
-				+ hireAnnouncementPreferentialConditions + ", hireAnnouncementEducation=" + hireAnnouncementEducation
-				+ ", hireAnnouncementSalary=" + hireAnnouncementSalary + ", hireAnnouncementWorkingFormName="
-				+ hireAnnouncementWorkingFormName + ", hireAnnouncementMainJob=" + hireAnnouncementMainJob
-				+ ", hireAnnouncementStartDate=" + hireAnnouncementStartDate + ", hireAnnouncementEndDate="
-				+ hireAnnouncementEndDate + ", hireAnnouncementContents=" + hireAnnouncementContents + ", cpMemberId="
-				+ cpMemberId + ", cpMemberPw=" + cpMemberPw + ", cpMemberLicenseNo=" + cpMemberLicenseNo
-				+ ", cpMemberManager=" + cpMemberManager + ", cpMemberCompany=" + cpMemberCompany + ", cpMemberCeo="
-				+ cpMemberCeo + ", cpMemberEmail=" + cpMemberEmail + ", cpMemberIndustryNo=" + cpMemberIndustryNo
-				+ ", cpMemberArea2No=" + cpMemberArea2No + ", cpMemberDetailedAddress=" + cpMemberDetailedAddress
-				+ ", cpMemberPhonenum=" + cpMemberPhonenum + ", cpMemberNumberOfEmployees=" + cpMemberNumberOfEmployees
-				+ ", cpMemberEstablishDate=" + cpMemberEstablishDate + ", cpMemberDate=" + cpMemberDate
-				+ ", cpMemberAdminAdmission=" + cpMemberAdminAdmission + ", areaNo=" + areaNo + ", area2Gungu="
+		return "HireAnnouncementAndCpMemberAndScrapAndLikecp [hireAnnouncementNo=" + hireAnnouncementNo
+				+ ", hireAnnouncementTitle=" + hireAnnouncementTitle + ", hireAnnouncementManager="
+				+ hireAnnouncementManager + ", hireAnnouncementRecuitmentField=" + hireAnnouncementRecuitmentField
+				+ ", hireAnnouncementCareer=" + hireAnnouncementCareer + ", hireAnnouncementDepartment="
+				+ hireAnnouncementDepartment + ", hireAnnouncementJobgrade=" + hireAnnouncementJobgrade
+				+ ", hireAnnouncementJobPosition=" + hireAnnouncementJobPosition
+				+ ", hireAnnouncementPreferentialConditions=" + hireAnnouncementPreferentialConditions
+				+ ", hireAnnouncementEducation=" + hireAnnouncementEducation + ", hireAnnouncementSalary="
+				+ hireAnnouncementSalary + ", hireAnnouncementWorkingFormName=" + hireAnnouncementWorkingFormName
+				+ ", hireAnnouncementMainJob=" + hireAnnouncementMainJob + ", hireAnnouncementStartDate="
+				+ hireAnnouncementStartDate + ", hireAnnouncementEndDate=" + hireAnnouncementEndDate
+				+ ", hireAnnouncementContents=" + hireAnnouncementContents + ", cpmemberId=" + cpmemberId
+				+ ", cpmemberPw=" + cpmemberPw + ", cpmemberLicenseNo=" + cpmemberLicenseNo + ", cpmemberManager="
+				+ cpmemberManager + ", cpmemberCompany=" + cpmemberCompany + ", cpmemberCeo=" + cpmemberCeo
+				+ ", cpmemberEmail=" + cpmemberEmail + ", cpmemberIndustryNo=" + cpmemberIndustryNo
+				+ ", cpmemberArea2No=" + cpmemberArea2No + ", cpmemberDetailedAddress=" + cpmemberDetailedAddress
+				+ ", cpmemberPhonenum=" + cpmemberPhonenum + ", cpmemberNumberOfEmployees=" + cpmemberNumberOfEmployees
+				+ ", cpmemberEstablishDate=" + cpmemberEstablishDate + ", cpmemberDate=" + cpmemberDate
+				+ ", cpmemberAdminAdmission=" + cpmemberAdminAdmission + ", areaNo=" + areaNo + ", area2Gungu="
 				+ area2Gungu + ", areaSido=" + areaSido + ", scrapNo=" + scrapNo + ", scrapBoolean=" + scrapBoolean
-				+ ", scrapDate=" + scrapDate + "]";
+				+ ", scrapDate=" + scrapDate + ", likecpNo=" + likecpNo + ", likecpBoolean=" + likecpBoolean
+				+ ", likecpDate=" + likecpDate + "]";
 	}
+	
+	
 }

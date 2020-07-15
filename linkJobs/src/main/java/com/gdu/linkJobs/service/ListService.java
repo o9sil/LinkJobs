@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gdu.linkJobs.mapper.ListMapper;
-import com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrap;
+import com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp;
 
 
 
@@ -15,15 +15,15 @@ public class ListService {
 	@Autowired private ListMapper listMapper;
 	
 	//메인페이지 채용공고 리스트 출력
-		public List<HireAnnouncementAndCpMemberAndScrap> selectHireAnnouncementList(HireAnnouncementAndCpMemberAndScrap hireAnnouncementAndCpMemberAndScrap){
-			List<HireAnnouncementAndCpMemberAndScrap> list = listMapper.selectHireAnnouncementList(hireAnnouncementAndCpMemberAndScrap);
+		public List<HireAnnouncementAndCpMemberAndScrapAndLikecp> selectHireAnnouncementList(HireAnnouncementAndCpMemberAndScrapAndLikecp hireAnnouncementAndCpMemberAndScrapAndLikecp){
+			List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listMapper.selectHireAnnouncementList(hireAnnouncementAndCpMemberAndScrapAndLikecp);
 			return list;
 		}
 	
 	
 	//채용공고 리스트 출력
-		public List<HireAnnouncementAndCpMemberAndScrap> selectHireAreaAnnouncementList(HireAnnouncementAndCpMemberAndScrap hireAnnouncementAndCpMemberAndScrap){
-			List<HireAnnouncementAndCpMemberAndScrap> list = listMapper.selectHireAreaAnnouncementList(hireAnnouncementAndCpMemberAndScrap);
+		public List<HireAnnouncementAndCpMemberAndScrapAndLikecp> selectHireAreaAnnouncementList(HireAnnouncementAndCpMemberAndScrapAndLikecp hireAnnouncementAndCpMemberAndScrapAndLikecp){
+			List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listMapper.selectHireAreaAnnouncementList(hireAnnouncementAndCpMemberAndScrapAndLikecp);
 			return list;
 		}
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.gdu.linkJobs.service.ListService;
 import com.gdu.linkJobs.service.ScrapService;
-import com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrap;
+import com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp;
 import com.gdu.linkJobs.vo.Scrap;
 
 @Controller
@@ -19,8 +19,8 @@ public class ListController {
 	
 	// 메인페이지 채용공고 리스트(일반회원)
 	@GetMapping("/getAnnouncementList")
-	public String getHireAnnouncementList(Model model, HireAnnouncementAndCpMemberAndScrap hireAnnouncementAndCpMemberAndScrap) {
-		List<HireAnnouncementAndCpMemberAndScrap> list = listService.selectHireAnnouncementList(hireAnnouncementAndCpMemberAndScrap);
+	public String getHireAnnouncementList(Model model, HireAnnouncementAndCpMemberAndScrapAndLikecp hireAnnouncementAndCpMemberAndScrapAndLikecp) {
+		List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectHireAnnouncementList(hireAnnouncementAndCpMemberAndScrapAndLikecp);
 		// hireAnnouncementAndCpMemberAndScrap.setHireAnnouncementNo(hireAnnouncementNo);
 		
 		List<Scrap> scrapList = scrapService.selectBoolean();
@@ -33,8 +33,9 @@ public class ListController {
 	// 채용공고 리스트(지역별) 조건 없을경우
 
 	@GetMapping("/getAreaAnnouncementList")
-	public String getAreaAnnouncementList(Model model, HireAnnouncementAndCpMemberAndScrap hireAnnouncementAndCpMember) {
-		List<HireAnnouncementAndCpMemberAndScrap> list = listService.selectHireAreaAnnouncementList(hireAnnouncementAndCpMember);
+	public String getAreaAnnouncementList(Model model,
+			HireAnnouncementAndCpMemberAndScrapAndLikecp hireAnnouncementAndCpMemberAndScrapAndLikecp) {
+		List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectHireAreaAnnouncementList(hireAnnouncementAndCpMemberAndScrapAndLikecp);
 		
 		model.addAttribute("list", list);
 		return "hireAnnouncement/getAreaAnnouncementList";
@@ -43,8 +44,9 @@ public class ListController {
 	// 채용공고 리스트(직업별) 조건 없을경우
 
 	@GetMapping("/getJobAnnouncementList")
-	public String getJobAnnouncementList(Model model, HireAnnouncementAndCpMemberAndScrap hireAnnouncementAndCpMember) {
-		List<HireAnnouncementAndCpMemberAndScrap> list = listService.selectHireAnnouncementList(hireAnnouncementAndCpMember);
+	public String getJobAnnouncementList(Model model, HireAnnouncementAndCpMemberAndScrapAndLikecp hireAnnouncementAndCpMemberAndScrapAndLikecp) {
+		List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService
+				.selectHireAnnouncementList(hireAnnouncementAndCpMemberAndScrapAndLikecp);
 		model.addAttribute("list", list);
 		return "hireAnnouncement/getJobAnnouncementList";
 	}

@@ -3,7 +3,7 @@
 <mapper namespace="com.gdu.linkJobs.mapper.ListMapper">
 	
 	<!-- 메인페이지 채용공고 리스트 출력 -->
-	<select id="selectHireAnnouncementList" parameterType="String" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrap">
+	<select id="selectHireAnnouncementList" parameterType="String" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp">
 		SELECT
 	   		ha.hire_announcement_no AS hireAnnouncementNo,
 	      	ha.hire_announcement_title AS hireAnnouncementTitle,
@@ -22,7 +22,7 @@
 	
 	
 	<!-- 채용공고 리스트 출력 -->
-	<select id="selectHireAreaAnnouncementList" parameterType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrap" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrap">
+	<select id="selectHireAreaAnnouncementList" parameterType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp">
 		SELECT
 	   		ha.hire_announcement_no AS hireAnnouncementNo,
 	      	ha.hire_announcement_title AS hireAnnouncementTitle,
@@ -31,7 +31,7 @@
 	      	ha.hire_announcement_education hireAnnouncementEducation,
 	      	ha.hire_announcement_start_date AS hireAnnouncementStartDate,
 	      	ha.hire_announcement_end_date AS hireAnnouncementEndDate,
-			cp.cpmember_company AS cpMemberCompany,
+			cp.cpmember_company AS cpmemberCompany,
 			la2.area2_gungu AS area2Gungu,
 			la.area_sido AS areaSido,
 			(SELECT scrap_boolean
@@ -41,7 +41,16 @@
 			(SELECT scrap_no
 			 FROM linkjobs_scrap ls
 			 WHERE ls.hire_announcement_no = ha.hire_announcement_no 
-			) AS scrapNo
+			) AS scrapNo,
+			(SELECT likecp_no
+			 FROM linkjobs_likecp ll
+			 WHERE ll.cpmember_id = ha.cpmember_id
+			) AS likecpNo,
+			(SELECT likecp_boolean
+			 FROM linkjobs_likecp ll
+			 WHERE ll.cpmember_id = ha.cpmember_id
+			) AS likecpBoolean
+			
 		FROM linkjobs_hire_announcement AS ha 
 		INNER JOIN linkjobs_cpmember AS cp
 		INNER JOIN linkjobs_area2 AS la2

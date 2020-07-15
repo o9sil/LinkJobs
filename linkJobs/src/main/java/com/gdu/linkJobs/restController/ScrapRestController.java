@@ -16,8 +16,9 @@ public class ScrapRestController {
 	
 	
 	@PostMapping("/insertScrap")
-	public int insertScrap(@RequestParam("scrapNo") int scrapNo ,@RequestParam("hireAnnouncementNo") int hireAnnouncementNo, @RequestParam("scrapBoolean") String scrapBoolean) {
-		String memberId = "user";	
+	public int insertScrap(HttpSession session, @RequestParam("scrapNo") int scrapNo ,@RequestParam("hireAnnouncementNo") int hireAnnouncementNo, @RequestParam("scrapBoolean") String scrapBoolean) {
+		
+		String memberId = (String)session.getAttribute("loginMember");	
 		Scrap scrap = new Scrap();
 		scrap.setScrapNo(scrapNo);
 		scrap.setMemberId(memberId);
@@ -27,7 +28,7 @@ public class ScrapRestController {
 		System.out.println(hireAnnouncementNo+"<--hireAnnouncementNo");
 
 	
-		return scrapService.insertScrap(scrap);
+		return scrapService.addScrap(scrap);
 	}
 	
 	
