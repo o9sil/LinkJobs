@@ -42,8 +42,14 @@
 				
 	<!-- 페이지 내용 -->
 	<div class="container-fluid">  
-         
-            <h1 align="center">학력 리스트</h1>
+         <div class="card shadow mb-4">
+                           
+           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h1 align="center" class="m-0 font-weight-bold text-info">학력 리스트</h1>      
+          </div>
+                
+          <div class="card-body">
+                
             <br>
             <a th:href="@{/addMemberAcademic}" class="btn btn-info">등록하기</a>
             <br><br>
@@ -86,6 +92,9 @@
                   </tr>
                </th:block>
             </table>
+          </div>
+</div>
+           
          </div>
       </div>
    </div>

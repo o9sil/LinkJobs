@@ -108,10 +108,15 @@ $(document).ready(function(){
 	<!-- 페이지 내용 -->
 	<div class="container-fluid">  
          
-            <h1 align="center">학력 추가</h1>
+            <div class="card shadow mb-4">
+                           
+           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h1 align="center" class="m-0 font-weight-bold text-info">학력 추가</h1>      
+          </div>
             
+          <div class="card-body">
             <form method="post" id="addForm" th:action="@{/addMemberAcademic}">
-               <table class="table" border="1">
+               <table class="table"	>
                   <tbody>
                      <!-- <td>회원정보</td> -->
                      <tr>               
@@ -169,7 +174,7 @@ $(document).ready(function(){
                      <tr>
                         <td>학점</td>
                         <td>
-                           <input type="text" id="academicScore" name="academicScore" class="form-control">
+                           <input type="text" id="academicScore" name="academicScore" class="form-control" numberOnly>
                            <span id="scoreHelper" class="text text-danger"></span>
                         </td>
                      </tr>
@@ -180,6 +185,10 @@ $(document).ready(function(){
             <div>
                <button type="button" id="addFormBtn" class="btn btn-info">추가하기</button>
             </div>
+                
+                
+          </div>
+</div>
          </div>
       </div>
    </div>

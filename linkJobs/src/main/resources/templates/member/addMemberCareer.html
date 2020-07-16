@@ -5,26 +5,26 @@
 <title>addMemberCareer</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
 
 <!-- jQuery library -->
 <script
-   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- Popper JS -->
 <script
-   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
 <script
-   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <!-- Custom fonts for this template-->
 <link th:href="@{/vendor/fontawesome-free/css/all.min.css}"
-   rel="stylesheet" type="text/css">
+	rel="stylesheet" type="text/css">
 <link
-   href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-   rel="stylesheet">
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
 <!-- Bootstrap core JavaScript-->
 <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
 <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
@@ -236,189 +236,181 @@
 </head>
 <body id="page-top">
 
-   <!-- Page Wrapper -->
-   <div id="wrapper">
-      <!-- SideBar -->
-      <ul th:include="/include/menuSide::navSide"
-         class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
-         id="accordionSidebar">
-      </ul>
-      <!-- Content Wrapper -->
-      <div id="content-wrapper" class="d-flex flex-column">
-         <div th:include="/include/menuTop::navTop"></div>
-         <!-- Main Content -->
-         <div id="content">
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<!-- SideBar -->
+		<ul th:include="/include/menuSide::navSide"
+			class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+		</ul>
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div th:include="/include/menuTop::navTop"></div>
+			<!-- Main Content -->
+			<div id="content">
 
-            <!-- 페이지 내용 -->
-            <div class="container-fluid">
-               <h1 align="center">경력사항 추가</h1>
-               <form th:action="@{/addMemberCareer}" method="post" id="careerForm">
-                  <div class="row">
-                     <div  class="col-sm-2">
-                        회사 이름 : 
-                     </div>
-                     <div class="col-sm-10">
-                     <input type="text" id="careerCompanyName"
-                           name="careerCompanyName" class="form-control">
-                     </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                     <div  class="col-sm-2">
-                        입사일 : 
-                     </div>
-                     <div class="col-sm-10">
-                     <input type="date" id="careerStartDate"
-                        name="careerStartDate" class="form-control">
-                     </div>
-                  </div>
-                  
-                  <br>
-                  <div class="row">
-                     <div  class="col-sm-2">
-                        퇴사일 : 
-                     </div>
-                     <div class="col-sm-10">
-                        <input type="date" id="careerEndDate" name="careerEndDate"
-                        class="form-control">
-                     </div>
-                  </div>
-                  <br>
-                  
-                  <div class="row">
-                     <div  class="col-sm-2">
-                        경력 상태 : 
-                     </div>
-                     <div class="col-sm-10">
-                        <select id="careerLeaving" name="careerLeaving"
-                           class="form-control">
-                           <option th:value="퇴사" th:text="퇴사">
-                           <option th:value="재직중" th:text="재직중">
-                        </select>
-                     </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                     <div  class="col-sm-2">
-                     퇴사 사유 :
-                     </div>
-                     <div class="col-sm-10">
-                      <input type="text" id="careerReasonForLeaving"
-                        name="careerReasonForLeaving" class="form-control">
-                     </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                     <div  class="col-sm-2">
-                        직급/ 직책 : 
-                     </div>
-                     <div    class="col-sm-10">
-                     <input type="text" id="careerJobgradeJobposition"
-                        name="careerJobgradeJobposition" class="form-control">
-                     </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                     <div  class="col-sm-2">
-                     연차 : 
-                     </div>
-                     <div class="col-sm-10">
-                     <input type="text" id="careerJobgradeJobpositionYear"
-                        name="careerJobgradeJobpositionYear" class="form-control" numberOnly>
-                     </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                     <div  class="col-sm-2">
-                     직종 : 
-                     </div>
-                     <div class="col-sm-4">
-                        <select id="jobNo" name="jobNo" class="form-control">
-                           <option th:each="jl:${jobList}" th:value="${jl.jobNo}" th:text="${jl.jobCategory}"></option>
-                        </select>
-                     </div>
-                     <div class="col-sm-3">
-                        <select id="job2No" name="job2No" class="form-control">
-                        	<option value=""></option>
-                        </select>
-                     </div>
-                     <div class="col-sm-3">
-                        <select id="job3No" name="job3No" class="form-control">
-                           
-                        </select>
-                     </div>
-                  </div>
-                  <br>
-                  
-                  <div class="row">
-                     <div class="col-sm-2">
-                     주소 :
-                     </div>
-                     <div class="col-sm-5">
-                        <select name="areaNo" id="areaCode"  class="form-control">
-                           <option value="">시 / 도</option>
-                           <option th:each="areaList : ${areaList}"
-                              th:value="${areaList.areaNo}" th:text="${areaList.areaSido}"></option>
-                        </select> <span id="areaCodeHelper"></span>
-                     </div>
-                     <div class="col-sm-5">
-                        <select id="area2Code" class="form-control" name="area2Gungu">
-                           <option value="">군 / 구</option>
+				<!-- 페이지 내용 -->
+				<div class="container-fluid">
+					<div class="card shadow mb-4">
 
-                        </select> <span id="area2CodeHelper"></span>
-                     </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                     <div  class="col-sm-2">
-                     경력 부서 : 
-                     </div>
-                     <div class="col-sm-10">
-                     <input type="text" id="careerDepartment"
-                        name="careerDepartment" class="form-control">
-                     </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                     <div  class="col-sm-2">
-                     월급 : 
-                     </div>
-                     <div class="col-sm-10">
-                     <input type="text" id="careerSalary" name="careerSalary"
-                        class="form-control" numberOnly>
-                     </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                     <div  class="col-sm-2">
-                     책임 : 
-                     </div>
-                     <div class="col-sm-10">
-                     <input type="text" id="careerResponsibilities"
-                        name="careerResponsibilities" class="form-control">
-                     </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                     <div  class="col-sm-2">
-                     프로젝트 내용 :
-                     </div>
-                     <div class="col-sm-10">
-                     <textarea rows="10" id="careerProjectContents"
-                        name="careerProjectContents" class="form-control"></textarea>
-                     </div>
-                  </div>
-                  <br>
+						<!-- 공고 제목 -->
+						<div
+							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+							<h1 align="center" class="m-0 font-weight-bold text-info">경력사항
+								추가</h1>
+						</div>
 
-                  <div>
-                     <button id="Btn" class="btn btn-info">입력</button>
-                  </div>
-               </form>
+						<div class="card-body">
+
+							<form th:action="@{/addMemberCareer}" method="post"
+								id="careerForm">
+								<div class="row">
+									<div class="col-sm-2">회사 이름 :</div>
+									<div class="col-sm-10">
+										<input type="text" id="careerCompanyName"
+											name="careerCompanyName" class="form-control">
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-2">입사일 :</div>
+									<div class="col-sm-10">
+										<input type="date" id="careerStartDate" name="careerStartDate"
+											class="form-control">
+									</div>
+								</div>
+
+								<br>
+								<div class="row">
+									<div class="col-sm-2">퇴사일 :</div>
+									<div class="col-sm-10">
+										<input type="date" id="careerEndDate" name="careerEndDate"
+											class="form-control">
+									</div>
+								</div>
+								<br>
+
+								<div class="row">
+									<div class="col-sm-2">경력 상태 :</div>
+									<div class="col-sm-10">
+										<select id="careerLeaving" name="careerLeaving"
+											class="form-control">
+											<option th:value="퇴사" th:text="퇴사">
+											<option th:value="재직중" th:text="재직중">
+										</select>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-2">퇴사 사유 :</div>
+									<div class="col-sm-10">
+										<input type="text" id="careerReasonForLeaving"
+											name="careerReasonForLeaving" class="form-control">
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-2">직급/ 직책 :</div>
+									<div class="col-sm-10">
+										<input type="text" id="careerJobgradeJobposition"
+											name="careerJobgradeJobposition" class="form-control">
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-2">연차 :</div>
+									<div class="col-sm-10">
+										<input type="text" id="careerJobgradeJobpositionYear"
+											name="careerJobgradeJobpositionYear" class="form-control"
+											numberOnly>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-2">직종 :</div>
+									<div class="col-sm-4">
+										<select id="jobNo" name="jobNo" class="form-control">
+											<option th:each="jl:${jobList}" th:value="${jl.jobNo}"
+												th:text="${jl.jobCategory}"></option>
+										</select>
+									</div>
+									<div class="col-sm-3">
+										<select id="job2No" name="job2No" class="form-control">
+											<option value=""></option>
+										</select>
+									</div>
+									<div class="col-sm-3">
+										<select id="job3No" name="job3No" class="form-control">
+
+										</select>
+									</div>
+								</div>
+								<br>
+
+								<div class="row">
+									<div class="col-sm-2">주소 :</div>
+									<div class="col-sm-5">
+										<select name="areaNo" id="areaCode" class="form-control">
+											<option value="">시 / 도</option>
+											<option th:each="areaList : ${areaList}"
+												th:value="${areaList.areaNo}" th:text="${areaList.areaSido}"></option>
+										</select> <span id="areaCodeHelper"></span>
+									</div>
+									<div class="col-sm-5">
+										<select id="area2Code" class="form-control" name="area2Gungu">
+											<option value="">군 / 구</option>
+
+										</select> <span id="area2CodeHelper"></span>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-2">경력 부서 :</div>
+									<div class="col-sm-10">
+										<input type="text" id="careerDepartment"
+											name="careerDepartment" class="form-control">
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-2">월급 :</div>
+									<div class="col-sm-10">
+										<input type="text" id="careerSalary" name="careerSalary"
+											class="form-control" numberOnly>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-2">책임 :</div>
+									<div class="col-sm-10">
+										<input type="text" id="careerResponsibilities"
+											name="careerResponsibilities" class="form-control">
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-2">프로젝트 내용 :</div>
+									<div class="col-sm-10">
+										<textarea rows="10" id="careerProjectContents"
+											name="careerProjectContents" class="form-control"></textarea>
+									</div>
+								</div>
+								<br>
+
+								<div>
+									<button id="Btn" class="btn btn-info">입력</button>
+								</div>
+							</form>
+
+						</div>
+					</div>
 
 
-            </div>
-         </div>
-      </div>
-   </div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

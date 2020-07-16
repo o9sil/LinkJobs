@@ -70,24 +70,38 @@
 <div id="content">				
 	<!-- 페이지 내용 -->
 	<div class="container-fluid">
-      <h1 align="center">자격증 추가</h1>
-      <form th:action="@{/addMemberCertificate}" id="certiFome" method="post">
-         <div>
-            <input type="hidden" th:value="user" name="memberId">
-         </div>
-         <div  class="col-sm-3">자격증명 :</div>
-         <div class="col-sm-9">
-            <input type="text" name="certificateName" id="certificateName" class="form-control">
-            <span id="certificateNameHelper" class="text text-danger"></span>
-         </div>
-         <div  class="col-sm-3">취득일 :</div>
-         <div class="col-sm-9">
-            <input type="date" name="certificateDate" id="certificateDate" class="form-control">
-            <span id="certificateDateHelper" class="text text-danger"></span>
-         </div>
-      </form>
-      <br>
-      <button type="button" id="certiBtn" class="btn btn-info">추가하기</button>
+	<div class="card shadow mb-4">
+                           
+           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h1 align="center" class="m-0 font-weight-bold text-info">자격증 추가</h1>      
+          </div>
+                
+          <div class="card-body">
+	      <form th:action="@{/addMemberCertificate}" id="certiFome" method="post">
+                
+	         <div>
+	            <input type="hidden" th:value="user" name="memberId">
+	         </div>
+	         <div class="row">
+		         <div  class="col-sm-3">자격증명 :</div>
+		         <div class="col-sm-9">
+		            <input type="text" name="certificateName" id="certificateName" class="form-control">
+		            <span id="certificateNameHelper" class="text text-danger"></span>
+		         </div>
+		      </div>
+		      <br>	
+	         <div class="row">
+	         <div  class="col-sm-3">취득일 :</div>
+	         <div class="col-sm-9">
+	            <input type="date" name="certificateDate" id="certificateDate" class="form-control">
+	            <span id="certificateDateHelper" class="text text-danger"></span>
+	         </div>
+	        </div>
+	      </form>
+	      <br>
+	      <button type="button" id="certiBtn" class="btn btn-info">추가하기</button>
+          </div>
+</div>
    </div>
   </div>
  </div>

@@ -52,76 +52,91 @@
 
 				<!-- 페이지 내용 -->
 				<div class="container-fluid">
-					<h1 align="center">경력사항</h1>
-					<div>
-					<br> <a th:href="@{/modifyMemberCareer(careerNo=${mc.careerNo})}" class="btn btn-info"
-						style="color: white;">수정하기</a>
-						<a th:href="@{/removeMemberCareer(careerNo=${mc.careerNo})}" class="btn btn-info"
-						style="color: white;">삭제하기</a>
-						<br> <br>
+					<div class="card shadow mb-4">
+
+						<div
+							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+							<h1 align="center" class="m-0 font-weight-bold text-info">경력사항</h1>
+						</div>
+
+						<div class="card-body">
+							<div>
+								<br> <a
+									th:href="@{/modifyMemberCareer(careerNo=${mc.careerNo})}"
+									class="btn btn-info" style="color: white;">수정하기</a> <a
+									th:href="@{/removeMemberCareer(careerNo=${mc.careerNo})}"
+									class="btn btn-info" style="color: white;">삭제하기</a> <br> <br>
+							</div>
+							<table class="table">
+								<tbody th:each="c : ${mc}">
+									<tr>
+										<td>번호</td>
+										<td th:value="${c.careerNo}" th:text="${c.careerNo}"></td>
+									</tr>
+									<tr>
+										<td>회사이름</td>
+										<td th:value="${c.careerCompanyName}"
+											th:text="${c.careerCompanyName}"></td>
+									</tr>
+									<tr>
+										<td>입사 날짜</td>
+										<td th:value="${c.careerStartDate}"
+											th:text="${c.careerStartDate}"></td>
+									</tr>
+									<tr>
+										<td>퇴사 날짜</td>
+										<td th:value="${c.careerEndDate}" th:text="${c.careerEndDate}"></td>
+									</tr>
+									<tr>
+										<td>재직 상태</td>
+										<td th:value="${c.careerLeaving}" th:text="${c.careerLeaving}"></td>
+									</tr>
+									<tr>
+										<td>퇴사 이유</td>
+										<td th:value="${c.careerReasonForLeaving}"
+											th:text="${c.careerReasonForLeaving}"></td>
+									</tr>
+									<tr>
+										<td>직급/직책</td>
+										<td th:value="${c.careerJobgradeJobposition}"
+											th:text="${c.careerJobgradeJobposition}"></td>
+									</tr>
+									<tr>
+										<td>연차</td>
+										<td th:value="${c.careerJobgradeJobpositionYear}"
+											th:text="${c.careerJobgradeJobpositionYear}"></td>
+									</tr>
+									<tr>
+										<td>직종</td>
+										<td th:value="${c.job2No}" th:text="${c.job2No}"></td>
+									</tr>
+									<tr>
+										<td>지역</td>
+										<td th:value="${c.areaNo}" th:text="${c.areaNo}"></td>
+									</tr>
+									<tr>
+										<td>부서</td>
+										<td th:value="${c.careerDepartment}"
+											th:text="${c.careerDepartment}"></td>
+									</tr>
+									<tr>
+										<td>월급</td>
+										<td th:value="${c.careerSalary}" th:text="${c.careerSalary}"></td>
+									</tr>
+									<tr>
+										<td>책임</td>
+										<td th:value="${c.careerResponsibilities}"
+											th:text="${c.careerResponsibilities}"></td>
+									</tr>
+									<tr>
+										<td>프로젝트 내용</td>
+										<td th:value="${c.careerProjectContents}"
+											th:text="${c.careerProjectContents}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
-					<table class="table">
-						<tbody th:each="c : ${mc}">
-							<tr>
-								<td>번호</td>
-								<td th:value="${c.careerNo}" th:text="${c.careerNo}"></td>
-							</tr>
-							<tr>
-								<td>회사이름</td>
-								<td th:value="${c.careerCompanyName}"
-									th:text="${c.careerCompanyName}"></td>
-							</tr>
-							<tr>
-								<td>입사 날짜</td>
-								<td th:value="${c.careerStartDate}"
-									th:text="${c.careerStartDate}"></td>
-							</tr>
-							<tr>
-								<td>퇴사 날짜</td>
-								<td th:value="${c.careerEndDate}" th:text="${c.careerEndDate}"></td>
-							</tr>
-							<tr>
-								<td>재직 상태</td>
-								<td th:value="${c.careerLeaving}" th:text="${c.careerLeaving}"></td>
-							</tr>
-							<tr>
-								<td>퇴사 이유</td>
-								<td th:value="${c.careerReasonForLeaving}" th:text="${c.careerReasonForLeaving}"></td>
-							</tr>
-							<tr>
-								<td>직급/직책</td>
-								<td th:value="${c.careerJobgradeJobposition}" th:text="${c.careerJobgradeJobposition}"></td>
-							</tr>
-							<tr>
-								<td>연차</td>
-								<td th:value="${c.careerJobgradeJobpositionYear}" th:text="${c.careerJobgradeJobpositionYear}"></td>
-							</tr>
-							<tr>
-								<td>직종</td>
-								<td th:value="${c.job2No}" th:text="${c.job2No}"></td>
-							</tr>
-							<tr>
-								<td>지역</td>
-								<td th:value="${c.areaNo}" th:text="${c.areaNo}"></td>
-							</tr>
-							<tr>
-								<td>부서</td>
-								<td th:value="${c.careerDepartment}" th:text="${c.careerDepartment}"></td>
-							</tr>
-							<tr>
-								<td>월급</td>
-								<td th:value="${c.careerSalary}" th:text="${c.careerSalary}"></td>
-							</tr>
-							<tr>
-								<td>책임</td>
-								<td th:value="${c.careerResponsibilities}" th:text="${c.careerResponsibilities}"></td>
-							</tr>
-							<tr>
-								<td>프로젝트 내용</td>
-								<td th:value="${c.careerProjectContents}" th:text="${c.careerProjectContents}"></td>
-							</tr>
-						</tbody>
-					</table>
 
 
 				</div>

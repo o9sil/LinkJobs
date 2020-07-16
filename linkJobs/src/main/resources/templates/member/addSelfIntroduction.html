@@ -65,28 +65,32 @@ $(document).ready(function () {
 <div id="content">			
 	<!-- 페이지 내용 -->
 	<div class="container-fluid">
-      <h1 align="center">자기소개서 등록</h1>
+     <h1 class="h3 mb-2 text-gray-800">자기소개서 등록</h1><br>
       <form th:action="@{/addSelfIntroduction}" method="post" id="addForm">
-         <table class="table">
-            <tr>
-               <td>제목</td>
-               <td>
-                  <input type="text" id="selfIntroductionTitle" name="selfIntroductionTitle"  class="form-control"> 
+         <!-- 자기소개서 제목 -->
+         <div class="card shadow mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              	<h2 class="m-0 font-weight-bold text-info">자기소개서 제목</h2>
+              </div>
+              <div class="card-body">
+                  <input type="text" style="height: 100px;" id="selfIntroductionTitle" name="selfIntroductionTitle"  class="form-control" placeholder="자기소개서 제목을 입력하세요(50자까지 입력가능)." maxlength=50> 
                   <span id="titleHelper"></span>
-               </td>
-               
-            </tr>
-            <tr>
-               <td>내용</td>
-               <td>
-                  <textarea id="selfIntroductionContents" name="selfIntroductionContents" class="form-control"> </textarea> 
+              </div>
+         </div>
+         
+         <!-- 내용 -->
+         <div class="card shadow mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h2 class="m-0 font-weight-bold text-info">자기소개서 내용</h2>
+              </div>
+              <div class="card-body">
+                  <textarea id="selfIntroductionContents" name="selfIntroductionContents" class="form-control" rows="10"> </textarea> 
                   <span id="contentsHelper"></span>
-               </td>
-            </tr>
-            
-         </table>
+                  <br>
+               </div>
+        </div>
+        		  <button type="button" id="addBtn"  class="btn btn-info">자기소개서 등록</button>
          <br>
-         <button type="button" id="addBtn"  class="btn btn-info">등록</button>
       </form>
    </div>
   </div>
