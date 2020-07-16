@@ -27,6 +27,6 @@ public interface SelfIntroductionMapper {
 	public int insertSelfIntroduction(SelfIntroduction selfIntroduction);
 
 	// 게시글 행 수
-	public int totalSelfIntroduction();
+	public int totalSelfIntroduction(String memberId);
 
 }

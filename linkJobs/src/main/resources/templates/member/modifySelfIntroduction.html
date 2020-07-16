@@ -4,19 +4,26 @@
 <meta charset="UTF-8">
 <title>modifySelfIntroduction</title>
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <!-- Custom fonts for this template-->
-<link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
 <!-- Bootstrap core JavaScript-->
 <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
 <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
@@ -28,69 +35,92 @@
 <!-- Custom styles for this template-->
 <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
 <script>
-let helperInit = function() {
-    $('#titleHelper').text("");
-    $('#contentsHelper').text("");
- }
+	let helperInit = function() {
+		$('#titleHelper').text("");
+		$('#contentsHelper').text("");
+	}
 
-
-
-$(document).ready(function () {
-   $('#modifyBtn').click(function () {
-      if($('#selfIntroductionTitle').val()==""){
-         helperInit();
-            $('#titleHelper').text("제목을 입력하세요");
-            $('#selfIntroductionTitle').focus();
-      }else if ($('#selfIntroductionContents').val()=="") {
-         helperInit();
-            $('#contentsHelper').text("내용을 입력하세요");
-            $('#selfIntroductionContents').focus();
-      } else{
-         $('#modifyForm').submit();
-      }
-   });
-});
+	$(document).ready(function() {
+		$('#modifyBtn').click(function() {
+			if ($('#selfIntroductionTitle').val() == "") {
+				helperInit();
+				$('#titleHelper').text("제목을 입력하세요");
+				$('#selfIntroductionTitle').focus();
+			} else if ($('#selfIntroductionContents').val() == "") {
+				helperInit();
+				$('#contentsHelper').text("내용을 입력하세요");
+				$('#selfIntroductionContents').focus();
+			} else {
+				$('#modifyForm').submit();
+			}
+		});
+	});
 </script>
 </head>
 <body id="page-top">
-<!-- Page Wrapper -->
-<div id="wrapper">
-	<!-- SideBar -->
-<ul th:include="/include/menuSide::navSide" class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
-</ul>
-<!-- Content Wrapper -->
-<div id="content-wrapper" class="d-flex flex-column">
-	<div th:include="/include/menuTop::navTop"></div>
-	<!-- Main Content -->
-<div id="content">
-				
-	<!-- 페이지 내용 -->
-	<div class="container-fluid">
-      <h1 align="center">자기소개서 수정</h1>
-      <form th:action="@{/modifySelfIntroduction(selfIntroductionNo=${selfIntroductionOne.selfIntroductionNo})}" method="post" id="modifyForm">
-	      <table class="table">
-	         <tr>
-	            <td>제목</td>
-	            <td>
-	               <input type="text" id="selfIntroductionTitle" name="selfIntroductionTitle" th:value="${selfIntroductionOne.selfIntroductionTitle}" class="form-control"> 
-	               <span id="titleHelper"></span>
-	            </td>
-	         </tr>
-	         <tr>
-	            <td>내용</td>
-	            <td>
-	               <textarea id="selfIntroductionContents" name="selfIntroductionContents" th:value="${selfIntroductionOne.selfIntroductionContents}"
-					th:text="${selfIntroductionOne.selfIntroductionContents}" class="form-control" rows="8"> </textarea> 
-	               <span id="contentsHelper"></span>
-	            </td>
-	         </tr>
-	         
-	      </table>
-	      <button type="button" id="modifyBtn" class="btn btn-info">수정</button>
-      </form>
-   </div>
-  </div>
- </div>
-</div>
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<!-- SideBar -->
+		<ul th:include="/include/menuSide::navSide"
+			class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+		</ul>
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div th:include="/include/menuTop::navTop"></div>
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- 페이지 내용 -->
+				<div class="container-fluid">
+					<div class="card shadow mb-4">
+
+						<!-- 공고 제목 -->
+						<div
+							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+							<h1 align="center" class="m-0 font-weight-bold text-info">자기소개서
+								수정</h1>
+						</div>
+
+						<div class="card-body">
+							<form
+								th:action="@{/modifySelfIntroduction(selfIntroductionNo=${selfIntroductionOne.selfIntroductionNo})}"
+								method="post" id="modifyForm">
+								<table class="table">
+									<tr>
+										<td>제목</td>
+										<td><input type="text" id="selfIntroductionTitle"
+											name="selfIntroductionTitle"
+											th:value="${selfIntroductionOne.selfIntroductionTitle}"
+											class="form-control"> <span id="titleHelper"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>내용</td>
+										<td><textarea id="selfIntroductionContents"
+												name="selfIntroductionContents"
+												th:value="${selfIntroductionOne.selfIntroductionContents}"
+												th:text="${selfIntroductionOne.selfIntroductionContents}"
+												class="form-control" rows="8"> </textarea> <span
+											id="contentsHelper"></span></td>
+									</tr>
+
+								</table>
+								<button type="button" id="modifyBtn" class="btn btn-info">수정</button>
+							</form>
+
+
+						</div>
+
+
+
+
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
 </body>
 </html>

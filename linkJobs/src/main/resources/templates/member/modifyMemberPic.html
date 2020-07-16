@@ -35,18 +35,14 @@
 <!-- Custom styles for this template-->
 <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
 <script th:inline="javascript">
+	$(document).ready(function() {
 
-   $(document).ready(function () {
-      
-      $('#picFormBtn').click(function() {
-    	  
-       
-            $('#picForm').submit();            
-         
-         
-      });
-   });
-   
+		$('#picFormBtn').click(function() {
+
+			$('#picForm').submit();
+
+		});
+	});
 </script>
 </head>
 <body id="page-top">
@@ -62,32 +58,52 @@
 			<div th:include="/include/menuTop::navTop"></div>
 			<!-- Main Content -->
 			<div id="content">
-				
+
 				<!-- 페이지 내용 -->
 				<div class="container-fluid">
-					<h1 align="center">회원사진 수정</h1>
-					<br><br>
-					
-					<!-- 회원사진 수정 폼 -->
-					<form th:action="@{/modifyMemberPic}" id="picForm" method="post" enctype="multipart/form-data">
-						<div class="row">
-							<div class="col-sm-3"><span th:text="${pic.memberId}"></span>님 : </div>
-							<div class="col-sm-9">
-								<img th:src="@{${'/img/' + pic.memberPic}}" alt="My Image" height="250px">
-							</div>
+
+
+
+					<div class="card shadow mb-4">
+
+						<!-- 공고 제목 -->
+						<div
+							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+							<h1 align="center" class="m-0 font-weight-bold text-info">회원사진
+								수정</h1>
 						</div>
-						<br><br>
-						<div class="row">
-							<div class="col-sm-3">변경할 사진 첨부 :</div>
-							<div class="col-sm-9">
-								<input type="file" name="memberPic">
+
+						<div class="card-body">
+
+							<!-- 회원사진 수정 폼 -->
+							<form th:action="@{/modifyMemberPic}" id="picForm" method="post"
+								enctype="multipart/form-data">
+								<div class="row">
+									<div class="col-sm-3">
+										<span th:text="${pic.memberId}"></span>님 :
+									</div>
+									<div class="col-sm-9">
+										<img th:src="@{${'/img/' + pic.memberPic}}" alt="My Image"
+											height="250px">
+									</div>
+								</div>
+								<br> <br>
+								<div class="row">
+									<div class="col-sm-3">변경할 사진 첨부 :</div>
+									<div class="col-sm-9">
+										<input type="file" name="memberPic">
+									</div>
+								</div>
+							</form>
+							<br> <br>
+							<div align="right">
+								<button type="button" id="picFormBtn" class="btn btn-info">수정하기</button>
 							</div>
+
+
 						</div>
-					</form>
-					<br><br>
-					<div align="right">
-						<button type="button" id="picFormBtn" class="btn btn-info">수정하기</button>
 					</div>
+
 				</div>
 				<hr>
 			</div>
