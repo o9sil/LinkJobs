@@ -1,6 +1,8 @@
 package com.gdu.linkJobs.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,24 @@ public class MemberAcademicService {
 	
 	
 	// 학력정보출력(멤버용)
-	public List<MemberAcademic> getMemberAcademicList(String memberId) {
-		return memberAcademicMapper.selectMemberAcademicList(memberId);
+	public  Map<String, Object> getMemberAcademicList(String memberId, int beginRow, int rowPerPage) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("beginRow",beginRow);
+		map.put("rowPerPage", rowPerPage);
+		
+		int totalRow = memberAcademicMapper.totalAcademic(memberId);
+		System.out.println(totalRow +"total");
+		
+		int lastPage = totalRow/rowPerPage;
+		
+		
+		System.out.println(lastPage+"last");
+		
+		List<MemberAcademic> academicList = memberAcademicMapper.selectMemberAcademicList(memberId, beginRow, rowPerPage);
+		map.put("academicList", academicList);
+		map.put("lastPage", lastPage);
+		
+		return map; 
 	}
 
 	// 학력정보 하나만

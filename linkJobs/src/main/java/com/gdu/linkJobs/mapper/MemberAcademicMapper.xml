@@ -20,7 +20,7 @@
 	
 	<!-- 멤버용 학력정보 -->
 	<select id="selectMemberAcademicList"
-		parameterType="String"
+		parameterType="java.util.Map"
 		resultType="com.gdu.linkJobs.vo.MemberAcademic">
 		SELECT
 			academic_no academicNo,
@@ -33,6 +33,14 @@
 			academic_score academicScore
 		FROM linkjobs_member_academic
 		WHERE member_id = #{memberId}
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- 학력사항 개수 -->
+	<select id="totalAcademic" resultType="int" parameterType="String">
+		SELECT COUNT(*)
+		FROM linkjobs_member_academic
+		WHERE member_id=#{memberId}
 	</select>
 	
 	<!-- 학력정보 하나만 -->

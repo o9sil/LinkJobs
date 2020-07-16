@@ -4,19 +4,26 @@
 <meta charset="UTF-8">
 <title>getMemberCertificate</title>
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <!-- Custom fonts for this template-->
-<link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
 <!-- Bootstrap core JavaScript-->
 <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
 <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
@@ -29,75 +36,122 @@
 <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
 </head>
 <body id="page-top">
-<!-- Page Wrapper -->
-<div id="wrapper">
-	<!-- SideBar -->
-<ul th:include="/include/menuSide::navSide" class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
-</ul>
-<!-- Content Wrapper -->
-<div id="content-wrapper" class="d-flex flex-column">
-	<div th:include="/include/menuTop::navTop"></div>
-	<!-- Main Content -->
-<div id="content">
-				 
-	<!-- 페이지 내용 -->
-	<div class="container-fluid">  
-         <div class="card shadow mb-4">
-                           
-           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h1 align="center" class="m-0 font-weight-bold text-info">학력 리스트</h1>      
-          </div>
-                
-          <div class="card-body">
-                
-            <br>
-            <a th:href="@{/addMemberAcademic}" class="btn btn-info">등록하기</a>
-            <br><br>
-            <table class="table">
-           	 <th:block th:each="ac : ${academicList}"> 
-                  <!-- <td>회원정보</td> -->
-                  <tr>               
-                     <td>최종학력</td>
-                     <td th:value="${ac.academicGrade}" th:text="${ac.academicGrade}"></td>
-                  </tr>
-                  <tr>
-                     <td>학교명</td>
-                     <td th:value="${ac.academicName}" th:text="${ac.academicName}"></td>
-                  </tr>
-                  <tr>
-                     <td>전공계열</td>
-                     <td th:value="${ac.academicMajor}" th:text="${ac.academicMajor}"></td>
-                  </tr>
-                  <tr>
-                     <td>전공명</td>
-                     <td th:value="${ac.academicMajorDetail}" th:text="${ac.academicMajorDetail}"></td>
-                  </tr>
-                  <tr>
-                     <td>재학기간(입학)</td>
-                     <td th:value="${ac.academicFromDate}" th:text="${ac.academicFromDate}"></td>
-                  </tr>
-                  <tr>
-                     <td>재학기간(졸업)</td>
-                     <td th:value="${ac.academicToDate}" th:text="${ac.academicToDate}"></td>
-                  </tr>
-                  <tr>
-                     <td>학점</td>
-                     <td th:value="${ac.academicScore}" th:text="${ac.academicScore}"></td>
-                  </tr>
-                  <tr>
-                     <td colspan="2" align="right">
-                        <a th:href="@{/modifyMemberAcademic(academicNo=${ac.academicNo})}" class="btn btn-info">수정</a>
-                        <a th:href="@{/removeMemberAcademic(academicNo=${ac.academicNo})}" class="btn btn-info">삭제</a>
-                     </td>
-                  </tr>
-               </th:block>
-            </table>
-          </div>
-</div>
-           
-         </div>
-      </div>
-   </div>
-</div>
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<!-- SideBar -->
+		<ul th:include="/include/menuSide::navSide"
+			class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+		</ul>
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div th:include="/include/menuTop::navTop"></div>
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- 페이지 내용 -->
+				<div class="container-fluid">
+					<div class="card shadow mb-4">
+
+						<div
+							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+							<h1 align="center" class="m-0 font-weight-bold text-info">학력
+								리스트</h1>
+						</div>
+
+						<div class="card-body">
+
+							<br> <a th:href="@{/addMemberAcademic}" class="btn btn-info">등록하기</a>
+							<br>
+							<br>
+							<table class="table">
+								<th:block th:each="ac : ${academicList}">
+									<!-- <td>회원정보</td> -->
+									<tr>
+										<td>최종학력</td>
+										<td th:value="${ac.academicGrade}"
+											th:text="${ac.academicGrade}"></td>
+									</tr>
+									<tr>
+										<td>학교명</td>
+										<td th:value="${ac.academicName}" th:text="${ac.academicName}"></td>
+									</tr>
+									<tr>
+										<td>전공계열</td>
+										<td th:value="${ac.academicMajor}"
+											th:text="${ac.academicMajor}"></td>
+									</tr>
+									<tr>
+										<td>전공명</td>
+										<td th:value="${ac.academicMajorDetail}"
+											th:text="${ac.academicMajorDetail}"></td>
+									</tr>
+									<tr>
+										<td>재학기간(입학)</td>
+										<td th:value="${ac.academicFromDate}"
+											th:text="${ac.academicFromDate}"></td>
+									</tr>
+									<tr>
+										<td>재학기간(졸업)</td>
+										<td th:value="${ac.academicToDate}"
+											th:text="${ac.academicToDate}"></td>
+									</tr>
+									<tr>
+										<td>학점</td>
+										<td th:value="${ac.academicScore}"
+											th:text="${ac.academicScore}"></td>
+									</tr>
+									<tr>
+										<td colspan="2" align="right"><a
+											th:href="@{/modifyMemberAcademic(academicNo=${ac.academicNo})}"
+											class="btn btn-info">수정</a> <a
+											th:href="@{/removeMemberAcademic(academicNo=${ac.academicNo})}"
+											class="btn btn-info">삭제</a></td>
+									</tr>
+								</th:block>
+							</table>
+						</div>
+					</div>
+					<ul class="pagination justify-content-center">
+						<th:block th:if="${currentPage>1}">
+							<li class="paginate_button page-item previous"
+								id="dataTable_previous"><a th:href="@{/getMemberAcademicList}"
+								aria-controls="dataTable" data-dt-idx="0" tabindex="0"
+								class="page-link">이전</a></li>
+						</th:block>
+
+						<th:block th:if="${currentPage==1}">
+							<li class="paginate_button page-item previous disabled"
+								id="dataTable_previous"><a th:href="@{/getMemberAcademicList}"
+								aria-controls="dataTable" data-dt-idx="0" tabindex="0"
+								class="page-link">이전</a></li>
+						</th:block>
+
+						<th:block th:each="num : ${#numbers.sequence(1,lastPage) }">
+							<li class="paginate_button page-item "><a
+								th:href="@{/getMemberAcademicList(currentPage=${num})}"
+								aria-controls="dataTable" data-dt-idx="1" tabindex="0"
+								class="page-link" th:text="${num}"></a></li>
+						</th:block>
+
+						<th:block th:if="${currentPage<lastPage}">
+							<li class="paginate_button page-item next" id="dataTable_next"><a
+								th:href="@{/getMemberAcademicList(currentPage=${currentPage+1})}"
+								aria-controls="dataTable" data-dt-idx="4" tabindex="0"
+								class="page-link">다음</a></li>
+						</th:block>
+						<th:block th:if="${currentPage==lastPage}">
+							<li class="paginate_button page-item next disabled"
+								id="dataTable_next"><a
+								th:href="@{/getMemberAcademicList(currentPage=${currentPage+1})}"
+								aria-controls="dataTable" data-dt-idx="4" tabindex="0"
+								class="page-link">다음</a></li>
+						</th:block>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

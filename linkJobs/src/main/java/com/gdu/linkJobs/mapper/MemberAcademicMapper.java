@@ -12,7 +12,7 @@ public interface MemberAcademicMapper {
 	public List<MemberAcademic> selectMemberAcademic(String memberId);
 	
 	// 멤버용 학력
-	public List<MemberAcademic> selectMemberAcademicList(String memberId);
+	public List<MemberAcademic> selectMemberAcademicList(String memberId, int beginRow, int rowPerPage);
 	
 	// 학력정보 하나만
 	public MemberAcademic selectMemberAcademicOne(int academicNo);
@@ -28,4 +28,7 @@ public interface MemberAcademicMapper {
 	
 	//회원 탈퇴용 학력 삭제
 	public int removeMemberAcademic(String memberId);
+	
+	//학력 개수
+	public int totalAcademic(String memberId);
 }

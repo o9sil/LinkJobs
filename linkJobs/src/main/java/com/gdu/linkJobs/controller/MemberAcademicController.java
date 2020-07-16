@@ -1,6 +1,6 @@
 package com.gdu.linkJobs.controller;
 
-import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,15 +21,23 @@ public class MemberAcademicController {
 	
 	//학력 리스트 출력 폼
 	@GetMapping("/getMemberAcademicList")
-	public String getMemberAcademic(HttpSession session,Model model) {
+	public String getMemberAcademic(HttpSession session,Model model, @RequestParam(value = "currentPage", defaultValue = "1")int currentPage) {
 		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/getAnnouncementList";
 		}
 		String memberId=(String)session.getAttribute("loginMember");
 		MemberAcademic MA=new MemberAcademic();
 		MA.setMemberId(memberId);
-		List<MemberAcademic> academicList = academicService.getMemberAcademicList(memberId);
-		model.addAttribute("academicList", academicList);
+		
+		int rowPerPage = 1;
+		int beginRow = (currentPage-1)*rowPerPage;
+		
+		Map<String,Object> map = academicService.getMemberAcademicList(memberId, beginRow,rowPerPage);
+		
+		
+		model.addAttribute("academicList", map.get("academicList"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("currentPage", currentPage);
 		
 		return "member/getMemberAcademicList";
 	}
