@@ -39,36 +39,6 @@
 		scrap_date = NOW()
 	WHERE scrap_no = #{scrapNo}
 	AND hire_announcement_no = #{hireAnnouncementNo}
+	AND member_id = #{memberId}
 </update>
-
-
-<!-- 멤버별 스크랩기업 -->
-<select id="selectMemberScrap" parameterType="String" resultType="com.gdu.linkJobs.vo.HireAnnouncement">
-SELECT
-   ha.hire_announcement_no hireAnnouncementNo,
-   ha.hire_announcement_title hireAnnouncementTitle,
-   ha.cpmember_id cpmemberId,
-   ha.hire_announcement_manager hireAnnouncementManager,
-   ha.hire_announcement_recruitment_field hireAnnouncementRecruitmentField,
-   ha.hire_announcement_career hireAnnouncementCareer,
-   ha.hire_announcement_department hireAnnouncementDepartment,
-   ha.hire_announcement_jobgrade_jobposition hireAnnouncementJobgradeJobposition,
-   ha.hire_announcement_preferential_conditions hireAnnouncementPreferentialConditions,
-   ha.hire_announcement_salary hireAnnouncementSalary,
-   ha.hire_announcement_main_job hireAnnouncementMainJob,
-   ha.hire_announcement_contents hireAnnouncementContents,
-   ha.hire_announcement_working_form_name hireAnnouncementWorkingFormName,
-   ha.hire_announcement_education hireAnnouncementEducation,
-   ha.hire_announcement_start_date hireAnnouncementStartDate,
-   ha.hire_announcement_end_date hireAnnouncementEndDate
-FROM linkjobs_hire_announcement ha 
-INNER JOIN linkjobs_scrap s 
-ON s.hire_announcement_no=ha.hire_announcement_no
-WHERE s.member_id=#{memberId}
-AND s.scrap_boolean='Y'
-ORDER BY ha.hire_announcement_no  ASC
-      
-</select>
-
-
 </mapper>

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>addResume</title>
+<title>Link jobs</title>
 <!-- Custom fonts for this template-->
 <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -15,268 +15,344 @@
 
 <!-- Custom styles for this template-->
 <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
-<!-- 
-<script th:inline="javascript">
-$(document).ready(function(){
-   let scrapNo = $('#scrapNo').val();
-   let hireAnnouncementNo = $('#hireAnnouncementNo').val();
-   if($('#scrap').val()==""){
-      let scrapBoolean = 'Y';
-      /*<![CDATA[*/
-         $.ajax({
-            url:/*[[@{/insertScrap}]]*/,
-            type: "POST",
-            data:{'scrapNo':scrapNo, 'hireAnnouncementNo':hireAnnouncementNo,'scrapBoolean':scrapBoolean},
-            success: function(data){
-               console.log(data);
-            }
-         });
-   } else if($('#scrap').val()=="Y"){
-      let scrapBoolean = 'N';
-      $.ajax({
-         url:/*[[@{/modifyScrap}]]*/, 
-         type: "POST",
-         data:{'scrapNo':scrapNo, 'hireAnnouncementNo':hireAnnouncementNo,'scrapBoolean':scrapBoolean},
-         success: function(data){
-            console.log(data);
-         }
-      })
-   } else($('#scrap').val()=="N"){
-      let scrapBoolean = 'Y';
-      $.ajax({
-         url:/*[[@{/modifyScrap}]]*/,
-         type: "POST",
-         data:{'scrapNo':scrapNo, 'hireAnnouncementNo':hireAnnouncementNo,'scrapBoolean':scrapBoolean},
-         success: function(data){
-            console.log(data);
-         }
-      })
-   }
-});
-    /*]]>*/
-</script>-->
+<style>
+.searchclass {
+	width:25%;
+	height:calc(1.5em + .75rem + 2px);
+	padding:.375rem .75rem;
+	font-size:1.5rem;
+	font-weight:400;
+	line-height:1.5;
+	color:#6e707e;
+	background-color:#fff;
+	background-clip:padding-box;
+	border:1px solid #d1d3e2;
+	border-radius:.35rem;
+	transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out
+	}@media (prefers-reduced-motion:reduce)
+
+</style>
 </head>
 <body id="page-top">
-   <!-- Page Wrapper -->
-   <div id="wrapper">
+	<!-- Page Wrapper -->
+	<div id="wrapper">
 
-      <!-- SideBar -->
-      <ul th:include="./include/menuSide::navSide"
-         class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
-         id="accordionSidebar">
-      </ul>
+		<!-- SideBar -->
+		<ul th:include="./include/menuSide::navSide"
+			class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+		</ul>
 
 
-      <!-- Content Wrapper -->
-      <div id="content-wrapper" class="d-flex flex-column">
-         <div th:include="./include/menuTop::navTop"></div>
-         <!-- Main Content -->
-         <div id="content">
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div th:include="./include/menuTop::navTop"></div>
+			<!-- Main Content -->
+			<div id="content">
 
 <!-- 페이지 내용 -->
-<div class="container-fluid">  
-   <!-- 로그인 -->
-   <div align="right">
-   <fieldset style="width: 650px;" >
-   <div class="card-body p-0">
-   <!-- Nested Row within Card Body -->
-    <div class="row">                         
-       <div class="col-lg-12">
-          <div class="p-5">
-           <div class="text-center">
-              <button id="loginMemberBtn" class="btn btn-secondary btn-icon-split" style="width: 49%;">
-                  <span class="text">일반회원 로그인</span>
-               </button>
-               <button id="loginCpMemberBtn" class="btn btn-light btn-icon-split" style="width: 49%;">
-                  <span class="text">기업회원 로그인</span>
-               </button>                                   
-         </div>
-         <hr> 
-                                 
-           <!-- cpMember -->
-           <div id="cpMemberDiv" style="display: none;">
-           <form class="user" id="cpMemberForm" method="post" th:action="@{/loginCpMember}">
-          <div class="form-group">
-              <input type="text" class="form-control form-control-user" id="cpMemberId" name="cpMemberId" placeholder="ID를 입력하세요.">
-              <span id="cpMemberIDSpan" style="color: red; margin: auto;"></span>
-          </div>
-          <div class="form-group">
-              <input type="password" class="form-control form-control-user" id="cpMemberPw" name="cpMemberPw" placeholder="PW를 입력하세요.">
-               <span id="cpMemberPWSpan" style="color: red; margin: auto;"></span>
-          </div>   
-          <a id="cpMemberLoginBtn" class="btn btn-primary btn-user btn-block" style="color: white;">기업회원 로그인</a>
-          <hr>                                                                        
-             </form>
-         <hr>
-           <div class="text-center">
-           <a class="small" th:href="@{/findCpMember}">ID/PW 찾기</a>                                       
-           <a class="small" th:href="@{/signUpCpMember}">회원가입</a>
-            </div>                                  
-            </div>
-                                 
-                                 <!-- member -->
-                                 <div id="memberDiv">
-                                  <form class="user" id="memberForm" method="post" th:action="@{/loginMember}">
-                                       <div class="form-group">
-                                         <input type="text" class="form-control form-control-user" id="memberId" name="memberId" placeholder="ID를 입력하세요.">
-                                         <span id="memberIDSpan" style="color: red; margin: auto;"></span>
-                                       </div>
-                                       <div class="form-group">
-                                         <input type="password" class="form-control form-control-user" id="memberPw" name="memberPw" placeholder="PW를 입력하세요.">
-                                         <span id="memberPWSpan" style="color: red; margin: auto;"></span>
-                                       </div>   
-                                          <a id="memberLoginBtn" class="btn btn-primary btn-user btn-block" style="color: white;">일반회원 로그인</a>
-                                       <hr>                                                                        
-                                  </form>
-                                  <hr>
-                                  <div class="text-center">
-                                       <a class="small" th:href="@{/findMember}">ID/PW 찾기</a>                                       
-                                       <a class="small" th:href="@{/addMember}">회원가입</a>
-                                  </div>                                  
-                                 </div>
-                              </div>  
-                           </div>                        
-                     </div>
-                   </div>
-   </fieldset>
-   </div>
-   <br><br>
-   
-   <fieldset style="display:inline-block; width: 350px; height: 250px;" th:each="list : ${list}">
-       <div th:text=${list.cpmemberCompany}></div> 
-       <div th:text=${list.hireAnnouncementTitle}></div>
-       <div>
-           <button type="button" id="scrap_btn" th:value="${list.hireAnnouncementNo}">스크랩</button>
-            <input type="hidden" th:name="|scrapBoolean_${list.hireAnnouncementNo}|" th:id="|scrapBoolean_${list.hireAnnouncementNo}|" th:value="${list.scrapBoolean}" />
-            <input type="hidden" th:name="|scrapNo_${list.hireAnnouncementNo}|" th:id="|scrapNo_${list.hireAnnouncementNo}|" th:value="${list.scrapNo}" />
-           <span th:text=${list.hireAnnouncementEndDate}></span>
-       </div>      
-   </fieldset>
+<div class="container-fluid">
+<!-- 
+	
+	<div align="right">
+	<fieldset style="width: 650px;" >
+	<div class="card-body p-0">
+	
+    <div class="row">             				
+    	<div class="col-lg-12">
+	    	<div class="p-5">
+	        <div class="text-center">
+	        	<button id="loginMemberBtn" class="btn btn-secondary btn-icon-split" style="width: 49%;">
+	            	<span class="text">일반회원 로그인</span>
+	            </button>
+	            <button id="loginCpMemberBtn" class="btn btn-light btn-icon-split" style="width: 49%;">
+	            	<span class="text">기업회원 로그인</span>
+	            </button>                    					
+			</div>
+			<hr> 
+	               					
 
-   
-   
-   
-   
-   
-      <!---->
-   
+	        <div id="cpMemberDiv" style="display: none;">
+	        <form class="user" id="cpMemberForm" method="post" th:action="@{/loginCpMember}">
+		    <div class="form-group">
+	        	<input type="text" class="form-control form-control-user" id="cpMemberId" name="cpMemberId" placeholder="ID를 입력하세요.">
+	        	<span id="cpMemberIDSpan" style="color: red; margin: auto;"></span>
+		    </div>
+		    <div class="form-group">
+	        	<input type="password" class="form-control form-control-user" id="cpMemberPw" name="cpMemberPw" placeholder="PW를 입력하세요.">
+	            <span id="cpMemberPWSpan" style="color: red; margin: auto;"></span>
+		    </div>	
+		    <a id="cpMemberLoginBtn" class="btn btn-primary btn-user btn-block" style="color: white;">기업회원 로그인</a>
+		    <hr>		                  					                  					
+	       	</form>
+			<hr>
+	        <div class="text-center">
+		        <a class="small" th:href="@{/findCpMember}">ID/PW 찾기</a>	                  						
+		        <a class="small" th:href="@{/signUpCpMember}">회원가입</a>
+	         </div>	                					
+	         </div>
+	              	
+	       
+	       	<div id="memberDiv">
+	        	<form class="user" id="memberForm" method="post" th:action="@{/loginMember}">
+		        	<div class="form-group">
+	              		<input type="text" class="form-control form-control-user" id="memberId" name="memberId" placeholder="ID를 입력하세요.">
+	                   	<span id="memberIDSpan" style="color: red; margin: auto;"></span>
+		            </div>
+		            <div class="form-group">
+	                  	<input type="password" class="form-control form-control-user" id="memberPw" name="memberPw" placeholder="PW를 입력하세요.">
+	                    <span id="memberPWSpan" style="color: red; margin: auto;"></span>
+		            </div>	
+		            <a id="memberLoginBtn" class="btn btn-primary btn-user btn-block" style="color: white;">일반회원 로그인</a>
+		            <hr>		                  					                  					
+	            </form>
+	            <hr>
+	            <div class="text-center">
+	            	<a class="small" th:href="@{/findMember}">ID/PW 찾기</a>	                  						
+	                <a class="small" th:href="@{/addMember}">회원가입</a>
+	            </div>	                					
+	        </div>
+	    </div>  
+     </div>            				
+  </div>
+</div>
 
-   
-   <!-- <table border="1">
-      <tr th:each="list : ${list}">
-         <td>기업명</td>
-         <td>공고 제목</td>
-         <td>지원 자격</td>
-         <td>근무조건</td>
-         <td>마감일·등록일</td>
-      </tr>   
-      <tr >
-
-        <td>
-             <span th:text=${list.cpMemberCompany}></span>
-          </td>
-         <td>
-           <span th:text=${list.hireAnnouncementTitle}></span>
-         </td>
-         <td th:text=${list.hireAnnouncementEducation}></td>
-         <td>
-            <span th:text=${list.hireAnnouncementWorkingFormName}></span><br>
-            <span th:text=${list.areaSido}></span><a></a>
-            <span th:text=${list.area2Gungu}></span>
-         </td>
-         <td>
-           <span th:text=${list.hireAnnouncementStartDate}></span><br>
-            ~ <span th:text=${list.hireAnnouncementEndDate}></span>
-         </td> 
-      </tr>
-   </table> -->
-   
-      <!-- <div th:text="{scrapBoolean}"></div> -->
-<input type="text" name="scrapBoolean" id="scrap" th:value="{scrapBoolean}">
-   <input type="hidden" id="hireAnnouncementNo" th:value=${list.hireAnnouncementNo}>
-   <input type="hidden" id="scrapNo" th:value=${list.scrapNo}>
-   
-         </div>
-      </div>
-   </div>
+	</fieldset>
+	</div>
+	 -->
+	<div class="row">
+		<div class="card-body">
+		<form class="col-xl-10 col-lg-12 col-md-9" id="searchForm" method="post" th:action="@{/searchAnnouncementList}">
+			<div align="center">
+				<input class="searchclass" type="search" name="wordSearch" id="wordSearch" placeholder="검색어 입력"/>
+				<input class="searchclass" type="text" name="areaSearch" id="areaSearch" placeholder="지역 선택"/>
+				<input class="searchclass" type="text" name="jobSearch" id="jobSearch" placeholder="직업 선택" readonly="readonly"/>
+				<button id="searchBtn" type="button" >검색</button>
+			</div>
+			<div align="center">
+				<span th:text="${msg}" class="text text-danger"></span>
+			</div>
+		</form>
+		</div>
+	</div>
+	<!--  -->
+	<div class="form-group row" id="searchDiv" style="display: none;">
+		  	<div class="card-body">
+		  	<div class="col-xl-10">   
+				<span id="hireAnnouncementMainJobSpan" style="color: red; margin: auto;"></span>
+	      
+				<div id="job1DivId" class="dropdown-list" style="float: left; height: 245px; overflow: auto; width: auto;">
+					<th:block th:each="job : ${job}" >
+						<div th:id="|job1Id_${job.jobNo}|" th:text="${job.jobCategory}" th:name="job1Div" class="dropdown-item d-flex align-items-center font-weight-bold text-truncate" style="cursor: pointer;">
+						
+						</div>
+		            </th:block>
+				
+					<!-- <div class="dropdown-item d-flex align-items-center font-weight-bold text-truncate" style="cursor: pointer;">
+		             		ASDF                                     		
+	               	 </div> -->
+	                                      		
+		 		</div>
+		                                      
+		        <div id="job2DivId" class="dropdown-list" style="float: left; height: 245px; overflow: auto; width: auto;" >
+		        	<th:block th:each="job2 : ${job2}">
+						<div th:name="|job2_job1Id_${job2.jobNo}|" th:id="|job2Id_${job2.job2No}|" th:text="${job2.job2Category}" class="job2Div" style="cursor: pointer; display: none;">
+						
+						</div>
+					</th:block>
+				</div>
+		        <div style="float: right; overflow: auto; width: 20%; ">
+		        	<span id="jobClear"  style="cursor: pointer;">직업 초기화</span>
+		        	<span id="jobClear1" style="cursor: pointer;" class="fas fa-redo-alt"></span>
+		        </div><br><br>               
+		        <div class="dropdown-list" style="float: left; height: 245px; overflow: auto; width: 55%;">
+		        	
+		        	<ul class="nav job3Ul">
+		            	<th:block th:each="job3 : ${job3}">
+			                <li th:name="|job3_job2Id_${job3.job2No}|" class="nav-item job3Li" style="display: none;">
+					            <div class="form-check-inline">		
+						            <label class="form-check-label">
+						            	<input type="checkbox" class="form-check-input" name="resumeWishJob3" th:id="|job3Id_${job3.job3No}|" th:value="${job3.job3Category}" th:text="${job3.job3Category}">
+						            </label>															
+					            </div>
+			                </li>		                                      	
+		                </th:block>
+		        	</ul>
+				</div>
+				
+				<span id="hireAnnouncementMainJobSpan" style="color: red; margin: auto;"></span>
+		        </div>
+			</div>
+		</div>
+	 <!--  -->
+	                                   
+	<br><br>
+	<div class="row">
+	<div class="col-xl-3 col-md-6 mb-4" th:each="list : ${list}">
+	<fieldset style="width: 500px; height: 350px;">
+		 <div>
+		 	<img id="cpmemberPic" style="width: 495px; height: 250px;" th:src="@{'img/' + ${list.cpmemberPic}}"/>
+		 </div>
+		 <div th:text=${list.cpmemberCompany}></div> 
+		 <div th:text=${list.hireAnnouncementTitle}></div>
+		 <div>
+		 	 <button type="button" id="scrap_btn" th:value="${list.hireAnnouncementNo}">스크랩</button>
+		 	 <input type="hidden" th:name="|scrapBoolean_${list.hireAnnouncementNo}|" th:id="|scrapBoolean_${list.hireAnnouncementNo}|" th:value="${list.scrapBoolean}" />
+		 	 <input type="hidden" th:name="|scrapNo_${list.hireAnnouncementNo}|" th:id="|scrapNo_${list.hireAnnouncementNo}|" th:value="${list.scrapNo}" />
+		 	 <span th:text=${list.hireAnnouncementEndDate}></span>
+		 	 <span th:text="${list.scrapBoolean}"></span>
+		 	 <!-- 검색용 -->
+		 	 <input type="hidden" id="memberId" th:value="${memberId}"/>
+		 	 <input type="hidden" name="hireAnnouncementManager"  th:value="${list.hireAnnouncementManager}" />
+		 	 <input type="hidden" name="hireAnnouncementCareer"  th:value="${list.hireAnnouncementCareer}" />
+		 	 <input type="hidden" name="hireAnnouncementDepartment"  th:value="${list.hireAnnouncementDepartment}" />
+		 	 <input type="hidden" name="hireAnnouncementJobgradeJobposition"  th:value="${list.hireAnnouncementJobgradeJobposition}" />
+		 	 <input type="hidden" name="hireAnnouncementPreferentialConditions"  th:value="${list.hireAnnouncementPreferentialConditions}" />
+		 	 <input type="hidden" name="hireAnnouncementSalary"  th:value="${list.hireAnnouncementSalary}" />
+		 	 <input type="hidden" name="hireAnnouncementMainJob"  th:value="${list.hireAnnouncementMainJob}" />
+		 	 <input type="hidden" name="hireAnnouncementContents"  th:value="${list.hireAnnouncementContents}" />
+		 	 <input type="hidden" name="hireAnnouncementWorkingFormName"  th:value="${list.hireAnnouncementWorkingFormName}" />
+		 	 <input type="hidden" name="area2Gungu"  th:value="${list.area2Gungu}" />
+		 	 <input type="hidden" name="areaSido"  th:value="${list.areaSido}" />
+		 </div>		
+	</fieldset>
+	</div>
+	</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 
 <!--  -->
 <!-- Bootstrap core JavaScript-->
-   <script src="vendor/jquery/jquery.min.js"></script>
-   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-   
-   <!-- Core plugin JavaScript-->
-   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-   
-   <!-- Custom scripts for all pages-->
-   <script src="js/sb-admin-2.min.js"></script>
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+	<!-- Core plugin JavaScript-->
+	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+	
+	<!-- Custom scripts for all pages-->
+	<script src="js/sb-admin-2.min.js"></script>
 
 <script>
-   
 
-   //cpMember
-   $('#loginCpMemberBtn').click(function(){
-      $('#loginCpMemberBtn').attr('class', 'btn btn-secondary btn-icon-split');
-      $('#loginMemberBtn').attr('class', 'btn btn-light btn-icon-split');
-      $('#cpMemberDiv').css('display', '');
-      $('#memberDiv').css('display', 'none');
-   });
+	//cpMember
+	$('#loginCpMemberBtn').click(function(){
+		$('#loginCpMemberBtn').attr('class', 'btn btn-secondary btn-icon-split');
+		$('#loginMemberBtn').attr('class', 'btn btn-light btn-icon-split');
+		$('#cpMemberDiv').css('display', '');
+		$('#memberDiv').css('display', 'none');
+	});
+	
+	$('#loginMemberBtn').click(function(){
+		$('#loginCpMemberBtn').attr('class', 'btn btn-light btn-icon-split');
+		$('#loginMemberBtn').attr('class', 'btn btn-secondary btn-icon-split');
+		$('#cpMemberDiv').css('display', 'none');
+		$('#memberDiv').css('display', '');
+	});
+	
+	$('#cpMemberLoginBtn').click(function(){
+		$('#cpMemberIDSpan').text("");
+		$('#cpMemberPWSpan').text("");
+		if($('#cpMemberId').val().length === 0){
+			$('#cpMemberIDSpan').text("ID를 입력하세요.");
+			return;
+		}
+		if($('#cpMemberPw').val().length === 0){
+			$('#cpMemberPWSpan').text("PW를 입력하세요.");
+			return;
+		}
+		
+		$('#cpMemberForm').submit();
+		
+	})
+	
+	
+	$('#memberLoginBtn').click(function(){
+		$('#memberIDSpan').text("");
+		$('#memberPWSpan').text("");
+		if($('#memberId').val().length === 0){
+			$('#memberIDSpan').text("ID를 입력하세요.");
+			return;
+		}
+		if($('#memberPw').val().length === 0){
+			$('#memberPWSpan').text("PW를 입력하세요.");
+			return;
+		}
+		
+		$('#memberForm').submit();
+		
+	})
+	
+	// 직업
+
+	var state = $('#searchDiv').css('display'); /
+	
+	$('#jobSearch').click(function(){
+		if(state == 'none'){
+			$('#searchDiv').show();
+		}else{ // 그 외에는
+			$('#searchDiv').hide(); 			
+		}
+	});
+	 $('#hireAnnouncementMainJob').click(function(){
+			$('#jobListSelect').css('display', '');
+		});
+		
+		$('[name=job1Div]').click(function(){
+			$('#job2DivId').children().attr('class', '');
+			$('#job2DivId').children().css('display', 'none');
+			//console.log(this.id);
+			let job2Name = 'job2_' + this.id;
+			$('[name='+job2Name+']').attr('class', 'dropdown-item d-flex align-items-center font-weight-bold text-truncate');
+			$('[name='+job2Name+']').css('display','');
+		});
+		
+		$('[class=job2Div]').click(function(){
+			//console.log(this.id);
+			
+			$('.job3Li').css('display', 'none');			
+			let job3Name = 'job3_' + this.id;
+			$('[name=' + job3Name + ']').css('display', '');
+			
+		});
+		
+		
+		$('[name=resumeWishJob3]').click(function(){
+			//console.log(this);
+			let str = "";
+			$('[name=resumeWishJob3]').each(function(){
+				if($(this).is(":checked")){
+					str += $(this).val() + " ";
+				}				
+			});			
+			$('#jobSearch').val(str);
+		})
+
+		
+		$('#jobClear').click(function(){
+			$('#jobSearch').val('');
+			$('[name=resumeWishJob3]').each(function(){
+				$(this).prop('checked', false);
+			});
+		});
    
-   $('#loginMemberBtn').click(function(){
-      $('#loginCpMemberBtn').attr('class', 'btn btn-light btn-icon-split');
-      $('#loginMemberBtn').attr('class', 'btn btn-secondary btn-icon-split');
-      $('#cpMemberDiv').css('display', 'none');
-      $('#memberDiv').css('display', '');
-   });
-   
-   $('#cpMemberLoginBtn').click(function(){
-      $('#cpMemberIDSpan').text("");
-      $('#cpMemberPWSpan').text("");
-      if($('#cpMemberId').val().length === 0){
-         $('#cpMemberIDSpan').text("ID를 입력하세요.");
-         return;
-      }
-      if($('#cpMemberPw').val().length === 0){
-         $('#cpMemberPWSpan').text("PW를 입력하세요.");
-         return;
-      }
-      
-      $('#cpMemberForm').submit();
-      
-   })
-   
-   
-   $('#memberLoginBtn').click(function(){
-      $('#memberIDSpan').text("");
-      $('#memberPWSpan').text("");
-      if($('#memberId').val().length === 0){
-         $('#memberIDSpan').text("ID를 입력하세요.");
-         return;
-      }
-      if($('#memberPw').val().length === 0){
-         $('#memberPWSpan').text("PW를 입력하세요.");
-         return;
-      }
-      
-      $('#memberForm').submit();
-      
-   })
 </script>
 
 
 <script th:inline="javascript">
+
 //스크랩
 $('[id^=scrap_btn]').on('click', function(event){
+
    let hireAnnouncementNo = $(this).val();
 
   console.log(hireAnnouncementNo);
   
   let scrapNo = $('#scrapNo_'+hireAnnouncementNo).val();
   let scrapBoolean = $('#scrapBoolean_'+hireAnnouncementNo).val();
-  // let hireAnnouncementNo = $('#hireAnnouncementNo').val();
-  
+
   console.log("scrapBoolean : test"+scrapBoolean);
   console.log("scrapNo : test"+scrapNo);
   console.log("hireAnnouncementNo : test"+hireAnnouncementNo);
@@ -325,33 +401,38 @@ $('[id^=scrap_btn]').on('click', function(event){
   location.reload();
 });
 
+	//검색
+	$('#searchBtn').click(function() {
+		 $('#searchForm').submit();
+	});
+
 /*<![CDATA[*/
-   if([[${cp}]] == true){
-      $('#loginCpMemberBtn').attr('class', 'btn btn-secondary btn-icon-split');
-      $('#loginMemberBtn').attr('class', 'btn btn-light btn-icon-split');
-      $('#cpMemberDiv').css('display', '');   
-      $('#memberDiv').css('display' , 'none');
-   }
+	if([[${cp}]] == true){
+		$('#loginCpMemberBtn').attr('class', 'btn btn-secondary btn-icon-split');
+		$('#loginMemberBtn').attr('class', 'btn btn-light btn-icon-split');
+		$('#cpMemberDiv').css('display', '');	
+		$('#memberDiv').css('display' , 'none');
+	}
 /*]]>*/
 </script>
+
+
 <!-- Bootstrap core JavaScript-->
-<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
-<!-- Core plugin JavaScript-->
-<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+	<!-- Core plugin JavaScript-->
+	<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
 
-<!-- Custom scripts for all pages-->
-<script th:src="@{/js/sb-admin-2.min.js}"></script>
+	<!-- Custom scripts for all pages-->
+	<script th:src="@{/js/sb-admin-2.min.js}"></script>
 
-<!-- Page level plugins -->
-<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
-<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+	<!-- Page level plugins -->
+	<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
 
-<!-- Page level custom scripts -->
-<script th:src="@{/js/demo/datatables-demo.js}"></script>
+	<!-- Page level custom scripts -->
+	<script th:src="@{/js/demo/datatables-demo.js}"></script>
 
-
-<!--  -->
 </body>
 </html>

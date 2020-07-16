@@ -2,17 +2,130 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.ListMapper">
 	
+	<!-- 메인페이지 검색 -->
+	
+	<select id="selectSearchHireAnnouncementList" parameterType="String" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp">
+		SELECT
+			ha.hire_announcement_no AS hireAnnouncementNo,
+	      	ha.hire_announcement_title AS hireAnnouncementTitle,
+	      	ha.cpmember_id AS cpmemberId,
+	      	ha.hire_announcement_manager hireAnnouncementManager,
+	      	ha.hire_announcement_recruitment_field hireAnnouncementRecruitmentField,
+	      	ha.hire_announcement_career hireAnnouncementCareer,
+	      	ha.hire_announcement_department hireAnnouncementDepartment,
+	      	ha.hire_announcement_jobgrade_jobposition hireAnnouncementJobgradeJobposition,
+	      	ha.hire_announcement_preferential_conditions hireAnnouncementPreferentialConditions,
+	      	ha.hire_announcement_salary hireAnnouncementSalary,
+	      	ha.hire_announcement_main_job hireAnnouncementMainJob,
+	      	ha.hire_announcement_contents hireAnnouncementContents,
+	      	ha.hire_announcement_working_form_name hireAnnouncementWorkingFormName,
+	      	ha.hire_announcement_education hireAnnouncementEducation,
+	      	ha.hire_announcement_start_date AS hireAnnouncementStartDate,
+	      	ha.hire_announcement_end_date AS hireAnnouncementEndDate,
+			cp.cpmember_company AS cpmemberCompany,
+			la2.area2_gungu AS area2Gungu,
+			la.area_sido AS areaSido,
+			(SELECT cpmember_pic
+			 FROM linkjobs_cpmember_pic lcp 
+			 WHERE lcp.cpmember_id = ha.cpmember_id
+			) AS cpmemberPic,
+			(SELECT scrap_boolean
+			 FROM linkjobs_scrap ls
+			 WHERE ls.hire_announcement_no = ha.hire_announcement_no 
+			) AS scrapBoolean,
+			(SELECT scrap_no
+			 FROM linkjobs_scrap ls
+			 WHERE ls.hire_announcement_no = ha.hire_announcement_no 
+			) AS scrapNo,
+			(SELECT likecp_no
+			 FROM linkjobs_likecp ll
+			 WHERE ll.cpmember_id = ha.cpmember_id
+			) AS likecpNo,
+			(SELECT likecp_boolean
+			 FROM linkjobs_likecp ll
+			 WHERE ll.cpmember_id = ha.cpmember_id
+			) AS likecpBoolean
+		FROM 
+			linkjobs_hire_announcement AS ha 
+		INNER JOIN 
+			linkjobs_cpmember AS cp
+		INNER JOIN 
+			linkjobs_area2 AS la2
+		INNER JOIN 
+			linkjobs_area AS la
+	   	ON ha.cpmember_id = cp.cpmember_id
+	   	AND cp.area2_no = la2.area2_no
+	   	AND la2.area_no = la.area_no
+		WHERE ha.hire_announcement_title like CONCAT('%', #{wordSearch}, '%')
+		OR ha.hire_announcement_manager like CONCAT('%', #{wordSearch}, '%')
+		OR ha.hire_announcement_recruitment_field like CONCAT('%', #{wordSearch}, '%')
+		OR ha.hire_announcement_career like CONCAT('%', #{wordSearch}, '%')
+		OR ha.hire_announcement_department like CONCAT('%', #{wordSearch}, '%')
+		OR ha.hire_announcement_jobgrade_jobposition like CONCAT('%', #{wordSearch}, '%')
+		OR ha.hire_announcement_preferential_conditions like CONCAT('%', #{wordSearch}, '%')
+		OR ha.hire_announcement_salary like CONCAT('%', #{wordSearch}, '%')
+		OR ha.hire_announcement_main_job like CONCAT('%', #{jobSearch}, '%')
+		OR ha.hire_announcement_contents like CONCAT('%', #{wordSearch}, '%')
+		OR ha.hire_announcement_working_form_name like CONCAT('%', #{wordSearch}, '%')
+		OR ha.hire_announcement_education like CONCAT('%', #{wordSearch}, '%')
+		OR ha.hire_announcement_start_date like CONCAT('%', #{wordSearch}, '%')
+		OR ha.hire_announcement_end_date like CONCAT('%', #{wordSearch}, '%')
+		OR cp.cpmember_company like CONCAT('%', #{wordSearch}, '%')
+		OR la2.area2_gungu like CONCAT('%', #{areaSearch}, '%')
+		OR la.area_sido like CONCAT('%', #{areaSearch}, '%')
+		ORDER BY hire_announcement_start_date DESC
+	</select>
+	 
 	<!-- 메인페이지 채용공고 리스트 출력 -->
 	<select id="selectHireAnnouncementList" parameterType="String" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp">
 		SELECT
 	   		ha.hire_announcement_no AS hireAnnouncementNo,
 	      	ha.hire_announcement_title AS hireAnnouncementTitle,
 	      	ha.cpmember_id AS cpmemberId,
+	      	ha.hire_announcement_manager hireAnnouncementManager,
+	      	ha.hire_announcement_recruitment_field hireAnnouncementRecruitmentField,
+	      	ha.hire_announcement_career hireAnnouncementCareer,
+	      	ha.hire_announcement_department hireAnnouncementDepartment,
+	      	ha.hire_announcement_jobgrade_jobposition hireAnnouncementJobgradeJobposition,
+	      	ha.hire_announcement_preferential_conditions hireAnnouncementPreferentialConditions,
+	      	ha.hire_announcement_salary hireAnnouncementSalary,
+	      	ha.hire_announcement_main_job hireAnnouncementMainJob,
+	      	ha.hire_announcement_contents hireAnnouncementContents,
+	      	ha.hire_announcement_working_form_name hireAnnouncementWorkingFormName,
+	      	ha.hire_announcement_education hireAnnouncementEducation,
 	      	ha.hire_announcement_start_date AS hireAnnouncementStartDate,
 	      	ha.hire_announcement_end_date AS hireAnnouncementEndDate,
-			cp.cpmember_company AS cpMemberCompany
+			cp.cpmember_company AS cpmemberCompany,
+			la2.area2_gungu AS area2Gungu,
+			la.area_sido AS areaSido,
+			(SELECT cpmember_pic
+			 FROM linkjobs_cpmember_pic lcp 
+			 WHERE lcp.cpmember_id = ha.cpmember_id
+			) AS cpmemberPic,
+			(SELECT scrap_boolean
+			 FROM linkjobs_scrap ls
+			 WHERE ls.hire_announcement_no = ha.hire_announcement_no 
+			) AS scrapBoolean,
+			(SELECT scrap_no
+			 FROM linkjobs_scrap ls
+			 WHERE ls.hire_announcement_no = ha.hire_announcement_no 
+			) AS scrapNo,
+			(SELECT likecp_no
+			 FROM linkjobs_likecp ll
+			 WHERE ll.cpmember_id = ha.cpmember_id
+			) AS likecpNo,
+			(SELECT likecp_boolean
+			 FROM linkjobs_likecp ll
+			 WHERE ll.cpmember_id = ha.cpmember_id
+			) AS likecpBoolean
+			
 		FROM linkjobs_hire_announcement AS ha 
-		INNER JOIN linkjobs_cpmember AS cp ON ha.cpmember_id = cp.cpmember_id
+		INNER JOIN linkjobs_cpmember AS cp
+		INNER JOIN linkjobs_area2 AS la2
+		INNER JOIN linkjobs_area AS la
+	   	ON ha.cpmember_id = cp.cpmember_id
+	   	AND cp.area2_no = la2.area2_no
+	   	AND la2.area_no = la.area_no
 		ORDER BY hire_announcement_start_date DESC
 		
 	</select>

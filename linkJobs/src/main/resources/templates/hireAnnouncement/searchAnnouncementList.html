@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>searchAnnouncementList</title>
+<!-- Custom fonts for this template -->
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+
+<!-- Custom styles for this page -->
+<link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<!-- SideBar -->
+		<ul th:include="/include/menuSide::navSide" class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
+		</ul>
+		
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div th:include="/include/menuTop::navTop"></div>
+			<!-- Main Content -->
+			<div id="content">
+				
+				<!-- 페이지 내용 -->
+				<div class="container-fluid">
+		
+					<!-- Page 헤드 -->
+					<div>
+						<h1 class="h3 mb-2 text-gray-800">Link Jobs</h1>
+						
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">채용정보</h6>
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+										<div class="row">
+											<div class="col-sm-12">
+												<table class="table table-bordered dataTable" id="dataTable" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+													<thead>
+														<tr role="row">
+															<th class="sorting_asc" style="width: 5%;">
+																번호
+															</th>
+															<th>
+																채용정보
+															</th>
+															<th style="width:15%;">
+																기업명
+															</th>
+															<th style="width: 10%;">
+																마감
+															</th>
+														</tr>
+													</thead>
+													<tbody>
+														<th:block th:each="list, index : ${list}">
+															<tr>
+																<td th:text="${index.index+1}">
+																	
+																</td>																
+																<td>																	
+																	<div>
+																		<strong style="font-size: 2.0em;" th:text="${list.hireAnnouncementTitle}"></strong>
+																		<button th:value="${list.scrapBoolean}">스크랩</button>
+																		<p>
+																		<span th:text="${list.areaSido}"></span>
+																		<span th:text="${list.area2Gungu}"></span>
+																		<span th:text="${list.hireAnnouncementCareer}" style="margin-left: 20px;"></span>
+																		<span th:text="${list.hireAnnouncementEducation}" style="margin-left: 20px;"></span>
+																		<span th:text="${list.hireAnnouncementWorkingFormName}" style="margin-left: 20px;"></span>
+																		
+																	</div>
+																	
+																	<strong style="font-size: 1.0em;" th:text="${list.hireAnnouncementMainJob}"></strong>
+																</td>
+																<td th:text="${list.cpmemberCompany}"></td>
+																<td th:text="${list.hireAnnouncementEndDate}">
+																<!--  
+																<th:block th:if="${#dates.format(#dates.createNow(), 'YYYY-MM-dd HH:mm:ss') > list.endDate}">
+																	<button class="btn btn-danger" disabled="disabled">마감</button>																																	
+																</th:block>
+																<th:block th:if="${#dates.format(#dates.createNow(), 'YYYY-MM-dd HH:mm:ss') <= list.endDate}">
+																	<a type="button"th:href="@{/modifyDeadlineAnnouncement(hireAnnouncementNo=${list.hireAnnouncementNo})}"  class="btn btn-danger">마감</a>
+																</th:block>
+																-->
+									
+																</td>
+															</tr>
+														</th:block>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br><br>
+					
+				</div>
+			</div>
+			
+		</div>
+		<!-- End of Page Wrapper -->
+
+		
+
+		
+	</div>
+	<!-- Bootstrap core JavaScript-->
+	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+	<!-- Page level plugins -->
+	<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+	<!-- Page level custom scripts -->
+	<script th:src="@{/js/demo/datatables-demo.js}"></script>
+	
+	<script>
+		
+	</script>
+
+</body>
+
+
+</html>

@@ -19,7 +19,13 @@ public class ListService {
 			List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listMapper.selectHireAnnouncementList(hireAnnouncementAndCpMemberAndScrapAndLikecp);
 			return list;
 		}
-	
+		
+	//메인페이지 채용공고 검색 리스트 출력
+		public List<HireAnnouncementAndCpMemberAndScrapAndLikecp> selectSearchHireAnnouncementList(String wordSearch, String areaSearch, String jobSearch){
+			List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listMapper.selectSearchHireAnnouncementList(wordSearch, areaSearch, jobSearch);
+			return list;
+		}
+
 	
 	//채용공고 리스트 출력
 		public List<HireAnnouncementAndCpMemberAndScrapAndLikecp> selectHireAreaAnnouncementList(HireAnnouncementAndCpMemberAndScrapAndLikecp hireAnnouncementAndCpMemberAndScrapAndLikecp){

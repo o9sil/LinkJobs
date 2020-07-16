@@ -235,6 +235,19 @@ public class MemberController {
 		return "member/addMember";
 	}
 
+	// main login action
+		@PostMapping("/mainLoginMember")
+		public String mainLoginMember(Model model, HttpSession session, LoginMember loginMember) {
+			// 로그인 중
+					if (session.getAttribute("loginMember") != null) {
+						return "hireAnnouncement/getLoginAnnouncementList";
+					}
+			String memberId = (String) session.getAttribute("loginMember");
+			Member member = memberService.getMemberOne(memberId);
+			model.addAttribute("member", member);
+			return "hireAnnouncement/getLoginAnnouncementList";
+		}
+	
 	// login form
 	@GetMapping("/loginMember")
 	public String loginMember(HttpSession session) {
