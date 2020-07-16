@@ -6,7 +6,7 @@
 		parameterType="com.gdu.linkJobs.vo.MemberAcademic"
 		resultType="com.gdu.linkJobs.vo.MemberAcademic">
 		SELECT
-			
+			academic_no academicNo,
 			academic_name academicName,
 			academic_major academicMajor,
 			academic_major_detail academicMajorDetail,

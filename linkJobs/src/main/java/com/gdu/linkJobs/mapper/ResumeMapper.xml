@@ -86,7 +86,7 @@
 							#{resumeWishIndustry},
 							#{resumeAvaliability},
 							#{resumeSelfIntroductionTitle},
-							#{resumeSelfIntroductionContents}
+							#{resumeSelfIntroductionContents},
 							NOW()
 						)
 	</insert>

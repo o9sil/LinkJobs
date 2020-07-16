@@ -1,6 +1,6 @@
 package com.gdu.linkJobs.controller;
 
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -96,10 +96,7 @@ public class ResumeController {
       Map<String, Object> jobMap = jobService.getJobListAll();
       Map<String, Object> map = selfIntroductionService.getSelfIntroductionList(memberId, beginRow, rowPerPage);//
       model.addAttribute("selfIntroList", map.get("list"));//
-      model.addAttribute("lastPage", map.get("lastPage"));//
       model.addAttribute("currentPage", currentPage);//
-      
-      
       
       
       model.addAttribute("job", jobMap.get("jobList"));
@@ -126,19 +123,20 @@ public class ResumeController {
    
    // 이력서 추가 액션
    @PostMapping("/addResumePost")
-   public String addResumePost(HttpSession session, AddResume addresume) { 
+   public String addResumePost(HttpSession session,Resume resume) { 
+	   System.out.println("이력서추가액션!!!!!"+resume);
 	   if (session.getAttribute("loginMember") == null) {
 			return "redirect:/getAnnouncementList";
 		}
 	   
 	  String memberId = (String) session.getAttribute("loginMember");
 
-	  System.out.println(addresume);
+	  resume.setMemberId(memberId);
+
+	  System.out.println("memberId--->"+memberId);
+      resumeService.addResume(resume);
+      return "redirect:/getResume";
 	  
-	  //resume.setMemberId(memberId);
-      //resumeService.addResume(resume);
-      //return "redirect:/getResume";
-	  return null;
    }
    
    

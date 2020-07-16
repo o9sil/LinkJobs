@@ -6,7 +6,7 @@ public class AddResume {
 	private int resumeNo;
 	private String resumeTitle;
 	private String memberId;
-	private String workingForm;
+	private String resumeWorkingForm;
 	private String resumeSalary;
 	private String resumeWishArea;
 	private String resumeWishJob;
@@ -37,11 +37,11 @@ public class AddResume {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getWorkingForm() {
-		return workingForm;
+	public String getResumeWorkingForm() {
+		return resumeWorkingForm;
 	}
-	public void setWorkingForm(String workingForm) {
-		this.workingForm = workingForm;
+	public void setResumeWorkingForm(String resumeWorkingForm) {
+		this.resumeWorkingForm = resumeWorkingForm;
 	}
 	public String getResumeSalary() {
 		return resumeSalary;
@@ -118,13 +118,12 @@ public class AddResume {
 	@Override
 	public String toString() {
 		return "AddResume [resumeNo=" + resumeNo + ", resumeTitle=" + resumeTitle + ", memberId=" + memberId
-				+ ", workingForm=" + workingForm + ", resumeSalary=" + resumeSalary + ", resumeWishArea="
+				+ ", resumeWorkingForm=" + resumeWorkingForm + ", resumeSalary=" + resumeSalary + ", resumeWishArea="
 				+ resumeWishArea + ", resumeWishJob=" + resumeWishJob + ", resumeWishIndustry=" + resumeWishIndustry
 				+ ", resumeAvaliability=" + resumeAvaliability + ", resumeSelfIntroductionTitle="
 				+ resumeSelfIntroductionTitle + ", resumeSelfIntroductionContents=" + resumeSelfIntroductionContents
 				+ ", resuemDate=" + resuemDate + ", resumeCareer=" + resumeCareer + ", certificateNo=" + certificateNo
 				+ ", careerNo=" + careerNo + ", academicNo=" + academicNo + "]";
 	}
-	
 	
 }

@@ -7,7 +7,7 @@
 <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 <!-- Bootstrap core JavaScript-->
-<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script> 
 <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <!-- Core plugin JavaScript-->
@@ -66,11 +66,33 @@ $(document).ready(function(){
           $("#" + this.value).css('display', 'none');
        }
     });
-	
+  
+	//신입,경력 선택
+ 	$("#careerBody").hide();
+    $("#old").click(function(){
+    	$("#careerBody").show();
+   	});
+    
+    $("#new").click(function(){
+    	$("#careerBody").hide();
+    });
+    
+  
+
+
+   //자기소개서 
+    $(".selfIntroListCheckBox").click(function(){
+       console.log(this.checked);
+       if(this.checked === true){
+          $("#" + this.value).css('display', '');   
+       }else{
+          $("#" + this.value).css('display', 'none');
+       }
+    });
 	
     
-
-   
+    
+    
    
    //희망근무직업
    
@@ -117,49 +139,45 @@ $(document).ready(function(){
 		});
    //희망근무지역 end
    
-   
-   
-   
+    
+        
+    //지역
+      
+     /*<![CDATA[*/
+      $('#areaCode').change(function () {
+            let areaSido=$(this).val();
+            console.log("areaSido : "+areaSido);
+            $('#area2Code').empty();
+             $.ajax({
+               url   :/*[[@{/getArea2AreaSido}]]*/, 
+                 type: "POST",
+                data:{'areaSido':areaSido},
+                success: function (data) {
+                   console.log(data);                   
+               $.each(data, function (index,item) {
+                  
+                  console.log(item);
+                  
+                  var addContent = $("<option value='"+item.area2Gungu+"' th:text='"+item.area2Gungu+"'>"+item.area2Gungu+"</option>");
+                    $("#area2Code").append(addContent);
 
-   
-   //지역   
-    /*<![CDATA[*/
-    $('#areaCode').change(function () {
-          let areaSido=$(this).val();
-          console.log("areaSido : "+areaSido);
-          $('#area2Code').empty();
-           $.ajax({
-             url   :/*[[@{/selectArea2}]]*/, 
-               type: "POST",
-              data:{'areaSido':areaSido},
-              success: function (data) {
-                 console.log(data);                   
-             $.each(data, function (index,item) {
-                
-                console.log(item);
-              
-                var addContent = $("<option th:value='"+item.area2Gungu+"' th:text='"+item.area2Gungu+"'>"+item.area2Gungu+"</option>");
-              $("#area2Code").append(addContent);
-             });
-             }
-           });
-          
-   });   
-    /*]]>*/
+                  
+               });
+            }
+          });
+     });   
+      /*]]>*/
     
-    
+
+      
    $('#addResumeBtn').click(function(){
 	   console.log($('#areaCode > option:selected').val());
 	   console.log($('#area2Code > option:selected').val());
 	   
-	   $('#resumeWishArea').val($('#areaCode > option:selected').val() + ' ' + $('#area2Code > option:selected').val());	   
-	   
+	   $('#resumeWishArea').val($('#areaCode > option:selected').val() + ' ' + $('#area2Code > option:selected').val());
+	  
 	   $('#resumeForm').submit();     
    })
-    
-    
-    
-    
     
     
 });
@@ -224,6 +242,9 @@ $(document).ready(function(){
 	
 	
 	<form id="resumeForm" method="post" th:action="@{/addResumePost}">
+	
+	
+	<input type="hidden" name="memberId" th:value="${memberInfo.memberId}">    
      	<div class="card shadow mb-4">
      		<div class="card-body">
 				<input type="text" style="height: 100px;" class="form-control" id="resumeTitle" name="resumeTitle" placeholder="이력서 제목을 입력하세요(50자까지 입력가능)." maxlength=50>	
@@ -262,6 +283,7 @@ $(document).ready(function(){
 			</div>
 		</div>
 		
+		
 		<div class="form-group row">
 			<div class="col-xl-2">	
 				<h5 class="m-0 font-weight-bold">성별</h5>	                  							
@@ -271,7 +293,6 @@ $(document).ready(function(){
 			</div>
 			<div class="col-xl-10" th:if="${memberInfo.memberGender}==여">			                  				
 				<input type="radio" readonly="readonly" id="man" checked="checked"> 여
-	       		  
 			</div>
 		</div>
 	   
@@ -308,23 +329,20 @@ $(document).ready(function(){
    </div>
      
       
-  <!--    
-   학력사항
+      
+      
+  <!--학력사항-->
    <div class="card shadow mb-4"> 
-   학력사항  헤드
+  <!--  학력사항  헤드 -->
 	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 		<h2 class="m-0 font-weight-bold text-info">학력사항</h2>
 	</div>
-
-
-  학력사항  바디
+  <!-- 학력사항  바디 -->
    <div th:each="memberAcademic : ${memberAcademic}" class="card-body">
   
-   
-   <input type="checkbox" class="academicListCheckBox" th:value="${memberAcademic.academicNo}" th:text="${memberAcademic.academicGrade}" >
+    <input type="checkbox" class="academicListCheckBox" th:value="${memberAcademic.academicNo}" th:text="${memberAcademic.academicGrade}">
          
-   
-   <div th:id="${memberAcademic.academicNo}" style="display: none;">
+     <div th:id="${memberAcademic.academicNo}" style="display: none;">
       <div class="form-group row">
          <div class="col-xl-2">   
             <h5 class="m-0 font-weight-bold">학교명</h5>                                       
@@ -359,10 +377,10 @@ $(document).ready(function(){
 		    <div class="col-xl-10">
 				<div class="row">
 					<div class="col-xl-6">
-						<input type="date" class="form-control" th:value="${memberAcademic.academicToDate}"  readonly="readonly">
+						<input type="date" class="form-control" th:value="${memberAcademic.academicFromDate}"  readonly="readonly">
 					</div>
 					<div class="col-xl-6">
-						<input type="date" class="form-control" th:value="${memberAcademic.academicEndDate}" readonly="readonly">
+						<input type="date" class="form-control" th:value="${memberAcademic.academicToDate}" readonly="readonly">
 					</div>                                             
 				</div>
 			</div>
@@ -375,12 +393,9 @@ $(document).ready(function(){
 	            <input type="text" class="form-control" th:value="${memberAcademic.academicScore}" readonly="readonly">
 	         </div>
       	</div>
-      
-      
-   </div>
+    </div>
   </div>
-
-  </div>  학력사항 end-->
+  </div> <!-- 학력사항 end-->
      
      
      
@@ -391,11 +406,10 @@ $(document).ready(function(){
 		<h2 class="m-0 font-weight-bold text-info">자격증정보</h2>
 	</div>
 
-
   <!-- 자격증정보  바디-->
    <div th:each="certificateList : ${certificateList}" class="card-body">
   
-   <input type="checkbox" name="certificateNo" class="certificateListCheckBox" th:value="${certificateList.certificateNo}" th:text="${certificateList.certificateName}" >
+   <input type="checkbox" name="certificateNo" class="certificateListCheckBox" th:value="${certificateList.certificateNo}" th:text="${certificateList.certificateName}">
          
    
    <div th:id="${certificateList.certificateNo}" style="display: none;">
@@ -418,14 +432,9 @@ $(document).ready(function(){
       </div>
    </div>
   </div>
-  
-  </div>
-  
-   <!-- 자격증정보  end-->
+  </div>   <!-- 자격증정보  end-->
      
      
-     
-
      
 	<!-- 경력사항 -->
    <div class="card shadow mb-4"> 
@@ -441,9 +450,9 @@ $(document).ready(function(){
 	</div>
 
    <!-- 경력사항  바디-->
-   <div th:each="memberCareer : ${memberCareer}" class="card-body">   	
+   <div id="careerBody" th:each="memberCareer : ${memberCareer}" class="card-body">   	
    
-   <input type="checkbox" name="careerNo" class="careerListCheckBox" id="careerListCheckBox" th:value="${memberCareer.careerNo}" th:text="${memberCareer.careerNo}" >
+   <input type="checkbox" name="careerNo" class="careerListCheckBox" id="careerListCheckBox" th:value="${memberCareer.careerNo}" th:text="${memberCareer.careerCompanyName}">
       <div th:id="${memberCareer.careerNo}" style="display: none;">
 		<div class="form-group row">
 			<div class="col-xl-2">	
@@ -486,7 +495,7 @@ $(document).ready(function(){
 		    <div class="col-xl-10">			                  				
 				<input type="text" class="form-control" th:value="${memberCareer.careerReasonForLeaving}" readonly="readonly">
 			</div>
-		</div>
+		</div>	
 		
 		<div class="form-group row">
 			<div class="col-xl-2">	
@@ -525,7 +534,7 @@ $(document).ready(function(){
 		</div>
 		
 		<div class="form-group row">
-			<div class="col-xl-2">	
+			<div class="col-xl-2">		
 				<h5 class="m-0 font-weight-bold">연봉</h5>	                  							
 		  	</div>
 		    <div class="col-xl-10">			                  				
@@ -583,7 +592,7 @@ $(document).ready(function(){
 				<h5 class="m-0 font-weight-bold">근무 형태</h5>	                  							
 			</div>
 			<div class="col-xl-10">			                  				
-				<select name="workingForm" id="resumeWorkingForm">
+				<select name="resumeWorkingForm" id="resumeWorkingForm">
 					<option>선택</option>
 		            <option>계약직</option>
 		            <option>교육생</option>
@@ -641,12 +650,13 @@ $(document).ready(function(){
 				<h5 class="m-0 font-weight-bold">희망근무지역 : </h5>	                  							
 		  	</div>
 		    <div class="col-xl-10">	
-		    	<input type="hidden" name="resumeWishArea" id="resumeWishArea" value="">
+		    	 <input type="hidden" name="resumeWishArea" id="resumeWishArea">
 		    		                  				
 				<select name="areaSido" id="areaCode" class="form-control">
 					<option value="">시 / 도</option>
 					<option th:each="areaList : ${areaList}" th:value="${areaList.areaSido}" th:text="${areaList.areaSido}"></option>
 				</select>
+				<span id="areaCodeHelper"></span>
 			</div>
 			<div class="col-xl-10">			                  				
 				<select id="area2Code" class="form-control" name="area2Gungu" >
@@ -655,9 +665,14 @@ $(document).ready(function(){
 				</select>
 				<span id="area2CodeHelper"></span>
 			</div>
-			</div> 
+		</div> 
 	  
 	  
+	  
+	  <!--  -->
+	  
+	  
+	  <!--  -->
 	  
 	  
 	  <div class="form-group row">
@@ -725,10 +740,7 @@ $(document).ready(function(){
    </div><!-- 희망근무조건 end -->
      
      
-     
-     
-     
-     
+
      
      
      
@@ -740,8 +752,10 @@ $(document).ready(function(){
 	</div>
 
    <!-- 자기소개서 바디-->
-   <div th:each="selfIntroList : ${selfIntroList}" class="card-body">   	
-
+   <div th:each="selfIntroList : ${selfIntroList}" class="card-body">
+   	
+  <input type="checkbox" name="selfIntroNo" class="selfIntroListCheckBox" th:value="${selfIntroList.selfIntroductionNo}" th:text="${selfIntroList.selfIntroductionTitle}">
+	<div th:id="${selfIntroList.selfIntroductionNo}" style="display: none;">
 		<div class="form-group row">
 			<div class="col-xl-2">	
 				<h5 class="m-0 font-weight-bold">제목</h5>	                  							
@@ -759,22 +773,15 @@ $(document).ready(function(){
 				<input type="text" id="selfIntroductionContents" style="height: 700px" name="resumeSelfIntroductionContents" class="form-control" th:value="${selfIntroList.selfIntroductionContents}"></textarea>
 			</div>
 		</div>
-
-		</div>
+	  </div>
+	</div>
 		
-		
-		<div>
-		
-		
-		
+  	 </div><!-- 자기소개서 end -->
+  	 
+  	<div>
 		<input type="radio" name="resumeAvaliability" value="공개">공개
-  		<input type="radio" name="resumeAvaliability" value="비공개">비공개
-		
-		</div>
-		
-	
-  
-  	 </div>
+	  	<input type="radio" name="resumeAvaliability" value="비공개">비공개
+	</div>
   
     <button id="addResumeBtn" type="button">이력서 등록</button>
 
