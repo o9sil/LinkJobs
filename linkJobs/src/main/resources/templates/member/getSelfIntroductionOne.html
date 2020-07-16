@@ -43,27 +43,47 @@
 <div id="content">		
 	<!-- 페이지 내용 -->
 	<div class="container-fluid">
-      <h1 align="center">자기소개서 상세페이지</h1>
-      <br>
-      <a th:href="@{/modifySelfIntroduction(selfIntroductionNo=${selfIntroductionOne.selfIntroductionNo})}"  class="btn btn-info">수정</a> 
-      <a th:href="@{/removeSelfIntroduction(selfIntroductionNo=${selfIntroductionOne.selfIntroductionNo})}"  class="btn btn-info">삭제</a>
-      <br>
-      <br>
-      
-      <table class="table">
-         <tr>
-            <td>제목</td>
-            <td th:value="${selfIntroductionOne.selfIntroductionTitle}" th:text="${selfIntroductionOne.selfIntroductionTitle}"></td>
-         </tr>
-         <tr>
-            <td>내용</td>
-            <td th:value="${selfIntroductionOne.selfIntroductionContents}" th:text="${selfIntroductionOne.selfIntroductionContents}"></td>
-         </tr>
-         <tr>
-            <td>작성일자</td>
-            <td th:value="${selfIntroductionOne.selfIntroductionDate}" th:text="${selfIntroductionOne.selfIntroductionDate}"></td>
-         </tr>
-      </table>
+	
+	<div class="card shadow mb-4">
+				               
+           <!-- 공고 제목 -->
+           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+		            <h1 align="center" class="m-0 font-weight-bold text-info">자기소개서 상세페이지</h1>		
+          </div>
+                
+          <div class="card-body">
+
+
+
+							<table class="table">
+								<tr>
+									<td>제목</td>
+									<td th:value="${selfIntroductionOne.selfIntroductionTitle}"
+										th:text="${selfIntroductionOne.selfIntroductionTitle}"></td>
+								</tr>
+								<tr>
+									<td>내용</td>
+									<td th:value="${selfIntroductionOne.selfIntroductionContents}"
+										th:text="${selfIntroductionOne.selfIntroductionContents}"></td>
+								</tr>
+								<tr>
+									<td>작성일자</td>
+									<td th:value="${selfIntroductionOne.selfIntroductionDate}"
+										th:text="${selfIntroductionOne.selfIntroductionDate}"></td>
+								</tr>
+							</table>
+
+<div align="center">
+							<a
+								th:href="@{/modifySelfIntroduction(selfIntroductionNo=${selfIntroductionOne.selfIntroductionNo})}"
+								class="btn btn-info">수정</a> <a
+								th:href="@{/removeSelfIntroduction(selfIntroductionNo=${selfIntroductionOne.selfIntroductionNo})}"
+								class="btn btn-info">삭제</a> <br> <br>
+
+</div>
+						</div>
+</div>
+		
    </div>
   </div>
  </div>

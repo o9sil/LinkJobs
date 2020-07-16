@@ -22,7 +22,7 @@ public class SelfIntroductionService {
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
 
-		int totalRow = selfIntroductionMapper.totalSelfIntroduction();
+		int totalRow = selfIntroductionMapper.totalSelfIntroduction(memberId);
 		System.out.println(totalRow+"<--totalRow");		
 		
 		

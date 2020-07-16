@@ -241,7 +241,18 @@
 
             <!-- 페이지 내용 -->
             <div class="container-fluid">
-               <h1 align="center">경력사항 수정</h1>
+            
+            	<div class="card shadow mb-4">
+				               
+           <!-- 공고 제목 -->
+           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+		            <h1 align="center" class="m-0 font-weight-bold text-info">경력사항 수정</h1>		
+          </div>
+                
+          <div class="card-body">
+                	
+		            
+                
                <form th:action="@{/modifyMemberCareer(careerNo=${mc.careerNo})}" method="post" id="careerForm">
                   <div class="row">
                      <div  class="col-sm-2">
@@ -402,6 +413,10 @@
                      <button id="Btn" class="btn btn-info">수정하기</button>
                   </div>
                </form>
+</div>
+</div>
+            	
+            	
 
 
             </div>

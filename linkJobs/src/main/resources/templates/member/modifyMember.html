@@ -149,117 +149,147 @@
 			<div th:include="/include/menuTop::navTop"></div>
 			<!-- Main Content -->
 			<div id="content">
-				
+
 				<!-- 페이지 내용 -->
 				<div class="container-fluid">
-					<h1 align="center">회원정보 수정</h1>
-					<br>
-					
-					<!-- 회원가입 폼 -->
-					<form th:action="@{/modifyMember}" method="post" id="myForm">
-						<div class="row">
-							<div class="col-sm-3">아이디 :</div>
-							<div class="col-sm-9">
-								<input type="text" id="memberId" name="memberId"
-									class="form-control" th:value="${m.memberId}"
-									readonly="readonly"> <span id="idHelper"></span>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">이름 :</div>
-							<div class="col-sm-9">
-								<input type="text" name="memberName" id="memberName"  th:value="${m.memberName}"
-									class="form-control"> <span id="nameHelper"></span>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">주소 :</div>
-							<div class="col-sm-4">
-								<select name="areaSido" id="areaCode" class="form-control">
-									<option th:text="${m.areaSido}" th:value="${m.areaSido}"></option>
-									<option th:each="areaList : ${areaList}"
-										th:value="${areaList.areaSido}" th:text="${areaList.areaSido}"></option>
-								</select> <span id="areaCodeHelper"></span>
-							</div>
-							<div class="col-sm-5">
-								<select id="area2Code" class="form-control" name="area2Gungu">
-									<option th:text="${m.area2Gungu}" th:value="${m.area2Gungu}">군 / 구</option>
 
-								</select> <span id="area2CodeHelper"></span>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">상세주소 :</div>
-							<div class="col-sm-9">
-								<input type="text" name="memberDetailedAddress"
-									id="memberDetailedAddress" class="form-control" th:value="${m.memberDetailedAddress}"> <span
-									id="detailAddrHelper"></span>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">전화번호 :</div>
-							<div class="col-sm-9">
-								<input type="text" name="memberPhone" id="memberPhone"  th:value="${m.memberPhone}"
-									class="form-control"> <span id="phoneHelper"></span>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">이메일 :</div>
-							<div class="col-sm-9">
-								<input type="text" name="memberEmail" id="memberEmail"  th:value="${m.memberEmail}"
-									class="form-control"> <span id="emailHelper"></span>
-							</div>
+					<div class="card shadow mb-4">
 
+						<!-- 공고 제목 -->
+						<div
+							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+							<h1 align="center" class="m-0 font-weight-bold text-info">회원정보
+								수정</h1>
 						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">생년월일 :</div>
-							<div class="col-sm-9">
-								<input type="date" name="memberBirthdate" id="memberBirthdate"  th:value="${m.memberBirthdate}"
-									class="form-control"> <span id="birthHelper"></span>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">성별 :</div>
-							<div class="col-sm-9">
-								<th:block th:if="${m.memberGender == '남'}">
-									<input type="radio" value="남" id="memberGender" name="memberGender" checked="checked">&nbsp;&nbsp;&nbsp;&nbsp;남&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-									<input type="radio" value="여" id="memberGender" name="memberGender">&nbsp;&nbsp;&nbsp;&nbsp;여
+
+						<div class="card-body">
+
+
+
+							<!-- 회원가입 폼 -->
+							<form th:action="@{/modifyMember}" method="post" id="myForm">
+								<div class="row">
+									<div class="col-sm-3">아이디 :</div>
+									<div class="col-sm-9">
+										<input type="text" id="memberId" name="memberId"
+											class="form-control" th:value="${m.memberId}"
+											readonly="readonly"> <span id="idHelper"></span>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-3">이름 :</div>
+									<div class="col-sm-9">
+										<input type="text" name="memberName" id="memberName"
+											th:value="${m.memberName}" class="form-control"> <span
+											id="nameHelper"></span>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-3">주소 :</div>
+									<div class="col-sm-4">
+										<select name="areaSido" id="areaCode" class="form-control">
+											<option th:text="${m.areaSido}" th:value="${m.areaSido}"></option>
+											<option th:each="areaList : ${areaList}"
+												th:value="${areaList.areaSido}"
+												th:text="${areaList.areaSido}"></option>
+										</select> <span id="areaCodeHelper"></span>
+									</div>
+									<div class="col-sm-5">
+										<select id="area2Code" class="form-control" name="area2Gungu">
+											<option th:text="${m.area2Gungu}" th:value="${m.area2Gungu}">군
+												/ 구</option>
+
+										</select> <span id="area2CodeHelper"></span>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-3">상세주소 :</div>
+									<div class="col-sm-9">
+										<input type="text" name="memberDetailedAddress"
+											id="memberDetailedAddress" class="form-control"
+											th:value="${m.memberDetailedAddress}"> <span
+											id="detailAddrHelper"></span>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-3">전화번호 :</div>
+									<div class="col-sm-9">
+										<input type="text" name="memberPhone" id="memberPhone"
+											th:value="${m.memberPhone}" class="form-control"> <span
+											id="phoneHelper"></span>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-3">이메일 :</div>
+									<div class="col-sm-9">
+										<input type="text" name="memberEmail" id="memberEmail"
+											th:value="${m.memberEmail}" class="form-control"> <span
+											id="emailHelper"></span>
+									</div>
+
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-3">생년월일 :</div>
+									<div class="col-sm-9">
+										<input type="date" name="memberBirthdate" id="memberBirthdate"
+											th:value="${m.memberBirthdate}" class="form-control">
+										<span id="birthHelper"></span>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-3">성별 :</div>
+									<div class="col-sm-9">
+										<th:block th:if="${m.memberGender == '남'}">
+											<input type="radio" value="남" id="memberGender"
+												name="memberGender" checked="checked">&nbsp;&nbsp;&nbsp;&nbsp;남&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+									<input type="radio" value="여" id="memberGender"
+												name="memberGender">&nbsp;&nbsp;&nbsp;&nbsp;여
 								</th:block>
-								<th:block th:if="${m.memberGender == '여'}">
-									<input type="radio" value="남" id="memberGender" name="memberGender" >&nbsp;&nbsp;&nbsp;&nbsp;남&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-									<input type="radio" value="여" id="memberGender" name="memberGender" checked="checked">&nbsp;&nbsp;&nbsp;&nbsp;여
+										<th:block th:if="${m.memberGender == '여'}">
+											<input type="radio" value="남" id="memberGender"
+												name="memberGender">&nbsp;&nbsp;&nbsp;&nbsp;남&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+									<input type="radio" value="여" id="memberGender"
+												name="memberGender" checked="checked">&nbsp;&nbsp;&nbsp;&nbsp;여
 								</th:block>
-								<span id="genderHelper"></span>
-							</div>
+										<span id="genderHelper"></span>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-3">비밀번호 :</div>
+									<div class="col-sm-9">
+										<input type="password" name="memberPw" id="memberPw"
+											class="form-control">
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-3">비밀번호 확인:</div>
+									<div class="col-sm-9">
+										<input type="password" id="memberPw2" class="form-control">
+										<span id="pwHelper"></span>
+									</div>
+								</div>
+								<br>
+								<br>
+								<div align="right">
+									<button id="myFormBtn" type="button" class="btn btn-info">수정하기</button>
+								</div>
+							</form>
 						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">비밀번호 :</div>
-							<div class="col-sm-9">
-								<input type="password" name="memberPw" id="memberPw"
-									class="form-control"> 
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">비밀번호 확인:</div>
-							<div class="col-sm-9">
-								<input type="password" id="memberPw2"
-									class="form-control"> <span id="pwHelper"></span>
-							</div>
-						</div><br><br>
-						<div align="right">
-							<button id="myFormBtn" type="button"
-								class="btn btn-info" >수정하기</button>
-						</div>
-					</form>
+					</div>
+
+
+
+
+
 				</div>
 				<hr>
 			</div>

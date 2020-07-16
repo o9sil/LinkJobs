@@ -15,11 +15,12 @@
 		LIMIT #{beginRow},#{rowPerPage}
 	</select>
 	<!-- 전체 행수 -->
-	<select id="totalSelfIntroduction" resultType="int">
+	<select id="totalSelfIntroduction" resultType="int" parameterType="String">
 		SELECT 
 			COUNT(*)
 		FROM 
 			linkjobs_self_introduction
+		WHERE member_id=#{memberId}
 	</select>
 	
 	<!-- 자기소개서 하나만 가지고 오기 -->
