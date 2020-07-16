@@ -29,10 +29,12 @@
 			resume_wish_job resumeWishJob,
 			resume_wish_industry resumeWishIndustry,
 			resume_avaliability resumeAvaliability,
-			resume_self_introduction_title resumeSelfIntroductionTitle
-			resume_self_introduction_contents resumeSelfIntroductionContents 
+			resume_self_introduction_title resumeSelfIntroductionTitle,
+			resume_self_introduction_contents resumeSelfIntroductionContents,
 			resume_date resumeDate
 		FROM linkjobs_resume
+		WHERE member_id = #{memberId} 
+		AND resume_no = #{resumeNo}
 	</select>
 	
 	
