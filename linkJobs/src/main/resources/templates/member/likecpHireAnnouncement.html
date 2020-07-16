@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>likecpHireAnnouncement</title>
+<!-- Custom fonts for this template-->
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+<!-- Custom scripts for all pages-->
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+<!-- Custom styles for this template-->
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+
+</head>
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<!-- SideBar -->
+		<ul th:include="/include/menuSide::navSide"
+			class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+		</ul>
+
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div th:include="/include/menuTop::navTop"></div>
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- 페이지 내용 -->
+				<div class="container-fluid">
+					<div class="card shadow mb-4">
+
+						<!-- 공고 제목 -->
+						<div
+							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+							<h1 align="center" class="m-0 font-weight-bold text-info">관심기업 공고</h1>
+						</div>
+
+						<div class="card-body">
+							<table class="table">
+								<tr>
+									<td>회사명</td>
+									<td>공고명</td>
+									<td>담당자</td>
+									<td>공고 시작일</td>
+									<td>공고 종료일</td>
+								</tr>
+								<tr th:each="list : ${list}">
+									<td th:value="${list.cpmemberCompany}" th:text="${list.cpmemberCompany}"></td>
+									<td>
+										<a th:href="@{/getAnnouncementOne(hireAnnouncementNo=${list.hireAnnouncementNo},cpmemberId=${list.cpmemberId})}" th:value="${list.hireAnnouncementTitle}" th:text="${list.hireAnnouncementTitle}">
+									</td>
+									<td th:value="${list.cpmemberId}" th:text="${list.cpmemberId}"></td>
+									<td th:value="${list.hireAnnouncementStartDate}" th:text="${list.hireAnnouncementStartDate}"></td>
+									<td th:value="${list.hireAnnouncementEndDate}" th:text="${list.hireAnnouncementEndDate}"></td>
+								</tr>
+							</table>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+<!-- Page level plugins -->
+<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+<!-- Page level custom scripts -->
+<script th:src="@{/js/demo/datatables-demo.js}"></script>
+</html>

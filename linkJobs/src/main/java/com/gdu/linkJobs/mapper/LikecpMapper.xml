@@ -2,7 +2,29 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.LikecpMapper">
 
+<!-- 일반회원 관심기업 리스트 -->
+<select id="selectMemberLikecp" parameterType="String" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp">
 
+SELECT 
+		likecp.likecp_boolean likecpBoolean,
+		likecp.likecp_no likecpNo,
+		likecp.cpmember_id cpmemberId,
+		likecp.member_id memberId,
+		likecp.likecp_date likecpDate,
+		hire.cpmember_id cpmemberId,
+		hire.hire_announcement_no hireAnnouncementNo,
+		hire.hire_announcement_title hireAnnouncementTitle,
+		cp.cpmember_company cpmemberCompany,
+		cp.cpmember_id cpmemberId,
+		hire.hire_announcement_start_date hireAnnouncementStartDate ,
+		hire.hire_announcement_end_date hireAnnouncementEndDate
+	FROM linkjobs_likecp likecp
+	INNER JOIN linkjobs_hire_announcement hire  ON likecp.cpmember_id = hire.cpmember_id
+	INNER JOIN linkjobs_cpmember cp ON likecp.cpmember_id = cp.cpmember_id
+	WHERE likecp.member_id = #{memberId}
+	AND likecp.likecp_boolean ='Y'
+	GROUP BY cp.cpmember_company
+</select>
 
 <!-- 관심기업 출력 -->
 <select id="selectLikecp"  resultType="com.gdu.linkJobs.vo.Likecp">

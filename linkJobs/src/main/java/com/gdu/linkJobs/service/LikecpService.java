@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gdu.linkJobs.mapper.LikecpMapper;
+import com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp;
 import com.gdu.linkJobs.vo.Likecp;
 
 
@@ -13,6 +14,11 @@ import com.gdu.linkJobs.vo.Likecp;
 public class LikecpService {
 	@Autowired private LikecpMapper likecpMapper;
 	
+	
+	//일반회원 관심기업 출력
+	public List<HireAnnouncementAndCpMemberAndScrapAndLikecp> likecpList(String memberId){
+		return likecpMapper.selectMemberLikecp(memberId);
+	}
 	
 	//관심기업 출력 
 	 public List<Likecp> getLikecp() { 
