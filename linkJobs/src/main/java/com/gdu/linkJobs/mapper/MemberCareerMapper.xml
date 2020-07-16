@@ -23,7 +23,7 @@
          lmc.career_department careerDepartment,
          lmc.career_salary careerSalary,
          lmc.career_responsibilities careerResponsibilities,
-         lmc.career_project_contents carrerProjectContents
+         lmc.career_project_contents careerProjectContents
       FROM linkjobs_member_career lmc
       INNER JOIN linkjobs_job2 lj2 ON lmc.job2_no = lj2.job2_no
        INNER JOIN linkjobs_job lj ON lj.job_no=lj2.job_no

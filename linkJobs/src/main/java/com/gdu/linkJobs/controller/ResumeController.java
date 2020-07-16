@@ -48,8 +48,13 @@ public class ResumeController {
    
    // 이력서 공개/비공개
    @PostMapping("/resumeAvaliability")
-   public String updateResumeAvaliability(Resume resume) {
+   public String updateResumeAvaliability(HttpSession session, Resume resume) {
       System.out.println(resume+"<--resumecontroller");
+      if(session.getAttribute("loginMember") == null) {
+	         return "redirect:/";
+	   }
+      
+      
       
       resume.getMemberId();
       resume.getResumeNo();
@@ -66,12 +71,25 @@ public class ResumeController {
    
    //이력서 상세보기
    @GetMapping("/getDetailResume")
-   public String getDetailResume(Resume resume, Model model) {
-      List<Resume> resumelist = resumeService.getDetailResume(resume);
+   public String getDetailResume(HttpSession session, Resume resume, Model model) {
+	   if(session.getAttribute("loginMember") == null) {
+	         return "redirect:/";
+	   }
+	  String memberId = (String) session.getAttribute("loginMember");
+	  resume.setMemberId(memberId);
+	  Member memberInfo = memberService.getMemberOne(memberId);
+	  model.addAttribute("memberInfo", memberInfo);
+	  List<Resume> resumelist = resumeService.getDetailResume(resume);
+	  System.out.println("dafadfafad"+resumelist);
       model.addAttribute("resumelist", resumelist);
       
       return "resume/getDetailResume";
    }
+   
+   
+   
+   
+   
    
    
    // 이력서 추가 폼
@@ -178,6 +196,7 @@ public class ResumeController {
       int count = resumeService.getResumeCount(memberId);
       System.out.println(count+"<--count");
       model.addAttribute("list", list);
+      System.out.println("이력서목록"+list);
       model.addAttribute("memberId", memberId);
       model.addAttribute("count", count);
       return "resume/getResume";
