@@ -28,7 +28,7 @@ SELECT
 
 
 <!-- 일반회원 관심기업의 공고 리스트 출력 -->
-<select id="selectMemberLikecpAnnouncement" parameterType="String" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp">
+<select id="selectMemberLikecpAnnouncement" parameterType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp">
 
 SELECT 
 		likecp.likecp_boolean likecpBoolean,
@@ -47,6 +47,7 @@ SELECT
 	INNER JOIN linkjobs_hire_announcement hire  ON likecp.cpmember_id = hire.cpmember_id
 	INNER JOIN linkjobs_cpmember cp ON likecp.cpmember_id = cp.cpmember_id
 	WHERE likecp.member_id = #{memberId}
+	AND cp.cpmember_company  = #{cpmemberCompany}
 	AND likecp.likecp_boolean ='Y'
 </select>
 

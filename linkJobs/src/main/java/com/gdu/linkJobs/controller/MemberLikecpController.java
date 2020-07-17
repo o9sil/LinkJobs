@@ -31,13 +31,15 @@ public class MemberLikecpController {
 	
 	//관심기업 공고 출력
 	@GetMapping("/likecpHireAnnouncement")
-	public String likecpHireAnnouncement(HttpSession session,Model model, String memberId){
+	public String likecpHireAnnouncement(HttpSession session,Model model, HireAnnouncementAndCpMemberAndScrapAndLikecp ha){
 		if(session.getAttribute("loginCpMember") != null) {
 			return "redirect:/getAnnouncementList";
 		}
-		memberId = (String)session.getAttribute("loginMember");
-		List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = likecpService.likecpListAnnouncement(memberId);
+		String memberId = (String)session.getAttribute("loginMember");
+		ha.setMemberId(memberId);
+		List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = likecpService.likecpListAnnouncement(ha);
 		model.addAttribute("list", list);
+		model.addAttribute("memberId", memberId);
 		
 		return "member/likecpHireAnnouncement";
 	}

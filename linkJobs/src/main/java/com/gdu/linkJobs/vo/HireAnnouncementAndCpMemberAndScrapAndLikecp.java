@@ -2,6 +2,7 @@ package com.gdu.linkJobs.vo;
 
 public class HireAnnouncementAndCpMemberAndScrapAndLikecp {
 	private int hireAnnouncementNo;
+	private String memberId;
 	private String hireAnnouncementTitle;
 	private String hireAnnouncementManager;
     private String hireAnnouncementRecruitmentField;
@@ -29,6 +30,12 @@ public class HireAnnouncementAndCpMemberAndScrapAndLikecp {
 	private String cpmemberDetailedAddress;
 	private String cpmemberPhonenum;
 	private int cpmemberNumberOfEmployees;
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	private String cpmemberEstablishDate;
 	private String cpmemberDate;
 	private String cpmemberAdminAdmission;
@@ -283,8 +290,8 @@ public class HireAnnouncementAndCpMemberAndScrapAndLikecp {
 	}
 	@Override
 	public String toString() {
-		return "HireAnnouncementAndCpMemberAndScrapAndLikecp [hireAnnouncementNo=" + hireAnnouncementNo
-				+ ", hireAnnouncementTitle=" + hireAnnouncementTitle + ", hireAnnouncementManager="
+		return "HireAnnouncementAndCpMemberAndScrapAndLikecp [hireAnnouncementNo=" + hireAnnouncementNo + ", memberId="
+				+ memberId + ", hireAnnouncementTitle=" + hireAnnouncementTitle + ", hireAnnouncementManager="
 				+ hireAnnouncementManager + ", hireAnnouncementRecruitmentField=" + hireAnnouncementRecruitmentField
 				+ ", hireAnnouncementCareer=" + hireAnnouncementCareer + ", hireAnnouncementDepartment="
 				+ hireAnnouncementDepartment + ", hireAnnouncementJobgradeJobposition="
@@ -303,33 +310,7 @@ public class HireAnnouncementAndCpMemberAndScrapAndLikecp {
 				+ cpmemberEstablishDate + ", cpmemberDate=" + cpmemberDate + ", cpmemberAdminAdmission="
 				+ cpmemberAdminAdmission + ", areaNo=" + areaNo + ", area2Gungu=" + area2Gungu + ", areaSido="
 				+ areaSido + ", scrapNo=" + scrapNo + ", scrapBoolean=" + scrapBoolean + ", scrapDate=" + scrapDate
-				+ ", likecpNo=" + likecpNo + ", likecpBoolean=" + likecpBoolean + ", likecpDate=" + likecpDate
-				+ ", getHireAnnouncementNo()=" + getHireAnnouncementNo() + ", getHireAnnouncementTitle()="
-				+ getHireAnnouncementTitle() + ", getHireAnnouncementManager()=" + getHireAnnouncementManager()
-				+ ", getHireAnnouncementRecruitmentField()=" + getHireAnnouncementRecruitmentField()
-				+ ", getHireAnnouncementCareer()=" + getHireAnnouncementCareer() + ", getHireAnnouncementDepartment()="
-				+ getHireAnnouncementDepartment() + ", getHireAnnouncementJobgradeJobposition()="
-				+ getHireAnnouncementJobgradeJobposition() + ", getHireAnnouncementPreferentialConditions()="
-				+ getHireAnnouncementPreferentialConditions() + ", getHireAnnouncementEducation()="
-				+ getHireAnnouncementEducation() + ", getHireAnnouncementSalary()=" + getHireAnnouncementSalary()
-				+ ", getHireAnnouncementWorkingFormName()=" + getHireAnnouncementWorkingFormName()
-				+ ", getHireAnnouncementMainJob()=" + getHireAnnouncementMainJob() + ", getHireAnnouncementStartDate()="
-				+ getHireAnnouncementStartDate() + ", getHireAnnouncementEndDate()=" + getHireAnnouncementEndDate()
-				+ ", getHireAnnouncementContents()=" + getHireAnnouncementContents() + ", getCpmemberId()="
-				+ getCpmemberId() + ", getCpmemberPw()=" + getCpmemberPw() + ", getCpmemberLicenseNo()="
-				+ getCpmemberLicenseNo() + ", getCpmemberManager()=" + getCpmemberManager() + ", getCpmemberCompany()="
-				+ getCpmemberCompany() + ", getCpmemberCeo()=" + getCpmemberCeo() + ", getCpmemberEmail()="
-				+ getCpmemberEmail() + ", getCpmemberPic()=" + getCpmemberPic() + ", getCpmemberIndustryNo()="
-				+ getCpmemberIndustryNo() + ", getCpmemberArea2No()=" + getCpmemberArea2No()
-				+ ", getCpmemberDetailedAddress()=" + getCpmemberDetailedAddress() + ", getCpmemberPhonenum()="
-				+ getCpmemberPhonenum() + ", getCpmemberNumberOfEmployees()=" + getCpmemberNumberOfEmployees()
-				+ ", getCpmemberEstablishDate()=" + getCpmemberEstablishDate() + ", getCpmemberDate()="
-				+ getCpmemberDate() + ", getCpmemberAdminAdmission()=" + getCpmemberAdminAdmission() + ", getAreaNo()="
-				+ getAreaNo() + ", getArea2Gungu()=" + getArea2Gungu() + ", getAreaSido()=" + getAreaSido()
-				+ ", getScrapNo()=" + getScrapNo() + ", getScrapBoolean()=" + getScrapBoolean() + ", getScrapDate()="
-				+ getScrapDate() + ", getLikecpNo()=" + getLikecpNo() + ", getLikecpBoolean()=" + getLikecpBoolean()
-				+ ", getLikecpDate()=" + getLikecpDate() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", likecpNo=" + likecpNo + ", likecpBoolean=" + likecpBoolean + ", likecpDate=" + likecpDate + "]";
 	}
 	
 	

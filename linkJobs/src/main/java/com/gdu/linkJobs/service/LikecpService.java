@@ -16,8 +16,8 @@ public class LikecpService {
 	
 	
 	//일반회원 관심기업의 공고 리스트 출력
-	public List<HireAnnouncementAndCpMemberAndScrapAndLikecp> likecpListAnnouncement(String memberId){
-		return likecpMapper.selectMemberLikecpAnnouncement(memberId);
+	public List<HireAnnouncementAndCpMemberAndScrapAndLikecp> likecpListAnnouncement(HireAnnouncementAndCpMemberAndScrapAndLikecp ha){
+		return likecpMapper.selectMemberLikecpAnnouncement(ha);
 	}
 	
 	//일반회원 관심기업 출력

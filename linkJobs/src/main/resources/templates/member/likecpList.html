@@ -57,7 +57,7 @@
 								<tr th:each="list : ${list}">
 									<td><a th:value="${list.cpmemberCompany}"
 										th:text="${list.cpmemberCompany}"
-										th:href="@{/likecpHireAnnouncement}"></a></td>
+										th:href="@{/likecpHireAnnouncement(cpmemberCompany=${list.cpmemberCompany})}"></a></td>
 									<td th:value="${list.cpmemberId}" th:text="${list.cpmemberId}"></td>
 								</tr>
 							</table>
@@ -70,6 +70,16 @@
 		</div>
 	</div>
 </body>
+ <!--  -->
+   <!-- Bootstrap core JavaScript-->
+   <script src="vendor/jquery/jquery.min.js"></script>
+   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+   <!-- Core plugin JavaScript-->
+   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+   <!-- Custom scripts for all pages-->
+   <script src="js/sb-admin-2.min.js"></script>
 <!-- Bootstrap core JavaScript-->
 <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
 <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
