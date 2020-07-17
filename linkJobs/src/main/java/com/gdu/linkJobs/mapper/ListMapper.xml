@@ -64,15 +64,15 @@
 		OR ha.hire_announcement_jobgrade_jobposition like CONCAT('%', #{wordSearch}, '%')
 		OR ha.hire_announcement_preferential_conditions like CONCAT('%', #{wordSearch}, '%')
 		OR ha.hire_announcement_salary like CONCAT('%', #{wordSearch}, '%')
-		OR ha.hire_announcement_main_job like CONCAT('%', #{jobSearch}, '%')
+		OR ha.hire_announcement_main_job like #{jobSearch}
 		OR ha.hire_announcement_contents like CONCAT('%', #{wordSearch}, '%')
 		OR ha.hire_announcement_working_form_name like CONCAT('%', #{wordSearch}, '%')
 		OR ha.hire_announcement_education like CONCAT('%', #{wordSearch}, '%')
 		OR ha.hire_announcement_start_date like CONCAT('%', #{wordSearch}, '%')
 		OR ha.hire_announcement_end_date like CONCAT('%', #{wordSearch}, '%')
 		OR cp.cpmember_company like CONCAT('%', #{wordSearch}, '%')
-		OR la2.area2_gungu like CONCAT('%', #{areaSearch}, '%')
-		OR la.area_sido like CONCAT('%', #{areaSearch}, '%')
+		OR la2.area2_gungu like #{areaSearch}
+		OR la.area_sido like #{areaSearch}
 		ORDER BY hire_announcement_start_date DESC
 	</select>
 	 
