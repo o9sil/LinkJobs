@@ -176,6 +176,10 @@ $(document).ready(function(){
 	   
 	   $('#resumeWishArea').val($('#areaCode > option:selected').val() + ' ' + $('#area2Code > option:selected').val());
 	  
+	   
+	   
+	   
+	   
 	   $('#resumeForm').submit();     
    })
     
@@ -340,7 +344,7 @@ $(document).ready(function(){
   <!-- 학력사항  바디 -->
    <div th:each="memberAcademic : ${memberAcademic}" class="card-body">
   
-    <input type="checkbox" class="academicListCheckBox" th:value="${memberAcademic.academicNo}" th:text="${memberAcademic.academicGrade}">
+    <input type="checkbox" class="academicListCheckBox" name="academicNo" th:value="${memberAcademic.academicNo}" th:text="${memberAcademic.academicGrade}">
          
      <div th:id="${memberAcademic.academicNo}" style="display: none;">
       <div class="form-group row">

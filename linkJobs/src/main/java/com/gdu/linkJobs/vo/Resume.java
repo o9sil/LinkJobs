@@ -1,5 +1,7 @@
 package com.gdu.linkJobs.vo;
 
+import java.util.List;
+
 public class Resume {
 	private int resumeNo;
 	private String resumeTitle;
@@ -12,15 +14,11 @@ public class Resume {
 	private String resumeAvaliability;
 	private String resumeSelfIntroductionTitle;
 	private String resumeSelfIntroductionContents;
-	private String resumeDate;
+	private String resuemDate;
 	private String resumeCareer;
-	
-	public String getResumeCareer() {
-		return resumeCareer;
-	}
-	public void setResumeCareer(String resumeCareer) {
-		this.resumeCareer = resumeCareer;
-	}
+	private List<Integer> certificateNo;
+	private List<Integer> careerNo;
+	private List<Integer> academicNo;
 	public int getResumeNo() {
 		return resumeNo;
 	}
@@ -87,11 +85,35 @@ public class Resume {
 	public void setResumeSelfIntroductionContents(String resumeSelfIntroductionContents) {
 		this.resumeSelfIntroductionContents = resumeSelfIntroductionContents;
 	}
-	public String getResumeDate() {
-		return resumeDate;
+	public String getResuemDate() {
+		return resuemDate;
 	}
-	public void setResumeDate(String resumeDate) {
-		this.resumeDate = resumeDate;
+	public void setResuemDate(String resuemDate) {
+		this.resuemDate = resuemDate;
+	}
+	public String getResumeCareer() {
+		return resumeCareer;
+	}
+	public void setResumeCareer(String resumeCareer) {
+		this.resumeCareer = resumeCareer;
+	}
+	public List<Integer> getCertificateNo() {
+		return certificateNo;
+	}
+	public void setCertificateNo(List<Integer> certificateNo) {
+		this.certificateNo = certificateNo;
+	}
+	public List<Integer> getCareerNo() {
+		return careerNo;
+	}
+	public void setCareerNo(List<Integer> careerNo) {
+		this.careerNo = careerNo;
+	}
+	public List<Integer> getAcademicNo() {
+		return academicNo;
+	}
+	public void setAcademicNo(List<Integer> academicNo) {
+		this.academicNo = academicNo;
 	}
 	@Override
 	public String toString() {
@@ -100,8 +122,8 @@ public class Resume {
 				+ resumeWishArea + ", resumeWishJob=" + resumeWishJob + ", resumeWishIndustry=" + resumeWishIndustry
 				+ ", resumeAvaliability=" + resumeAvaliability + ", resumeSelfIntroductionTitle="
 				+ resumeSelfIntroductionTitle + ", resumeSelfIntroductionContents=" + resumeSelfIntroductionContents
-				+ ", resumeDate=" + resumeDate + ", resumeCareer=" + resumeCareer + "]";
+				+ ", resuemDate=" + resuemDate + ", resumeCareer=" + resumeCareer + ", certificateNo=" + certificateNo
+				+ ", careerNo=" + careerNo + ", academicNo=" + academicNo + "]";
 	}
-	
 	
 }

@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.gdu.linkJobs.mapper.ResumeMapper;
+
 import com.gdu.linkJobs.vo.Resume;
 
 @Service
@@ -29,8 +30,12 @@ public class ResumeService {
 	
 	
 	// 이력서 추가
-	public int addResume(Resume resume) {
-		return resumeMapper.insertResume(resume);
+	public int addResume(Resume resume) {		
+		resumeMapper.insertResume(resume);
+		System.out.println("이력서no--->"+resume.getResumeNo());
+		resume.getResumeNo();
+		resumeMapper.addAcademic(resume);
+		return 0;
 	}
 	
 	// 이력서 현황 카운트

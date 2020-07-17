@@ -41,142 +41,178 @@
 								<div class="row no-gutters align-items-center">
 									
 								
-									<div class="col mr-2">
+									<div th:each="resumelist : ${resumelist}" class="col mr-2">
 									<div class="col-xl-6 col-md-6 mb-4" th:each="memberInfo : ${memberInfo}">
 										<h2 th:text="${memberInfo.memberName}"></h2>
-										<span th:text="${memberInfo.memberBirthdate}"></span>
+										<div>
+											<span th:text="${memberInfo.memberBirthdate}"></span>
+										</div>
+										<div>
+											<span th:text="${memberInfo.memberGender}"></span>
+										</div>
+										<div>
+											<span th:text="${memberInfo.memberEmail}"></span>
+										</div>
+										<div>
+											<span th:text="${memberInfo.memberPhone}"></span>
+										</div>
+										<div>
+											<span th:text="${memberInfo.areaSido}"></span>
+										</div>
+										<div>
+											<span th:text="${memberInfo.area2Gungu}"></span>
+										</div>
 										
 										
+										
+										
+										
+										<span th:text="${memberInfo.memberGender}"></span>
+										<span th:text="${memberInfo.memberEmail}"></span>
+										<span th:text="${memberInfo.memberPhone}"></span>
+										<span th:text="${memberInfo.areaSido}"></span>
+										<span th:text="${memberInfo.area2Gungu}"></span>
 									</div>	
 										<hr>
 										<div class="row">
-											<div class="col-xl-6 col-md-6 mb-4">
-												<div>
-													ㅊ
-													<span th:text="${memberInfo.memberName}"></span>
-												</div>
-												<div>
-													학력 : 
-													<span th:text="${memberInfo.memberName}"></span>
-												</div>
-												<div>
-													근무형태 : 
-													<span th:text="${memberInfo.memberName}"></span>
-												</div>
+											<div>
+												<h2>학력사항</h2>
 											</div>
-											<div class="col-xl-6 col-md-6 mb-4">
-												<div>
-													급여 :
-													<span th:text="${memberInfo.memberName}"></span>
-												</div>
-												<div>
-													직급/직책 :
-													<span th:text="${memberInfo.memberName}"></span>
-												</div>
-												<div>
-													근무부서 :
-													<span th:text="${memberInfo.memberName}"></span>
-												</div>
-												<div>
-													근무지역 :
-													<span th:text="${memberInfo.memberName}"></span>
-												</div>
-											</div>										
+											
+											<div>
+											<table border="1">
+												<thead>
+													<tr>
+														<th>학력사항</th>
+														<th>구분</th>
+														<th>학교명</th>
+														<th>전공</th>
+														<th>학점</th>
+													</tr>
+													<tr>
+														<td>dasf</td>
+														<td>adsfads</td>
+														<td>aaa</td>
+														<td>aa</td>
+														<td>aa</atd>
+													</tr>
+												</thead>
+											
+											</table>
+											
+											</div>
+											
+																
 										</div>
 										<hr>
-										
-										<h3>모집부문 및 자격요건</h3>
-										
-										<h5>모집분야</h5>
+										<div style="display: flex;">
+											<h3>경력</h3>&nbsp;&nbsp;&nbsp;
+											<span th:text="${resumelist.resumeCareer}"></span>		<!-- 이력서 상세보기 리스트  resumeCareer-->							
+										</div>
+									<div><!-- 경력--- >>> 경력일때만 보이게 조건 -->
 										<div>
-											근무부서 :
+											회사명 :
 											<span th:text="${memberInfo.memberName}"></span>											
 										</div>
 										<div>
-											우대조건 :
+											재직기간 :
 											<span th:text="${memberInfo.memberName}"></span>											
 										</div>
 										<div>
-											대표직무 :
+											년차 :
 											<span th:text="${memberInfo.memberName}"></span>											
 										</div>
-										
-										<h5>근무조건</h5>
 										<div>
-											근무형태 :
+											퇴사사유 :
+											<span th:text="${memberInfo.memberName}"></span>											
+										</div>			
+										<div>
+											직급/직책 :
 											<span th:text="${memberInfo.memberName}"></span>										
 										</div>
 										<div>
-											연봉/급여 :
+											직종 :
 											<span th:text="${memberInfo.memberName}"></span>										
 										</div>
 										<div>
 											근무지역 :
-											<span id="areaAddress" th:text="${memberInfo.memberName} "></span>											
-										</div>
-										
-										<h5>상세내용</h5>
-										<div>											
-											<span th:text="${memberInfo.memberName}"></span>											
-										</div>
-										
-										<hr>
-										
-										<h3>접수기간 및 방법</h3>
-										<div>				
-											기간 : 							
-											<span th:text="${memberInfo.memberName}"></span>											
-										</div>
-										<div>				
-											접수방법 : 							
-											<span>LinkJobs 입사지원</span>											
-										</div>
-										<div>				
-											이력서 양식 : 							
-											<span>LinkJobs 온라인 이력서</span>											
-										</div>
-										
-										<hr>
-										<h3>유의사항</h3>
+											<span th:text="${memberInfo.memberName} "></span>											
+										</div>													
 										<div>
-											<span>*입사지원 서류에 허위사실이 발견될 경우, 채용확정 이후에도 채용이 취소될 수 있습니다.</span>
+											근무부서 :											
+											<span th:text="${memberInfo.memberName}"></span>											
+										</div>
+										<div>
+											연봉 :											
+											<span th:text="${memberInfo.memberName}"></span>											
+										</div>
+										<div>
+											담당업무 :											
+											<span th:text="${memberInfo.memberName}"></span>											
+										</div>
+										<div>
+											퇴사/재직중 :											
+											<span th:text="${memberInfo.memberName}"></span>											
+										</div>
+									</div>
+										<hr>
+										<div><!-- 자격증 -->
+										<h3>자격증</h3>
+										<div>				
+											자격증 이름 : 							
+											<span th:text="${memberInfo.memberName}"></span>											
+										</div>
+										<div>				
+											취득일 : 							
+											<span th:text="${memberInfo.memberName}"></span>										
+										</div>
 										</div>
 										
 										<hr>
 										
-										<h3>기업정보</h3>
-										<div class="row">
-											<div class="col-xl-6 col-md-6 mb-4">
-												<div id="map" style="width:100%;height:400px;"></div>
+										<!-- 희망근무조건 -->
+										<div>
+											<h3>희망근무조건</h3>
+											<div>				
+												근무 형태 : 							
+												<span th:text="${resumelist.resumeWorkingForm}"></span>											
+											</div>										
+											<div>				
+												희망 연봉 : 							
+												<span th:text="${resumelist.resumeSalary}"></span>											
 											</div>
-											<div class="col-xl-6 col-md-6 mb-4">
-												
-												<h5 th:text="${memberInfo.memberName}"></h5>
-												<div>
-													사원수 : 
-													<span th:text="${memberInfo.memberName}"></span> 
-												</div>
-												<div>
-													대표자명 : 
-													<span th:text="${memberInfo.memberName}"></span> 
-												</div>
-												<div>
-													업종 : 
-													<span th:text="${memberInfo.memberName}"></span> 
-												</div>
-												<div>
-													설립일 : 
-													<span th:text="${memberInfo.memberName}"></span> 
-												</div>
-												<div>
-													주소 : 
-													<span th:text="${memberInfo.memberName} "></span>
-												</div>
+											<div>				
+												희망 근무지역 : 							
+												<span th:text="${resumelist.resumeWishArea}"></span>											
 											</div>
-											
-										</div>										
+											<div>				
+												희망 근무업종 : 							
+												<span th:text="${resumelist.resumeWishIndustry}"></span>											
+											</div>
+											<div>				
+												희망 근무직종 : 							
+												<span th:text="${resumelist.resumeWishJob}"></span>											
+											</div>
+										</div>
 										
 										
+										
+										<hr>
+										
+										<!--  -->
+										
+										 <!--자기소개서  -->
+								         <div class="card shadow mb-4">
+								              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+								                <h2 class="m-0 font-weight-bold text-info">자기소개서</h2>
+								              </div>
+								              <div class="card-body">
+								              <h2 th:text="${resumelist.resumeSelfIntroductionTitle}"></h2>
+								                  <textarea id="selfIntroductionContents" th:text="${resumelist.resumeSelfIntroductionContents}" class="form-control" rows="10"> </textarea> 
+								                  
+								                  <br>
+								               </div>
+								        </div>					
 										
 									</div>
 									

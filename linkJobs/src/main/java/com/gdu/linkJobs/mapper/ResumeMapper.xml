@@ -1,7 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.ResumeMapper">
-	
+	<!-- 이력서 학력 정보 추가 -->
+	 <insert id="addAcademic" parameterType="com.gdu.linkJobs.vo.Resume">
+		INSERT INTO linkjobs_member_resume_academic(
+							resume_no, 
+							academic_no 
+							
+				) VALUES
+					
+					<foreach collection="academicNo" item="i" separator=",">
+						(#{resumeNo}, #{i})
+					</foreach>
+	</insert> 
 	
 	
 	<!-- 이력서 공개/비공개 설정 -->
@@ -63,7 +74,7 @@
 		WHERE member_id = #{memberId}
 	</select>
 	<!-- 이력서 추가 -->
-	<insert id="insertResume" parameterType="com.gdu.linkJobs.vo.Resume">
+	<insert id="insertResume" parameterType="com.gdu.linkJobs.vo.Resume" keyProperty="resumeNo" useGeneratedKeys="true">
 		INSERT INTO linkjobs_resume(
 							resume_title,
 							member_id, 

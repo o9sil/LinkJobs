@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -23,7 +24,6 @@ import com.gdu.linkJobs.service.ResumeService;
 import com.gdu.linkJobs.service.SelfIntroductionService;
 import com.gdu.linkJobs.service.MemberAcademicService;
 import com.gdu.linkJobs.vo.Resume;
-import com.gdu.linkJobs.vo.AddResume;
 import com.gdu.linkJobs.vo.Area;
 
 import com.gdu.linkJobs.vo.Member;
@@ -46,24 +46,27 @@ public class ResumeController {
    
    
    
+   
+  
+   
+   
+   
    // 이력서 공개/비공개
-   @PostMapping("/resumeAvaliability")
-   public String updateResumeAvaliability(HttpSession session, Resume resume) {
-      System.out.println(resume+"<--resumecontroller");
-      if(session.getAttribute("loginMember") == null) {
-	         return "redirect:/";
-	   }
-      
-      
-      
-      resume.getMemberId();
-      resume.getResumeNo();
-      System.out.println(resume.getResumeNo()+"<--resumeNo");
-      System.out.println(resume.getMemberId()+"<--memberId");
-      resumeService.modifyResumeAvaliability(resume);
-      
-      return "redirect:/getResume";
-   }
+	
+	  @PostMapping("/resumeAvaliability") public String updateResumeAvaliability(HttpSession session, Resume resume) {
+	  System.out.println(resume+"<--resumecontroller");
+	  if(session.getAttribute("loginMember") == null) { return "redirect:/"; }
+	  
+	  
+	  
+	  resume.getMemberId(); resume.getResumeNo();
+	  System.out.println(resume.getResumeNo()+"<--resumeNo");
+	  System.out.println(resume.getMemberId()+"<--memberId");
+	  resumeService.modifyResumeAvaliability(resume);
+	  
+	  return "redirect:/getResume";
+	  }
+	 
    
    
    
@@ -80,9 +83,8 @@ public class ResumeController {
 	  Member memberInfo = memberService.getMemberOne(memberId);
 	  model.addAttribute("memberInfo", memberInfo);
 	  List<Resume> resumelist = resumeService.getDetailResume(resume);
-	  System.out.println("dafadfafad"+resumelist);
       model.addAttribute("resumelist", resumelist);
-      
+      System.out.println("희망연봉!!!!!!!!!!!!!"+resumelist);
       return "resume/getDetailResume";
    }
    
@@ -141,7 +143,7 @@ public class ResumeController {
    
    // 이력서 추가 액션
    @PostMapping("/addResumePost")
-   public String addResumePost(HttpSession session,Resume resume) { 
+   public String addResumePost(HttpSession session, Resume resume) { 
 	   System.out.println("이력서추가액션!!!!!"+resume);
 	   if (session.getAttribute("loginMember") == null) {
 			return "redirect:/getAnnouncementList";
