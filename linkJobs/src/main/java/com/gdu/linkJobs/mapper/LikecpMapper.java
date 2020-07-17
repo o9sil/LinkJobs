@@ -11,6 +11,10 @@ import com.gdu.linkJobs.vo.Likecp;
 public interface LikecpMapper {
 		
 
+	
+		//일반회원 관심기업의 공고 리스트
+		public List<HireAnnouncementAndCpMemberAndScrapAndLikecp> selectMemberLikecpAnnouncement(String memberId);
+	
 		//일반회원 관심기업 리스트 
 		public List<HireAnnouncementAndCpMemberAndScrapAndLikecp> selectMemberLikecp(String memberId);
 	

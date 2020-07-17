@@ -36,7 +36,7 @@ public class MemberLikecpController {
 			return "redirect:/getAnnouncementList";
 		}
 		memberId = (String)session.getAttribute("loginMember");
-		List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = likecpService.likecpList(memberId);
+		List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = likecpService.likecpListAnnouncement(memberId);
 		model.addAttribute("list", list);
 		
 		return "member/likecpHireAnnouncement";

@@ -15,6 +15,11 @@ public class LikecpService {
 	@Autowired private LikecpMapper likecpMapper;
 	
 	
+	//일반회원 관심기업의 공고 리스트 출력
+	public List<HireAnnouncementAndCpMemberAndScrapAndLikecp> likecpListAnnouncement(String memberId){
+		return likecpMapper.selectMemberLikecpAnnouncement(memberId);
+	}
+	
 	//일반회원 관심기업 출력
 	public List<HireAnnouncementAndCpMemberAndScrapAndLikecp> likecpList(String memberId){
 		return likecpMapper.selectMemberLikecp(memberId);
