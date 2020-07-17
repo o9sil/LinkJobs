@@ -180,7 +180,11 @@ public class CpMemberService extends HttpServlet {
 	//회원가입
 	public int addMember(CpMember cpMember) {		
 		int row = cpMemberMapper.insertCpMember(cpMember);
-		return row;
+		int row2= 0;
+		if(row == 1) {
+			row2 = cpMemberMapper.insertCpMemberPic(cpMember.getCpMemberId());
+		}
+		return row2;
 	}	
 	
 }
