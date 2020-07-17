@@ -22,6 +22,7 @@ public class ListService {
 		
 	//메인페이지 채용공고 검색 리스트 출력
 		public List<HireAnnouncementAndCpMemberAndScrapAndLikecp> selectSearchHireAnnouncementList(String wordSearch, String areaSearch, String jobSearch){
+			System.out.println(jobSearch+"<<<<<<잡");
 			List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listMapper.selectSearchHireAnnouncementList(wordSearch, areaSearch, jobSearch);
 			return list;
 		}

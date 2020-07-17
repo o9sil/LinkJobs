@@ -1,5 +1,9 @@
 package com.gdu.linkJobs.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -28,6 +32,16 @@ public class ScrapController {
 		List<HireAnnouncement> list=scrapService.getMemberScrapList(memberId);
 		System.out.println(list+"<--list");
 		model.addAttribute("list", list);
+		
+		Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println("current: " + df.format(cal.getTime()));
+		String current= df.format(cal.getTime());
+		
+		model.addAttribute("current", current);
+		
+		
 		
 		return "/member/scrapList";
 	}
