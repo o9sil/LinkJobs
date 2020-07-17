@@ -5,6 +5,7 @@
 	<!-- 메인페이지 검색 -->
 	
 	<select id="selectSearchHireAnnouncementList" parameterType="String" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp">
+		
 		SELECT
 			ha.hire_announcement_no AS hireAnnouncementNo,
 	      	ha.hire_announcement_title AS hireAnnouncementTitle,
@@ -22,10 +23,29 @@
 	      	ha.hire_announcement_education hireAnnouncementEducation,
 	      	ha.hire_announcement_start_date AS hireAnnouncementStartDate,
 	      	ha.hire_announcement_end_date AS hireAnnouncementEndDate,
-			cp.cpmember_company AS cpmemberCompany,
-			la2.area2_gungu AS area2Gungu,
-			la.area_sido AS areaSido,
-			(SELECT cpmember_pic
+	      	(SELECT 
+	      		cp.cpmember_company 
+	      	FROM linkjobs_cpmember AS cp 
+	      	WHERE cp.cpmember_id = ha.cpmember_id
+	      	) cpmemberCompany,
+	      	(SELECT la2.area2_gungu  
+	      	FROM linkjobs_area2 AS la2 
+	      	INNER JOIN linkjobs_cpmember AS cp 
+	      	ON la2.area2_no = cp.area2_no 
+	      	WHERE la2.area2_no = cp.area2_no 
+	      	AND ha.cpmember_id = cp.cpmember_id 
+	      	) area2Gungu,
+	      	(SELECT la.area_sido 
+	      	FROM linkjobs_area AS la 
+	      	INNER JOIN linkjobs_area2 AS la2
+	      	ON la.area_no = la2.area_no 
+	      	INNER JOIN linkjobs_cpmember AS cp 
+	      	ON la2.area2_no = cp.area2_no 
+	      	WHERE la.area_no = la2.area_no 
+	      	AND la2.area2_no = cp.area2_no 
+	      	AND ha.cpmember_id = cp.cpmember_id
+	      	) areaSido,
+	      	(SELECT cpmember_pic
 			 FROM linkjobs_cpmember_pic lcp 
 			 WHERE lcp.cpmember_id = ha.cpmember_id
 			) AS cpmemberPic,
@@ -47,15 +67,12 @@
 			) AS likecpBoolean
 		FROM 
 			linkjobs_hire_announcement AS ha 
-		INNER JOIN 
+		NATURAL JOIN 
 			linkjobs_cpmember AS cp
-		INNER JOIN 
+		NATURAL JOIN 
 			linkjobs_area2 AS la2
-		INNER JOIN 
+		NATURAL JOIN 
 			linkjobs_area AS la
-	   	ON ha.cpmember_id = cp.cpmember_id
-	   	AND cp.area2_no = la2.area2_no
-	   	AND la2.area_no = la.area_no
 		WHERE ha.hire_announcement_title like CONCAT('%', #{wordSearch}, '%')
 		OR ha.hire_announcement_manager like CONCAT('%', #{wordSearch}, '%')
 		OR ha.hire_announcement_recruitment_field like CONCAT('%', #{wordSearch}, '%')
@@ -64,7 +81,7 @@
 		OR ha.hire_announcement_jobgrade_jobposition like CONCAT('%', #{wordSearch}, '%')
 		OR ha.hire_announcement_preferential_conditions like CONCAT('%', #{wordSearch}, '%')
 		OR ha.hire_announcement_salary like CONCAT('%', #{wordSearch}, '%')
-		OR ha.hire_announcement_main_job like #{jobSearch}
+		OR ha.hire_announcement_main_job REGEXP #{jobSearch}
 		OR ha.hire_announcement_contents like CONCAT('%', #{wordSearch}, '%')
 		OR ha.hire_announcement_working_form_name like CONCAT('%', #{wordSearch}, '%')
 		OR ha.hire_announcement_education like CONCAT('%', #{wordSearch}, '%')
@@ -79,7 +96,7 @@
 	<!-- 메인페이지 채용공고 리스트 출력 -->
 	<select id="selectHireAnnouncementList" parameterType="String" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp">
 		SELECT
-	   		ha.hire_announcement_no AS hireAnnouncementNo,
+			ha.hire_announcement_no AS hireAnnouncementNo,
 	      	ha.hire_announcement_title AS hireAnnouncementTitle,
 	      	ha.cpmember_id AS cpmemberId,
 	      	ha.hire_announcement_manager hireAnnouncementManager,
@@ -95,10 +112,29 @@
 	      	ha.hire_announcement_education hireAnnouncementEducation,
 	      	ha.hire_announcement_start_date AS hireAnnouncementStartDate,
 	      	ha.hire_announcement_end_date AS hireAnnouncementEndDate,
-			cp.cpmember_company AS cpmemberCompany,
-			la2.area2_gungu AS area2Gungu,
-			la.area_sido AS areaSido,
-			(SELECT cpmember_pic
+	      	(SELECT 
+	      		cp.cpmember_company 
+	      	FROM linkjobs_cpmember AS cp 
+	      	WHERE cp.cpmember_id = ha.cpmember_id
+	      	) cpmemberCompany,
+	      	(SELECT la2.area2_gungu  
+	      	FROM linkjobs_area2 AS la2 
+	      	INNER JOIN linkjobs_cpmember AS cp 
+	      	ON la2.area2_no = cp.area2_no 
+	      	WHERE la2.area2_no = cp.area2_no 
+	      	AND ha.cpmember_id = cp.cpmember_id 
+	      	) area2Gungu,
+	      	(SELECT la.area_sido 
+	      	FROM linkjobs_area AS la 
+	      	INNER JOIN linkjobs_area2 AS la2
+	      	ON la.area_no = la2.area_no 
+	      	INNER JOIN linkjobs_cpmember AS cp 
+	      	ON la2.area2_no = cp.area2_no 
+	      	WHERE la.area_no = la2.area_no 
+	      	AND la2.area2_no = cp.area2_no 
+	      	AND ha.cpmember_id = cp.cpmember_id
+	      	) areaSido,
+	      	(SELECT cpmember_pic
 			 FROM linkjobs_cpmember_pic lcp 
 			 WHERE lcp.cpmember_id = ha.cpmember_id
 			) AS cpmemberPic,
@@ -118,15 +154,11 @@
 			 FROM linkjobs_likecp ll
 			 WHERE ll.cpmember_id = ha.cpmember_id
 			) AS likecpBoolean
-			
-		FROM linkjobs_hire_announcement AS ha 
-		INNER JOIN linkjobs_cpmember AS cp
-		INNER JOIN linkjobs_area2 AS la2
-		INNER JOIN linkjobs_area AS la
-	   	ON ha.cpmember_id = cp.cpmember_id
-	   	AND cp.area2_no = la2.area2_no
-	   	AND la2.area_no = la.area_no
-		ORDER BY hire_announcement_start_date DESC
+		FROM
+			linkjobs_hire_announcement AS ha
+		ORDER BY 
+			hire_announcement_start_date DESC
+
 		
 	</select>
 	
@@ -144,9 +176,28 @@
 	      	ha.hire_announcement_education hireAnnouncementEducation,
 	      	ha.hire_announcement_start_date AS hireAnnouncementStartDate,
 	      	ha.hire_announcement_end_date AS hireAnnouncementEndDate,
-			cp.cpmember_company AS cpmemberCompany,
-			la2.area2_gungu AS area2Gungu,
-			la.area_sido AS areaSido,
+			(SELECT 
+	      		cp.cpmember_company 
+	      	FROM linkjobs_cpmember AS cp 
+	      	WHERE cp.cpmember_id = ha.cpmember_id
+	      	) cpmemberCompany,
+	      	(SELECT la2.area2_gungu  
+	      	FROM linkjobs_area2 AS la2 
+	      	INNER JOIN linkjobs_cpmember AS cp 
+	      	ON la2.area2_no = cp.area2_no 
+	      	WHERE la2.area2_no = cp.area2_no 
+	      	AND ha.cpmember_id = cp.cpmember_id 
+	      	) area2Gungu,
+	      	(SELECT la.area_sido 
+	      	FROM linkjobs_area AS la 
+	      	INNER JOIN linkjobs_area2 AS la2
+	      	ON la.area_no = la2.area_no 
+	      	INNER JOIN linkjobs_cpmember AS cp 
+	      	ON la2.area2_no = cp.area2_no 
+	      	WHERE la.area_no = la2.area_no 
+	      	AND la2.area2_no = cp.area2_no 
+	      	AND ha.cpmember_id = cp.cpmember_id
+	      	) areaSido,
 			(SELECT scrap_boolean
 			 FROM linkjobs_scrap ls
 			 WHERE ls.hire_announcement_no = ha.hire_announcement_no 
@@ -165,12 +216,7 @@
 			) AS likecpBoolean
 			
 		FROM linkjobs_hire_announcement AS ha 
-		INNER JOIN linkjobs_cpmember AS cp
-		INNER JOIN linkjobs_area2 AS la2
-		INNER JOIN linkjobs_area AS la
-	   	ON ha.cpmember_id = cp.cpmember_id
-	   	AND cp.area2_no = la2.area2_no
-	   	AND la2.area_no = la.area_no
+		
 	 
 	</select>
 	

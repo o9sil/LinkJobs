@@ -55,28 +55,62 @@ public class ListController {
 		//if (session.getAttribute("loginMember") != null) {
 		//		return "hireAnnouncement/getLoginAnnouncementList";
 		//} 
-		System.out.println(wordSearch + "<--searchAnnouncementList.wordSearch");
-		System.out.println(areaSearch + "<--searchAnnouncementList.areaSearch");
-		System.out.println(jobSearch + "<--searchAnnouncementList.jobSearch");
+		//System.out.println(wordSearch + "<--searchAnnouncementList.wordSearch");
+		//System.out.println(areaSearch + "<--searchAnnouncementList.areaSearch");
+		//System.out.println(jobSearch + "<--searchAnnouncementList.jobSearch");
 		// 검색기능 추가
 		if((wordSearch == null || wordSearch == "") && (areaSearch == null || areaSearch == "") && (jobSearch == null || jobSearch == "")) {
+			
+			System.out.println(wordSearch + "<--searchAnnouncementList.wordSearch1");
+			System.out.println(areaSearch + "<--searchAnnouncementList.areaSearch1");
+			System.out.println(jobSearch + "<--searchAnnouncementList.jobSearch1");
+			
 			Map<String, Object> jobMap = jobService.getJobListAll();
 			model.addAttribute("job", jobMap.get("job"));
 			model.addAttribute("job2", jobMap.get("job2"));
 			model.addAttribute("job3", jobMap.get("job3"));
+			
 			List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectHireAnnouncementList(hireAnnouncementAndCpMemberAndScrapAndLikecp);
 			model.addAttribute("list", list);
 			model.addAttribute("msg", "검색 결과가 존재하지 않습니다.");
-			return "hireAnnouncement/getAnnouncementList";
+			return "redirect:/getAnnouncementList";
 			
-		} else {
+		} else if((wordSearch == null || wordSearch == "")){
+			System.out.println(wordSearch + "<--searchAnnouncementList.wordSearch2");
+			System.out.println(areaSearch + "<--searchAnnouncementList.areaSearch2");
+			System.out.println(jobSearch + "<--searchAnnouncementList.jobSearch2");
+			wordSearch = "notseachword";
+			String[] jobsSearch = jobSearch.split(" ");
+			System.out.println(jobSearch.length());
+			jobSearch = "";
+		
+			for(int i=0; i<jobsSearch.length; i++) {
+				if(jobsSearch.length == 1) {
+					jobSearch = (String)(jobsSearch[i]);
+				} else {
+					jobSearch += (String)(jobsSearch[i]) + "|";
+					
+				}
+				System.out.println(jobsSearch[i]+"<<"+i);
+				System.out.println(jobSearch+"<<for문 jobSearch");
+			} // end for문
+			jobSearch = jobSearch.substring(0, jobSearch.length()-1);
+			System.out.println(jobSearch+"<<finall jobSearch");
+			
 			List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectSearchHireAnnouncementList(wordSearch, areaSearch, jobSearch);
 			model.addAttribute("list", list);
+			return "hireAnnouncement/searchAnnouncementList";
+		} else{
+				System.out.println(wordSearch + "<--searchAnnouncementList.wordSearch3");
+				System.out.println(areaSearch + "<--searchAnnouncementList.areaSearch3");
+				System.out.println(jobSearch + "<--searchAnnouncementList.jobSearch3");
+				List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectSearchHireAnnouncementList(wordSearch, areaSearch, jobSearch);
+				model.addAttribute("list", list);
+				return "hireAnnouncement/searchAnnouncementList";
+			}
+			
 		}
 
-		return "hireAnnouncement/searchAnnouncementList";
-		
-	}
 	
 	
 	// 로그인시 메인페이지
