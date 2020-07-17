@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.linkJobs.mapper.ResumeApplyMapper">
+	
+	<!-- 이력서 지원 -->
+	<insert id="insertResumeAplly" parameterType="com.gdu.linkJobs.vo.ResumeApply">
+		INSERT linkjobs_resume_apply 
+		INTO ( 
+			   resume_apply_no, 
+				hire_announcement_no, 
+				member_id, 
+				resume_confirm, 
+				resume_title, 
+				resume_working_form, 
+				resume_salary, 
+				resume_wish_area, 
+				resume_industry2_category, 
+				resume_job, 
+				resume_self_introduction_title ,
+				resume_self_introduction_contents, 
+				academic_grade, 
+				academic_name, 
+				academic_major,
+				academic_major_detail, 
+				academic_from_date, 
+				academic_to_date, 
+				academic_score, 
+				career_company_name, 
+				career_start_date, 
+				career_end_date, 
+				career_leaving, 
+				career_reason_for_leaving, 
+				career_jobgrade_jobposition,
+				career_jobgrade_jobposition_year,
+				career_department, 
+				career_salary, 
+				career_responsibilities, 
+				carrer_project_contents, 
+				certificate_name, 
+				certificate_date, 
+				area_no, 
+				job2_no, 
+				apply_date 
+			)
+		VALUES(
+				#{resumeApplyNo}, 
+				#{hireAnnouncemenNo}, 
+				#{memberId}, 
+				#{resumeConfirm}, 
+				#{resumeTitle}, 
+				#{resumeWorkingForm}, 
+				#{resumeSalary}, 
+				#{resumeWishArea}, 
+				#{resumeIndustry2Category}, 
+				#{resumeJob}, 
+				#{resume_selfIntroductionTitle},
+				#{resume_selfIntroductionContents}, 
+				#{academicGrade}, 
+				#{academicName}, 
+				#{academicMajor},
+				#{academicMajorDetail}, 
+				#{academicFromDate}, 
+				#{academicToDate}, 
+				#{academicScore}, 
+				#{careerCompanyName}, 
+				#{careerStartDate}, 
+				#{careerEndDate}, 
+				#{careerLeaving}, 
+				#{careerReasonForLeaving}, 
+				#{careerJobgradeJobposition},
+				#{careerJobgradeJobpositionYear},
+				#{careerDepartment}, 
+				#{careerSalary}, 
+				#{careerResponsibilities}, 
+				#{carrerProjectNontents}, 
+				#{certificateName}, 
+				#{certificateDate}, 
+				#{areaNo}, 
+				#{job2No}, 
+				NOW()
+		)
+		
+	</insert>
+</mapper>
