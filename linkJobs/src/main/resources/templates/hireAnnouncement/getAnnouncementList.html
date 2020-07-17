@@ -18,10 +18,6 @@
 <style>
 
 
-.show {display:block} /*보여주기*/
-
-.hide {display:none} /*숨기기*/
-
 .searchclass {
 	width:20%;
 	height:calc(1.0em + .5rem + 1px);
@@ -296,17 +292,7 @@
 	
 	$('#searchDiv').hide(); 
 	$('#jobSearch').click(function(){
-		$('#searchDiv').show();
-		$('#jobSearch').click(function(){
-			$('#searchDiv').hide();
-			 layer.toggle(
-
-			           function(){searchDiv.addClass('show')}, //클릭하면 show클래스 적용되서 보이기
-
-			           function(){searchDiv.addClass('hide')} //한 번 더 클릭하면 hide클래스가 숨기기
-
-			         );
-		})
+		$('#searchDiv').toggle();
 	})
 	/*
 	$('#jobSearch').click(function(){
