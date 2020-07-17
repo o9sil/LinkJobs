@@ -43,29 +43,40 @@
 
 						<div
 							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-							<h1 align="center" class="m-0 font-weight-bold text-info">스크랩 기업</h1>
+							<h1 align="center" class="m-0 font-weight-bold text-info">스크랩
+								기업</h1>
 						</div>
 
 						<div class="card-body">
 							<table class="table">
-									<tr>
-										<td>공고 번호</td>
-										<td>회사이름</td>
-										<td>공고 제목</td>
-										<td>공고 시작일</td>
-										<td>공고 종료일</td>
-									</tr>
+								<tr>
+									<td>공고 번호</td>
+									<td>회사이름</td>
+									<td>공고 제목</td>
+									<td>공고 시작일</td>
+									<td>공고 종료일</td>
+								</tr>
 
-									<tr th:each="h :${list}">
-										<td th:value="${h.hireAnnouncementNo}" th:text="${h.hireAnnouncementNo}"></td>
-										<td th:value="${h.cpmemberId}" th:text="${h.cpmemberId}"></td>
-										<td >
-											<a th:href="@{/getAnnouncementOne(hireAnnouncementNo=${h.hireAnnouncementNo},cpmemberId=${h.cpmemberId})}" th:value="${h.hireAnnouncementTitle}" th:text="${h.hireAnnouncementTitle}"></a>
+								<tr th:each="h :${list}">
+									<td th:value="${h.hireAnnouncementNo}"
+										th:text="${h.hireAnnouncementNo}"></td>
+									<td th:value="${h.cpmemberId}" th:text="${h.cpmemberId}"></td>
+									<td><a
+										th:href="@{/aboutAnnouncementOne(hireAnnouncementNo=${h.hireAnnouncementNo},cpmemberId=${h.cpmemberId})}"
+										th:value="${h.hireAnnouncementTitle}"
+										th:text="${h.hireAnnouncementTitle}" 
+										></a> 
+										 <th:block th:if="${current==h.hireAnnouncementStartDate}">
+											
+											<span class="badge badge-warning">new</span> 
+										</th:block> 
 										</td>
-										<td th:value="${h.hireAnnouncementStartDate}" th:text="${h.hireAnnouncementStartDate}"></td>
-										<td th:value="${h.hireAnnouncementEndDate}" th:text="${h.hireAnnouncementEndDate}"></td>
-									</tr>
-									
+									<td th:value="${h.hireAnnouncementStartDate}"
+										th:text="${h.hireAnnouncementStartDate}"></td>
+									<td th:value="${h.hireAnnouncementEndDate}"
+										th:text="${h.hireAnnouncementEndDate}"></td>
+								</tr>
+
 							</table>
 						</div>
 					</div>
