@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.gdu.linkJobs.mapper.ResumeApplyMapper;
 import com.gdu.linkJobs.vo.ResumeApply;
-
+ 
 @Service
 public class ResumeApplyService {
 

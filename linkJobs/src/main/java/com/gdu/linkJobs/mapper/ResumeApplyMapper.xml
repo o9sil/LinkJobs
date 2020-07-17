@@ -4,7 +4,7 @@
 	
 	<!-- 이력서 지원 -->
 	<insert id="insertResumeAplly" parameterType="com.gdu.linkJobs.vo.ResumeApply">
-		INSERT linkjobs_resume_apply 
+		INSERT linkjobs_resume_apply  
 		INTO ( 
 			   resume_apply_no, 
 				hire_announcement_no, 

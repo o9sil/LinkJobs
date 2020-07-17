@@ -1,5 +1,5 @@
 package com.gdu.linkJobs.vo;
-
+ 
 public class ResumeApply {
 	private int resumeApplyNo;
 	private int hireAnnouncementNo;
