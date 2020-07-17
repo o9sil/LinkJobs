@@ -3,8 +3,9 @@
 <mapper namespace="com.gdu.linkJobs.mapper.HireAnnouncementMapper">
 	
 	<!-- 채용공고 월별달력 -->
-   	<select id="selectDayAndAnnouncementList" parameterType="String" resultType="com.gdu.linkJobs.vo.DayAndAnnouncement">
+   	<select id="selectDayAndAnnouncementList" parameterType="hashmap" resultType="com.gdu.linkJobs.vo.DayAndAnnouncement">
       	SELECT 
+      		hire_announcement_no AS hireAnnouncementNo,
       		hire_announcement_title AS hireAnnouncementTitle,
 			hire_announcement_start_date AS hireAnnouncementStartDate,
 			hire_announcement_end_date AS hireAnnouncementEndDate

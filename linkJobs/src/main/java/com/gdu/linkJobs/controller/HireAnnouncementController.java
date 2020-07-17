@@ -2,9 +2,13 @@ package com.gdu.linkJobs.controller;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -72,7 +76,7 @@ public class HireAnnouncementController {
 	
 	// 월별 채용공고 페이지 요청
 	   @GetMapping("/getPlan")
-	   public String getPlan(Model model, HttpSession session, String cpMemberId , @RequestParam(value="day", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate day) {
+	   public String getPlan(Model model, HttpSession session, @RequestParam(value="day", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate day) {
 	      // 로그인이 되어있지 않으면
 	      if(session.getAttribute("loginCpMember") == null) {
 	         return "redirect:/getPlan";
@@ -91,10 +95,27 @@ public class HireAnnouncementController {
 	     System.out.println(year);
 	     int month = cDay.get(Calendar.MONTH)+1;
 	     
-	     List<DayAndAnnouncement> list = hireAnnouncementService.getHireAnnouncementPlan(cpMemberId);
+	     Map<String, Object> map = new HashMap<String, Object>();
+	     
+	     
+	     String cpMemberId = (String) session.getAttribute("loginCpMember");
+	     map.put("cpmemberId", cpMemberId);	     
+	     map.put("hireAnnouncementStartDate", cDay.get(Calendar.YEAR) + "-" + (cDay.get(Calendar.MONTH)+1) + "-" + cDay.getActualMaximum(Calendar.DATE));
+	     map.put("hireAnnouncementEndDate", cDay.get(Calendar.YEAR) + "-" + (cDay.get(Calendar.MONTH)+1) + "-" + cDay.getActualMinimum(Calendar.DATE));
+	     
+	     
+	     
+	     System.out.println(cDay.get(Calendar.YEAR) + "-" + (cDay.get(Calendar.MONTH)+1) + "-" + cDay.getActualMaximum(Calendar.DATE));
+	     System.out.println(cDay.get(Calendar.YEAR) + "-" + (cDay.get(Calendar.MONTH)+1) + "-" + cDay.getActualMinimum(Calendar.DATE));
+	     
+	     List<DayAndAnnouncement> list = hireAnnouncementService.getHireAnnouncementPlan(map);
+	     
+	     List<String> listStartDay = new ArrayList<String>();
+	     List<String> listEndDay = new ArrayList<String>();
 	     
 	     for(DayAndAnnouncement j : list) {
-	    	 System.out.println(j);
+	    	 listStartDay.add(j.getHireAnnouncementStartDate().substring(0, 10));
+	    	 listEndDay.add(j.getHireAnnouncementEndDate().substring(0, 10));
 	     }
 	     
 	     model.addAttribute("day", day);
@@ -102,6 +123,8 @@ public class HireAnnouncementController {
 	     model.addAttribute("month", cDay.get(Calendar.MONTH)+1);
 	     model.addAttribute("lastDay", cDay.getActualMaximum(Calendar.DATE));
 	     model.addAttribute("list", list);
+	     model.addAttribute("listStartDay", listStartDay);
+	     model.addAttribute("listEndDay", listEndDay);
 	     Calendar firstDay = cDay;
 	     firstDay.set(Calendar.DATE, 1);
 	     

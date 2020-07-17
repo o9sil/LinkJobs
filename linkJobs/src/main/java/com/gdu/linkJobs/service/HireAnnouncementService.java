@@ -47,8 +47,8 @@ public class HireAnnouncementService extends HttpServlet {
 	}
 	
 	// 채용공고 일정표
-	public List<DayAndAnnouncement> getHireAnnouncementPlan(String cpMemberId) {
-		return hireAnnouncementMapper.selectDayAndAnnouncementList(cpMemberId);
+	public List<DayAndAnnouncement> getHireAnnouncementPlan(Map<String, Object> map) {
+		return hireAnnouncementMapper.selectDayAndAnnouncementList(map);
 	}
 	
 	//기업회원 상세정보 가져오기
