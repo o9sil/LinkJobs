@@ -9,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.gdu.linkJobs.common.KakaoLogin;
 import com.gdu.linkJobs.service.AreaService;
 import com.gdu.linkJobs.service.MemberService;
 import com.gdu.linkJobs.vo.Area;
@@ -26,6 +29,33 @@ public class MemberController {
 	@Autowired
 	private AreaService areaService;
 
+	KakaoLogin login = null;
+	@RequestMapping(value="/kakaoLogin")
+    public String login(@RequestParam("code") String code, HttpSession session) {
+              
+       login = new KakaoLogin();
+       JsonNode jsonToken = login.getKakaoAccessToken(code, true);
+       JsonNode accessToken = jsonToken.get("access_token");
+       JsonNode userInfo = KakaoLogin.getKakaoUserInfo(accessToken);
+       
+       String id = userInfo.path("id").asText();
+        String name = null;
+        String email = null;
+ 
+        // 유저정보 카카오에서 가져오기 Get properties
+        JsonNode properties = userInfo.path("properties");
+        JsonNode kakao_account = userInfo.path("kakao_account");
+ 
+        name = properties.path("nickname").asText();
+        email = kakao_account.path("email").asText();
+ 
+        System.out.println("id : " + id);
+        System.out.println("name : " + name);
+        System.out.println("email : " + email);
+        session.setAttribute("token",accessToken);
+        session.setMaxInactiveInterval(450);
+        return "redirect:/index.html";
+    }
 	
 	//비밀번호 , 아이디 찾기 폼
 	@GetMapping("/findMember")
