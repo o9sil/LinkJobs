@@ -38,7 +38,8 @@ public class ListController {
 		//		return "hireAnnouncement/getLoginAnnouncementList";
 		//} 
 		
-		
+		String memberId = (String)session.getAttribute("loginMember");
+		hireAnnouncementAndCpMemberAndScrapAndLikecp.setMemberId(memberId);
 		List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectHireAnnouncementList(hireAnnouncementAndCpMemberAndScrapAndLikecp);
 		List<Scrap> scrapList = scrapService.selectBoolean();
 		Map<String, Object> jobMap = jobService.getJobListAll();
@@ -75,7 +76,8 @@ public class ListController {
 			model.addAttribute("job", jobMap.get("job"));
 			model.addAttribute("job2", jobMap.get("job2"));
 			model.addAttribute("job3", jobMap.get("job3"));
-			
+			String memberId = (String)session.getAttribute("loginMember");
+			hireAnnouncementAndCpMemberAndScrapAndLikecp.setMemberId(memberId);
 			List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectHireAnnouncementList(hireAnnouncementAndCpMemberAndScrapAndLikecp);
 			model.addAttribute("list", list);
 			model.addAttribute("msg", "검색 결과가 존재하지 않습니다.");
@@ -143,9 +145,11 @@ public class ListController {
 	// 채용공고 리스트(지역별) 조건 없을경우
 
 	@GetMapping("/getAreaAnnouncementList")
-	public String getAreaAnnouncementList(Model model, HireAnnouncementAndCpMemberAndScrapAndLikecp hireAnnouncementAndCpMemberAndScrapAndLikecp) {
+	public String getAreaAnnouncementList(HttpSession session, Model model, HireAnnouncementAndCpMemberAndScrapAndLikecp hireAnnouncementAndCpMemberAndScrapAndLikecp) {
+		String memberId = (String)session.getAttribute("loginMember");
+		hireAnnouncementAndCpMemberAndScrapAndLikecp.setMemberId(memberId);
 		List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectHireAreaAnnouncementList(hireAnnouncementAndCpMemberAndScrapAndLikecp);
-		
+		model.addAttribute("memberId", memberId);
 		model.addAttribute("list", list);
 		return "hireAnnouncement/getAreaAnnouncementList";
 	}

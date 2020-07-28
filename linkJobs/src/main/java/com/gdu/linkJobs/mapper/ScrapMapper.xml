@@ -12,7 +12,8 @@
 	member_id memberId,
 	hire_announcement_no hireAnnouncementNo,
 	scrap_date scrapDate
-	FROM linkjobs_scrap 
+	FROM linkjobs_scrap
+	WHERE member_id = #{memberId}
 </select>
 
 <!-- 스크랩 추가 -->

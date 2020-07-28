@@ -140,19 +140,23 @@
 			) AS cpmemberPic,
 			(SELECT scrap_boolean
 			 FROM linkjobs_scrap ls
-			 WHERE ls.hire_announcement_no = ha.hire_announcement_no 
+			 WHERE ls.hire_announcement_no = ha.hire_announcement_no
+			 AND member_id = #{memberId}
 			) AS scrapBoolean,
 			(SELECT scrap_no
 			 FROM linkjobs_scrap ls
-			 WHERE ls.hire_announcement_no = ha.hire_announcement_no 
+			 WHERE ls.hire_announcement_no = ha.hire_announcement_no
+			 AND member_id = #{memberId} 
 			) AS scrapNo,
 			(SELECT likecp_no
 			 FROM linkjobs_likecp ll
 			 WHERE ll.cpmember_id = ha.cpmember_id
+			 AND member_id = #{memberId}
 			) AS likecpNo,
 			(SELECT likecp_boolean
 			 FROM linkjobs_likecp ll
 			 WHERE ll.cpmember_id = ha.cpmember_id
+			 AND member_id = #{memberId}
 			) AS likecpBoolean
 		FROM
 			linkjobs_hire_announcement AS ha
@@ -167,7 +171,7 @@
 	
 	
 	<!-- 채용공고 리스트 출력 -->
-	<select id="selectHireAreaAnnouncementList" parameterType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp">
+	<select id="selectHireAreaAnnouncementList" parameterType="String" resultType="com.gdu.linkJobs.vo.HireAnnouncementAndCpMemberAndScrapAndLikecp">
 		SELECT
 	   		ha.hire_announcement_no AS hireAnnouncementNo,
 	      	ha.hire_announcement_title AS hireAnnouncementTitle,
@@ -201,18 +205,22 @@
 			(SELECT scrap_boolean
 			 FROM linkjobs_scrap ls
 			 WHERE ls.hire_announcement_no = ha.hire_announcement_no 
+			 AND member_id = #{memberId}
 			) AS scrapBoolean,
 			(SELECT scrap_no
 			 FROM linkjobs_scrap ls
 			 WHERE ls.hire_announcement_no = ha.hire_announcement_no 
+			 AND member_id = #{memberId}
 			) AS scrapNo,
 			(SELECT likecp_no
 			 FROM linkjobs_likecp ll
 			 WHERE ll.cpmember_id = ha.cpmember_id
+			 AND member_id = #{memberId}
 			) AS likecpNo,
 			(SELECT likecp_boolean
 			 FROM linkjobs_likecp ll
 			 WHERE ll.cpmember_id = ha.cpmember_id
+			 AND member_id = #{memberId}
 			) AS likecpBoolean
 			
 		FROM linkjobs_hire_announcement AS ha 
