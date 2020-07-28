@@ -14,6 +14,24 @@ import com.gdu.linkJobs.vo.Resume;
 public class ResumeService {
 	@Autowired private ResumeMapper resumeMapper;
 	
+	//이력서 자격증정보 삭제
+	public int deleteResumeCertificate(Resume resume) {
+		//System.out.println("자격증정보---->>>>>"+resume);
+		return resumeMapper.delteResumeCertificate(resume);
+	}
+	
+	//이력서 경력정보 삭제
+	public int deleteResumeCareer(Resume resume) {
+		return resumeMapper.deleteResumeCareer(resume);
+	}
+	
+	
+	//이력서 학력정보 삭제
+	public int deleteResumeAcademic(Resume resume) {
+		return resumeMapper.deleteResumeAcademic(resume);
+	}
+	
+	
 	
 	//이력서 공개/비공개
 	public int modifyResumeAvaliability(Resume resume) {

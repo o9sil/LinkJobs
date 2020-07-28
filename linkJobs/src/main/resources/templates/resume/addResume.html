@@ -32,23 +32,25 @@ $(document).ready(function(){
 	//학력 사항  
     $(".academicListCheckBox").click(function(){
        console.log(this.checked);
+       console.log(this.value);
        if(this.checked === true){
-          $("#" + this.value).css('display', '');   
+          $("#academic_" + this.value).css('display', '');   
        }else{
-          $("#" + this.value).css('display', 'none');
+          $("#academic_" + this.value).css('display', 'none');
        }
     });
 	
 	
 	
 	
-	//자격증  
+	// 자격증  
     $(".certificateListCheckBox").click(function(){
        console.log(this.checked);
+       console.log(this.value);
        if(this.checked === true){
-          $("#" + this.value).css('display', '');   
+          $("#certificate_" + this.value).css('display', '');   
        }else{
-          $("#" + this.value).css('display', 'none');
+          $("#certificate_" + this.value).css('display', 'none');
        }
     });
 	
@@ -56,27 +58,28 @@ $(document).ready(function(){
 	
 	
 	
-	
+  //신입,경력 선택
+ 	$(".careerBodyClass").hide();
+    $("#old").click(function(){
+    	$(".careerBodyClass").show();
+   	});
+    
+    $("#new").click(function(){
+    	$(".careerBodyClass").hide();
+    });
+    
+  
   //경력사항  
     $(".careerListCheckBox").click(function(){
        console.log(this.checked);
        if(this.checked === true){
-          $("#" + this.value).css('display', '');   
+          $("#career_" + this.value).css('display', '');   
        }else{
-          $("#" + this.value).css('display', 'none');
+          $("#career_" + this.value).css('display', 'none');
        }
     });
   
-	//신입,경력 선택
- 	$("#careerBody").hide();
-    $("#old").click(function(){
-    	$("#careerBody").show();
-   	});
-    
-    $("#new").click(function(){
-    	$("#careerBody").hide();
-    });
-    
+	
   
 
 
@@ -84,9 +87,9 @@ $(document).ready(function(){
     $(".selfIntroListCheckBox").click(function(){
        console.log(this.checked);
        if(this.checked === true){
-          $("#" + this.value).css('display', '');   
+          $("#selfIntro_" + this.value).css('display', '');   
        }else{
-          $("#" + this.value).css('display', 'none');
+          $("#selfIntro_" + this.value).css('display', 'none');
        }
     });
 	
@@ -337,7 +340,7 @@ $(document).ready(function(){
       
   <!--학력사항-->
    <div class="card shadow mb-4"> 
-  <!--  학력사항  헤드 -->
+  <!-- 학력사항  헤드 -->
 	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 		<h2 class="m-0 font-weight-bold text-info">학력사항</h2>
 	</div>
@@ -346,7 +349,7 @@ $(document).ready(function(){
   
     <input type="checkbox" class="academicListCheckBox" name="academicNo" th:value="${memberAcademic.academicNo}" th:text="${memberAcademic.academicGrade}">
          
-     <div th:id="${memberAcademic.academicNo}" style="display: none;">
+     <div th:id="|academic_${memberAcademic.academicNo}|" style="display: none;">
       <div class="form-group row">
          <div class="col-xl-2">   
             <h5 class="m-0 font-weight-bold">학교명</h5>                                       
@@ -416,7 +419,7 @@ $(document).ready(function(){
    <input type="checkbox" name="certificateNo" class="certificateListCheckBox" th:value="${certificateList.certificateNo}" th:text="${certificateList.certificateName}">
          
    
-   <div th:id="${certificateList.certificateNo}" style="display: none;">
+   <div th:id="|certificate_${certificateList.certificateNo}|" style="display: none;">
       <div class="form-group row">
          <div class="col-xl-2">   
             <h5 class="m-0 font-weight-bold">자격증 이름</h5>                                       
@@ -454,10 +457,10 @@ $(document).ready(function(){
 	</div>
 
    <!-- 경력사항  바디-->
-   <div id="careerBody" th:each="memberCareer : ${memberCareer}" class="card-body">   	
+   <div th:id="|careerBody_${memberCareer.careerNo}|" th:each="memberCareer : ${memberCareer}" class="card-body careerBodyClass">   	
    
-   <input type="checkbox" name="careerNo" class="careerListCheckBox" id="careerListCheckBox" th:value="${memberCareer.careerNo}" th:text="${memberCareer.careerCompanyName}">
-      <div th:id="${memberCareer.careerNo}" style="display: none;">
+   <input type="checkbox" name="careerNo" class="careerListCheckBox"  th:value="${memberCareer.careerNo}" th:text="${memberCareer.careerCompanyName}">
+      <div th:id="|career_${memberCareer.careerNo}|" style="display: none;">
 		<div class="form-group row">
 			<div class="col-xl-2">	
 				<h5 class="m-0 font-weight-bold">회사명</h5>	                  							
@@ -673,10 +676,6 @@ $(document).ready(function(){
 	  
 	  
 	  
-	  <!--  -->
-	  
-	  
-	  <!--  -->
 	  
 	  
 	  <div class="form-group row">
@@ -759,7 +758,7 @@ $(document).ready(function(){
    <div th:each="selfIntroList : ${selfIntroList}" class="card-body">
    	
   <input type="checkbox" name="selfIntroNo" class="selfIntroListCheckBox" th:value="${selfIntroList.selfIntroductionNo}" th:text="${selfIntroList.selfIntroductionTitle}">
-	<div th:id="${selfIntroList.selfIntroductionNo}" style="display: none;">
+	<div th:id="|selfIntro_${selfIntroList.selfIntroductionNo}|" style="display: none;">
 		<div class="form-group row">
 			<div class="col-xl-2">	
 				<h5 class="m-0 font-weight-bold">제목</h5>	                  							

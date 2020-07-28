@@ -1,17 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.ResumeMapper">
+	
+	
+	
+	<!-- 이력서 자격증정보 삭제 -->
+	<delete id="delteResumeCertificate" parameterType="int">
+		DELETE FROM linkjobs_member_resume_certificate
+		WHERE resume_no=#{resumeNo}
+	</delete>
+	
+	
+	
+	
+	<!-- 이력서 경력정보 삭제 -->
+	<delete id="deleteResumeCareer" parameterType="int">
+		DELETE FROM linkjobs_member_resume_career 
+		WHERE resume_no=#{resumeNo}
+	</delete>
+	
+	
+	<!--이력서 학력정보 삭제  -->
+	<delete id="deleteResumeAcademic" parameterType="int">
+		DELETE FROM linkjobs_member_resume_academic 
+		WHERE resume_no=#{resumeNo}
+	</delete>
+	
+	
+	
 	<!-- 이력서 학력 정보 추가 -->
 	 <insert id="addAcademic" parameterType="com.gdu.linkJobs.vo.Resume">
 		INSERT INTO linkjobs_member_resume_academic(
-							resume_no, 
-							academic_no 
+					resume_no, 
+					academic_no 
 							
 				) VALUES
 					
-					<foreach collection="academicNo" item="i" separator=",">
-						(#{resumeNo}, #{i})
-					</foreach>
+				<foreach collection="academicNo" item="i" separator=",">
+					(#{resumeNo}, #{i})
+				</foreach>
 	</insert> 
 	
 	
@@ -19,7 +46,7 @@
 	<update id="updateResumeAvaliability" parameterType="com.gdu.linkJobs.vo.Resume">
 		UPDATE linkjobs_resume
 		SET	
-			resume_avaliability = #{resumeAvaliability}
+		resume_avaliability = #{resumeAvaliability}
 		WHERE resume_no = #{resumeNo} 
 		AND member_id = #{memberId};
 	</update>

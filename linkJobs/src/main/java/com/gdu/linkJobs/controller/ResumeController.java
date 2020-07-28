@@ -170,31 +170,32 @@ public class ResumeController {
    
    // 이력서 삭제
    @GetMapping("/removeResume")
-   public String removeResume(Resume resume) {
-      /*
+   public String removeResume(HttpSession session, Resume resume) {
       if(session.getAttribute("loginMember") == null) {
          return "redirect:/";
       }
-      */
+     
+      String memberId = (String) session.getAttribute("loginMember");
       
-      resume.getMemberId();
-      resume.getResumeNo();
-      System.out.println(resume.getMemberId());
-      System.out.println(resume.getResumeNo());
+      resume.setMemberId(memberId);
+     
+      
+      resumeService.deleteResumeAcademic(resume);
+      resumeService.deleteResumeCertificate(resume);
+      resumeService.deleteResumeCareer(resume);
       resumeService.removeResume(resume);
       return "redirect:/getResume";
    }
    
    // 이력서 목록
    @GetMapping("/getResume")
-   public String selectResume(HttpSession session, Model model, String memberId) {
+   public String selectResume(HttpSession session, Model model) {
       
       if(session.getAttribute("loginMember") == null) {
          return "redirect:/";
       }
       
-      memberId = (String) session.getAttribute("loginMember");
-      System.out.println(memberId+"getResume.memberId");
+      String memberId = (String) session.getAttribute("loginMember");
       List<Resume> list = resumeService.getResume(memberId);
       int count = resumeService.getResumeCount(memberId);
       System.out.println(count+"<--count");

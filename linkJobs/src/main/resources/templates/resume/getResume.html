@@ -138,21 +138,22 @@ $(document).ready(function(){
 																<td>																	
 																	<div>
 																		<h4 class="font-weight-bold" style="width: 50%; float:left;"><a th:href="@{/getDetailResume(resumeNo=${list.resumeNo})}" th:text="${list.resumeTitle}" style="color: #858796;"></a></h4>
+																	
 																		<div style="width: 40%; float: left;">
 																			<strong th:text="${list.resumeSalary}"></strong>
 																		</div>
 																		<div style="width: 40%; float: left;">
 																			<strong th:text="${list.resumeAvaliability}" style="margin-left: 20px;"></strong>
 																		</div>
-																		<div style="width: 40%; float: left;">
+																		<!-- <div style="width: 40%; float: left;">
 																			<label>
 																               <input type="radio" name="resumeAvaliability" id="openRadio" value="공개">공개
 																            </label> &nbsp;&nbsp;&nbsp;
 																            <label>
 																               <input type="radio" name="resumeAvaliability" id="closeRadio" value="비공개">비공개
 																            </label>
-																			<!-- <strong th:text="${list.resumeCareer}"></strong> -->
-																		</div>
+																			<strong th:text="${list.resumeCareer}"></strong>
+																		</div> -->
 																	</div>
 																</td>
 																<td>
