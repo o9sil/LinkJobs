@@ -182,8 +182,8 @@ $(document).ready(function(){
             <span th:text="${list.likecpBoolean}"></span>
           </td>
          <td>
-         <span th:text=${list.hireAnnouncementTitle}>
-         </span>
+        	 <a th:href="@{/aboutAnnouncementOne(hireAnnouncementNo=${list.hireAnnouncementNo})}"><span th:text=${list.hireAnnouncementTitle}></span></a>
+         
             <button type="button" id="scrap_btn" th:value="${list.hireAnnouncementNo}">스크랩</button>
             <input type="hidden" th:name="|scrapBoolean_${list.hireAnnouncementNo}|" th:id="|scrapBoolean_${list.hireAnnouncementNo}|" th:value="${list.scrapBoolean}" />
             <span th:text="${list.scrapBoolean}"></span>
