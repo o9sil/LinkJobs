@@ -76,9 +76,7 @@ public class MemberController {
 
 	@GetMapping("addKakaoMember")
 	public String addKakaoMember(HttpSession session, Model model,String memberId) {
-		
-		session.removeAttribute("loginMember");
-		
+				
 		List<Area> areaList = areaService.getArea();
 		model.addAttribute("areaList", areaList);
 		model.addAttribute("memberId", memberId);
