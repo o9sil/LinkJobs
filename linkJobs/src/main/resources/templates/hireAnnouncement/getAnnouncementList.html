@@ -192,10 +192,12 @@
 	<div class="col-xl-3 col-md-6 mb-4" th:each="list : ${list}">
 	<fieldset style="width: 350px; height: 250px;">
 		 <div>
-		 	<img id="cpmemberPic" style="width: 345px; height: 150px;" th:src="@{'img/' + ${list.cpmemberPic}}"/>
+		 	<a th:href="@{/aboutAnnouncementOne(hireAnnouncementNo=${list.hireAnnouncementNo})}"><img id="cpmemberPic" style="width: 345px; height: 150px;" th:src="@{'img/' + ${list.cpmemberPic}}"/></a>
 		 </div>
 		 <div th:text=${list.cpmemberCompany}></div> 
-		 <div th:text=${list.hireAnnouncementTitle}></div>
+		 <div>
+		 <a th:href="@{/aboutAnnouncementOne(hireAnnouncementNo=${list.hireAnnouncementNo})}"><span th:text=${list.hireAnnouncementTitle}></span></a>
+		 </div>
 		 <div>
 		 	 <button type="button" id="scrap_btn" th:value="${list.hireAnnouncementNo}">스크랩</button>
 		 	 <input type="hidden" th:name="|scrapBoolean_${list.hireAnnouncementNo}|" th:id="|scrapBoolean_${list.hireAnnouncementNo}|" th:value="${list.scrapBoolean}" />

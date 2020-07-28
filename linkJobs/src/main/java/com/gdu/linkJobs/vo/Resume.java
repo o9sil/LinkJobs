@@ -14,7 +14,7 @@ public class Resume {
 	private String resumeAvaliability;
 	private String resumeSelfIntroductionTitle;
 	private String resumeSelfIntroductionContents;
-	private String resuemDate;
+	private String resumeDate;
 	private String resumeCareer;
 	private List<Integer> certificateNo;
 	private List<Integer> careerNo;
@@ -85,11 +85,11 @@ public class Resume {
 	public void setResumeSelfIntroductionContents(String resumeSelfIntroductionContents) {
 		this.resumeSelfIntroductionContents = resumeSelfIntroductionContents;
 	}
-	public String getResuemDate() {
-		return resuemDate;
+	public String getResumeDate() {
+		return resumeDate;
 	}
-	public void setResuemDate(String resuemDate) {
-		this.resuemDate = resuemDate;
+	public void setResumeDate(String resumeDate) {
+		this.resumeDate = resumeDate;
 	}
 	public String getResumeCareer() {
 		return resumeCareer;
@@ -122,7 +122,7 @@ public class Resume {
 				+ resumeWishArea + ", resumeWishJob=" + resumeWishJob + ", resumeWishIndustry=" + resumeWishIndustry
 				+ ", resumeAvaliability=" + resumeAvaliability + ", resumeSelfIntroductionTitle="
 				+ resumeSelfIntroductionTitle + ", resumeSelfIntroductionContents=" + resumeSelfIntroductionContents
-				+ ", resuemDate=" + resuemDate + ", resumeCareer=" + resumeCareer + ", certificateNo=" + certificateNo
+				+ ", resumeDate=" + resumeDate + ", resumeCareer=" + resumeCareer + ", certificateNo=" + certificateNo
 				+ ", careerNo=" + careerNo + ", academicNo=" + academicNo + "]";
 	}
 	

@@ -187,13 +187,14 @@ public class ResumeController {
    
    // 이력서 목록
    @GetMapping("/getResume")
-   public String selectResume(HttpSession session, Model model) {
+   public String selectResume(HttpSession session, Model model, String memberId) {
       
       if(session.getAttribute("loginMember") == null) {
          return "redirect:/";
       }
       
-      String memberId = (String) session.getAttribute("loginMember");
+      memberId = (String) session.getAttribute("loginMember");
+      System.out.println(memberId+"getResume.memberId");
       List<Resume> list = resumeService.getResume(memberId);
       int count = resumeService.getResumeCount(memberId);
       System.out.println(count+"<--count");

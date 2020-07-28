@@ -96,9 +96,10 @@ public class ListController {
 			} // end for문
 			jobSearch = jobSearch.substring(0, jobSearch.length()-1);
 			System.out.println(jobSearch+"<<finall jobSearch");
-			
+			String memberId = (String)session.getAttribute("loginMember");
 			List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectSearchHireAnnouncementList(wordSearch, areaSearch, jobSearch);
 			model.addAttribute("list", list);
+			model.addAttribute("memberId", memberId);
 			return "hireAnnouncement/searchAnnouncementList";
 		} else{
 				System.out.println(wordSearch + "<--searchAnnouncementList.wordSearch3");

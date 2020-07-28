@@ -51,6 +51,7 @@ public class ResumeService {
 	// 이력서 목록
 	public List<Resume> getResume(String memberId) {
 		List<Resume> list = resumeMapper.selectResume(memberId);
+		System.out.println(list+"<-- service.getResume");
 		return list;
 	}
 }

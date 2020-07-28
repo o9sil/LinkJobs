@@ -23,7 +23,8 @@ $(document).ready(function(){
   	
 
   	$('[id^=likecp_btn]').on('click', function(event){
-		  let hireAnnouncementNo = $(this).val();
+  		 
+  		  let hireAnnouncementNo = $(this).val();
 
 	      console.log(hireAnnouncementNo);
 	      
@@ -47,6 +48,7 @@ $(document).ready(function(){
 	               success: function(data){
 	                  console.log(data);
 	               }
+	               
 	            });
 	      } else if(likecpBoolean == "Y"){
 	         let likecpBoolean = 'N';
@@ -74,7 +76,7 @@ $(document).ready(function(){
 	               console.log(data);
 	            }
 	         })
-	      } 
+	      }
 	      location.reload();
 	   });
   
@@ -174,7 +176,7 @@ $(document).ready(function(){
         <td>
              <span th:text=${list.cpmemberCompany}>
              </span>
-            <button type="button" class="fas fa-heart" id="likecp_btn" th:value="${list.hireAnnouncementNo}"></button>
+            <button type="button" class="fas fa-heart" style="font-size:16px;color:red" id="likecp_btn" th:value="${list.hireAnnouncementNo}"></button>
             <input type="hidden" th:name="|likecpNo_${list.hireAnnouncementNo}|" th:id="|likecpNo_${list.hireAnnouncementNo}|" th:value="${list.likecpNo}" />
             <input type="hidden" th:name="|likecpBoolean_${list.hireAnnouncementNo}|" th:id="|likecpBoolean_${list.hireAnnouncementNo}|" th:value="${list.likecpBoolean}" />
             <span th:text="${list.likecpBoolean}"></span>
@@ -204,6 +206,7 @@ $(document).ready(function(){
         
       </tr>
    </table>
+   		
          </div>
       </div>
    </div>
