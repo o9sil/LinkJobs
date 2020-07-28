@@ -37,7 +37,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/kakaoLogin")
 	public String login(@RequestParam("code") String code, HttpSession session) {
-
+		
 		login = new KakaoLogin();
 		JsonNode jsonToken = login.getKakaoAccessToken(code, false);
 		JsonNode accessToken = jsonToken.get("access_token");
@@ -74,9 +74,10 @@ public class MemberController {
 
 	}
 
-	@GetMapping("addKakaoMember")
+	@GetMapping("/addKakaoMember")
 	public String addKakaoMember(HttpSession session, Model model,String memberId) {
-				
+		
+		
 		List<Area> areaList = areaService.getArea();
 		model.addAttribute("areaList", areaList);
 		model.addAttribute("memberId", memberId);
@@ -84,9 +85,10 @@ public class MemberController {
 		return "member/addKakaoMember";
 	}
 
-	@PostMapping("addKakaoMember")
+	@PostMapping("/addKakaoMember")
 	public String addKakaoMember(HttpSession session, Member member) {
-
+		
+		
 		
 		Random rnd = new Random();
 		String pw = String.valueOf((char) ((int) (rnd.nextInt(26)) + 97));
