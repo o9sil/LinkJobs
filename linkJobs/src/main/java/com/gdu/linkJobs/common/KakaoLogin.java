@@ -31,7 +31,7 @@ public class KakaoLogin {
         postParams.add(new BasicNameValuePair("client_id", "e288d857e7b76a4a5528c17a577dda79")); // REST API KEY
         //일반회원
         if(memberBoolean == false) {
-        	postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost/KakaoLogin")); // 리다이렉트 URI
+        	postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost/kakaoLogin")); // 리다이렉트 URI
         }else if(memberBoolean == true) {
         	postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost/cpKakaoLogin")); // 리다이렉트 URI
         }        

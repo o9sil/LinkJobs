@@ -1,9 +1,11 @@
 package com.gdu.linkJobs.controller;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.gdu.linkJobs.common.KakaoLogin;
+import com.gdu.linkJobs.mapper.MemberPicMapper;
 import com.gdu.linkJobs.service.AreaService;
 import com.gdu.linkJobs.service.MemberService;
 import com.gdu.linkJobs.vo.Area;
@@ -28,36 +31,75 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private AreaService areaService;
+	
 
 	KakaoLogin login = null;
-	@RequestMapping(value="/kakaoLogin")
-    public String login(@RequestParam("code") String code, HttpSession session) {
-              
-       login = new KakaoLogin();
-       JsonNode jsonToken = login.getKakaoAccessToken(code, true);
-       JsonNode accessToken = jsonToken.get("access_token");
-       JsonNode userInfo = KakaoLogin.getKakaoUserInfo(accessToken);
-       
-       String id = userInfo.path("id").asText();
-        String name = null;
-        String email = null;
- 
-        // 유저정보 카카오에서 가져오기 Get properties
-        JsonNode properties = userInfo.path("properties");
-        JsonNode kakao_account = userInfo.path("kakao_account");
- 
-        name = properties.path("nickname").asText();
-        email = kakao_account.path("email").asText();
- 
-        System.out.println("id : " + id);
-        System.out.println("name : " + name);
-        System.out.println("email : " + email);
-        session.setAttribute("token",accessToken);
-        session.setMaxInactiveInterval(450);
-        return "redirect:/index.html";
-    }
-	
-	//비밀번호 , 아이디 찾기 폼
+
+	@RequestMapping(value = "/kakaoLogin")
+	public String login(@RequestParam("code") String code, HttpSession session) {
+
+		login = new KakaoLogin();
+		JsonNode jsonToken = login.getKakaoAccessToken(code, false);
+		JsonNode accessToken = jsonToken.get("access_token");
+		JsonNode userInfo = KakaoLogin.getKakaoUserInfo(accessToken);
+
+		String id = userInfo.path("id").asText();
+		String name = null;
+		String email = null;
+
+		// 유저정보 카카오에서 가져오기 Get properties
+		JsonNode properties = userInfo.path("properties");
+		JsonNode kakao_account = userInfo.path("kakao_account");
+
+		name = properties.path("nickname").asText();
+		email = kakao_account.path("email").asText();
+		String memberId = "kakao_" + id;
+		System.out.println(memberId);
+
+		System.out.println("id : " + id);
+		System.out.println("name : " + name);
+		System.out.println("email : " + email);
+
+		session.setMaxInactiveInterval(450);
+
+		// db에 없는 회원일 경우
+		if (memberService.memberIdCheck(memberId) == null) {
+			return "redirect:/addKakaoMember?memberId=" + memberId;
+		} else {
+			// db에 있는 경우
+			session.setAttribute("loginMember", memberId);
+			return "redirect:/getAnnouncementList";
+
+		}
+
+	}
+
+	@GetMapping("addKakaoMember")
+	public String addKakaoMember(HttpSession session, Model model,String memberId) {
+
+		List<Area> areaList = areaService.getArea();
+		model.addAttribute("areaList", areaList);
+		model.addAttribute("memberId", memberId);
+		
+		return "member/addKakaoMember";
+	}
+
+	@PostMapping("addKakaoMember")
+	public String addKakaoMember(HttpSession session, Member member) {
+
+		
+		Random rnd = new Random();
+		String pw = String.valueOf((char) ((int) (rnd.nextInt(26)) + 97));
+		member.setMemberPw(pw);
+		member.setMemberSocialLogin("Y");
+		
+		System.out.println(member);
+		memberService.addMember(member);
+
+		return "redirect:/getAnnouncementList";
+	}
+
+	// 비밀번호 , 아이디 찾기 폼
 	@GetMapping("/findMember")
 	public String findMemberPW(HttpSession session) {
 		if (session.getAttribute("loginMember") != null) {
@@ -65,44 +107,44 @@ public class MemberController {
 		}
 		return "member/findMember";
 	}
-	
-	//아이디 찾기 액션
+
+	// 아이디 찾기 액션
 	@PostMapping("/findMemberId")
 	public String findMemberId(HttpSession session, Model model, Member member) {
 		if (session.getAttribute("loginMember") != null) {
 			return "redirect:/getAnnouncementList";
 		}
 		System.out.println(memberService.findMemberId(member));
-		
+
 		return "redirect:/loginMember";
 	}
-	
-	//비밀번호 찾기 액션
+
+	// 비밀번호 찾기 액션
 	@PostMapping("/findMemberPw")
 	public String findMemberPw(Member member, Model model, HttpSession session) {
 		if (session.getAttribute("loginMember") != null) {
 			return "redirect:/getAnnouncementList";
 		}
-		
-		if(memberService.findMemberPw(member) == 1) {
+
+		if (memberService.findMemberPw(member) == 1) {
 			return "redirect:/loginMember";
 		} else {
 			return "redirect:/findMember";
 		}
 	}
-	
+
 	// 사진 수정 폼
 	@GetMapping("/modifyMemberPic")
-	public String modifyMemberPic(HttpSession session,String memberId, Model model) {
+	public String modifyMemberPic(HttpSession session, String memberId, Model model) {
 		if (session.getAttribute("loginMember") == null) {
 			return "redirect:/getAnnouncementList";
 		}
-		
-		memberId = (String)session.getAttribute("loginMember");
-		
+
+		memberId = (String) session.getAttribute("loginMember");
+
 		MemberPic pic = memberService.getMemberPic(memberId);
 		pic.setMemberId(memberId);
-		
+
 		model.addAttribute("pic", pic);
 		return "member/modifyMemberPic";
 
@@ -229,13 +271,12 @@ public class MemberController {
 
 	// 일반회원 회원가입 액션
 	@PostMapping("/addMember")
-	public String addMember(Member member,HttpSession session) {
+	public String addMember(Member member, HttpSession session) {
 		if (session.getAttribute("loginMember") != null) {
 			return "redirect:/getAnnouncementList";
 		}
 		System.out.println(member);
 		memberService.addMember(member);
-		System.out.println(member);
 		return "redirect:/getAnnouncementList";
 	}
 
@@ -266,18 +307,18 @@ public class MemberController {
 	}
 
 	// main login action
-		@PostMapping("/mainLoginMember")
-		public String mainLoginMember(Model model, HttpSession session, LoginMember loginMember) {
-			// 로그인 중
-					if (session.getAttribute("loginMember") != null) {
-						return "hireAnnouncement/getLoginAnnouncementList";
-					}
-			String memberId = (String) session.getAttribute("loginMember");
-			Member member = memberService.getMemberOne(memberId);
-			model.addAttribute("member", member);
+	@PostMapping("/mainLoginMember")
+	public String mainLoginMember(Model model, HttpSession session, LoginMember loginMember) {
+		// 로그인 중
+		if (session.getAttribute("loginMember") != null) {
 			return "hireAnnouncement/getLoginAnnouncementList";
 		}
-	
+		String memberId = (String) session.getAttribute("loginMember");
+		Member member = memberService.getMemberOne(memberId);
+		model.addAttribute("member", member);
+		return "hireAnnouncement/getLoginAnnouncementList";
+	}
+
 	// login form
 	@GetMapping("/loginMember")
 	public String loginMember(HttpSession session) {
@@ -286,9 +327,9 @@ public class MemberController {
 		}
 
 		if (session.getAttribute("loginCpMember") != null) {
-	         return "redirect:/getAnnouncementList";
-	      }
-		
+			return "redirect:/getAnnouncementList";
+		}
+
 		return "login/login";
 	}
 
