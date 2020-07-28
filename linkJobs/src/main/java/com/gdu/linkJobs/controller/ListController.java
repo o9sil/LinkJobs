@@ -24,6 +24,12 @@ public class ListController {
 	@Autowired private ScrapService scrapService; 
 	@Autowired private JobService jobService;
 	
+	// index
+		@GetMapping("/")
+		   public String getMain() {
+		      return "redirect:/getAnnouncementList";
+		   }
+	
 	// 메인페이지 채용공고 리스트(일반회원)
 	@GetMapping("/getAnnouncementList")
 	public String getHireAnnouncementList(HttpSession session, Model model, HireAnnouncementAndCpMemberAndScrapAndLikecp hireAnnouncementAndCpMemberAndScrapAndLikecp) {
