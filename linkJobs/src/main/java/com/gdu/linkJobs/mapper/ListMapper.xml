@@ -51,19 +51,23 @@
 			) AS cpmemberPic,
 			(SELECT scrap_boolean
 			 FROM linkjobs_scrap ls
-			 WHERE ls.hire_announcement_no = ha.hire_announcement_no 
+			 WHERE ls.hire_announcement_no = ha.hire_announcement_no
+			 AND ls.member_id = #{memberId} 
 			) AS scrapBoolean,
 			(SELECT scrap_no
 			 FROM linkjobs_scrap ls
 			 WHERE ls.hire_announcement_no = ha.hire_announcement_no 
+			 AND ls.member_id = #{memberId} 
 			) AS scrapNo,
 			(SELECT likecp_no
 			 FROM linkjobs_likecp ll
 			 WHERE ll.cpmember_id = ha.cpmember_id
+			 AND ll.member_id = #{memberId} 
 			) AS likecpNo,
 			(SELECT likecp_boolean
 			 FROM linkjobs_likecp ll
 			 WHERE ll.cpmember_id = ha.cpmember_id
+			 AND ll.member_id = #{memberId} 
 			) AS likecpBoolean
 		FROM 
 			linkjobs_hire_announcement AS ha 
@@ -141,22 +145,22 @@
 			(SELECT scrap_boolean
 			 FROM linkjobs_scrap ls
 			 WHERE ls.hire_announcement_no = ha.hire_announcement_no
-			 AND member_id = #{memberId}
+			 AND ls.member_id = #{memberId}
 			) AS scrapBoolean,
 			(SELECT scrap_no
 			 FROM linkjobs_scrap ls
 			 WHERE ls.hire_announcement_no = ha.hire_announcement_no
-			 AND member_id = #{memberId} 
+			 AND ls.member_id = #{memberId} 
 			) AS scrapNo,
 			(SELECT likecp_no
 			 FROM linkjobs_likecp ll
 			 WHERE ll.cpmember_id = ha.cpmember_id
-			 AND member_id = #{memberId}
+			 AND ll.member_id = #{memberId}
 			) AS likecpNo,
 			(SELECT likecp_boolean
 			 FROM linkjobs_likecp ll
 			 WHERE ll.cpmember_id = ha.cpmember_id
-			 AND member_id = #{memberId}
+			 AND ll.member_id = #{memberId}
 			) AS likecpBoolean
 		FROM
 			linkjobs_hire_announcement AS ha

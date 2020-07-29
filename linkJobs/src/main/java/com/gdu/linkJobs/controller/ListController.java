@@ -68,9 +68,9 @@ public class ListController {
 		// 검색기능 추가
 		if((wordSearch == null || wordSearch == "") && (areaSearch == null || areaSearch == "") && (jobSearch == null || jobSearch == "")) {
 			
-			System.out.println(wordSearch + "<--searchAnnouncementList.wordSearch1");
-			System.out.println(areaSearch + "<--searchAnnouncementList.areaSearch1");
-			System.out.println(jobSearch + "<--searchAnnouncementList.jobSearch1");
+			System.out.println(wordSearch + "<--searchAnnouncementList.wordSearchNo");
+			System.out.println(areaSearch + "<--searchAnnouncementList.areaSearchNo");
+			System.out.println(jobSearch + "<--searchAnnouncementList.jobSearchNo");
 			
 			Map<String, Object> jobMap = jobService.getJobListAll();
 			model.addAttribute("job", jobMap.get("job"));
@@ -83,11 +83,12 @@ public class ListController {
 			model.addAttribute("msg", "검색 결과가 존재하지 않습니다.");
 			return "redirect:/getAnnouncementList";
 			
-		} else if((wordSearch == null || wordSearch == "")){
-			System.out.println(wordSearch + "<--searchAnnouncementList.wordSearch2");
-			System.out.println(areaSearch + "<--searchAnnouncementList.areaSearch2");
-			System.out.println(jobSearch + "<--searchAnnouncementList.jobSearch2");
-			wordSearch = "notseachword";
+		} else if((wordSearch == null || wordSearch == "") && (areaSearch == null || areaSearch == "")){
+			System.out.println(wordSearch + "<--searchAnnouncementList.wordSearchNo");
+			System.out.println(areaSearch + "<--searchAnnouncementList.areaSearchNo");
+			System.out.println(jobSearch + "<--searchAnnouncementList.jobSearchYes");
+			areaSearch = "notsearchword";
+			wordSearch = "notsearchword";
 			String[] jobsSearch = jobSearch.split(" ");
 			System.out.println(jobSearch.length());
 			jobSearch = "";
@@ -105,15 +106,36 @@ public class ListController {
 			jobSearch = jobSearch.substring(0, jobSearch.length()-1);
 			System.out.println(jobSearch+"<<finall jobSearch");
 			String memberId = (String)session.getAttribute("loginMember");
-			List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectSearchHireAnnouncementList(wordSearch, areaSearch, jobSearch);
+			List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectSearchHireAnnouncementList(memberId, wordSearch, areaSearch, jobSearch);
 			model.addAttribute("list", list);
 			model.addAttribute("memberId", memberId);
+			return "hireAnnouncement/searchAnnouncementList";
+		} else if((areaSearch == null || areaSearch == "") && (jobSearch == null || jobSearch == "")) {
+			System.out.println(wordSearch + "<--searchAnnouncementList.wordSearchYes");
+			System.out.println(areaSearch + "<--searchAnnouncementList.areaSearchNo");
+			System.out.println(jobSearch + "<--searchAnnouncementList.jobSearchNo");
+			areaSearch = "notsearchword";
+			jobSearch = "notsearchword";
+			String memberId = (String)session.getAttribute("loginMember");
+			List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectSearchHireAnnouncementList(memberId, wordSearch, areaSearch, jobSearch);
+			model.addAttribute("list", list);
+			return "hireAnnouncement/searchAnnouncementList";
+		} else if((wordSearch == null || wordSearch == "") && (jobSearch == null || jobSearch == "")) {
+			System.out.println(wordSearch + "<--searchAnnouncementList.wordSearchYes");
+			System.out.println(areaSearch + "<--searchAnnouncementList.areaSearchNo");
+			System.out.println(jobSearch + "<--searchAnnouncementList.jobSearchNo");
+			wordSearch = "notsearchword";
+			jobSearch = "notsearchword";
+			String memberId = (String)session.getAttribute("loginMember");
+			List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectSearchHireAnnouncementList(memberId, wordSearch, areaSearch, jobSearch);
+			model.addAttribute("list", list);
 			return "hireAnnouncement/searchAnnouncementList";
 		} else{
 				System.out.println(wordSearch + "<--searchAnnouncementList.wordSearch3");
 				System.out.println(areaSearch + "<--searchAnnouncementList.areaSearch3");
 				System.out.println(jobSearch + "<--searchAnnouncementList.jobSearch3");
-				List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectSearchHireAnnouncementList(wordSearch, areaSearch, jobSearch);
+				String memberId = (String)session.getAttribute("loginMember");
+				List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectSearchHireAnnouncementList(memberId, wordSearch, areaSearch, jobSearch);
 				model.addAttribute("list", list);
 				return "hireAnnouncement/searchAnnouncementList";
 			}

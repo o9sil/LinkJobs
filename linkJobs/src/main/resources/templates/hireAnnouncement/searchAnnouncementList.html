@@ -72,7 +72,7 @@
 																</td>																
 																<td>																	
 																	<div>
-																		<strong style="font-size: 2.0em;" th:text="${list.hireAnnouncementTitle}"></strong>
+																		<a th:href="@{/aboutAnnouncementOne(hireAnnouncementNo=${list.hireAnnouncementNo})}"><strong style="font-size: 2.0em;" th:text="${list.hireAnnouncementTitle}"></strong></a>
 																		<button th:value="${list.scrapBoolean}">스크랩</button>
 																		<p>
 																		<span th:text="${list.areaSido}"></span>
