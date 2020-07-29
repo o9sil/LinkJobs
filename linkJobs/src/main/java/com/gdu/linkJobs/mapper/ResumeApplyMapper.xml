@@ -3,10 +3,8 @@
 <mapper namespace="com.gdu.linkJobs.mapper.ResumeApplyMapper">
 	
 	<!-- 이력서 지원 -->
-	<insert id="insertResumeAplly" parameterType="com.gdu.linkJobs.vo.ResumeApply">
-		INSERT linkjobs_resume_apply  
-		INTO ( 
-			   resume_apply_no, 
+	<insert id="insertResumeApply" parameterType="com.gdu.linkJobs.vo.ResumeApply">
+		INSERT INTO linkjobs_resume_apply  (
 				hire_announcement_no, 
 				member_id, 
 				resume_confirm, 
@@ -43,8 +41,7 @@
 				apply_date 
 			)
 		VALUES(
-				#{resumeApplyNo}, 
-				#{hireAnnouncemenNo}, 
+				#{hireAnnouncementNo}, 
 				#{memberId}, 
 				#{resumeConfirm}, 
 				#{resumeTitle}, 
@@ -53,8 +50,8 @@
 				#{resumeWishCity}, 
 				#{resumeIndustry2Category}, 
 				#{resumeJob}, 
-				#{resume_selfIntroductionTitle},
-				#{resume_selfIntroductionContents}, 
+				#{resumeSelfIntroductionTitle},
+				#{resumeSelfIntroductionContents}, 
 				#{academicGrade}, 
 				#{academicName}, 
 				#{academicMajor},
@@ -72,7 +69,7 @@
 				#{careerDepartment}, 
 				#{careerSalary}, 
 				#{careerResponsibilities}, 
-				#{carrerProjectNontents}, 
+				#{careerProjectContents}, 
 				#{certificateName}, 
 				#{certificateDate}, 
 				#{areaNo}, 

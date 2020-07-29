@@ -33,7 +33,10 @@
 		<!-- Main Content -->
 		<div id="content">		
 			<div class="container-fluid">				
-				<button type="button" class="btn btn-primary" id="savePdf" style="margin-bottom: 2em;">PDF 저장</button>			
+				<button type="button" class="btn btn-primary" id="savePdf" style="margin-bottom: 2em;">PDF 저장</button>	
+				
+				<a th:href="@{/addResumeApplyList(hireAnnouncementNo=${hireAnnouncement.hireAnnouncementNo})}" class="btn btn-warning"  style="margin-bottom: 2em;">지원하기</a>
+						
 				<div class="row" id="pdfDiv">
 					<div class="col-xl-12 col-md-12 mb-4">
 						<div class="card border-left-info h-100 py-2">

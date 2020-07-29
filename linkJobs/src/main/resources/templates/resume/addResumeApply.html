@@ -15,7 +15,17 @@
 
 <script th:src="@{/js/html2canvas.js}"></script>
 <script th:src="@{/js/jspdf.min.js}"></script>
-
+<script>
+   
+$(document).ready(function(){
+    
+	$('#btn').click(function(){
+			console.log("fasdf");
+			$('#form').submit();
+		
+	});
+});
+</script>
 </head>
 
 <body id="page-top">
@@ -33,45 +43,48 @@
 		<!-- Main Content -->
 		<div id="content">		
 			<div class="container-fluid">				
-				<button type="button" class="btn btn-primary" id="savePdf" style="margin-bottom: 2em;">PDF 저장</button>
+				
 				<div class="row" id="pdfDiv">
 					<div class="col-xl-12 col-md-12 mb-4">
 						<div class="card border-left-info h-100 py-2">
 							<div class="card-body">
+								
+							  <form th:action="@{/addResumeApply}" method="post" id="form">
+							  <button class="btn btn-warning" id="btn" style="margin-bottom: 2em;">지원하기</button>
 								<div class="row no-gutters align-items-center">
 									
 								
 									<div th:each="resumelist : ${resumelist}" class="col mr-2">
 									<div class="col-xl-6 col-md-6 mb-4" th:each="memberInfo : ${memberInfo}">
-										<h2 th:text="${memberInfo.memberName}"></h2>
+										<h2 th:text="${memberInfo.memberName}"  th:value="${memberInfo.memberName}"></h2>
 										<div>
-											<span th:text="${memberInfo.memberBirthdate}"></span>
+											<input th:text="${memberInfo.memberBirthdate}" th:value="${memberInfo.memberBirthdate}" name="memberBirthdate"></input>
 										</div>
 										<div>
-											<span th:text="${memberInfo.memberGender}"></span>
+											<input th:text="${memberInfo.memberGender}" th:value="${memberInfo.memberGender}" name="memberGender"></input>
 										</div>
 										<div>
-											<span th:text="${memberInfo.memberEmail}"></span>
+											<input th:text="${memberInfo.memberEmail}" th:value="${memberInfo.memberEmail}" name="memberEmail"></input>
 										</div>
 										<div>
-											<span th:text="${memberInfo.memberPhone}"></span>
+											<input th:text="${memberInfo.memberPhone}"  th:value="${memberInfo.memberPhone}" name="memberPhone"></input>
 										</div>
 										<div>
-											<span th:text="${memberInfo.areaSido}"></span>
+											<input th:text="${memberInfo.areaSido}" th:value="${memberInfo.areaSido}" name="areaSido"></input>
 										</div>
 										<div>
-											<span th:text="${memberInfo.area2Gungu}"></span>
+											<input th:text="${memberInfo.area2Gungu}" th:value="${memberInfo.area2Gungu}" name="area2Gungu"></input>
 										</div>
 										
 										
 										
 										
 										
-										<span th:text="${memberInfo.memberGender}"></span>
-										<span th:text="${memberInfo.memberEmail}"></span>
-										<span th:text="${memberInfo.memberPhone}"></span>
-										<span th:text="${memberInfo.areaSido}"></span>
-										<span th:text="${memberInfo.area2Gungu}"></span>
+										<input th:text="${memberInfo.memberGender}" th:value="${memberInfo.memberGender}" name="memberGender"></input>
+										<input th:text="${memberInfo.memberEmail}" th:value="${memberInfo.memberEmail}" name="memberEmail"></input>
+										<input th:text="${memberInfo.memberPhone}" th:value="${memberInfo.memberPhone}" name="memberPhone"></input>
+										<input th:text="${memberInfo.areaSido}" th:value="${memberInfo.areaSido}" name="areaSido"></input>
+										<input th:text="${memberInfo.area2Gungu}" th:value="${memberInfo.area2Gungu}" name="area2Gungu"></input>
 									</div>	
 										<hr>
 										<div class="row">
@@ -107,52 +120,52 @@
 										<hr>
 										<div style="display: flex;">
 											<h3>경력</h3>&nbsp;&nbsp;&nbsp;
-											<span th:text="${resumelist.resumeCareer}"></span>		<!-- 이력서 상세보기 리스트  resumeCareer-->							
+											<input th:text="${resumelist.resumeCareer}" th:value="${resumelist.resumeCareer}" name="resumeCareer"></input>		<!-- 이력서 상세보기 리스트  resumeCareer-->							
 										</div>
 									<div><!-- 경력--- >>> 경력일때만 보이게 조건 -->
 										<div>
 											회사명 :
-											<span th:text="${memberInfo.memberName}"></span>											
+											<input th:text="${memberInfo.memberName}" th:value="${memberInfo.memberName}"  name=""></input>											
 										</div>
 										<div>
 											재직기간 :
-											<span th:text="${memberInfo.memberName}"></span>											
+											<input th:text="${memberInfo.memberName}" th:value="${memberInfo.memberName}" name=""></input>											
 										</div>
 										<div>
 											년차 :
-											<span th:text="${memberInfo.memberName}"></span>											
+											<input th:text="${memberInfo.memberName}" th:value="${memberInfo.memberName}" name=""></input>											
 										</div>
 										<div>
 											퇴사사유 :
-											<span th:text="${memberInfo.memberName}"></span>											
+											<input th:text="${memberInfo.memberName}" th:value="${memberInfo.memberName}" name=""></input>											
 										</div>			
 										<div>
 											직급/직책 :
-											<span th:text="${memberInfo.memberName}"></span>										
+											<input th:text="${memberInfo.memberName}" th:value="${memberInfo.memberName}" name=""></input>										
 										</div>
 										<div>
 											직종 :
-											<span th:text="${memberInfo.memberName}"></span>										
+											<input th:text="${memberInfo.memberName}" th:value="${memberInfo.memberName}" name=""></input>										
 										</div>
 										<div>
 											근무지역 :
-											<span th:text="${memberInfo.memberName} "></span>											
+											<input th:text="${memberInfo.memberName} " th:value="${memberInfo.memberName} " name=""></input>											
 										</div>													
 										<div>
 											근무부서 :											
-											<span th:text="${memberInfo.memberName}"></span>											
+											<input th:text="${memberInfo.memberName}" th:value="${memberInfo.memberName}" name=""></input>											
 										</div>
 										<div>
 											연봉 :											
-											<span th:text="${memberInfo.memberName}"></span>											
+											<input th:text="${memberInfo.memberName}"  th:value="${memberInfo.memberName}" name=""></input>											
 										</div>
 										<div>
 											담당업무 :											
-											<span th:text="${memberInfo.memberName}"></span>											
+											<input th:text="${memberInfo.memberName}" th:value="${memberInfo.memberName}" name=""></input>											
 										</div>
 										<div>
 											퇴사/재직중 :											
-											<span th:text="${memberInfo.memberName}"></span>											
+											<input th:text="${memberInfo.memberName}" th:value="${memberInfo.memberName}" name=""></input>											
 										</div>
 									</div>
 										<hr>
@@ -160,11 +173,11 @@
 										<h3>자격증</h3>
 										<div>				
 											자격증 이름 : 							
-											<span th:text="${memberInfo.memberName}"></span>											
+											<input th:text="${memberInfo.memberName}" th:value="${memberInfo.memberName}" name="memberName"></input>											
 										</div>
 										<div>				
 											취득일 : 							
-											<span th:text="${memberInfo.memberName}"></span>										
+											<input th:text="${memberInfo.memberName}" th:value="${memberInfo.memberName}" name="memberName"></input>										
 										</div>
 										</div>
 										
@@ -175,23 +188,23 @@
 											<h3>희망근무조건</h3>
 											<div>				
 												근무 형태 : 							
-												<span th:text="${resumelist.resumeWorkingForm}"></span>											
+												<input th:text="${resumelist.resumeWorkingForm}" th:value="${resumelist.resumeWorkingForm}" name="resumeWorkingForm"></input>											
 											</div>										
 											<div>				
 												희망 연봉 : 							
-												<span th:text="${resumelist.resumeSalary}"></span>											
+												<input th:text="${resumelist.resumeSalary}" th:value="${resumelist.resumeSalary}" name="resumeSalary"></input>											
 											</div>
 											<div>				
 												희망 근무지역 : 							
-												<span th:text="${resumelist.resumeWishArea}"></span>											
+												<input th:text="${resumelist.resumeWishArea}" th:value="${resumelist.resumeWishArea}" name="resumeWishArea"></input>											
 											</div>
 											<div>				
 												희망 근무업종 : 							
-												<span th:text="${resumelist.resumeWishIndustry}"></span>											
+												<input th:text="${resumelist.resumeWishIndustry}" th:value="${resumelist.resumeWishIndustry}" name="resumeWishIndustry"></input>											
 											</div>
 											<div>				
 												희망 근무직종 : 							
-												<span th:text="${resumelist.resumeWishJob}"></span>											
+												<input th:text="${resumelist.resumeWishJob}" th:value="${resumelist.resumeWishJob}" name="resumeWishJob"></input>											
 											</div>
 										</div>
 										
@@ -205,13 +218,16 @@
 								         <div>
 								              <h3> 자기소개서</h3>
 								              <h5 th:text="${resumelist.resumeSelfIntroductionTitle}"></h5>
-								                  <textarea id="selfIntroductionContents" th:text="${resumelist.resumeSelfIntroductionContents}" class="form-control" rows="10" readonly="readonly"> </textarea> 
+								                  <textarea id="selfIntroductionContents" th:text="${resumelist.resumeSelfIntroductionContents}" name="resumeSelfIntroductionContents" class="form-control" rows="10" readonly="readonly"> </textarea> 
 								                  <br>
 								        	</div>
 								        </div>					
 										
 									</div>
 									
+									</form>
+									
+
 								</div>
 							
 							

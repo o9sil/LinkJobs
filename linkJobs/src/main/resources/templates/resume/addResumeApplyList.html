@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>recordAnnouncement</title>
+<!-- Custom fonts for this template -->
+<link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+
+<!-- Custom styles for this page -->
+<link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+<!-- Page level plugins -->
+<script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+
+<!-- Page level custom scripts -->
+<script th:src="@{/js/demo/chart-area-demo.js}"></script>
+<script th:src="@{/js/demo/chart-pie-demo.js}"></script> 
+<script th:inline="javascript">
+
+$(document).ready(function(){
+    
+	
+	/*<![CDATA[*/   
+   // 공개 비공개
+   
+    $('#openRadio').click(function () {
+          let resumeNo= $('#resumeNo').val();
+        let resumeAvaliability = $(this).val();
+          console.log("resumeNo : "+resumeNo);
+          console.log("resumeAvaliability : "+resumeAvaliability);
+           $.ajax({
+              url :/*[[@{/modifyResumeAvaliability}]]*/, 
+              type: "POST",
+              data:{'resumeNo':resumeNo, 'resumeAvaliability':resumeAvaliability},
+              success: function (data) {
+              console.log(data);                   
+             },
+              error: function (data) {
+                 console.log('Error:', data);
+             }
+           });
+          
+   });   
+    $('#closeRadio').click(function () {
+        let resumeNo= $('#resumeNo').val();
+        let resumeAvaliability = $(this).val();
+        console.log("resumeNo : "+resumeNo);
+        console.log("resumeAvaliability : "+resumeAvaliability);
+         $.ajax({
+            url :/*[[@{/modifyResumeAvaliability}]]*/, 
+            type: "POST",
+            data:{'resumeNo':resumeNo, 'resumeAvaliability':resumeAvaliability},
+            success: function (data) {
+            console.log(data);                   
+           },
+            error: function (data) {
+               console.log('Error:', data);
+           }
+         });
+        
+ });
+    /* 수정중
+    if($('#openRadio').val() === "공개") {
+       $('#openRadio').prop('checked', true);
+       $('#closeRadio').prop('disabled', false);
+    } else {
+       $('#openRadio').prop('disabled', false);
+       $('#closeRadio').prop('checked', true);
+    }
+    */
+    /*]]>*/
+   
+});
+   
+</script>
+
+
+
+
+
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<!-- SideBar -->
+		<ul th:include="/include/menuSide::navSide" class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
+		</ul>
+		
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div th:include="/include/menuTop::navTop"></div>
+			<!-- Main Content -->
+			<div id="content">
+				
+				<!-- 페이지 내용 -->
+				<div class="container-fluid">
+		
+					<!-- Page 헤드 -->
+					<div>
+						<h1 class="h3 mb-2 text-gray-800">이력서를 선택하여 지원하세요</h1>
+						
+						<div class="card shadow mb-4">
+						
+							<div class="card-header py-3">
+								<div th:text="|나의 이력서 : ${count} 개|"></div>
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+										<div class="row">
+											<div class="col-sm-12">
+													<table class="table table-bordered dataTable" id="dataTable" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+														<thead>
+															<tr role="row">
+																<th class="sorting_asc" style="width: 5%;">
+																	번호
+																</th>
+																<th>
+																	이력서 목록
+																</th>
+																<th>
+																	수정 날짜
+																</th>
+															</tr>
+														</thead>
+														<tbody>
+															<th:block th:each="list : ${list}">
+																<tr>
+																	<td>
+																		<div type="text" name="resumeNo" id="resumeNo" th:text="${list.resumeNo}" ></div>
+																	</td>																
+																	<td>																	
+																		<div>
+																			<h4 class="font-weight-bold " style="width: 50%; float:left;"><a th:href="@{/addResumeApply(resumeNo=${list.resumeNo})}" th:text="${list.resumeTitle}" class="text-info"></a></h4>
+																		
+																			<div style="width: 40%; float: left;">
+																				<strong th:text="${list.resumeSalary}"></strong>
+																			</div>
+																			<div style="width: 40%; float: left;">
+																				<strong th:text="${list.resumeAvaliability}" style="margin-left: 20px;"></strong>
+																			</div>
+																			<!-- <div style="width: 40%; float: left;">
+																				<label>
+																	               <input type="radio" name="resumeAvaliability" id="openRadio" value="공개">공개
+																	            </label> &nbsp;&nbsp;&nbsp;
+																	            <label>
+																	               <input type="radio" name="resumeAvaliability" id="closeRadio" value="비공개">비공개
+																	            </label>
+																				<strong th:text="${list.resumeCareer}"></strong>
+																			</div> -->
+																		</div>
+																	</td>
+																	<td>
+																		<h4 class="font-weight-bold" style="width: 50%; float:left;" th:text="|${list.ResumeDate}|"></h4>
+																	</td>
+																</tr>
+															</th:block>
+														</tbody>
+													</table>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br><br>
+					
+				</div>
+			</div>
+			
+		</div>
+		<!-- End of Page Wrapper -->
+
+		
+
+	
+	</div>
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+<!-- Page level plugins -->
+<script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+
+<!-- Page level custom scripts -->
+<script th:src="@{/js/demo/chart-area-demo.js}"></script>
+<script th:src="@{/js/demo/chart-pie-demo.js}"></script> 
+</body>
+</html>

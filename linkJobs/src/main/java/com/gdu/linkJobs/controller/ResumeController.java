@@ -5,31 +5,31 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 import com.gdu.linkJobs.service.AreaService;
 import com.gdu.linkJobs.service.IndustryService;
 import com.gdu.linkJobs.service.JobService;
+import com.gdu.linkJobs.service.MemberAcademicService;
 import com.gdu.linkJobs.service.MemberCareerService;
 import com.gdu.linkJobs.service.MemberCertificateService;
 import com.gdu.linkJobs.service.MemberService;
+import com.gdu.linkJobs.service.ResumeApplyService;
 import com.gdu.linkJobs.service.ResumeService;
 import com.gdu.linkJobs.service.SelfIntroductionService;
-import com.gdu.linkJobs.service.MemberAcademicService;
-import com.gdu.linkJobs.vo.Resume;
 import com.gdu.linkJobs.vo.Area;
-
 import com.gdu.linkJobs.vo.Member;
 import com.gdu.linkJobs.vo.MemberAcademic;
 import com.gdu.linkJobs.vo.MemberCareerAndJobAndArea;
 import com.gdu.linkJobs.vo.MemberCertificate;
+import com.gdu.linkJobs.vo.Resume;
+import com.gdu.linkJobs.vo.ResumeApply;
 
 @Controller
 public class ResumeController {
@@ -43,7 +43,7 @@ public class ResumeController {
    @Autowired private JobService jobService;
    @Autowired private IndustryService industryService;
    @Autowired private SelfIntroductionService selfIntroductionService;
-   
+   @Autowired private ResumeApplyService resumeApplyService;
    
    
    
@@ -89,6 +89,25 @@ public class ResumeController {
    }
    
    
+   
+   // 이력서 목록
+   @GetMapping("/getResume")
+   public String selectResume(HttpSession session, Model model) {
+	   
+	   if(session.getAttribute("loginMember") == null) {
+		   return "redirect:/";
+	   }
+	   
+	   String memberId = (String) session.getAttribute("loginMember");
+	   List<Resume> list = resumeService.getResume(memberId);
+	   int count = resumeService.getResumeCount(memberId);
+	   System.out.println(count+"<--count");
+	   model.addAttribute("list", list);
+	   System.out.println("이력서목록"+list);
+	   model.addAttribute("memberId", memberId);
+	   model.addAttribute("count", count);
+	   return "resume/getResume";
+   }
    
    
    
@@ -187,22 +206,76 @@ public class ResumeController {
       return "redirect:/getResume";
    }
    
-   // 이력서 목록
-   @GetMapping("/getResume")
-   public String selectResume(HttpSession session, Model model) {
+   // 지원할 이력서 선택하는 목록
+   @GetMapping("/addResumeApplyList")
+   public String addResumeApplyList(HttpSession session,Resume resume, Model model) {
       
       if(session.getAttribute("loginMember") == null) {
          return "redirect:/";
       }
       
       String memberId = (String) session.getAttribute("loginMember");
+      
+      //이력서 상세내용
+	  resume.setMemberId(memberId);
+	  Member memberInfo = memberService.getMemberOne(memberId);
+	  model.addAttribute("memberInfo", memberInfo);
+	  List<Resume> resumelist = resumeService.getDetailResume(resume);
+      model.addAttribute("resumelist", resumelist);
+      System.out.println("희망연봉!!!!!!!!!!!!!"+resumelist);
+    
+      //이력서 리스트
       List<Resume> list = resumeService.getResume(memberId);
       int count = resumeService.getResumeCount(memberId);
-      System.out.println(count+"<--count");
+      //System.out.println(count+"<--count");
       model.addAttribute("list", list);
-      System.out.println("이력서목록"+list);
+      //System.out.println("이력서목록"+list);
       model.addAttribute("memberId", memberId);
       model.addAttribute("count", count);
-      return "resume/getResume";
+      return "resume/addResumeApplyList";
+   }
+   
+   
+   //이력서 지원 액션
+   @PostMapping("/addResumeApply")
+   public String addResumeApply(HttpSession session,ResumeApply resumeApply, Model model) {
+   
+      if(session.getAttribute("loginMember") == null) {
+         return "redirect:/";
+      }
+      String memberId = (String) session.getAttribute("loginMember");
+      resumeApply.setMemberId(memberId);
+      resumeApply.setResumeConfirm("N");
+      resumeApplyService.addResumeApply(resumeApply);
+      return "redirect:/";
+   }
+   
+   //이력서
+   @GetMapping("/addResumeApply")
+   public String addResumeApply(HttpSession session,Resume resume, Model model) {
+
+	      if(session.getAttribute("loginMember") == null) {
+	         return "redirect:/";
+	      }
+	      
+	      String memberId = (String) session.getAttribute("loginMember");
+	      
+	      //이력서 상세내용
+		  resume.setMemberId(memberId);
+		  Member memberInfo = memberService.getMemberOne(memberId);
+		  model.addAttribute("memberInfo", memberInfo);
+		  List<Resume> resumelist = resumeService.getDetailResume(resume);
+	      model.addAttribute("resumelist", resumelist);
+	      System.out.println("희망연봉!!!!!!!!!!!!!"+resumelist);
+	    
+	      //이력서 리스트
+	      List<Resume> list = resumeService.getResume(memberId);
+	      int count = resumeService.getResumeCount(memberId);
+	      //System.out.println(count+"<--count");
+	      model.addAttribute("list", list);
+	      //System.out.println("이력서목록"+list);
+	      model.addAttribute("memberId", memberId);
+	      model.addAttribute("count", count);
+	      return "resume/addResumeApply";
    }
 }
