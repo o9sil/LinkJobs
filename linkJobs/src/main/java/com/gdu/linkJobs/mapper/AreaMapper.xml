@@ -2,6 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.linkJobs.mapper.AreaMapper">
 
+	<!-- Area 리스트 가져오기 -->
+	<select id="selectAreaListAll"	resultType="com.gdu.linkJobs.vo.Area">
+		SELECT 
+			area_no areaNo, 
+			area_sido areaSido 
+		FROM linkjobs_area
+	</select>
+
+	<!-- Area2 리스트 가져오기 -->
+	<select id="selectArea2ListAll"	resultType="com.gdu.linkJobs.vo.AreaAndArea2">
+		SELECT 
+			area2_no area2No, 
+			area2_gungu area2Gungu, 
+			area_no areaNo
+		FROM linkjobs_area2 
+	</select>
+
+
    <!-- 특정 지역 가져오기 -->
    <select id="selectAreaSidoGungu" resultType="com.gdu.linkJobs.vo.AreaAndArea2" parameterType="int">
        SELECT 

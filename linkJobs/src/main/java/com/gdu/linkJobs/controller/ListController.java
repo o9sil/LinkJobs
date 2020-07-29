@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.gdu.linkJobs.service.AreaService;
 import com.gdu.linkJobs.service.JobService;
 import com.gdu.linkJobs.service.ListService;
 import com.gdu.linkJobs.service.ScrapService;
@@ -23,6 +24,7 @@ public class ListController {
 	@Autowired private ListService listService;
 	@Autowired private ScrapService scrapService; 
 	@Autowired private JobService jobService;
+	@Autowired private AreaService areaService;
 	
 	// index
 		@GetMapping("/")
@@ -42,6 +44,11 @@ public class ListController {
 		hireAnnouncementAndCpMemberAndScrapAndLikecp.setMemberId(memberId);
 		List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectHireAnnouncementList(hireAnnouncementAndCpMemberAndScrapAndLikecp);
 		List<Scrap> scrapList = scrapService.selectBoolean();
+		
+		Map<String, Object> areaMap = areaService.getAreaListAll();
+		model.addAttribute("area", areaMap.get("areaList"));
+		model.addAttribute("area2", areaMap.get("area2List"));
+		
 		Map<String, Object> jobMap = jobService.getJobListAll();
 		model.addAttribute("job", jobMap.get("jobList"));
 		model.addAttribute("job2", jobMap.get("job2List"));
@@ -71,6 +78,10 @@ public class ListController {
 			System.out.println(wordSearch + "<--searchAnnouncementList.wordSearchNo");
 			System.out.println(areaSearch + "<--searchAnnouncementList.areaSearchNo");
 			System.out.println(jobSearch + "<--searchAnnouncementList.jobSearchNo");
+			
+			Map<String, Object> areaMap = areaService.getAreaListAll();
+			model.addAttribute("area", areaMap.get("areaList"));
+			model.addAttribute("area2", areaMap.get("area2List"));
 			
 			Map<String, Object> jobMap = jobService.getJobListAll();
 			model.addAttribute("job", jobMap.get("job"));
@@ -126,6 +137,23 @@ public class ListController {
 			System.out.println(jobSearch + "<--searchAnnouncementList.jobSearchNo");
 			wordSearch = "notsearchword";
 			jobSearch = "notsearchword";
+			String[] areasSearch = areaSearch.split(" ");
+			System.out.println(areaSearch.length());
+			areaSearch = "";
+			
+			for(int i=0; i<areasSearch.length; i++) {
+				if(areasSearch.length == 1) {
+					areaSearch = (String)(areasSearch[i]);
+				} else {
+					areaSearch += (String)(areasSearch[i]) + "|";
+					
+				}
+				
+				System.out.println(areasSearch[i]+"<<"+i);
+				System.out.println(areaSearch+"<<for문 jobSearch");
+			} // end for문
+			areaSearch = areaSearch.substring(0, areaSearch.length()-1);
+			
 			String memberId = (String)session.getAttribute("loginMember");
 			List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectSearchHireAnnouncementList(memberId, wordSearch, areaSearch, jobSearch);
 			model.addAttribute("list", list);

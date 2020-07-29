@@ -137,7 +137,47 @@
 		</form>
 		</div>
 	</div>
-	<!--  -->
+	
+	<!-- 지역 검색 리스트 -->
+	<div class="form-group row" id="searchAreaDiv" >
+		  	<div class="card-body">
+		  	<div class="col-xl-10">   
+				<span id="hireAnnouncementMainAreaSpan" style="color: red; margin: auto;"></span>
+	      
+				<div id="area1DivId" class="dropdown-list" style="float: left; height: 245px; overflow: auto; width: auto;">
+					<th:block th:each="area : ${area}" >
+						<div th:id="|area1Id_${area.areaNo}|" th:text="${area.areaSido}" th:name="area1Div" class="dropdown-item d-flex align-items-center font-weight-bold text-truncate" style="cursor: pointer;">
+						
+						</div>
+		            </th:block>
+                          		
+		 		</div>
+		                                      
+		        <div style="float: right; overflow: auto; width: 20%; ">
+		        	<span id="areaClear"  style="cursor: pointer;">지역 초기화</span>
+		        </div><br><br>               
+		        <div class="dropdown-list" style="float: left; height: 245px; overflow: auto; width: 55%;">
+		        	
+		        	<ul class="nav area2Ul">
+		            	<th:block th:each="area2 : ${area2}">
+			                <li th:name="|area2_area1Id_${area2.areaNo}|" class="nav-item area2Li" style="display: none;">
+					            <div class="form-check-inline">		
+						            <label class="form-check-label">
+						            	<input type="checkbox" class="form-check-input" name="resumeWishArea2" th:id="|area2Id_${area2.area2No}|" th:value="${area2.area2Gungu}" th:text="${area2.area2Gungu}">
+						            </label>															
+					            </div>
+			                </li>		                                      	
+		                </th:block>
+		        	</ul>
+				</div>
+				
+				<span id="hireAnnouncementMainAreaSpan" style="color: red; margin: auto;"></span>
+		        </div>
+			</div>
+		</div>
+	 <!--  -->
+	
+	<!-- 직업 검색 리스트 -->
 	<div class="form-group row" id="searchDiv" >
 		  	<div class="card-body">
 		  	<div class="col-xl-10">   
@@ -149,10 +189,6 @@
 						
 						</div>
 		            </th:block>
-				
-					<!-- <div class="dropdown-item d-flex align-items-center font-weight-bold text-truncate" style="cursor: pointer;">
-		             		ASDF                                     		
-	               	 </div> -->
 	                                      		
 		 		</div>
 		                                      
@@ -288,28 +324,15 @@
 		
 	})
 	
-	// 직업
+	// 지역
 
-	//var state = $('#searchDiv').css('display'); 
-	
-	$('#searchDiv').hide(); 
-	$('#jobSearch').click(function(){
-		$('#searchDiv').toggle();
+	$('#searchAreaDiv').hide(); 
+	$('#areaSearch').click(function(){
+		$('#searchAreaDiv').toggle();
 	})
-	/*
-	$('#jobSearch').click(function(){
-		if(state == 'none'){
-			$('#searchDiv').show();
-		}else{ // 그 외에는
-			$('#searchDiv').hide(); 
-		}
-	});*/
-	
-	 $('#hireAnnouncementMainJob').click(function(){
-			$('#jobListSelect').css('display', '');
-		});
-		
-		$('[name=job1Div]').click(function(){
+
+		/*
+		$('[name=area1Div]').click(function(){
 			$('#job2DivId').children().attr('class', '');
 			$('#job2DivId').children().css('display', 'none');
 			//console.log(this.id);
@@ -317,9 +340,63 @@
 			$('[name='+job2Name+']').attr('class', 'dropdown-item d-flex align-items-center font-weight-bold text-truncate');
 			$('[name='+job2Name+']').css('display','');
 		});
+		*/
+		$('[name=area1Div]').click(function(){
+			console.log(this.id);
+			console.log($('#area2Id_116').text()+"test");
+			console.log($('#area2Id_113').text()+"test2");
+			
+			
+			$('.area2Li').css('display', 'none');			
+			let area2Name = 'area2_' + this.id;
+			$('[name=' + area2Name + ']').css('display', '');
+			
+		});
+		
+		
+		$('[name=resumeWishArea2]').click(function(){
+			//console.log(this);
+			let str = "";
+			$('[name=resumeWishArea2]').each(function(){
+			
+				if($(this).is(":checked")){
+					str += $(this).val() + " "; 
+				}				
+			});			
+			$('#areaSearch').val(str);
+		})
+
+		
+		$('#areaClear').click(function(){
+			$('#areaSearch').val('');
+			$('[name=resumeWishArea2]').each(function(){
+				$(this).prop('checked', false);
+			});
+		});
+	
+	
+	// 직업
+
+	$('#searchDiv').hide(); 
+	$('#jobSearch').click(function(){
+		$('#searchDiv').toggle();
+	})
+	/*
+	 $('#hireAnnouncementMainJob').click(function(){
+			$('#jobListSelect').css('display', '');
+		});
+		*/
+		$('[name=job1Div]').click(function(){
+			$('#job2DivId').children().attr('class', '');
+			$('#job2DivId').children().css('display', 'none');
+			console.log(this.id);
+			let job2Name = 'job2_' + this.id;
+			$('[name='+job2Name+']').attr('class', 'dropdown-item d-flex align-items-center font-weight-bold text-truncate');
+			$('[name='+job2Name+']').css('display','');
+		});
 		
 		$('[class=job2Div]').click(function(){
-			//console.log(this.id);
+			console.log(this.id);
 			
 			$('.job3Li').css('display', 'none');			
 			let job3Name = 'job3_' + this.id;
@@ -329,7 +406,7 @@
 		
 		
 		$('[name=resumeWishJob3]').click(function(){
-			//console.log(this);
+			console.log(this);
 			let str = "";
 			$('[name=resumeWishJob3]').each(function(){
 				if($(this).is(":checked")){

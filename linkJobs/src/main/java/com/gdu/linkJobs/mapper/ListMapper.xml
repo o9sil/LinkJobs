@@ -92,8 +92,8 @@
 		OR ha.hire_announcement_start_date like CONCAT('%', #{wordSearch}, '%')
 		OR ha.hire_announcement_end_date like CONCAT('%', #{wordSearch}, '%')
 		OR cp.cpmember_company like CONCAT('%', #{wordSearch}, '%')
-		OR la2.area2_gungu like #{areaSearch}
-		OR la.area_sido like #{areaSearch}
+		OR la2.area2_gungu REGEXP #{areaSearch}
+		OR la.area_sido REGEXP #{areaSearch}
 		ORDER BY hire_announcement_start_date DESC
 	</select>
 	 
