@@ -380,18 +380,24 @@
 			//console.log($('#area2Id_116').text()+"test");
 			//console.log($('#area2Id_113').text()+"test2");
 			
-			
 			$('.area2Li').css('display', 'none');			
 			let area2Name = 'area2_' + this.id;
-			$('[name=' + area2Name + ']').css('display', '');
+			if(area2Name == 'area2_area1Id_17') {
+				console.log("test입니다.");
+				$('[type=checkbox]').css('display', '');
+				$('[name=' + area2Name + ']').text("세종특별자치시").css('display', '');
+			}
 			
+			$('[name=' + area2Name + ']').css('display', '');
 		});
-		
+		//console.log($('#area2Id_116').val("세종특별자치시")+"area2No"); 
 		
 		$('[name=resumeWishArea2]').click(function(){
 			//console.log(this);
 			let str = "";
+			
 			$('[name=resumeWishArea2]').each(function(){
+			
 			/*
 				if($('#area2No').val() == 116) {
 					let area2Text = $('#116').val() == 
@@ -402,6 +408,9 @@
 				}
 			*/
 				if($(this).is(":checked")){
+					if($(this).val() == "") {
+						$(this).val("세종특별자치시");
+					}
 					str += $(this).val() + " "; 
 				}				
 			});			
