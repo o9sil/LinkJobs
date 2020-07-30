@@ -163,7 +163,7 @@
 			                <li th:name="|area2_area1Id_${area2.areaNo}|" class="nav-item area2Li" style="display: none;">
 					            <div class="form-check-inline">		
 						            <label class="form-check-label">
-						            	<input type="checkbox" class="form-check-input" name="resumeWishArea2" th:id="|area2Id_${area2.area2No}|" th:value="${area2.area2Gungu}" th:text="${area2.area2Gungu}">
+						            	<input type="checkbox"  class="form-check-input" name="resumeWishArea2" th:id="|area2Id_${area2.area2No}|" th:value="${area2.area2Gungu}" th:text="${area2.area2Gungu}">
 						            </label>															
 					            </div>
 			                </li>		                                      	
@@ -178,15 +178,15 @@
 	 <!--  -->
 	
 	<!-- 직업 검색 리스트 -->
-	<div class="form-group row" id="searchDiv" >
+	<div class="form-group row" id="searchJobDiv" >
 		  	<div class="card-body">
 		  	<div class="col-xl-10">   
 				<span id="hireAnnouncementMainJobSpan" style="color: red; margin: auto;"></span>
-	      
+	      		
 				<div id="job1DivId" class="dropdown-list" style="float: left; height: 245px; overflow: auto; width: auto;">
-					<th:block th:each="job : ${job}" >
+					<th:block th:each="job : ${job}">
 						<div th:id="|job1Id_${job.jobNo}|" th:text="${job.jobCategory}" th:name="job1Div" class="dropdown-item d-flex align-items-center font-weight-bold text-truncate" style="cursor: pointer;">
-						
+
 						</div>
 		            </th:block>
 	                                      		
@@ -195,7 +195,7 @@
 		        <div id="job2DivId" class="dropdown-list" style="float: left; height: 245px; overflow: auto; width: auto;" >
 		        	<th:block th:each="job2 : ${job2}">
 						<div th:name="|job2_job1Id_${job2.jobNo}|" th:id="|job2Id_${job2.job2No}|" th:text="${job2.job2Category}" class="job2Div" style="cursor: pointer; display: none;">
-						
+
 						</div>
 					</th:block>
 				</div>
@@ -265,14 +265,14 @@
 
 <!--  -->
 <!-- Bootstrap core JavaScript-->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script th:src="@{vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 	
 	<!-- Core plugin JavaScript-->
-	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
 	
 	<!-- Custom scripts for all pages-->
-	<script src="js/sb-admin-2.min.js"></script>
+	<script th:src="@{js/sb-admin-2.min.js}"></script>
 
 <script>
 
@@ -325,12 +325,46 @@
 	})
 	
 	// 지역
+	//$(this).prepend().siblings().children(".answer").slideUp();
+
 
 	$('#searchAreaDiv').hide(); 
 	$('#areaSearch').click(function(){
-		$('#searchAreaDiv').toggle();
-	})
+		
+		if($("#searchJobDiv").css("display") == "none") {
+			$('#searchAreaDiv').slideToggle();
+			console.log("tests");
+		} else {
+			$('#searchJobDiv').slideUp();
+			$('#searchAreaDiv').slideToggle();
+			console.log("test");
+		}
 
+	});
+
+	$('#searchJobDiv').hide();
+	$('#jobSearch').click(function(){
+		
+		if($("#searchAreaDiv").css("display") == "none") {
+			$('#searchJobDiv').slideToggle();
+			console.log("test2");
+			
+		} else {
+			$('#searchAreaDiv').slideUp();
+			$('#searchJobDiv').slideToggle();
+			console.log("test1");
+		}
+	});
+	$('#wordSearch').click(function(){
+		if($("#searchAreaDiv").css("display") == "block" || $("#searchJobDiv").css("display") == "block") {
+			
+			console.log("확인");
+		} else {
+			$('#searchJobDiv').hide();
+			$('#searchAreaDiv').hide();
+		}
+		
+	});	
 		/*
 		$('[name=area1Div]').click(function(){
 			$('#job2DivId').children().attr('class', '');
@@ -343,8 +377,8 @@
 		*/
 		$('[name=area1Div]').click(function(){
 			console.log(this.id);
-			console.log($('#area2Id_116').text()+"test");
-			console.log($('#area2Id_113').text()+"test2");
+			//console.log($('#area2Id_116').text()+"test");
+			//console.log($('#area2Id_113').text()+"test2");
 			
 			
 			$('.area2Li').css('display', 'none');			
@@ -358,7 +392,15 @@
 			//console.log(this);
 			let str = "";
 			$('[name=resumeWishArea2]').each(function(){
-			
+			/*
+				if($('#area2No').val() == 116) {
+					let area2Text = $('#116').val() == 
+					$('#area2Gungu').text("세종특별자치시");
+					console.log($('#area2Gungu').text();
+					$('#area2Gungu').val("세종특별자치시");
+					console.log($('#area2Gungu').val());
+				}
+			*/
 				if($(this).is(":checked")){
 					str += $(this).val() + " "; 
 				}				
@@ -377,10 +419,7 @@
 	
 	// 직업
 
-	$('#searchDiv').hide(); 
-	$('#jobSearch').click(function(){
-		$('#searchDiv').toggle();
-	})
+	
 	/*
 	 $('#hireAnnouncementMainJob').click(function(){
 			$('#jobListSelect').css('display', '');
@@ -404,16 +443,21 @@
 			
 		});
 		
-		
+		$('#area2Id_116').text('세종특별자치시');
 		$('[name=resumeWishJob3]').click(function(){
-			console.log(this);
+			// console.log(this+"<--test");
 			let str = "";
-			$('[name=resumeWishJob3]').each(function(){
+			$('#area2Id_116').val('세종특별자치시');
+			
+			$('[name=resumeWishJob3]').each(function(){	
 				if($(this).is(":checked")){
+					
 					str += $(this).val() + " "; 
+					
 				}				
 			});			
 			$('#jobSearch').val(str);
+			// console.log(str);
 		})
 
 		

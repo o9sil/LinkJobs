@@ -48,6 +48,7 @@ public class ListController {
 		Map<String, Object> areaMap = areaService.getAreaListAll();
 		model.addAttribute("area", areaMap.get("areaList"));
 		model.addAttribute("area2", areaMap.get("area2List"));
+		System.out.println(areaMap.get("area2List") +"<<< area2");
 		
 		Map<String, Object> jobMap = jobService.getJobListAll();
 		model.addAttribute("job", jobMap.get("jobList"));
@@ -121,6 +122,7 @@ public class ListController {
 			model.addAttribute("list", list);
 			model.addAttribute("memberId", memberId);
 			return "hireAnnouncement/searchAnnouncementList";
+			
 		} else if((areaSearch == null || areaSearch == "") && (jobSearch == null || jobSearch == "")) {
 			System.out.println(wordSearch + "<--searchAnnouncementList.wordSearchYes");
 			System.out.println(areaSearch + "<--searchAnnouncementList.areaSearchNo");
@@ -131,6 +133,7 @@ public class ListController {
 			List<HireAnnouncementAndCpMemberAndScrapAndLikecp> list = listService.selectSearchHireAnnouncementList(memberId, wordSearch, areaSearch, jobSearch);
 			model.addAttribute("list", list);
 			return "hireAnnouncement/searchAnnouncementList";
+			
 		} else if((wordSearch == null || wordSearch == "") && (jobSearch == null || jobSearch == "")) {
 			System.out.println(wordSearch + "<--searchAnnouncementList.wordSearchYes");
 			System.out.println(areaSearch + "<--searchAnnouncementList.areaSearchNo");
@@ -143,12 +146,14 @@ public class ListController {
 			
 			for(int i=0; i<areasSearch.length; i++) {
 				if(areasSearch.length == 1) {
+					
 					areaSearch = (String)(areasSearch[i]);
 				} else {
+					
 					areaSearch += (String)(areasSearch[i]) + "|";
 					
-				}
-				
+			}
+			
 				System.out.println(areasSearch[i]+"<<"+i);
 				System.out.println(areaSearch+"<<for문 jobSearch");
 			} // end for문

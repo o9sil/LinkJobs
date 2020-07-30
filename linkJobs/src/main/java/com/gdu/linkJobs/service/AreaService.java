@@ -26,7 +26,7 @@ public class AreaService {
 
 		List<Area> areaList = areaMapper.selectAreaListAll();
 		List<AreaAndArea2> area2List = areaMapper.selectArea2ListAll();
-		
+		// System.out.println(area2List);
 		map.put("areaList", areaList);
 		map.put("area2List", area2List);
 
