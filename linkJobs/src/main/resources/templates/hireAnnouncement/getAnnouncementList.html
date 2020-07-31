@@ -161,11 +161,27 @@
 		        	<ul class="nav area2Ul">
 		            	<th:block th:each="area2 : ${area2}">
 			                <li th:name="|area2_area1Id_${area2.areaNo}|" class="nav-item area2Li" style="display: none;">
-					            <div class="form-check-inline">		
-						            <label class="form-check-label">
-						            	<input type="checkbox"  class="form-check-input" name="resumeWishArea2" th:id="|area2Id_${area2.area2No}|" th:value="${area2.area2Gungu}" th:text="${area2.area2Gungu}">
-						            </label>															
-					            </div>
+			                
+			               		<th:block th:if="${area2.area2Gungu != ''}">
+			                		<div class="form-check-inline">		
+							            <label class="form-check-label">
+							            	<input type="checkbox"  class="form-check-input" name="resumeWishArea2" th:id="|area2Id_${area2.area2No}|" th:value="${area2.area2Gungu}" th:text="${area2.area2Gungu}">
+							            </label>															
+						            </div>
+			                	</th:block>
+			                	
+			                	<th:block th:if="${area2.area2Gungu == ''}">
+			                		<div class="form-check-inline">		
+							            <label class="form-check-label">
+							            	<input type="checkbox" class="form-check-input" name="resumeWishArea2" th:id="|area2Id_${area2.area2No}|" th:value="세종특별자치시" th:text="세종특별자치시">
+							            </label>															
+						            </div>
+			                	</th:block>
+			                	
+			                	
+			                
+			                
+					            
 			                </li>		                                      	
 		                </th:block>
 		        	</ul>
@@ -382,11 +398,11 @@
 			
 			$('.area2Li').css('display', 'none');			
 			let area2Name = 'area2_' + this.id;
-			if(area2Name == 'area2_area1Id_17') {
-				console.log("test입니다.");
-				$('[type=checkbox]').css('display', '');
-				$('[name=' + area2Name + ']').text("세종특별자치시").css('display', '');
-			}
+			//if(area2Name == 'area2_area1Id_17') {
+			//	console.log("test입니다.");
+			//	$('[type=checkbox]').css('display', '');
+			//	$('[name=' + area2Name + ']').text("세종특별자치시").css('display', '');
+			//}
 			
 			$('[name=' + area2Name + ']').css('display', '');
 		});
@@ -408,9 +424,9 @@
 				}
 			*/
 				if($(this).is(":checked")){
-					if($(this).val() == "") {
-						$(this).val("세종특별자치시");
-					}
+					//if($(this).val() == "") {
+						//$(this).val("세종특별자치시");
+					//}
 					str += $(this).val() + " "; 
 				}				
 			});			
@@ -452,7 +468,7 @@
 			
 		});
 		
-		$('#area2Id_116').text('세종특별자치시');
+		//$('#area2Id_116').text('세종특별자치시');
 		$('[name=resumeWishJob3]').click(function(){
 			// console.log(this+"<--test");
 			let str = "";
