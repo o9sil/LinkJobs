@@ -174,7 +174,7 @@ public class ResumeController {
 
 	  System.out.println("memberId--->"+memberId);
       resumeService.addResume(resume);
-      return "redirect:/getResume";
+      return "redirect:/";
 	  
    }
    
@@ -247,6 +247,7 @@ public class ResumeController {
       resumeApply.setMemberId(memberId);
       resumeApply.setResumeConfirm("N");
       resumeApplyService.addResumeApply(resumeApply);
+      
       return "redirect:/";
    }
    
